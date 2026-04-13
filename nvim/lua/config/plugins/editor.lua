@@ -478,6 +478,9 @@ M = {
                 filters = {
                     dotfiles = true,
                 },
+                trash = {
+                    cmd = "trash-put",
+                },
             })
         end,
 

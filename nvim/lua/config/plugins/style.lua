@@ -15,6 +15,11 @@ M = {
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
+        config = function()
+            vim.api.nvim_set_hl(0, 'WinBar', { bg = '#2F3B36' })
+            vim.api.nvim_set_hl(0, 'WinBarNC', { bg = '#2F3B36' })
+            require('dropbar').setup({})
+        end,
     },
 
     {
