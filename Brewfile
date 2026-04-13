@@ -6,6 +6,10 @@ brew "starship"
 brew "neovim"
 brew "tmux"
 brew "yazi"
+brew "poppler"
+brew "imagemagick"
+brew "resvg"
+brew "p7zip"
 
 # CLI Tools
 brew "fzf"

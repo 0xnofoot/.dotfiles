@@ -24,6 +24,7 @@ if [ ! -d "$TMP_DIR" ]; then
 fi
 
 # prompt
+export STARSHIP_CONFIG="$HOME/.config/zsh/starship/starship.toml"
 eval "$(starship init zsh)"
 
 # editor

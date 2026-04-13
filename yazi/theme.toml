@@ -16,6 +16,7 @@ preview = { reversed = true }
 # Override: directories bold
 [filetype]
 rules = [
+	{ url = "*/", is = "link", fg = "#89b482", bold = true, italic = true },
 	{ url = "*/", fg = "#7daea3", bold = true },
 	{ mime = "image/*", fg = "#89b482" },
 	{ mime = "{audio,video}/*", fg = "#d8a657" },
@@ -23,6 +24,7 @@ rules = [
 	{ mime = "application/{pdf,doc,rtf}", fg = "#a9b665" },
 	{ mime = "vfs/{absent,stale}", fg = "#a89984" },
 	{ url = "*", is = "orphan", fg = "#ea6962", bold = true },
+	{ url = "*", is = "link", fg = "#89b482", italic = true },
 	{ url = "*", is = "exec", fg = "#a9b665", bold = true },
 	{ url = "*", is = "dummy", bg = "#ea6962" },
 	{ url = "*/", is = "dummy", bg = "#ea6962" },

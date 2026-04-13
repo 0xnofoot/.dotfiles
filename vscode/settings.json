@@ -35,7 +35,7 @@
   "editor.renderWhitespace": "trailing",
   "editor.smoothScrolling": true,
   "editor.wordWrap": "on",
-  "editor.lineNumbers": "relative",
+  // editor.lineNumbers 由 vim.smartRelativeLine 自动控制
   "editor.stickyScroll.enabled": false,
   "editor.suggest.showStatusBar": true,
   "editor.suggest.snippetsPreventQuickSuggestions": true,
@@ -64,7 +64,7 @@
   "notebook.output.wordWrap": true,
   "notebook.lineNumbers": "on",
   "notebook.output.textLineLimit": 50,
-  //---------- Databse Client ----------//
+  //---------- Database Client ----------//
   "database-client.telemetry.usesOnlineServices": false,
   "database-client.autoSync": true,
   //---------- Flutter & Dart ----------//
@@ -73,7 +73,6 @@
   "dart.debugExternalPackageLibraries": false,
   "dart.debugSdkLibraries": false,
   "dart.openDevTools": "flutter",
-  "dart.flutterCreateOrganization": null,
   "dart.devToolsLocation": {
     "default": "active",
   },
@@ -228,8 +227,6 @@
   "vim.incsearch": true,
   "vim.hlsearch": true,
   "vim.useCtrlKeys": true,
-  "vim.handleKeys": {},
-  "vim.insertModeKeyBindings": [],
   "vim.normalModeKeyBindingsNonRecursive": [
     // 光标移动
     {
@@ -431,7 +428,7 @@
     },
     {
       "before": ["Y"],
-      "after": ["v", "$", "y"],
+      "after": ["y", "$"],
     },
     {
       "before": ["U"],
@@ -477,10 +474,6 @@
     {
       "before": ["g", "R"],
       "commands": ["editor.action.rename"],
-    },
-    {
-      "before": ["g", "t"],
-      "commands": ["editor.action.showHover"],
     },
     {
       "before": ["g", "T"],

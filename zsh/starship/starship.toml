@@ -1,0 +1,94 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+format = """$os[](fg:color_bg3 bg:color_bg2)$directory$git_branch$git_status$line_break$character"""
+
+palette = 'gruvbox_dark'
+
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg2 = '#504945'
+color_bg3 = '#665c54'
+color_bright_red = '#fb4934'
+color_bright_green = '#b8bb26'
+color_bright_yellow = '#fabd2f'
+color_bright_aqua = '#8ec07c'
+color_bright_orange = '#fe8019'
+color_bright_purple = '#d3869b'
+
+[os]
+disabled = false
+style = "fg:color_bright_aqua bg:color_bg3"
+format = "[](fg:color_bg3)[$symbol ]($style)"
+
+[os.symbols]
+Macos = "\uf179"
+Linux = "\uf17c"
+Windows = "\uf17a"
+
+[directory]
+style = "bold fg:color_bright_orange bg:color_bg2"
+format = "[ $path ]($style)"
+truncation_length = 8
+truncation_symbol = "…/"
+truncate_to_repo = false
+
+[git_branch]
+symbol = ""
+style = "bg:color_bg1"
+format = '[](fg:color_bg2 bg:color_bg1)[[ $symbol $branch ](fg:color_bright_green bg:color_bg1)]($style)'
+
+[git_status]
+style = "bg:color_bg1"
+format = '[[$all_status$ahead_behind](fg:color_bright_yellow bg:color_bg1)]($style)[](fg:color_bg1)'
+modified = '*'
+staged = '+'
+untracked = ''
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = ' [ ](bold fg:color_bright_red)'
+error_symbol = ' [ ](bold fg:color_bright_red)'
+vimcmd_symbol = ' [ ](bold fg:color_bright_green)'
+vimcmd_replace_one_symbol = ' [ ](bold fg:color_bright_purple)'
+vimcmd_replace_symbol = ' [ ](bold fg:color_bright_purple)'
+vimcmd_visual_symbol = ' [ ](bold fg:color_bright_yellow)'
+
+# Disable all language detections
+[golang]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[rust]
+disabled = true
+
+[java]
+disabled = true
+
+[kotlin]
+disabled = true
+
+[python]
+disabled = true
+
+[dart]
+disabled = true
+
+[ruby]
+disabled = true
+
+[php]
+disabled = true
+
+[c]
+disabled = true
+
+[package]
+disabled = true

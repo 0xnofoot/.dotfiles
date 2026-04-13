@@ -32,23 +32,28 @@ play = [
 	{ run = "mediainfo %s1; echo 'Press enter to exit'; read _", block = true, desc = "Media info", for = "unix" },
 ]
 open = [
-	{ run = "open %s",  desc = "Open", for = "macos" },
+	{ run = "open %s",      desc = "Open",              for = "macos" },
+	{ run = "xdg-open %s",  desc = "Open",              for = "linux" },
 ]
 reveal = [
-	{ run = "open -R %s1",  desc = "Reveal in Finder", for = "macos" },
+	{ run = "open -R %s1",                          desc = "Reveal in Finder",  for = "macos" },
+	{ run = "xdg-open \"$(dirname %s1)\"",          desc = "Reveal in Files",   for = "linux" },
 ]
 extract = [
 	{ run = "ya pub extract --list %s", desc = "Extract here" },
 ]
 image_view = [
 	{ run = "open %s",           desc = "Open",      for = "macos" },
+	{ run = "xdg-open %s",      desc = "Open",      for = "linux" },
 	{ run = "exiftool %s1; echo 'Press enter to exit'; read _", desc = "EXIF info", for = "unix", block = true },
 ]
 pdf_view = [
-	{ run = "open %s",  desc = "Open", for = "macos" },
+	{ run = "open %s",      desc = "Open", for = "macos" },
+	{ run = "xdg-open %s",  desc = "Open", for = "linux" },
 ]
 libreoffice = [
-	{ run = "open %s",  desc = "Open", for = "macos" },
+	{ run = "open %s",      desc = "Open", for = "macos" },
+	{ run = "xdg-open %s",  desc = "Open", for = "linux" },
 ]
 
 [open]
