@@ -7,7 +7,7 @@
 | 文件 | 作用 |
 |------|------|
 | `Brewfile` | Homebrew 依赖声明，brew bundle 读取此文件安装所有包 |
-| `install.sh` | 安装入口，包含 `CONFIG_PACKAGES` 数组和七步安装流程 |
+| `install.sh` | 安装入口，包含 `CONFIG_PACKAGES` 数组和九步安装流程 |
 
 ## 场景 1：新增应用（带配置目录）
 

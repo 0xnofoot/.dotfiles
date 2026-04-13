@@ -27,11 +27,16 @@
 | 内容 | 位置 |
 |------|------|
 | 配置包列表 | `CONFIG_PACKAGES=(kitty tmux nvim yazi zsh)` — 第 5 行 |
-| Symlink 循环 | Step 4/7 — 遍历 CONFIG_PACKAGES 链接到 `~/.config/` |
-| zsh 根级 symlink | Step 5/7 — `~/.zshrc`、`~/.zimrc` |
-| vscode/cursor 配置 | Step 6/7 — 文件级 symlink 到应用用户目录 |
-| Linux kitty 安装 | Step 3/7 — macOS 用 cask，Linux 用官方安装脚本（kitty 跨平台使用，非 macOS 专属） |
-| 步骤总数 | 硬编码为 "Step N/7"，增减步骤时需全部更新 |
+| Linux 编译工具 | Step 1/9 — apt/dnf/pacman 安装 build-essential 等 |
+| Homebrew | Step 2/9 — 安装并配置 PATH |
+| Brew bundle | Step 3/9 — 通过 Brewfile 安装所有包 |
+| Linux kitty 安装 | Step 4/9 — macOS 用 cask，Linux 用官方安装脚本 |
+| Symlink 循环 | Step 5/9 — 遍历 CONFIG_PACKAGES 链接到 `~/.config/` |
+| zsh 根级 symlink | Step 6/9 — `~/.zshrc`、`~/.zimrc` |
+| vscode/cursor 配置 | Step 7/9 — 文件级 symlink 到应用用户目录 |
+| 默认 shell | Step 8/9 — Linux 上设置 zsh 为默认 shell |
+| Nerd Fonts | Step 9/9 — 自动下载安装 FiraMono + Symbols Nerd Font |
+| 步骤总数 | 硬编码为 "Step N/9"，增减步骤时需全部更新 |
 
 ## 维护文档
 

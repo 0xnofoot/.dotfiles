@@ -9,8 +9,27 @@ success() { printf "\033[1;32m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
 warn()    { printf "\033[1;33m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
 error()   { printf "\033[1;31m==>\033[0m \033[1m%s\033[0m\n" "$1"; exit 1; }
 
-# ── Step 1/7: Homebrew ────────────────────────────────────
-info "Step 1/7: Installing Homebrew..."
+# ── Step 1/9: Linux build tools ───────────────────────────
+if [[ "$(uname)" != "Darwin" ]]; then
+  info "Step 1/9: Installing Linux build tools..."
+  if command -v apt-get &>/dev/null; then
+    sudo apt-get update -qq
+    sudo apt-get install -y build-essential procps curl file git
+  elif command -v dnf &>/dev/null; then
+    sudo dnf groupinstall -y 'Development Tools'
+    sudo dnf install -y procps-ng curl file git
+  elif command -v pacman &>/dev/null; then
+    sudo pacman -Sy --noconfirm base-devel procps-ng curl file git
+  else
+    warn "Unknown package manager, please ensure build tools (gcc, make, curl, git) are installed"
+  fi
+  success "Build tools ready"
+else
+  success "Step 1/9: macOS build tools (Xcode CLT) assumed present"
+fi
+
+# ── Step 2/9: Homebrew ────────────────────────────────────
+info "Step 2/9: Installing Homebrew..."
 if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
@@ -23,14 +42,14 @@ else
 fi
 success "Homebrew ready"
 
-# ── Step 2/7: Install packages ────────────────────────────
-info "Step 2/7: Installing packages via Brewfile..."
+# ── Step 3/9: Install packages ────────────────────────────
+info "Step 3/9: Installing packages via Brewfile..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 success "All packages installed"
 
-# ── Step 3/7: kitty on Linux ──────────────────────────────
+# ── Step 4/9: kitty on Linux ──────────────────────────────
 if [[ "$(uname)" != "Darwin" ]]; then
-  info "Step 3/7: Installing kitty (Linux)..."
+  info "Step 4/9: Installing kitty (Linux)..."
   if ! command -v kitty &>/dev/null; then
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     mkdir -p ~/.local/bin
@@ -41,11 +60,11 @@ if [[ "$(uname)" != "Darwin" ]]; then
     success "kitty already installed, skipping"
   fi
 else
-  success "Step 3/7: kitty installed via Homebrew (macOS)"
+  success "Step 4/9: kitty installed via Homebrew (macOS)"
 fi
 
-# ── Step 4/7: Symlink configs ─────────────────────────────
-info "Step 4/7: Linking configs to ~/.config/..."
+# ── Step 5/9: Symlink configs ─────────────────────────────
+info "Step 5/9: Linking configs to ~/.config/..."
 mkdir -p "$HOME/.config"
 for pkg in "${CONFIG_PACKAGES[@]}"; do
   ln -sfn "$DOTFILES_DIR/$pkg" "$HOME/.config/$pkg"
@@ -53,8 +72,8 @@ for pkg in "${CONFIG_PACKAGES[@]}"; do
 done
 success "All configs linked"
 
-# ── Step 5/7: zsh setup ──────────────────────────────────
-info "Step 5/7: Setting up zsh..."
+# ── Step 6/9: zsh setup ──────────────────────────────────
+info "Step 6/9: Setting up zsh..."
 
 # Backup existing non-symlink files
 for f in "$HOME/.zshrc" "$HOME/.zimrc"; do
@@ -79,8 +98,8 @@ if [[ ! -e "$ZIM_HOME/zimfw.zsh" ]]; then
 fi
 success "zsh configured"
 
-# ── Step 6/7: vscode / cursor ────────────────────────────
-info "Step 6/7: Linking vscode / cursor configs..."
+# ── Step 7/9: vscode / cursor ────────────────────────────
+info "Step 7/9: Linking vscode / cursor configs..."
 VSCODE_FILES=(settings.json keybindings.json)
 
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -111,9 +130,9 @@ for dir in "${VSCODE_DIRS[@]}"; do
 done
 success "vscode / cursor configured"
 
-# ── Step 7/7: Default shell ──────────────────────────────
+# ── Step 8/9: Default shell ──────────────────────────────
 if [[ "$(uname)" != "Darwin" ]]; then
-  info "Step 7/7: Setting default shell to zsh..."
+  info "Step 8/9: Setting default shell to zsh..."
   ZSH_PATH="$(which zsh)"
   if [[ "$SHELL" != "$ZSH_PATH" ]]; then
     if ! grep -qF "$ZSH_PATH" /etc/shells; then
@@ -125,8 +144,42 @@ if [[ "$(uname)" != "Darwin" ]]; then
     success "Default shell is already zsh"
   fi
 else
-  success "Step 7/7: macOS default shell is already zsh"
+  success "Step 8/9: macOS default shell is already zsh"
 fi
+
+# ── Step 9/9: Nerd Fonts ─────────────────────────────────
+info "Step 9/9: Installing Nerd Fonts..."
+FONT_DIR=""
+if [[ "$(uname)" == "Darwin" ]]; then
+  FONT_DIR="$HOME/Library/Fonts"
+else
+  FONT_DIR="$HOME/.local/share/fonts"
+fi
+mkdir -p "$FONT_DIR"
+
+install_nerd_font() {
+  local name="$1" zip_name="$2"
+  if ls "$FONT_DIR"/*"$name"* &>/dev/null; then
+    echo "  $name already installed"
+    return
+  fi
+  echo "  Downloading $name..."
+  local tmpdir
+  tmpdir=$(mktemp -d)
+  curl -fsSL -o "$tmpdir/$zip_name" \
+    "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$zip_name"
+  unzip -qo "$tmpdir/$zip_name" -d "$FONT_DIR" '*.ttf' '*.otf' 2>/dev/null || true
+  rm -rf "$tmpdir"
+}
+
+install_nerd_font "FiraMono" "FiraMono.zip"
+install_nerd_font "NerdFontsSymbolsOnly" "NerdFontsSymbolsOnly.zip"
+
+# Refresh font cache on Linux
+if [[ "$(uname)" != "Darwin" ]]; then
+  fc-cache -f "$FONT_DIR" 2>/dev/null || true
+fi
+success "Nerd Fonts installed"
 
 echo ""
 success "All done! Restart your terminal to apply changes."
