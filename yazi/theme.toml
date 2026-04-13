@@ -1,0 +1,41 @@
+"$schema" = "https://yazi-rs.github.io/schemas/theme.json"
+
+# Use community gruvbox-material flavor as base
+[flavor]
+dark = "gruvbox-material"
+
+# Override: tabs (rendering handled in init.lua)
+[tabs]
+active   = { fg = "#282828", bg = "#d8a657", bold = true }
+inactive = { fg = "#d4be98", bg = "#3c3836" }
+
+# Override: preview hovered uses background highlight instead of underline
+[indicator]
+preview = { reversed = true }
+
+# Override: directories bold
+[filetype]
+rules = [
+	{ url = "*/", fg = "#7daea3", bold = true },
+	{ mime = "image/*", fg = "#89b482" },
+	{ mime = "{audio,video}/*", fg = "#d8a657" },
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#d3869b" },
+	{ mime = "application/{pdf,doc,rtf}", fg = "#a9b665" },
+	{ mime = "vfs/{absent,stale}", fg = "#a89984" },
+	{ url = "*", is = "orphan", fg = "#ea6962", bold = true },
+	{ url = "*", is = "exec", fg = "#a9b665", bold = true },
+	{ url = "*", is = "dummy", bg = "#ea6962" },
+	{ url = "*/", is = "dummy", bg = "#ea6962" },
+	{ url = "*", fg = "#d4be98" },
+]
+
+# Override: which-key popup with higher contrast
+[which]
+cols            = 3
+mask            = { bg = "#504945" }
+cand            = { fg = "#7daea3", bold = true }
+rest            = { fg = "#ddc7a1" }
+desc            = { fg = "#d4be98" }
+separator       = " → "
+separator_style = { fg = "#928374" }
+border          = { fg = "#7daea3" }

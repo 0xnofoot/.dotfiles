@@ -1,0 +1,13 @@
+# ------------------
+# zshrc config
+# ------------------
+
+source $HOME/.config/zsh/env.zsh
+source $HOME/.config/zsh/vim.zsh
+source $HOME/.config/zsh/plugs.zsh
+source $HOME/.config/zsh/alias.zsh
+source $HOME/.config/zsh/fzf/fzf.zsh
+
+if [ -f "$HOME/.config/zsh/local.zsh" ]; then
+    source $HOME/.config/zsh/local.zsh
+fi

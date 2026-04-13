@@ -1,0 +1,15 @@
+# ------------------
+# zimrc plugins
+# ------------------
+
+zmodule zimfw/environment
+zmodule zimfw/utility
+zmodule zimfw/completion
+
+zmodule zsh-users/zsh-autosuggestions
+zmodule zsh-users/zsh-history-substring-search
+
+zmodule jeffreytse/zsh-vi-mode
+zmodule zdharma-continuum/fast-syntax-highlighting
+zmodule hlissner/zsh-autopair
+zmodule Aloxaf/fzf-tab
