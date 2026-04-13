@@ -16,15 +16,15 @@
 1. 在仓库根目录创建配置目录 `<app>/`，放入配置文件
 2. **Brewfile**：添加 `brew "<app>"` 到对应分类下
 3. **install.sh**：将 `<app>` 追加到 `CONFIG_PACKAGES` 数组（第 5 行）
-4. 如果该应用在 Linux 上无法通过 Homebrew 安装（如 kitty），需在 Step 3 区域添加平台特殊安装逻辑（参见[场景 5](#场景-5应用需要非标准安装)）
-5. 如果该应用需要 `~/.config/` 之外的 symlink（如 zsh 需要 `~/.zshrc`），需在 Step 5 区域添加对应逻辑（参见[场景 6](#场景-6应用需要根级-symlink)）
+4. 如果该应用在 Linux 上无法通过 Homebrew 安装（如 kitty），需在 Step 4 区域添加平台特殊安装逻辑（参见[场景 5](#场景-5应用需要非标准安装)）
+5. 如果该应用需要 `~/.config/` 之外的 symlink（如 zsh 需要 `~/.zshrc`），需在 Step 6 区域添加对应逻辑（参见[场景 6](#场景-6应用需要根级-symlink)）
 
 ## 场景 2：删除应用
 
 1. **Brewfile**：删除对应的 `brew`/`cask` 行
 2. **install.sh**：从 `CONFIG_PACKAGES` 数组中移除
-3. 如果该应用有平台特殊安装逻辑（Step 3 区域），一并删除
-4. 如果该应用有额外 symlink 逻辑（Step 5 区域），一并删除
+3. 如果该应用有平台特殊安装逻辑（Step 4 区域），一并删除
+4. 如果该应用有额外 symlink 逻辑（Step 6 区域），一并删除
 5. 配置目录本身是否从仓库删除，由维护者决定
 
 ## 场景 3：新增依赖（不带配置目录）
@@ -44,7 +44,7 @@
 
 当某个应用在 Linux 上没有 Homebrew formula，需要单独处理。
 
-参照 kitty 的模式，在 install.sh 的 Step 3 区域添加：
+参照 kitty 的模式，在 install.sh 的 Step 4 区域添加：
 
 ```bash
 if [[ "$(uname)" != "Darwin" ]]; then
@@ -64,7 +64,7 @@ cask "<app>" if OS.mac?
 
 部分应用的配置文件不在 `~/.config/` 下，而是在 `$HOME` 根目录（如 `~/.zshrc`）。
 
-参照 zsh 的模式，在 install.sh 的 Step 5 区域添加：
+参照 zsh 的模式，在 install.sh 的 Step 6 区域添加：
 
 ```bash
 # 备份已有的非 symlink 文件
@@ -79,7 +79,7 @@ ln -sfn "$HOME/.config/<app>/<rc>" "$HOME/.<rc>"
 
 部分应用的配置目录不在 `~/.config/<app>` 下，且 macOS/Linux 路径不同。这类应用不加入 `CONFIG_PACKAGES`，而是在 install.sh 中单独处理。
 
-参照 vscode 的模式（install.sh Step 6）：
+参照 vscode 的模式（install.sh Step 7）：
 - 先判断目标应用目录是否存在（不存在则 skip）
 - 存在则将仓库中的配置文件逐个 symlink 到目标目录
 - macOS 和 Linux 使用不同的目标路径

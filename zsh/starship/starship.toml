@@ -2,7 +2,7 @@
 
 add_newline = false
 
-format = """$os[](fg:color_bg3 bg:color_bg2)$directory$git_branch$git_status$line_break$character"""
+format = """ [](fg:color_bg2)$directory$git_branch$git_status$line_break$character"""
 
 palette = 'gruvbox_dark'
 
@@ -18,19 +18,9 @@ color_bright_aqua = '#8ec07c'
 color_bright_orange = '#fe8019'
 color_bright_purple = '#d3869b'
 
-[os]
-disabled = false
-style = "fg:color_bright_aqua bg:color_bg3"
-format = "[](fg:color_bg3)[$symbol ]($style)"
-
-[os.symbols]
-Macos = "\uf179"
-Linux = "\uf17c"
-Windows = "\uf17a"
-
 [directory]
 style = "bold fg:color_bright_orange bg:color_bg2"
-format = "[ $path ]($style)"
+format = "[ $path ]($style)[](fg:color_bg2)"
 truncation_length = 8
 truncation_symbol = "…/"
 truncate_to_repo = false
@@ -38,11 +28,11 @@ truncate_to_repo = false
 [git_branch]
 symbol = ""
 style = "bg:color_bg1"
-format = '[](fg:color_bg2 bg:color_bg1)[[ $symbol $branch ](fg:color_bright_green bg:color_bg1)]($style)'
+format = '[ ](fg:color_bg1)[[ $symbol $branch ](fg:color_bright_green bg:color_bg1)]($style)'
 
 [git_status]
 style = "bg:color_bg1"
-format = '[[$all_status$ahead_behind](fg:color_bright_yellow bg:color_bg1)]($style)[](fg:color_bg1)'
+format = '[[$all_status$ahead_behind](fg:color_bright_yellow bg:color_bg1)]($style)[](fg:color_bg1)'
 modified = '*'
 staged = '+'
 untracked = ''

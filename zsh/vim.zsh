@@ -45,4 +45,25 @@ function zvm_after_lazy_keybindings() {
 # Restore fzf keybindings after zsh-vi-mode init
 function zvm_after_init() {
     eval "$(fzf --zsh)"
+
+    if [[ -n "$TMUX_POPUP" ]]; then
+        _tmux_popup_exit() { exit }
+        zle -N _tmux_popup_exit
+        bindkey '\eQ' _tmux_popup_exit
+        bindkey -M vicmd '\eQ' _tmux_popup_exit
+
+        _tmux_popup_confirm_exit() {
+            local reply cancelled=0
+            zle -I
+            trap 'cancelled=1; echo' INT
+            read -k 1 "reply?kill-pane? (y/n) "
+            trap - INT
+            (( cancelled )) || echo
+            (( ! cancelled )) && [[ "$reply" == [yY] ]] && exit
+            zle clear-screen
+        }
+        zle -N _tmux_popup_confirm_exit
+        bindkey '\eq' _tmux_popup_confirm_exit
+        bindkey -M vicmd '\eq' _tmux_popup_confirm_exit
+    fi
 }
