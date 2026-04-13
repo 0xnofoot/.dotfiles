@@ -77,11 +77,12 @@ ln -sfn "$HOME/.config/<app>/<rc>" "$HOME/.<rc>"
 
 ## 场景 7：应用配置路径因平台而异（如 vscode/cursor）
 
-部分应用的配置目录不在 `~/.config/<app>` 下，且 macOS/Linux 路径不同。这类应用不加入 `CONFIG_PACKAGES`，而是在 install.sh 中单独处理。
+部分应用的配置虽然也链接到 `~/.config/<app>`，但还需将其中的文件链接到应用自身的用户配置目录（macOS/Linux 路径不同），且不需要脚本自动安装应用本体。
 
 参照 vscode 的模式（install.sh Step 7）：
-- 先判断目标应用目录是否存在（不存在则 skip）
-- 存在则将仓库中的配置文件逐个 symlink 到目标目录
+- 应用配置目录已通过 Step 5 链接到 `~/.config/`
+- 检测目标应用目录是否存在（不存在则 skip）
+- 存在则将 `~/.config/<app>/` 下的配置文件逐个 symlink 到应用用户目录
 - macOS 和 Linux 使用不同的目标路径
 
 ## 修改后检查清单

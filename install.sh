@@ -2,7 +2,7 @@
 set -e
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-CONFIG_PACKAGES=(kitty tmux nvim yazi zsh)
+CONFIG_PACKAGES=(kitty tmux nvim yazi zsh vscode)
 
 info()    { printf "\033[1;34m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
 success() { printf "\033[1;32m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
@@ -124,7 +124,7 @@ for dir in "${VSCODE_DIRS[@]}"; do
       warn "Backing up $dir/$f to $dir/$f.bak"
       mv "$dir/$f" "$dir/$f.bak"
     fi
-    ln -sfn "$DOTFILES_DIR/vscode/$f" "$dir/$f"
+    ln -sfn "$HOME/.config/vscode/$f" "$dir/$f"
   done
   echo "  $(basename "$(dirname "$dir")")/User -> vscode/"
 done
