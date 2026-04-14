@@ -36,7 +36,13 @@ fi
 
 # Ensure brew is on PATH for this session
 if [[ "$(uname)" == "Darwin" ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv 2>/dev/null)"
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  else
+    error "Homebrew installed but not found at /opt/homebrew or /usr/local"
+  fi
 else
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi

@@ -42,8 +42,13 @@ function zvm_after_lazy_keybindings() {
     bindkey -M vicmd "'" vi-match-bracket
 }
 
-# Restore fzf keybindings after zsh-vi-mode init
+# Restore fzf keybindings and init starship after zsh-vi-mode
+# (starship must be initialized here so it doesn't conflict with
+# zsh-vi-mode's zle-keymap-select hook wrapping — avoids FUNCNEST overflow)
 function zvm_after_init() {
+    # Guard: only init starship once per session — re-sourcing would wrap
+    # zle-keymap-select on top of itself, causing FUNCNEST overflow
+    (( ${+functions[starship_precmd]} )) || eval "$(starship init zsh)"
     eval "$(fzf --zsh)"
 
     if [[ -n "$TMUX_POPUP" ]]; then

@@ -12,6 +12,7 @@ brew "resvg"
 brew "p7zip"
 
 # CLI Tools
+brew "tree-sitter-cli"
 brew "fzf"
 brew "fd"
 brew "ripgrep"

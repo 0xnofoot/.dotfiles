@@ -23,12 +23,25 @@ if [ ! -d "$TMP_DIR" ]; then
     echo "make ~/.tmp"
 fi
 
-# prompt
+# prompt — initialized in zvm_after_init() in vim.zsh to avoid
+# zle-keymap-select hook conflicts with zsh-vi-mode (FUNCNEST overflow)
 export STARSHIP_CONFIG="$HOME/.config/zsh/starship/starship.toml"
-eval "$(starship init zsh)"
 
 # editor
 export EDITOR='nvim'
+
+# Homebrew PATH — only run when not already initialized.
+# HOMEBREW_PREFIX is exported by `brew shellenv`; if it's set, shellenv has
+# already run (e.g. via /etc/zprofile on macOS or a prior source of this file).
+if [[ -z "$HOMEBREW_PREFIX" ]]; then
+    if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    elif [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -x /usr/local/bin/brew ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
+fi
 
 # path
 export PATH=$PATH:$HOME/.local/bin
