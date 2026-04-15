@@ -93,7 +93,7 @@ keymap = [
 	{ on = ":",  run = "shell --block --interactive", desc = "Shell (block)" },
 	{ on = ";",  run = "shell --block --interactive", desc = "Shell (block)" },
 	{ on = "'",  run = "shell --interactive",         desc = "Shell" },
-	{ on = "S",  run = "shell 'zoxide add . && zsh' --block", desc = "Open zsh" },
+	{ on = "S",  run = "shell 'zoxide add . && zsh -l' --block", desc = "Open zsh" },
 	{ on = "T",  run = "create",                       desc = "Create file/dir" },
 	{ on = "M",  run = "create --dir",                 desc = "Create dir" },
 

@@ -96,6 +96,7 @@ fi
 info "Step 5/9: 链接配置到 ~/.config/..."
 mkdir -p "$HOME/.config"
 for pkg in "${CONFIG_PACKAGES[@]}"; do
+  rm -rf "$HOME/.config/$pkg"
   ln -sfn "$DOTFILES_DIR/$pkg" "$HOME/.config/$pkg"
   echo "  $pkg -> ~/.config/$pkg"
 done

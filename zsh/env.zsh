@@ -46,6 +46,13 @@ fi
 # path
 export PATH=$PATH:$HOME/.local/bin
 
+# trash-cli (keg-only，需手动加入 PATH)
+if [[ -d /opt/homebrew/opt/trash-cli/bin ]]; then
+    export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
+elif [[ -d /home/linuxbrew/.linuxbrew/opt/trash-cli/bin ]]; then
+    export PATH="/home/linuxbrew/.linuxbrew/opt/trash-cli/bin:$PATH"
+fi
+
 # zoxide
 eval "$(zoxide init zsh)"
 
