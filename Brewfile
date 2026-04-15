@@ -28,6 +28,3 @@ brew "xclip" if OS.linux?
 
 # Media
 brew "mpv"
-
-# kitty (macOS via cask, Linux via official installer in install.sh)
-cask "kitty" if OS.mac?

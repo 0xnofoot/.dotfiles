@@ -42,23 +42,21 @@
 
 ## 场景 5：应用需要非标准安装
 
-当某个应用在 Linux 上没有 Homebrew formula，需要单独处理。
+当某个应用在 Linux 上没有 Homebrew formula，或安装本身是可选的，需要单独处理。
 
-参照 kitty 的模式，在 install.sh 的 Step 4 区域添加：
+kitty 已改为可选安装模式（Step 4），通过交互式提示或 `--with-kitty` / `--no-kitty` 参数控制。参照此模式，在 install.sh 的 Step 4 区域添加类似逻辑：
 
 ```bash
-if [[ "$(uname)" != "Darwin" ]]; then
-  if ! command -v <app> &>/dev/null; then
-    # 平台特殊安装逻辑（curl 官方安装脚本等）
-  fi
+if command -v <app> &>/dev/null; then
+  # 已安装，跳过
+elif [[ "$(uname)" == "Darwin" ]]; then
+  brew install --cask <app>
+else
+  # 平台特殊安装逻辑（curl 官方安装脚本等）
 fi
 ```
 
-同时在 Brewfile 中用条件限制：
-
-```ruby
-cask "<app>" if OS.mac?
-```
+如果应用从 Brewfile 中移除（改为可选），确保在 install.sh 中手动调用 `brew install`。
 
 ## 场景 6：应用需要根级 symlink
 

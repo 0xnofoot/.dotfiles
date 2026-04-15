@@ -97,6 +97,7 @@ keymap = [
 	{ on = "T",  run = "create",                       desc = "Create file/dir" },
 	{ on = "M",  run = "create --dir",                 desc = "Create dir" },
 
+	{ on = "O",     run = "shell 'open . 2>/dev/null || xdg-open .' --confirm", desc = "在文件管理器中打开" },
 	{ on = "<C-v>", run = "shell 'nvim' --block",    desc = "Open nvim" },
 	{ on = "<C-g>", run = "shell 'lazygit' --block", desc = "Open lazygit" },
 

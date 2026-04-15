@@ -30,7 +30,7 @@
 | Linux 编译工具 | Step 1/9 — apt/dnf/pacman 安装 build-essential 等 |
 | Homebrew | Step 2/9 — 安装并配置 PATH |
 | Brew bundle | Step 3/9 — 通过 Brewfile 安装所有包 |
-| Linux kitty 安装 | Step 4/9 — macOS 用 cask，Linux 用官方安装脚本 |
+| kitty 可选安装 | Step 4/9 — 交互式询问，支持 `--with-kitty` / `--no-kitty` 参数；macOS 用 cask，Linux 用官方脚本 |
 | Symlink 循环 | Step 5/9 — 遍历 CONFIG_PACKAGES 链接到 `~/.config/` |
 | zsh 根级 symlink | Step 6/9 — `~/.zshrc`、`~/.zimrc` |
 | vscode/cursor 配置 | Step 7/9 — 检测已安装的 Code/Cursor，将 `~/.config/vscode/` 下的配置文件链接到应用用户目录 |

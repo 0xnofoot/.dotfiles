@@ -28,7 +28,7 @@ bash install.sh
 1. 安装 Linux 编译工具（macOS 跳过）
 2. 安装 Homebrew
 3. 通过 Brewfile 安装所有依赖
-4. Linux 上安装 kitty（macOS 用 cask）
+4. 可选安装 kitty 终端（交互式询问，或通过 `--with-kitty` / `--no-kitty` 控制）
 5. Symlink 配置目录到 `~/.config/`（含 vscode）
 6. 设置 zsh 根级 symlink（`~/.zshrc`、`~/.zimrc`）+ 下载 Zim
 7. 检测已安装的 VS Code / Cursor，将 `~/.config/vscode/` 下的配置文件链接到对应应用目录
@@ -135,7 +135,7 @@ Prefix 为 `Ctrl+S`。
 | 项目 | macOS | Linux |
 |------|-------|-------|
 | 包管理 | Homebrew（原生） | Linuxbrew |
-| kitty 安装 | `brew install --cask kitty` | 官方安装脚本 |
+| kitty 安装 | `brew install --cask kitty`（可选） | 官方安装脚本（可选） |
 | kitty 快捷键 | `Cmd + 字母` | `Super + 字母` |
 | VS Code / Cursor 配置路径 | `~/Library/Application Support/{Code,Cursor}/User/` | `~/.config/{Code,Cursor}/User/` |
 | 默认 shell | 已是 zsh | 脚本自动 `chsh` |

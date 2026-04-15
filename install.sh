@@ -4,14 +4,23 @@ set -e
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 CONFIG_PACKAGES=(kitty tmux nvim yazi zsh vscode)
 
+# 解析命令行参数
+INSTALL_KITTY=""
+for arg in "$@"; do
+  case "$arg" in
+    --with-kitty) INSTALL_KITTY=yes ;;
+    --no-kitty)   INSTALL_KITTY=no ;;
+  esac
+done
+
 info()    { printf "\033[1;34m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
 success() { printf "\033[1;32m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
 warn()    { printf "\033[1;33m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
 error()   { printf "\033[1;31m==>\033[0m \033[1m%s\033[0m\n" "$1"; exit 1; }
 
-# ── Step 1/9: Linux build tools ───────────────────────────
+# ── Step 1/9: Linux 编译工具 ──────────────────────────────
 if [[ "$(uname)" != "Darwin" ]]; then
-  info "Step 1/9: Installing Linux build tools..."
+  info "Step 1/9: 安装 Linux 编译工具..."
   if command -v apt-get &>/dev/null; then
     sudo apt-get update -qq
     sudo apt-get install -y build-essential procps curl file git
@@ -21,15 +30,15 @@ if [[ "$(uname)" != "Darwin" ]]; then
   elif command -v pacman &>/dev/null; then
     sudo pacman -Sy --noconfirm base-devel procps-ng curl file git
   else
-    warn "Unknown package manager, please ensure build tools (gcc, make, curl, git) are installed"
+    warn "未知包管理器，请确保已安装编译工具（gcc, make, curl, git）"
   fi
-  success "Build tools ready"
+  success "编译工具就绪"
 else
-  success "Step 1/9: macOS build tools (Xcode CLT) assumed present"
+  success "Step 1/9: macOS 编译工具（Xcode CLT）已就绪"
 fi
 
 # ── Step 2/9: Homebrew ────────────────────────────────────
-info "Step 2/9: Installing Homebrew..."
+info "Step 2/9: 安装 Homebrew..."
 if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
@@ -41,54 +50,64 @@ if [[ "$(uname)" == "Darwin" ]]; then
   elif [[ -x /usr/local/bin/brew ]]; then
     eval "$(/usr/local/bin/brew shellenv)"
   else
-    error "Homebrew installed but not found at /opt/homebrew or /usr/local"
+    error "Homebrew 已安装但未找到（/opt/homebrew 或 /usr/local）"
   fi
 else
   if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   else
-    error "Homebrew installed but not found at /home/linuxbrew/.linuxbrew"
+    error "Homebrew 已安装但未找到（/home/linuxbrew/.linuxbrew）"
   fi
 fi
-success "Homebrew ready"
+success "Homebrew 就绪"
 
-# ── Step 3/9: Install packages ────────────────────────────
-info "Step 3/9: Installing packages via Brewfile..."
+# ── Step 3/9: 安装依赖包 ─────────────────────────────────
+info "Step 3/9: 通过 Brewfile 安装依赖包..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
-success "All packages installed"
+success "所有依赖包已安装"
 
-# ── Step 4/9: kitty on Linux ──────────────────────────────
-if [[ "$(uname)" != "Darwin" ]]; then
-  info "Step 4/9: Installing kitty (Linux)..."
-  if ! command -v kitty &>/dev/null; then
+# ── Step 4/9: kitty（可选）───────────────────────────────
+if [[ -z "$INSTALL_KITTY" ]]; then
+  printf "\033[1;34m==>\033[0m \033[1m是否安装 kitty 终端？(y/N) \033[0m"
+  read -r answer
+  [[ "$answer" == [yY] ]] && INSTALL_KITTY=yes || INSTALL_KITTY=no
+fi
+
+if [[ "$INSTALL_KITTY" == "yes" ]]; then
+  if command -v kitty &>/dev/null; then
+    success "Step 4/9: kitty 已安装，跳过"
+  elif [[ "$(uname)" == "Darwin" ]]; then
+    info "Step 4/9: 通过 Homebrew 安装 kitty..."
+    brew install --cask kitty
+    success "kitty 已安装"
+  else
+    info "Step 4/9: 通过官方脚本安装 kitty (Linux)..."
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     mkdir -p ~/.local/bin
     ln -sfn ~/.local/kitty.app/bin/kitty ~/.local/bin/kitty
     ln -sfn ~/.local/kitty.app/bin/kitten ~/.local/bin/kitten
-    success "kitty installed"
-  else
-    success "kitty already installed, skipping"
+    success "kitty 已安装"
   fi
 else
-  success "Step 4/9: kitty installed via Homebrew (macOS)"
+  success "Step 4/9: 跳过 kitty 安装"
 fi
 
-# ── Step 5/9: Symlink configs ─────────────────────────────
-info "Step 5/9: Linking configs to ~/.config/..."
+# ── Step 5/9: 链接配置 ───────────────────────────────────
+info "Step 5/9: 链接配置到 ~/.config/..."
 mkdir -p "$HOME/.config"
 for pkg in "${CONFIG_PACKAGES[@]}"; do
   ln -sfn "$DOTFILES_DIR/$pkg" "$HOME/.config/$pkg"
   echo "  $pkg -> ~/.config/$pkg"
 done
-success "All configs linked"
+success "所有配置已链接"
 
-# ── Step 6/9: zsh setup ──────────────────────────────────
-info "Step 6/9: Setting up zsh..."
+# ── Step 6/9: zsh 设置 ───────────────────────────────────
+info "Step 6/9: 配置 zsh..."
 
 # 备份已有的非符号链接文件
 for f in "$HOME/.zshrc" "$HOME/.zimrc"; do
   if [[ -e "$f" && ! -L "$f" ]]; then
-    warn "Backing up $(basename "$f") to $(basename "$f").bak"
+    warn "备份 $(basename "$f") 为 $(basename "$f").bak"
     mv "$f" "$f.bak"
   fi
 done
@@ -101,15 +120,15 @@ echo "  ~/.zimrc -> ~/.config/zsh/zimrc"
 # 预下载 zimfw
 ZIM_HOME="$HOME/.config/zsh/zim"
 if [[ ! -e "$ZIM_HOME/zimfw.zsh" ]]; then
-  echo "  Downloading zimfw..."
+  echo "  下载 zimfw..."
   mkdir -p "$ZIM_HOME"
   curl -fsSL -o "$ZIM_HOME/zimfw.zsh" \
     https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 fi
-success "zsh configured"
+success "zsh 配置完成"
 
 # ── Step 7/9: vscode / cursor ────────────────────────────
-info "Step 7/9: Linking vscode / cursor configs..."
+info "Step 7/9: 链接 vscode / cursor 配置..."
 VSCODE_FILES=(settings.json keybindings.json)
 
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -126,39 +145,39 @@ fi
 
 for dir in "${VSCODE_DIRS[@]}"; do
   if [[ ! -d "$dir" ]]; then
-    echo "  $(basename "$(dirname "$dir")") not found, skipping"
+    echo "  $(basename "$(dirname "$dir")") 未找到，跳过"
     continue
   fi
   for f in "${VSCODE_FILES[@]}"; do
     if [[ -e "$dir/$f" && ! -L "$dir/$f" ]]; then
-      warn "Backing up $dir/$f to $dir/$f.bak"
+      warn "备份 $dir/$f 为 $dir/$f.bak"
       mv "$dir/$f" "$dir/$f.bak"
     fi
     ln -sfn "$HOME/.config/vscode/$f" "$dir/$f"
   done
   echo "  $(basename "$(dirname "$dir")")/User -> vscode/"
 done
-success "vscode / cursor configured"
+success "vscode / cursor 配置完成"
 
-# ── Step 8/9: Default shell ──────────────────────────────
+# ── Step 8/9: 默认 shell ─────────────────────────────────
 if [[ "$(uname)" != "Darwin" ]]; then
-  info "Step 8/9: Setting default shell to zsh..."
+  info "Step 8/9: 设置默认 shell 为 zsh..."
   ZSH_PATH="$(which zsh)"
   if [[ "$SHELL" != "$ZSH_PATH" ]]; then
     if ! grep -qF "$ZSH_PATH" /etc/shells; then
       echo "$ZSH_PATH" | sudo tee -a /etc/shells >/dev/null
     fi
     chsh -s "$ZSH_PATH"
-    success "Default shell set to zsh"
+    success "默认 shell 已设置为 zsh"
   else
-    success "Default shell is already zsh"
+    success "默认 shell 已是 zsh"
   fi
 else
-  success "Step 8/9: macOS default shell is already zsh"
+  success "Step 8/9: macOS 默认 shell 已是 zsh"
 fi
 
 # ── Step 9/9: Nerd Fonts ─────────────────────────────────
-info "Step 9/9: Installing Nerd Fonts..."
+info "Step 9/9: 安装 Nerd Fonts..."
 FONT_DIR=""
 if [[ "$(uname)" == "Darwin" ]]; then
   FONT_DIR="$HOME/Library/Fonts"
@@ -170,10 +189,10 @@ mkdir -p "$FONT_DIR"
 install_nerd_font() {
   local name="$1" zip_name="$2"
   if ls "$FONT_DIR"/*"$name"* &>/dev/null; then
-    echo "  $name already installed"
+    echo "  $name 已安装"
     return
   fi
-  echo "  Downloading $name..."
+  echo "  下载 $name..."
   local tmpdir
   tmpdir=$(mktemp -d)
   curl -fsSL -o "$tmpdir/$zip_name" \
@@ -189,7 +208,7 @@ install_nerd_font "NerdFontsSymbolsOnly" "NerdFontsSymbolsOnly.zip"
 if [[ "$(uname)" != "Darwin" ]]; then
   fc-cache -f "$FONT_DIR" 2>/dev/null || true
 fi
-success "Nerd Fonts installed"
+success "Nerd Fonts 已安装"
 
 echo ""
-success "All done! Restart your terminal to apply changes."
+success "全部完成！重启终端以生效。"
