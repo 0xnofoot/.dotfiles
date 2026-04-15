@@ -1,19 +1,19 @@
 "$schema" = "https://yazi-rs.github.io/schemas/theme.json"
 
-# Use community gruvbox-material flavor as base
+# 使用社区 gruvbox-material 主题作为基础
 [flavor]
 dark = "gruvbox-material"
 
-# Override: tabs (rendering handled in init.lua)
+# 覆盖：标签页（渲染逻辑在 init.lua 中）
 [tabs]
 active   = { fg = "#282828", bg = "#d8a657", bold = true }
 inactive = { fg = "#d4be98", bg = "#3c3836" }
 
-# Override: preview hovered uses background highlight instead of underline
+# 覆盖：预览悬停使用背景高亮而非下划线
 [indicator]
 preview = { reversed = true }
 
-# Override: directories bold
+# 覆盖：目录加粗
 [filetype]
 rules = [
 	{ url = "*/", is = "link", fg = "#89b482", bold = true, italic = true },
@@ -31,7 +31,7 @@ rules = [
 	{ url = "*", fg = "#d4be98" },
 ]
 
-# Override: which-key popup with higher contrast
+# 覆盖：which-key 弹窗提高对比度
 [which]
 cols            = 3
 mask            = { bg = "#504945" }

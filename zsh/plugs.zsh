@@ -1,9 +1,9 @@
 # ------------------
-# Initialize modules
+# plugs config
 # ------------------
 
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.config/zsh/zim
-# Download zimfw plugin manager if missing.
+# 如果缺少 zimfw 插件管理器则下载
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   if (( ${+commands[curl]} )); then
     curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
@@ -13,13 +13,13 @@ if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
         https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
   fi
 fi
-# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+# 安装缺失模块，如果 init.zsh 缺失或过期则更新
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
-# Initialize modules — guarded so re-sourcing ~/.zshrc doesn't reload zim
-# modules, which would trigger compinit double-init warnings.
+# 初始化模块 — 加守卫防止重复 source ~/.zshrc 时重载 zim 模块，
+# 避免 compinit 重复初始化警告
 if [[ -z "$_ZSH_ZIM_LOADED" ]]; then
-  export _ZSH_ZIM_LOADED=1
+  _ZSH_ZIM_LOADED=1
   source ${ZIM_HOME}/init.zsh
 fi

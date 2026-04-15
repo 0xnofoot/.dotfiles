@@ -49,7 +49,7 @@ vimcmd_replace_one_symbol = ' [ ](bold fg:color_bright_purple)'
 vimcmd_replace_symbol = ' [ ](bold fg:color_bright_purple)'
 vimcmd_visual_symbol = ' [ ](bold fg:color_bright_yellow)'
 
-# Disable all language detections
+# 禁用所有语言检测
 [golang]
 disabled = true
 

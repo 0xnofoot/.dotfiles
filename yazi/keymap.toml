@@ -3,12 +3,12 @@
 [mgr]
 
 keymap = [
-	# === General ===
+	# === 通用 ===
 	{ on = "<Esc>", run = "escape",             desc = "Exit visual / clear selection / cancel search" },
 	{ on = "q",     run = "close",              desc = "Close tab, or quit if last" },
 	{ on = "Q",     run = "quit --no-cwd-file", desc = "Quit without cwd-file" },
 
-	# === Navigation ===
+	# === 导航 ===
 	{ on = "j", run = "arrow next",  desc = "Next file" },
 	{ on = "k", run = "arrow prev",  desc = "Prev file" },
 	{ on = "J", run = "arrow 5",     desc = "Down 5 lines" },
@@ -35,10 +35,10 @@ keymap = [
 	{ on = "<C-j>", run = "arrow 15",    desc = "Down 15 lines" },
 	{ on = "<C-k>", run = "arrow -15",   desc = "Up 15 lines" },
 
-	# === Reload ===
+	# === 刷新 ===
 	{ on = "R", run = "reload", desc = "Reload directory" },
 
-	# === Tab ===
+	# === 标签页 ===
 	{ on = "<C-n>", run = "tab_create --current", desc = "New tab in cwd" },
 	{ on = "<C-h>", run = "tab_switch -1 --relative", desc = "Prev tab" },
 	{ on = "<C-l>", run = "tab_switch 1 --relative",  desc = "Next tab" },
@@ -52,7 +52,7 @@ keymap = [
 	{ on = "<C-8>", run = "tab_switch 7", desc = "Tab 8" },
 	{ on = "<C-9>", run = "tab_switch 8", desc = "Tab 9" },
 
-	# === File operations ===
+	# === 文件操作 ===
 	{ on = [ "d", "d" ], run = "yank --cut",            desc = "Cut files" },
 	{ on = [ "d", "D" ], run = "remove --permanently",  desc = "Delete permanently" },
 	{ on = "d",          run = "remove",                 desc = "Trash files" },
@@ -69,17 +69,17 @@ keymap = [
 	{ on = [ "p", "p" ], run = "paste",           desc = "Paste" },
 	{ on = [ "p", "o" ], run = "paste --force",   desc = "Paste (overwrite)" },
 
-	# === Selection ===
+	# === 选择 ===
 	{ on = "<Space>", run = [ "toggle", "arrow 1" ], desc = "Toggle select" },
 	{ on = "V",       run = "plugin toggle-visual",   desc = "Toggle visual mode" },
 	{ on = [ "v", "v" ], run = "toggle_all --state=on",  desc = "Select all" },
 	{ on = [ "v", "V" ], run = "toggle_all --state=off", desc = "Deselect all" },
 
-	# === Hidden files ===
+	# === 隐藏文件 ===
 	{ on = [ "z", "h" ], run = "hidden toggle", desc = "Toggle hidden" },
 	{ on = ".",          run = "hidden toggle", desc = "Toggle hidden" },
 
-	# === Rename ===
+	# === 重命名 ===
 	{ on = [ "c", "n" ], run = "rename --empty=stem --cursor=start",  desc = "Rename (clear name, keep ext)" },
 	{ on = [ "c", "w" ], run = "rename --empty=all",                desc = "Rename (clear all)" },
 	{ on = [ "c", "I" ], run = "rename --cursor=start",             desc = "Rename (cursor at start)" },
@@ -89,7 +89,7 @@ keymap = [
 	{ on = [ "c", "d" ], run = "cd --interactive",            desc = "Change dir" },
 	{ on = [ "c", "m" ], run = "shell 'chmod +x %s' --block", desc = "Make executable" },
 
-	# === Shell ===
+	# === 终端 ===
 	{ on = ":",  run = "shell --block --interactive", desc = "Shell (block)" },
 	{ on = ";",  run = "shell --block --interactive", desc = "Shell (block)" },
 	{ on = "'",  run = "shell --interactive",         desc = "Shell" },
@@ -100,7 +100,7 @@ keymap = [
 	{ on = "<C-v>", run = "shell 'nvim' --block",    desc = "Open nvim" },
 	{ on = "<C-g>", run = "shell 'lazygit' --block", desc = "Open lazygit" },
 
-	# === Search / Filter ===
+	# === 搜索 / 过滤 ===
 	{ on = "/",     run = "find --smart",            desc = "Find next" },
 	{ on = "?",     run = "filter --smart",          desc = "Filter" },
 	{ on = "<C-d>", run = "search --via=fd",         desc = "Search via fd" },
@@ -109,7 +109,7 @@ keymap = [
 	{ on = "n", run = "find_arrow",              desc = "Next match" },
 	{ on = "N", run = "find_arrow --previous",   desc = "Prev match" },
 
-	# === Sort ===
+	# === 排序 ===
 	{ on = [ "s", "r" ], run = "sort mtime --reverse=yes",       desc = "Sort by mtime (rev)" },
 	{ on = [ "s", "l" ], run = "sort alphabetical --reverse=no", desc = "Sort alphabetical" },
 	{ on = [ "s", "t" ], run = "sort mtime --reverse=no",        desc = "Sort by mtime" },
@@ -117,7 +117,7 @@ keymap = [
 	{ on = [ "s", "s" ], run = "sort size --reverse=no",         desc = "Sort by size" },
 	{ on = [ "s", "e" ], run = "sort extension --reverse=no",    desc = "Sort by ext" },
 
-	# === Linemode ===
+	# === 行信息 ===
 	{ on = [ "i", "s" ], run = "linemode size",        desc = "Show size" },
 	{ on = [ "i", "t" ], run = "linemode mtime",       desc = "Show mtime" },
 	{ on = [ "i", "b" ], run = "linemode btime",       desc = "Show btime" },
@@ -125,7 +125,7 @@ keymap = [
 	{ on = [ "i", "o" ], run = "linemode owner",       desc = "Show owner" },
 	{ on = [ "i", "n" ], run = "linemode none",        desc = "Hide linemode" },
 
-	# === Goto ===
+	# === 跳转 ===
 	{ on = [ "g", "r" ], run = "cd /",            desc = "Go to /" },
 	{ on = [ "g", "d" ], run = "cd ~/Downloads",  desc = "Go to Downloads" },
 	{ on = [ "g", "D" ], run = "cd ~/Desktop",    desc = "Go to Desktop" },
@@ -136,14 +136,14 @@ keymap = [
 	{ on = [ "g", "P" ], run = "cd ~/Projects",   desc = "Go to Projects" },
 	{ on = [ "g", "f" ], run = "follow",          desc = "Follow symlink" },
 
-	# === Spot ===
+	# === 预览 ===
 	{ on = "<Tab>", run = "spot", desc = "Spot file" },
 
 
-	# === Tasks ===
+	# === 任务 ===
 	{ on = "w", run = "tasks:show", desc = "Task manager" },
 
-	# === Help ===
+	# === 帮助 ===
 	{ on = "~",    run = "help", desc = "Help" },
 
 	# === Zoxide ===
@@ -211,7 +211,7 @@ keymap = [
 	{ on = "<Enter>", run = "close --submit", desc = "Submit" },
 	{ on = "<Esc>",   run = "escape",         desc = "Normal mode or cancel" },
 
-	# Mode
+	# 模式
 	{ on = "i", run = "insert",                          desc = "Insert mode" },
 	{ on = "I", run = [ "move first-char", "insert" ],   desc = "Insert at BOL" },
 	{ on = "a", run = "insert --append",                 desc = "Append mode" },
@@ -219,7 +219,7 @@ keymap = [
 	{ on = "v", run = "visual",                          desc = "Visual mode" },
 	{ on = "r", run = "replace",                         desc = "Replace char" },
 
-	# Movement
+	# 移动
 	{ on = "h",       run = "move -1", desc = "Left" },
 	{ on = "H",       run = "move -3", desc = "Left x3" },
 	{ on = "l",       run = "move 1",  desc = "Right" },
@@ -240,12 +240,12 @@ keymap = [
 	{ on = "<Home>",  run = "move bol",        desc = "BOL" },
 	{ on = "<End>",   run = "move eol",        desc = "EOL" },
 
-	# Delete
+	# 删除
 	{ on = "<Backspace>", run = "backspace",         desc = "Delete before cursor" },
 	{ on = "<Delete>",    run = "backspace --under", desc = "Delete under cursor" },
 
 
-	# Cut/Yank/Paste
+	# 剪切/复制/粘贴
 	{ on = "d", run = "delete --cut",          desc = "Cut selected" },
 	{ on = "D", run = [ "delete --cut", "move eol" ], desc = "Cut to EOL" },
 	{ on = "c", run = "delete --cut --insert", desc = "Cut and insert" },
@@ -255,7 +255,7 @@ keymap = [
 	{ on = "p", run = "paste",          desc = "Paste after" },
 	{ on = "P", run = "paste --before", desc = "Paste before" },
 
-	# Undo/Redo
+	# 撤销/重做
 	{ on = "u",     run = [ "undo", "casefy lower" ], desc = "Undo or lowercase" },
 	{ on = "U",     run = "casefy upper",             desc = "Uppercase" },
 

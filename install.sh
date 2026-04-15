@@ -34,7 +34,7 @@ if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-# Ensure brew is on PATH for this session
+# 确保 brew 在当前会话的 PATH 中
 if [[ "$(uname)" == "Darwin" ]]; then
   if [[ -x /opt/homebrew/bin/brew ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -44,7 +44,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
     error "Homebrew installed but not found at /opt/homebrew or /usr/local"
   fi
 else
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  else
+    error "Homebrew installed but not found at /home/linuxbrew/.linuxbrew"
+  fi
 fi
 success "Homebrew ready"
 
@@ -81,7 +85,7 @@ success "All configs linked"
 # ── Step 6/9: zsh setup ──────────────────────────────────
 info "Step 6/9: Setting up zsh..."
 
-# Backup existing non-symlink files
+# 备份已有的非符号链接文件
 for f in "$HOME/.zshrc" "$HOME/.zimrc"; do
   if [[ -e "$f" && ! -L "$f" ]]; then
     warn "Backing up $(basename "$f") to $(basename "$f").bak"
@@ -94,7 +98,7 @@ ln -sfn "$HOME/.config/zsh/zimrc" "$HOME/.zimrc"
 echo "  ~/.zshrc -> ~/.config/zsh/zshrc"
 echo "  ~/.zimrc -> ~/.config/zsh/zimrc"
 
-# Pre-download zimfw
+# 预下载 zimfw
 ZIM_HOME="$HOME/.config/zsh/zim"
 if [[ ! -e "$ZIM_HOME/zimfw.zsh" ]]; then
   echo "  Downloading zimfw..."
@@ -181,7 +185,7 @@ install_nerd_font() {
 install_nerd_font "FiraMono" "FiraMono.zip"
 install_nerd_font "NerdFontsSymbolsOnly" "NerdFontsSymbolsOnly.zip"
 
-# Refresh font cache on Linux
+# 在 Linux 上刷新字体缓存
 if [[ "$(uname)" != "Darwin" ]]; then
   fc-cache -f "$FONT_DIR" 2>/dev/null || true
 fi

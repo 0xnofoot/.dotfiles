@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bulk rename: lists files in $EDITOR, then renames based on changes
+# 批量重命名：在 $EDITOR 中列出文件，根据修改内容重命名
 set -euo pipefail
 
 tmpfile=$(mktemp /tmp/yazi-bulk-rename.XXXXXX)

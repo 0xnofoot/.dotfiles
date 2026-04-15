@@ -38,6 +38,10 @@
 | Nerd Fonts | Step 9/9 — 自动下载安装 FiraMono + Symbols Nerd Font |
 | 步骤总数 | 硬编码为 "Step N/9"，增减步骤时需全部更新 |
 
+## Git 规范
+
+- 提交时使用中文 commit message
+
 ## 维护文档
 
 - [安装脚本更新 SOP](.docs/install-update-sop.md) — 配置变更时如何更新安装脚本

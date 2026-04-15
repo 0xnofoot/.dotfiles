@@ -1,8 +1,8 @@
 # ------------------
-# zsh vi-mode config (zsh-vi-mode hooks)
+# zsh vi-mode config（zsh-vi-mode 钩子）
 # ------------------
 
-# Configuration — called before plugin init
+# 配置 — 在插件初始化之前调用
 function zvm_config() {
     ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BEAM
     ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
@@ -14,7 +14,7 @@ function zvm_config() {
     ZVM_LAZY_KEYBINDINGS=true
 }
 
-# Accelerated movement widgets
+# 加速移动 widget
 remap_vi_H() { for i in {1..3}; do zle vi-backward-char; done }
 zle -N remap_vi_H
 
@@ -30,7 +30,7 @@ zle -N remap_vi_E
 remap_vi_B() { for i in {1..3}; do zle vi-backward-blank-word; done }
 zle -N remap_vi_B
 
-# Custom vicmd keybindings — called when lazy keybindings load
+# 自定义 vicmd 按键绑定 — 在懒加载按键绑定时调用
 function zvm_after_lazy_keybindings() {
     bindkey -M vicmd "H" remap_vi_H
     bindkey -M vicmd "L" remap_vi_L
@@ -42,12 +42,12 @@ function zvm_after_lazy_keybindings() {
     bindkey -M vicmd "'" vi-match-bracket
 }
 
-# Restore fzf keybindings and init starship after zsh-vi-mode
-# (starship must be initialized here so it doesn't conflict with
-# zsh-vi-mode's zle-keymap-select hook wrapping — avoids FUNCNEST overflow)
+# 在 zsh-vi-mode 之后恢复 fzf 按键绑定并初始化 starship
+# （starship 必须在此初始化，避免与 zsh-vi-mode 的
+# zle-keymap-select 钩子包装冲突 — 否则会 FUNCNEST 溢出）
 function zvm_after_init() {
-    # Guard: only init starship once per session — re-sourcing would wrap
-    # zle-keymap-select on top of itself, causing FUNCNEST overflow
+    # 守卫：每个会话只初始化 starship 一次 — 重复 source 会叠加
+    # zle-keymap-select 钩子，导致 FUNCNEST 溢出
     (( ${+functions[starship_precmd]} )) || eval "$(starship init zsh)"
     eval "$(fzf --zsh)"
 
