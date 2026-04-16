@@ -1,0 +1,7 @@
+# 运行时生成数据 — 全部忽略，仅保留配置文件
+*
+!.gitignore
+!CLAUDE.md
+!settings.json
+!commands/
+!commands/**

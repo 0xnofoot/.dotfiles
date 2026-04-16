@@ -93,6 +93,19 @@ for pkg in "${CONFIG_PACKAGES[@]}"; do
   ln -sfn "$DOTFILES_DIR/$pkg" "$HOME/.config/$pkg"
   echo "  $pkg -> ~/.config/$pkg"
 done
+
+# claude 特殊处理：链接到 ~/.claude（非 ~/.config）
+if [[ -d "$HOME/.claude" && ! -L "$HOME/.claude" ]]; then
+  warn "备份已有 ~/.claude 配置文件..."
+  for f in CLAUDE.md settings.json; do
+    [[ -e "$HOME/.claude/$f" && ! -L "$HOME/.claude/$f" ]] && mv "$HOME/.claude/$f" "$HOME/.claude/$f.bak"
+  done
+  [[ -d "$HOME/.claude/commands" && ! -L "$HOME/.claude/commands" ]] && mv "$HOME/.claude/commands" "$HOME/.claude/commands.bak"
+  rm -rf "$HOME/.claude"
+fi
+ln -sfn "$DOTFILES_DIR/claude" "$HOME/.claude"
+echo "  claude -> ~/.claude"
+
 git -C "$DOTFILES_DIR" config core.hooksPath .githooks
 echo "  git hooksPath -> .githooks"
 success "所有配置已链接"

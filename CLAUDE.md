@@ -12,6 +12,10 @@
 ├── yazi/               # yazi 文件管理器配置
 ├── zsh/                # zsh 配置（特殊：需要根级 symlink）
 ├── .githooks/          # git hooks（pre-commit 检查扩展同步）
+├── claude/             # Claude Code 配置（链接到 ~/.claude）
+│   ├── CLAUDE.md
+│   ├── settings.json
+│   └── commands/       # 自定义 skills
 ├── .docs/              # 维护文档（安装脚本更新 SOP 等）
 └── vscode/             # vscode/cursor 配置（链接到 ~/.config/vscode，再按需链接到应用目录）
     ├── settings.json
@@ -30,6 +34,7 @@
 - 包管理：macOS 和 Linux 统一使用 Homebrew
 - 配置链接：每个 `<app>/` 目录通过 `ln -sfn` 链接到 `~/.config/<app>`
 - 依赖声明：所有 brew/cask 包写在 `Brewfile` 中
+- claude 特殊处理：整个 `claude/` 目录链接到 `~/.claude`（非 `~/.config`），`.gitignore` 排除运行时数据，仅跟踪配置文件和 commands/
 - zsh 特殊处理：除 `~/.config/zsh` 外，还需 `~/.zshrc` 和 `~/.zimrc` 根级 symlink
 - vscode 特殊处理：同样链接到 `~/.config/vscode`，再检测已安装的 Code/Cursor，将配置文件链接到对应应用用户目录（macOS/Linux 路径不同）
 
@@ -42,7 +47,7 @@
 | Homebrew | Step 2/10 — 安装并配置 PATH |
 | Brew bundle | Step 3/10 — 通过 Brewfile 安装所有包 |
 | kitty 可选安装 | Step 4/10 — 默认跳过，`--with-kitty` 启用；macOS 用 cask，Linux 用官方脚本 |
-| Symlink 循环 | Step 5/10 — 遍历 CONFIG_PACKAGES 链接到 `~/.config/`，同时配置 `core.hooksPath` |
+| Symlink 循环 | Step 5/10 — 遍历 CONFIG_PACKAGES 链接到 `~/.config/`，claude 特殊链接到 `~/.claude`，同时配置 `core.hooksPath` |
 | zsh 根级 symlink | Step 6/10 — `~/.zshrc`、`~/.zimrc` |
 | vscode/cursor 配置 | Step 7/10 — 检测已安装的 Code/Cursor，将 `~/.config/vscode/` 下的配置文件链接到应用用户目录 |
 | vscode/cursor 扩展 | Step 8/10 — 检测 code/cursor CLI，从 extensions*.txt 安装扩展 |
