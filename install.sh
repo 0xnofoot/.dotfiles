@@ -89,7 +89,10 @@ fi
 info "Step 5/8: 链接配置..."
 mkdir -p "$HOME/.config"
 for script in "$DOTFILES_DIR"/*/.config.sh; do
-  [[ -f "$script" ]] && bash "$script"
+  [[ -f "$script" ]] || continue
+  pkg=$(basename "$(dirname "$script")")
+  bash "$script"
+  printf "  \033[1;32m✓\033[0m %s\n" "$pkg"
 done
 
 git -C "$DOTFILES_DIR" config core.hooksPath .githooks
