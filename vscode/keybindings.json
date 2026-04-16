@@ -1,6 +1,6 @@
 // 将键绑定放在此文件中以覆盖默认值
 [
-  //---------- Cursor AI ----------//
+  //========== Cursor AI ==========//
   {
     "key": "alt+enter",
     "command": "editor.action.acceptCursorTabSuggestion",
@@ -11,7 +11,8 @@
     "command": "editor.action.acceptGPT4",
     "when": "hasGPT4Diff",
   },
-  //---------- 编辑操作 ----------//
+  //========== 全局操作 ==========//
+  // Alt+Enter: 从任意位置回到编辑器（when 从具体到通用，顺序决定优先级）
   {
     "key": "alt+enter",
     "command": "workbench.action.focusActiveEditorGroup",
@@ -42,6 +43,27 @@
     "when": "textInputFocus && inlineSuggestionVisible",
   },
   {
+    "key": "cmd+q",
+    "command": "workbench.action.quit",
+  },
+  {
+    "key": "cmd+e",
+    "command": "workbench.action.toggleSidebarVisibility",
+  },
+  {
+    "key": "ctrl+;",
+    "command": "workbench.action.showCommands",
+  },
+  {
+    "key": "ctrl+f",
+    "command": "workbench.action.quickTextSearch",
+  },
+  {
+    "key": "ctrl+shift+f",
+    "command": "workbench.action.quickOpen",
+  },
+  //========== 编辑器操作 ==========//
+  {
     "key": "ctrl+p",
     "command": "clipboard-manager.editor.pickAndPaste",
     "when": "textInputFocus",
@@ -51,7 +73,43 @@
     "command": "toggleSuggestionDetails",
     "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus",
   },
-  //---------- 选项操作 ----------//
+  {
+    "key": "ctrl+/",
+    "command": "editor.action.commentLine",
+    "when": "editorTextFocus && !editorReadonly",
+  },
+  {
+    "key": "ctrl+alt+a",
+    "command": "settings.cycle",
+    "args": {
+      "id": "toggleInlayHints",
+      "values": [
+        {
+          "python.analysis.inlayHints.pytestParameters": true,
+          "python.analysis.inlayHints.callArgumentNames": "all",
+          "python.analysis.inlayHints.functionReturnTypes": true,
+          "python.analysis.inlayHints.variableTypes": true,
+
+          "cursorpyright.analysis.inlayHints.callArgumentNames": true,
+          "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
+          "cursorpyright.analysis.inlayHints.variableTypes": true,
+        },
+        {
+          "python.analysis.inlayHints.pytestParameters": false,
+          "python.analysis.inlayHints.callArgumentNames": "off",
+          "python.analysis.inlayHints.functionReturnTypes": false,
+          "python.analysis.inlayHints.variableTypes": false,
+
+          "cursorpyright.analysis.inlayHints.callArgumentNames": false,
+          "cursorpyright.analysis.inlayHints.functionReturnTypes": false,
+          "cursorpyright.analysis.inlayHints.variableTypes": false,
+        },
+      ],
+    },
+    "when": "editorTextFocus",
+  },
+  //========== 列表与弹窗导航 ==========//
+  // --- Suggest Widget ---
   {
     "key": "tab",
     "command": "selectNextSuggestion",
@@ -77,6 +135,7 @@
     "command": "selectPrevSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
   },
+  // --- Code Action ---
   {
     "key": "tab",
     "command": "selectNextCodeAction",
@@ -102,6 +161,7 @@
     "command": "selectPrevCodeAction",
     "when": "codeActionMenuVisible",
   },
+  // --- Quick Open ---
   {
     "key": "tab",
     "command": "workbench.action.quickOpenSelectNext",
@@ -133,6 +193,7 @@
     "command": "workbench.action.acceptSelectedQuickOpenItem",
     "when": "inQuickOpen",
   },
+  // --- Tab 键恢复 ---
   {
     "key": "tab",
     "command": "-tab",
@@ -153,13 +214,8 @@
     "command": "outdent",
     "when": "editorTextFocus && !editorReadonly && vim.mode=='Insert' && !suggestWidgetVisible && !codeActionMenuVisible && !quickFixWidgetVisible && !snippetWidgetVisible && !snippetTabstopHighlightActive && !inSnippetMode && !hasSnippetCompletions",
   },
-  //---------- 注释代码 ----------//
-  {
-    "key": "ctrl+/",
-    "command": "editor.action.commentLine",
-    "when": "editorTextFocus && !editorReadonly",
-  },
-  //---------- 窗口操作 ----------//
+  //========== 编辑器窗口与分组 ==========//
+  // 切换编辑器
   {
     "key": "ctrl+h",
     "command": "workbench.action.previousEditor",
@@ -170,6 +226,7 @@
     "command": "workbench.action.nextEditor",
     "when": "editorTextFocus",
   },
+  // 移动编辑器位置
   {
     "key": "ctrl+shift+h",
     "command": "workbench.action.moveEditorLeftInGroup",
@@ -180,6 +237,7 @@
     "command": "workbench.action.moveEditorRightInGroup",
     "when": "editorTextFocus",
   },
+  // 焦点切换（编辑器组间）
   {
     "key": "alt+j",
     "command": "workbench.action.focusBelowGroup",
@@ -200,6 +258,18 @@
     "command": "workbench.action.focusRightGroup",
     "when": "editorTextFocus || terminalFocus",
   },
+  // 焦点切换（面板/侧栏 → 编辑器）
+  {
+    "key": "alt+l",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "sideBarFocus",
+  },
+  {
+    "key": "alt+h",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "auxiliaryBarFocus",
+  },
+  // 分屏
   {
     "key": "alt+shift+j",
     "command": "workbench.action.splitEditorDown",
@@ -220,21 +290,7 @@
     "command": "workbench.action.splitEditorRight",
     "when": "editorTextFocus",
   },
-  {
-    "key": "alt+k",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "panelFocus",
-  },
-  {
-    "key": "alt+l",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "sideBarFocus",
-  },
-  {
-    "key": "alt+h",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "auxiliaryBarFocus",
-  },
+  // 移动编辑器到其他组
   {
     "key": "ctrl+alt+shift+h",
     "command": "workbench.action.moveEditorToLeftGroup",
@@ -255,35 +311,11 @@
     "command": "workbench.action.moveEditorToAboveGroup",
     "when": "editorTextFocus",
   },
-  {
-    "key": "alt+h",
-    "command": "workbench.action.previousPanelView",
-    "when": "panelFocus",
-  },
-  {
-    "key": "alt+l",
-    "command": "workbench.action.nextPanelView",
-    "when": "panelFocus",
-  },
-  {
-    "key": "alt+z",
-    "command": "workbench.action.terminal.focus",
-    "when": "!panelFocus",
-  },
-  {
-    "key": "alt+z",
-    "command": "workbench.action.togglePanel",
-    "when": "panelFocus",
-  },
+  // 关闭
   {
     "key": "alt+shift+q",
     "command": "workbench.action.closeActiveEditor",
     "when": "editorTextFocus",
-  },
-  {
-    "key": "alt+q",
-    "command": "workbench.action.closePanel",
-    "when": "panelFocus",
   },
   {
     "key": "alt+shift+q",
@@ -300,24 +332,64 @@
     "command": "workbench.action.closeOtherEditors",
     "when": "editorTextFocus",
   },
+  //========== 底部面板与终端 ==========//
   {
-    "key": "cmd+q",
-    "command": "workbench.action.quit",
-  },
-  //---------- 搜索与指令 ----------//
-  {
-    "key": "ctrl+f",
-    "command": "workbench.action.quickTextSearch",
+    "key": "alt+z",
+    "command": "workbench.action.terminal.focus",
+    "when": "!panelFocus",
   },
   {
-    "key": "ctrl+shift+f",
-    "command": "workbench.action.quickOpen",
+    "key": "alt+z",
+    "command": "workbench.action.togglePanel",
+    "when": "panelFocus",
   },
   {
-    "key": "ctrl+;",
-    "command": "workbench.action.showCommands",
+    "key": "alt+h",
+    "command": "workbench.action.previousPanelView",
+    "when": "panelFocus",
   },
-  //---------- 运行和调试 ----------//
+  {
+    "key": "alt+l",
+    "command": "workbench.action.nextPanelView",
+    "when": "panelFocus",
+  },
+  {
+    "key": "alt+k",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "panelFocus",
+  },
+  {
+    "key": "alt+q",
+    "command": "workbench.action.closePanel",
+    "when": "panelFocus",
+  },
+  {
+    "key": "alt+q",
+    "command": "workbench.action.closePanel",
+    "when": "terminalFocus",
+  },
+  {
+    "key": "alt+shift+z",
+    "command": "workbench.action.quickOpenTerm",
+  },
+  //========== 书签 ==========//
+  {
+    "key": "ctrl+m",
+    "command": "bookmarks.toggle",
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "bookmarks.list",
+  },
+  {
+    "key": "alt+m",
+    "command": "bookmarksExplorer.focus",
+  },
+  {
+    "key": "ctrl+alt+shift+m",
+    "command": "bookmarks.clear",
+  },
+  //========== 运行与调试 ==========//
   {
     "key": "ctrl+b",
     "command": "editor.debug.action.toggleBreakpoint",
@@ -338,42 +410,12 @@
     "command": "workbench.action.debug.stop",
     // "when": "editorTextFocus"
   },
-  //---------- 书签 ----------//
-  {
-    "key": "ctrl+m",
-    "command": "bookmarks.toggle",
-  },
-  {
-    "key": "ctrl+shift+m",
-    "command": "bookmarks.list",
-  },
-  {
-    "key": "alt+m",
-    "command": "bookmarksExplorer.focus",
-  },
-  {
-    "key": "ctrl+alt+shift+m",
-    "command": "bookmarks.clear",
-  },
-  //---------- 终端 ----------//
-  {
-    "key": "alt+shift+z",
-    "command": "workbench.action.quickOpenTerm",
-  },
-  {
-    "key": "alt+q",
-    "command": "workbench.action.closePanel",
-    "when": "terminalFocus",
-  },
-  //---------- 侧边栏 ----------//
-  {
-    "key": "cmd+e",
-    "command": "workbench.action.toggleSidebarVisibility",
-  },
+  //========== 侧边栏导航 ==========//
   {
     "key": "alt+w",
     "command": "workbench.action.focusSideBar",
   },
+  // ESC 层级（从具体到通用，顺序决定优先级）
   {
     "key": "escape",
     "command": "list.closeFind",
@@ -390,20 +432,11 @@
     "when": "searchViewletFocus && inputFocus",
   },
   {
-    "key": "/",
-    "command": "workbench.action.findInFiles",
-    "when": "searchViewletFocus && !inputFocus",
-  },
-  {
-    "key": "enter",
-    "command": "search.action.focusSearchList",
-    "when": "searchViewletFocus && inputFocus",
-  },
-  {
     "key": "escape",
     "command": "workbench.action.focusActiveEditorGroup",
     "when": "sideBarFocus && !inputFocus",
   },
+  // 快速移动
   {
     "key": "shift+j",
     "command": "list.focusDown",
@@ -428,7 +461,7 @@
     "args": 20,
     "when": "sideBarFocus && !inputFocus || explorerViewletFocus && !inputFocus",
   },
-  //---------- 侧边资源管理器 ----------//
+  //---------- 文件管理器 ----------//
   {
     "key": "space w",
     "command": "workbench.action.toggleSidebarVisibility",
@@ -529,7 +562,18 @@
     "command": "list.find",
     "when": "filesExplorerFocus && !inputFocus",
   },
-  //---------- 书签资源管理器 ----------//
+  //---------- 搜索面板 ----------//
+  {
+    "key": "/",
+    "command": "workbench.action.findInFiles",
+    "when": "searchViewletFocus && !inputFocus",
+  },
+  {
+    "key": "enter",
+    "command": "search.action.focusSearchList",
+    "when": "searchViewletFocus && inputFocus",
+  },
+  //---------- 书签面板 ----------//
   {
     "key": "shift+d shift+d",
     "command": "bookmarks.clearFromAllFiles",
@@ -546,38 +590,7 @@
     "command": "list.find",
     "when": "focusedView == 'workbench.scm' && !inputFocus",
   },
-  //---------- 代码编写 ----------//
-  {
-    "key": "ctrl+alt+a",
-    "command": "settings.cycle",
-    "args": {
-      "id": "toggleInlayHints",
-      "values": [
-        {
-          "python.analysis.inlayHints.pytestParameters": true,
-          "python.analysis.inlayHints.callArgumentNames": "all",
-          "python.analysis.inlayHints.functionReturnTypes": true,
-          "python.analysis.inlayHints.variableTypes": true,
-
-          "cursorpyright.analysis.inlayHints.callArgumentNames": true,
-          "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
-          "cursorpyright.analysis.inlayHints.variableTypes": true,
-        },
-        {
-          "python.analysis.inlayHints.pytestParameters": false,
-          "python.analysis.inlayHints.callArgumentNames": "off",
-          "python.analysis.inlayHints.functionReturnTypes": false,
-          "python.analysis.inlayHints.variableTypes": false,
-
-          "cursorpyright.analysis.inlayHints.callArgumentNames": false,
-          "cursorpyright.analysis.inlayHints.functionReturnTypes": false,
-          "cursorpyright.analysis.inlayHints.variableTypes": false,
-        },
-      ],
-    },
-    "when": "editorTextFocus",
-  },
-  //---------- End ----------//
+  //========== End ==========//
   //===== Auto Generated: Disabled Defaults =====//
   // 以下内容由 generate-disabled-defaults.py 自动生成，请勿手动编辑
   {
