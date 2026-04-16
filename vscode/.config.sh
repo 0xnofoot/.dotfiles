@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 # vscode / cursor 配置链接 — 由 install.sh 调用，DOTFILES_DIR 由父进程导出
 
 VSCODE_FILES=(settings.json keybindings.json)

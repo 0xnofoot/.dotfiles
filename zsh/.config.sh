@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 # zsh 配置链接 — 由 install.sh 调用，DOTFILES_DIR 由父进程导出
 
 # ~/.config/zsh 目录链接

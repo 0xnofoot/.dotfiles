@@ -91,7 +91,7 @@ mkdir -p "$HOME/.config"
 for script in "$DOTFILES_DIR"/*/.config.sh; do
   [[ -f "$script" ]] || continue
   pkg=$(basename "$(dirname "$script")")
-  bash "$script"
+  bash "$script" || error "$pkg 配置失败"
   printf "  \033[1;32m✓\033[0m %s\n" "$pkg"
 done
 

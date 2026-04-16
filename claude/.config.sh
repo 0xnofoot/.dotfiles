@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 # claude 配置链接 — 由 install.sh 调用，DOTFILES_DIR 由父进程导出
 # 逐文件链接到 ~/.claude，保留运行时数据（历史记录、缓存等）
 
