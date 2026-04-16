@@ -729,22 +729,6 @@
     "when": "textInputFocus"
   },
   {
-    "key": "cmd+a",
-    "command": "-editor.action.selectAll"
-  },
-  {
-    "key": "cmd+c",
-    "command": "-execCopy"
-  },
-  {
-    "key": "cmd+x",
-    "command": "-execCut"
-  },
-  {
-    "key": "cmd+v",
-    "command": "-execPaste"
-  },
-  {
     "key": "cmd+p",
     "command": "-expandLineSelection",
     "when": "textInputFocus"
@@ -753,10 +737,6 @@
     "key": "ctrl+o",
     "command": "-lineBreakInsert",
     "when": "textInputFocus && !editorReadonly"
-  },
-  {
-    "key": "shift+cmd+z",
-    "command": "-redo"
   },
   {
     "key": "ctrl+pagedown",
@@ -777,10 +757,6 @@
     "key": "cmd+pageup",
     "command": "-scrollPageUp",
     "when": "textInputFocus"
-  },
-  {
-    "key": "cmd+z",
-    "command": "-undo"
   },
   {
     "key": "cmd+down",

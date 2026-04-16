@@ -60,6 +60,17 @@ def is_shortcut_key(key: str) -> bool:
     return False
 
 
+# 不应被禁用的基础命令（全选、复制、剪切、粘贴、撤销、重做等）
+PRESERVE_COMMANDS = {
+    "editor.action.selectAll",
+    "execCopy",
+    "execCut",
+    "execPaste",
+    "undo",
+    "redo",
+}
+
+
 def generate_disable_entry(binding: dict) -> dict:
     """将一个默认绑定转为 - 禁用条目"""
     entry = {"key": binding["key"], "command": f"-{binding['command']}"}
@@ -112,6 +123,8 @@ def build_disabled_content(input_files: list[Path], above: str) -> tuple[str, in
             if not is_shortcut_key(binding["key"]):
                 continue
             if binding["command"].startswith("extension.vim_"):
+                continue
+            if binding["command"] in PRESERVE_COMMANDS:
                 continue
             disable_entries.append(generate_disable_entry(binding))
 
