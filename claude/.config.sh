@@ -18,5 +18,6 @@ for item in "${MANAGED[@]}"; do
   [[ -d "$src" ]] && suffix="/" || suffix=""
   rm -rf "$dst"
   ln -sfn "$src" "$dst"
-  printf "  %-25s -> claude/%s\n" "~/.claude/${item}${suffix}" "${item}${suffix}"
+  printf "  \033[36m%-25s\033[0m \033[2m→\033[0m \033[2;3mclaude/%s\033[0m\n" \
+    "~/.claude/${item}${suffix}" "${item}${suffix}"
 done

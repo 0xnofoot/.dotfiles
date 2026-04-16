@@ -92,11 +92,11 @@ for script in "$DOTFILES_DIR"/*/.config.sh; do
   [[ -f "$script" ]] || continue
   pkg=$(basename "$(dirname "$script")")
   bash "$script" || error "$pkg 配置失败"
-  printf "  \033[1;32m✓\033[0m %s\n" "$pkg"
+  printf "  \033[1;32m✓\033[0m \033[1m%s\033[0m\n" "$pkg"
 done
 
 git -C "$DOTFILES_DIR" config core.hooksPath .githooks
-echo "  dotfiles git hooks       -> .githooks/"
+printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "dotfiles git hooks" ".githooks/"
 success "所有配置已链接"
 
 # ── Step 6/8: vscode / cursor 扩展 ───────────────────────
@@ -109,7 +109,7 @@ install_extensions() {
     ext=$(echo "$ext" | sed 's/#.*//' | xargs)
     [[ -z "$ext" ]] && continue
     echo "$installed" | grep -qiF "$ext" && continue
-    echo "    安装 $ext..."
+    printf "    \033[2m安装 %s\033[0m\n" "$ext"
     "$cli" --install-extension "$ext" --force 2>/dev/null || warn "    安装失败: $ext"
   done < "$file"
 }
@@ -125,16 +125,16 @@ if ! $_has_code && ! $_has_cursor; then
 else
   info "Step 6/8: 安装 vscode / cursor 扩展..."
   if $_has_code; then
-    echo "  安装 Code 扩展..."
+    printf "  \033[33m%s\033[0m\n" "安装 Code 扩展..."
     install_extensions "code" "$VSCODE_EXT_DIR/extensions.txt"
     install_extensions "code" "$VSCODE_EXT_DIR/extensions-code.txt"
-    echo "  Code 扩展安装完成"
+    printf "  \033[2m%s\033[0m\n" "Code 扩展安装完成"
   fi
   if $_has_cursor; then
-    echo "  安装 Cursor 扩展..."
+    printf "  \033[33m%s\033[0m\n" "安装 Cursor 扩展..."
     install_extensions "cursor" "$VSCODE_EXT_DIR/extensions.txt"
     install_extensions "cursor" "$VSCODE_EXT_DIR/extensions-cursor.txt"
-    echo "  Cursor 扩展安装完成"
+    printf "  \033[2m%s\033[0m\n" "Cursor 扩展安装完成"
   fi
   success "vscode / cursor 扩展安装完成"
 fi
@@ -169,10 +169,10 @@ mkdir -p "$FONT_DIR"
 install_nerd_font() {
   local name="$1" zip_name="$2"
   if ls "$FONT_DIR"/*"$name"* &>/dev/null; then
-    echo "  $name 已安装"
+    printf "  \033[2m%s 已安装\033[0m\n" "$name"
     return
   fi
-  echo "  下载 $name..."
+  printf "  \033[33m下载 %s...\033[0m\n" "$name"
   local tmpdir
   tmpdir=$(mktemp -d)
   curl -fsSL -o "$tmpdir/$zip_name" \

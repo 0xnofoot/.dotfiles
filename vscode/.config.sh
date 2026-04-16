@@ -23,9 +23,9 @@ for dir in "${VSCODE_DIRS[@]}"; do
   for f in "${VSCODE_FILES[@]}"; do
     rm -rf "$dir/$f"
     ln -sfn "$DOTFILES_DIR/vscode/$f" "$dir/$f"
-    printf "  %-25s -> vscode/%s\n" "$app/User/$f" "$f"
+    printf "  \033[36m%-30s\033[0m \033[2m→\033[0m \033[2;3mvscode/%s\033[0m\n" "$app/User/$f" "$f"
   done
   linked=$((linked + 1))
 done
 
-[[ $linked -eq 0 ]] && echo "  未检测到已安装的编辑器，已跳过"
+[[ $linked -eq 0 ]] && printf "  \033[33m%s\033[0m\n" "未检测到已安装的编辑器，已跳过"
