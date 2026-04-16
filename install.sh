@@ -96,7 +96,7 @@ for script in "$DOTFILES_DIR"/*/.config.sh; do
 done
 
 git -C "$DOTFILES_DIR" config core.hooksPath .githooks
-printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "dotfiles git hooks" ".githooks/"
+printf "  \033[2mgit config core.hooksPath\033[0m \033[2m=\033[0m \033[2;3m.githooks/\033[0m\n"
 success "所有配置已链接"
 
 # ── Step 6/8: vscode / cursor 扩展 ───────────────────────
