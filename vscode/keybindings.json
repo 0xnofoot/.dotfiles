@@ -14,7 +14,27 @@
   //---------- 编辑操作 ----------//
   {
     "key": "alt+enter",
-    "command": "workbench.action.focusLastEditorGroup",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "sideBarFocus",
+  },
+  {
+    "key": "alt+enter",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "panelFocus",
+  },
+  {
+    "key": "alt+enter",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "auxiliaryBarFocus",
+  },
+  {
+    "key": "alt+enter",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus",
+  },
+  {
+    "key": "alt+enter",
+    "command": "workbench.action.focusActiveEditorGroup",
   },
   {
     "key": "alt+enter",
@@ -38,6 +58,11 @@
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
   },
   {
+    "key": "ctrl+j",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+  },
+  {
     "key": "shift+tab",
     "command": "selectPrevSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
@@ -48,7 +73,17 @@
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
   },
   {
+    "key": "ctrl+k",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+  },
+  {
     "key": "tab",
+    "command": "selectNextCodeAction",
+    "when": "codeActionMenuVisible",
+  },
+  {
+    "key": "ctrl+j",
     "command": "selectNextCodeAction",
     "when": "codeActionMenuVisible",
   },
@@ -63,7 +98,17 @@
     "when": "codeActionMenuVisible",
   },
   {
+    "key": "ctrl+k",
+    "command": "selectPrevCodeAction",
+    "when": "codeActionMenuVisible",
+  },
+  {
     "key": "tab",
+    "command": "workbench.action.quickOpenSelectNext",
+    "when": "inQuickOpen",
+  },
+  {
+    "key": "ctrl+j",
     "command": "workbench.action.quickOpenSelectNext",
     "when": "inQuickOpen",
   },
@@ -71,6 +116,21 @@
     // "key": "shift+tab", 不起作用，无法解决
     "key": "alt+tab",
     "command": "workbench.action.quickOpenSelectPrevious",
+    "when": "inQuickOpen",
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.quickOpenSelectPrevious",
+    "when": "inQuickOpen",
+  },
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.closeQuickOpen",
+    "when": "inQuickOpen",
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.acceptSelectedQuickOpenItem",
     "when": "inQuickOpen",
   },
   {
@@ -207,7 +267,13 @@
   },
   {
     "key": "alt+z",
-    "command": "workbench.action.focusPanel",
+    "command": "workbench.action.terminal.focus",
+    "when": "!panelFocus",
+  },
+  {
+    "key": "alt+z",
+    "command": "workbench.action.togglePanel",
+    "when": "panelFocus",
   },
   {
     "key": "alt+shift+q",
@@ -215,7 +281,7 @@
     "when": "editorTextFocus",
   },
   {
-    "key": "alt+shift+q",
+    "key": "alt+q",
     "command": "workbench.action.closePanel",
     "when": "panelFocus",
   },
@@ -233,6 +299,10 @@
     "key": "ctrl+alt+q",
     "command": "workbench.action.closeOtherEditors",
     "when": "editorTextFocus",
+  },
+  {
+    "key": "cmd+q",
+    "command": "workbench.action.quit",
   },
   //---------- 搜索与指令 ----------//
   {
@@ -291,7 +361,7 @@
     "command": "workbench.action.quickOpenTerm",
   },
   {
-    "key": "alt+shift+q",
+    "key": "alt+q",
     "command": "workbench.action.closePanel",
     "when": "terminalFocus",
   },
@@ -306,8 +376,33 @@
   },
   {
     "key": "escape",
+    "command": "list.closeFind",
+    "when": "filesExplorerFocus && inputFocus",
+  },
+  {
+    "key": "escape",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "sideBarFocus && !inputFocus || explorerViewletFocus",
+    "when": "activeViewlet == 'workbench.view.scm' && inputFocus",
+  },
+  {
+    "key": "escape",
+    "command": "search.action.focusSearchList",
+    "when": "searchViewletFocus && inputFocus",
+  },
+  {
+    "key": "/",
+    "command": "workbench.action.findInFiles",
+    "when": "searchViewletFocus && !inputFocus",
+  },
+  {
+    "key": "enter",
+    "command": "search.action.focusSearchList",
+    "when": "searchViewletFocus && inputFocus",
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "sideBarFocus && !inputFocus",
   },
   {
     "key": "shift+j",
@@ -433,6 +528,23 @@
     "key": "/",
     "command": "list.find",
     "when": "filesExplorerFocus && !inputFocus",
+  },
+  //---------- 书签资源管理器 ----------//
+  {
+    "key": "shift+d shift+d",
+    "command": "bookmarks.clearFromAllFiles",
+    "when": "focusedView == 'bookmarksExplorer' && !inputFocus",
+  },
+  {
+    "key": "/",
+    "command": "list.find",
+    "when": "focusedView == 'bookmarksExplorer' && !inputFocus",
+  },
+  //---------- 源代码管理器 ----------//
+  {
+    "key": "/",
+    "command": "list.find",
+    "when": "focusedView == 'workbench.scm' && !inputFocus",
   },
   //---------- 代码编写 ----------//
   {

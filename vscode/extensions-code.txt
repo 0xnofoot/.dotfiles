@@ -2,7 +2,6 @@
 
 # AI
 anthropic.claude-code
-github.copilot-chat
 
 # Python
 ms-python.vscode-pylance

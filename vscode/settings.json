@@ -80,7 +80,7 @@
     "editor.tabSize": 2,
     "editor.inlayHints.enabled": "offUnlessPressed",
   },
-  "python.languageServer": "None",
+  "python.languageServer": "Pylance",
   "python.analysis.typeCheckingMode": "standard",
   "python.analysis.completeFunctionParens": true,
   "python.analysis.inlayHints.pytestParameters": false,
@@ -286,6 +286,14 @@
       "commands": ["workbench.action.splitEditorRight"],
     },
     {
+      "before": ["z", "q"],
+      "commands": ["workbench.action.closeGroup"],
+    },
+    {
+      "before": ["z", "Q"],
+      "commands": ["workbench.action.closeEditorsInOtherGroups"],
+    },
+    {
       "before": ["leader", "k"],
       "commands": ["workbench.action.focusAboveGroup"],
     },
@@ -343,6 +351,18 @@
       "commands": ["workbench.action.quickOpen"],
     },
     {
+      "before": ["leader", "e", "g"],
+      "commands": ["workbench.action.findInFiles"],
+    },
+    {
+      "before": ["leader", "e", "o"],
+      "commands": ["workbench.action.openRecent"],
+    },
+    {
+      "before": ["leader", "e", "b"],
+      "commands": ["workbench.action.showAllEditors"],
+    },
+    {
       "before": ["leader", "<enter>"],
       "commands": [":nohl"],
     },
@@ -354,6 +374,10 @@
     // 禁用
     {
       "before": ["g", "f"],
+      "commands": [""],
+    },
+    {
+      "before": ["q"],
       "commands": [""],
     },
     // 文本编辑
@@ -479,15 +503,34 @@
       "before": ["leader", "w"],
       "commands": ["workbench.view.explorer"],
     },
+    //---------- 源代码管理 ----------//
+    {
+      "before": ["leader", "v"],
+      "commands": ["workbench.view.scm"],
+    },
+    //---------- 运行与调试 ----------//
+    {
+      "before": ["leader", "d"],
+      "commands": ["workbench.view.debug"],
+    },
     //---------- 引用 ----------//
     {
       "before": ["leader", "r"],
       "commands": ["workbench.view.extension.references-view"],
     },
+    //---------- 大纲 ----------//
+    {
+      "before": ["leader", "o"],
+      "commands": ["outline.focus"],
+    },
     //---------- 书签 ----------//
     {
       "before": ["leader", "m"],
       "commands": ["bookmarksExplorer.focus"],
+    },
+    {
+      "before": ["leader", "M"],
+      "commands": ["bookmarks.listFromAllFiles"],
     },
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -537,6 +580,23 @@
     {
       "before": ["g", "f"],
       "commands": [""],
+    },
+    // u/U 防护：防止 visual 模式误触 undo 或大小写转换
+    {
+      "before": ["u"],
+      "commands": [""],
+    },
+    {
+      "before": ["U"],
+      "commands": [""],
+    },
+    {
+      "before": ["leader", "u"],
+      "after": ["u"],
+    },
+    {
+      "before": ["leader", "U"],
+      "after": ["U"],
     },
     //文本编辑
     {

@@ -11,8 +11,6 @@ local nmappings = {
     { from = "K",            to = "5k",                                                  mode = mode_nv },
     { from = "<c-j>",        to = "<c-d>",                                               mode = mode_nv },
     { from = "<c-k>",        to = "<c-u>",                                               mode = mode_nv },
-    { from = "<c-s-j>",      to = "G",                                                   mode = mode_nv },
-    { from = "<c-s-k>",      to = "gg",                                                  mode = mode_nv },
     { from = "H",            to = "3h",                                                  mode = mode_nv },
     { from = "L",            to = "3l",                                                  mode = mode_nv },
     { from = "W",            to = "3w",                                                  mode = mode_nv },
