@@ -28,4 +28,6 @@ for dir in "${VSCODE_DIRS[@]}"; do
   linked=$((linked + 1))
 done
 
-[[ $linked -eq 0 ]] && printf "  \033[33m%s\033[0m\n" "未检测到已安装的编辑器，已跳过"
+if [[ $linked -eq 0 ]]; then
+  printf "  \033[33m%s\033[0m\n" "未检测到已安装的编辑器，已跳过"
+fi

@@ -97,13 +97,21 @@ while IFS= read -r ext; do
   fi
 done < "$all_installed"
 
-# 找已移除：已跟踪但未安装
-while IFS= read -r ext; do
-  [[ -z "$ext" ]] && continue
-  if ! grep -qiF "$ext" "$all_installed"; then
-    removed+=("$ext")
-  fi
-done < "$all_tracked"
+# 找已移除：已跟踪但对应编辑器未安装
+# 共享扩展：任一可用编辑器安装即可，全部未安装才算移除
+# 独有扩展：对应编辑器不可用时跳过，可用但未安装才算移除
+check_removed() {
+  local file="$1" installed_file="$2"
+  while IFS= read -r ext; do
+    ext=$(echo "$ext" | sed 's/#.*//' | tr -d ' ' | tr '[:upper:]' '[:lower:]')
+    [[ -z "$ext" ]] && continue
+    grep -qiF "$ext" "$installed_file" || removed+=("$ext")
+  done < "$file"
+}
+
+check_removed "$SHARED_FILE" "$all_installed"
+$has_code   && check_removed "$CODE_FILE"   "$code_installed"
+$has_cursor && check_removed "$CURSOR_FILE" "$cursor_installed"
 
 # 清理临时文件
 cleanup() { rm -f "$all_tracked" "$code_installed" "$cursor_installed" "$all_installed"; }

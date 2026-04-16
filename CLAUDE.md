@@ -30,6 +30,7 @@
     ├── extensions.txt          # Code 和 Cursor 共享扩展
     ├── extensions-code.txt     # Code 独有扩展
     ├── extensions-cursor.txt   # Cursor 独有扩展
+    ├── extensions-vsix.txt     # 需要 VSIX 本地安装的扩展
     ├── defaults/               # 各编辑器导出的默认快捷键 JSON（git 跟踪）
     └── scripts/
         ├── sync-extensions.sh             # 扩展列表同步脚本
@@ -64,7 +65,7 @@
 | Brew bundle | Step 3/8 — 通过 Brewfile 安装所有包 |
 | kitty 可选安装 | Step 4/8 — 默认跳过，`--with-kitty` 启用；macOS 用 cask，Linux 用官方脚本 |
 | 链接配置 | Step 5/8 — 扫描所有子目录，逐一调用 `.config.sh`（失败则终止）；完成后配置 `core.hooksPath` |
-| vscode/cursor 扩展 | Step 6/8 — 检测 code/cursor CLI，均未找到时跳过；从 extensions*.txt 增量安装扩展 |
+| vscode/cursor 扩展 | Step 6/8 — 检测 code/cursor CLI，均未找到时跳过；从 extensions*.txt 增量安装扩展；提示 VSIX 本地安装扩展 |
 | 默认 shell | Step 7/8 — Linux 上设置 zsh 为默认 shell |
 | Nerd Fonts | Step 8/8 — 自动下载安装 FiraMono + Symbols Nerd Font |
 | 步骤总数 | 硬编码为 "Step N/8"，增减步骤时需全部更新 |
@@ -72,7 +73,8 @@
 ## VSCode 扩展管理
 
 - 共享扩展写在 `vscode/extensions.txt`，Code 独有写在 `extensions-code.txt`，Cursor 独有写在 `extensions-cursor.txt`
-- `install.sh` Step 6 自动检测 CLI 并增量安装（已安装的跳过）
+- 需要通过 VSIX 本地安装的扩展写在 `extensions-vsix.txt`（不在 Open VSX / VS Code Marketplace 上的扩展）
+- `install.sh` Step 6 自动检测 CLI 并增量安装（已安装的跳过），最后提示用户手动安装 VSIX 扩展
 - 新增/删除扩展后，运行 `bash vscode/scripts/sync-extensions.sh` 自动检测差异并同步
 - pre-commit hook 会自动检查扩展列表是否同步，未同步时可选择自动修复并加入提交；无 code/cursor CLI 时跳过检查
 

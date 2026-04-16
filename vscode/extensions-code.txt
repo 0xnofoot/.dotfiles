@@ -3,6 +3,15 @@
 # AI
 anthropic.claude-code
 
+# Vim
+murloccra4ler.leap
+
+# 主题与外观
+peaceshi.syntax-highlight
+
+# 编辑增强
+hoovercj.vscode-settings-cycler
+
 # Python
 ms-python.vscode-pylance
 

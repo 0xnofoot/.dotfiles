@@ -4,79 +4,75 @@
   {
     "key": "alt+enter",
     "command": "editor.action.acceptCursorTabSuggestion",
-    "when": "cpp.shouldAcceptTab",
+    "when": "cpp.shouldAcceptTab"
   },
   {
     "key": "alt+enter",
     "command": "editor.action.acceptGPT4",
-    "when": "hasGPT4Diff",
+    "when": "hasGPT4Diff"
+  },
+  {
+    "key": "alt+,",
+    "command": "aichat.newchataction",
+    "when": "!composerFocused"
+  },
+  {
+    "key": "alt+,",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.toggleAuxiliaryBar",
+        "workbench.action.focusActiveEditorGroup"
+      ]
+    },
+    "when": "composerFocused"
   },
   //========== 全局操作 ==========//
-  // Alt+Enter: 从任意位置回到编辑器（when 从具体到通用，顺序决定优先级）
   {
     "key": "alt+enter",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "sideBarFocus",
-  },
-  {
-    "key": "alt+enter",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "panelFocus",
-  },
-  {
-    "key": "alt+enter",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "auxiliaryBarFocus",
-  },
-  {
-    "key": "alt+enter",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "terminalFocus",
-  },
-  {
-    "key": "alt+enter",
-    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "!editorFocus"
   },
   {
     "key": "alt+enter",
     "command": "editor.action.inlineSuggest.commit",
-    "when": "textInputFocus && inlineSuggestionVisible",
+    "when": "textInputFocus && inlineSuggestionVisible"
   },
   {
     "key": "cmd+q",
-    "command": "workbench.action.quit",
+    "command": "workbench.action.quit"
   },
   {
     "key": "cmd+e",
-    "command": "workbench.action.toggleSidebarVisibility",
+    "command": "workbench.action.toggleSidebarVisibility"
   },
   {
     "key": "ctrl+;",
-    "command": "workbench.action.showCommands",
+    "command": "workbench.action.showCommands"
   },
   {
     "key": "ctrl+f",
-    "command": "workbench.action.quickTextSearch",
+    "command": "workbench.action.quickTextSearch"
   },
   {
     "key": "ctrl+shift+f",
-    "command": "workbench.action.quickOpen",
+    "command": "workbench.action.quickOpen"
   },
   //========== 编辑器操作 ==========//
   {
     "key": "ctrl+p",
     "command": "clipboard-manager.editor.pickAndPaste",
-    "when": "textInputFocus",
+    "when": "textInputFocus"
   },
   {
     "key": "ctrl+tab",
     "command": "toggleSuggestionDetails",
-    "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus",
+    "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
   },
   {
     "key": "ctrl+/",
     "command": "editor.action.commentLine",
-    "when": "editorTextFocus && !editorReadonly",
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+alt+a",
@@ -92,7 +88,7 @@
 
           "cursorpyright.analysis.inlayHints.callArgumentNames": true,
           "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
-          "cursorpyright.analysis.inlayHints.variableTypes": true,
+          "cursorpyright.analysis.inlayHints.variableTypes": true
         },
         {
           "python.analysis.inlayHints.pytestParameters": false,
@@ -102,493 +98,489 @@
 
           "cursorpyright.analysis.inlayHints.callArgumentNames": false,
           "cursorpyright.analysis.inlayHints.functionReturnTypes": false,
-          "cursorpyright.analysis.inlayHints.variableTypes": false,
-        },
-      ],
+          "cursorpyright.analysis.inlayHints.variableTypes": false
+        }
+      ]
     },
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   //========== 列表与弹窗导航 ==========//
   // --- Suggest Widget ---
   {
     "key": "tab",
     "command": "selectNextSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
   },
   {
     "key": "ctrl+j",
     "command": "selectNextSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
   },
   {
     "key": "shift+tab",
     "command": "selectPrevSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
   },
   {
     "key": "alt+tab",
     "command": "selectPrevSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
   },
   {
     "key": "ctrl+k",
     "command": "selectPrevSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
   },
   // --- Code Action ---
   {
     "key": "tab",
     "command": "selectNextCodeAction",
-    "when": "codeActionMenuVisible",
+    "when": "codeActionMenuVisible"
   },
   {
     "key": "ctrl+j",
     "command": "selectNextCodeAction",
-    "when": "codeActionMenuVisible",
+    "when": "codeActionMenuVisible"
   },
   {
     "key": "shift+tab",
     "command": "selectPrevCodeAction",
-    "when": "codeActionMenuVisible",
+    "when": "codeActionMenuVisible"
   },
   {
     "key": "alt+tab",
     "command": "selectPrevCodeAction",
-    "when": "codeActionMenuVisible",
+    "when": "codeActionMenuVisible"
   },
   {
     "key": "ctrl+k",
     "command": "selectPrevCodeAction",
-    "when": "codeActionMenuVisible",
+    "when": "codeActionMenuVisible"
   },
   // --- Quick Open ---
   {
     "key": "tab",
     "command": "workbench.action.quickOpenSelectNext",
-    "when": "inQuickOpen",
+    "when": "inQuickOpen"
   },
   {
     "key": "ctrl+j",
     "command": "workbench.action.quickOpenSelectNext",
-    "when": "inQuickOpen",
+    "when": "inQuickOpen"
   },
   {
     // "key": "shift+tab", 不起作用，无法解决
     "key": "alt+tab",
     "command": "workbench.action.quickOpenSelectPrevious",
-    "when": "inQuickOpen",
+    "when": "inQuickOpen"
   },
   {
     "key": "ctrl+k",
     "command": "workbench.action.quickOpenSelectPrevious",
-    "when": "inQuickOpen",
+    "when": "inQuickOpen"
   },
   {
     "key": "ctrl+h",
     "command": "workbench.action.closeQuickOpen",
-    "when": "inQuickOpen",
+    "when": "inQuickOpen"
   },
   {
     "key": "ctrl+l",
     "command": "workbench.action.acceptSelectedQuickOpenItem",
-    "when": "inQuickOpen",
+    "when": "inQuickOpen"
   },
   // --- Tab 键恢复 ---
   {
     "key": "tab",
     "command": "-tab",
-    "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus",
+    "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
   },
   {
     "key": "shift+tab",
     "command": "-outdent",
-    "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus",
+    "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
   },
   {
     "key": "tab",
     "command": "tab",
-    "when": "editorTextFocus && !editorReadonly && vim.mode=='Insert' && !suggestWidgetVisible && !codeActionMenuVisible && !quickFixWidgetVisible && !snippetWidgetVisible && !snippetTabstopHighlightActive && !inSnippetMode && !hasSnippetCompletions",
+    "when": "editorTextFocus && !editorReadonly && vim.mode=='Insert' && !suggestWidgetVisible && !codeActionMenuVisible && !quickFixWidgetVisible && !snippetWidgetVisible && !snippetTabstopHighlightActive && !inSnippetMode && !hasSnippetCompletions"
   },
   {
     "key": "shift+tab",
     "command": "outdent",
-    "when": "editorTextFocus && !editorReadonly && vim.mode=='Insert' && !suggestWidgetVisible && !codeActionMenuVisible && !quickFixWidgetVisible && !snippetWidgetVisible && !snippetTabstopHighlightActive && !inSnippetMode && !hasSnippetCompletions",
+    "when": "editorTextFocus && !editorReadonly && vim.mode=='Insert' && !suggestWidgetVisible && !codeActionMenuVisible && !quickFixWidgetVisible && !snippetWidgetVisible && !snippetTabstopHighlightActive && !inSnippetMode && !hasSnippetCompletions"
   },
   //========== 编辑器窗口与分组 ==========//
   // 切换编辑器
   {
     "key": "ctrl+h",
     "command": "workbench.action.previousEditor",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "ctrl+l",
     "command": "workbench.action.nextEditor",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   // 移动编辑器位置
   {
     "key": "ctrl+shift+h",
     "command": "workbench.action.moveEditorLeftInGroup",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "ctrl+shift+l",
     "command": "workbench.action.moveEditorRightInGroup",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   // 焦点切换（编辑器组间）
   {
     "key": "alt+j",
     "command": "workbench.action.focusBelowGroup",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "alt+k",
     "command": "workbench.action.focusAboveGroup",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "alt+h",
     "command": "workbench.action.focusLeftGroup",
-    "when": "editorTextFocus || terminalFocus",
+    "when": "editorTextFocus || terminalFocus"
   },
   {
     "key": "alt+l",
     "command": "workbench.action.focusRightGroup",
-    "when": "editorTextFocus || terminalFocus",
+    "when": "editorTextFocus || terminalFocus"
   },
   // 焦点切换（面板/侧栏 → 编辑器）
   {
     "key": "alt+l",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "sideBarFocus",
+    "when": "sideBarFocus"
   },
   {
     "key": "alt+h",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "auxiliaryBarFocus",
+    "when": "auxiliaryBarFocus"
   },
   // 分屏
   {
     "key": "alt+shift+j",
     "command": "workbench.action.splitEditorDown",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "alt+shift+k",
     "command": "workbench.action.splitEditorUp",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "alt+shift+h",
     "command": "workbench.action.splitEditorLeft",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "alt+shift+l",
     "command": "workbench.action.splitEditorRight",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   // 移动编辑器到其他组
   {
     "key": "ctrl+alt+shift+h",
     "command": "workbench.action.moveEditorToLeftGroup",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "ctrl+alt+shift+l",
     "command": "workbench.action.moveEditorToRightGroup",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "ctrl+alt+shift+j",
     "command": "workbench.action.moveEditorToBelowGroup",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "ctrl+alt+shift+k",
     "command": "workbench.action.moveEditorToAboveGroup",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   // 关闭
   {
     "key": "alt+shift+q",
     "command": "workbench.action.closeActiveEditor",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "alt+shift+q",
     "command": "workbench.action.closeSidebar",
-    "when": "sideBarFocus && !inputFocus",
+    "when": "sideBarFocus && !inputFocus"
   },
   {
     "key": "alt+shift+q",
     "command": "workbench.action.closeAuxiliaryBar",
-    "when": "auxiliaryBarFocus",
+    "when": "auxiliaryBarFocus"
   },
   {
     "key": "ctrl+alt+q",
     "command": "workbench.action.closeOtherEditors",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   //========== 底部面板与终端 ==========//
   {
     "key": "alt+z",
     "command": "workbench.action.terminal.focus",
-    "when": "!panelFocus",
+    "when": "!panelFocus"
   },
   {
     "key": "alt+z",
     "command": "workbench.action.togglePanel",
-    "when": "panelFocus",
+    "when": "panelFocus"
   },
   {
     "key": "alt+h",
     "command": "workbench.action.previousPanelView",
-    "when": "panelFocus",
+    "when": "panelFocus"
   },
   {
     "key": "alt+l",
     "command": "workbench.action.nextPanelView",
-    "when": "panelFocus",
+    "when": "panelFocus"
   },
   {
     "key": "alt+k",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "panelFocus",
+    "when": "panelFocus"
   },
   {
     "key": "alt+q",
     "command": "workbench.action.closePanel",
-    "when": "panelFocus",
+    "when": "panelFocus"
   },
   {
     "key": "alt+q",
     "command": "workbench.action.closePanel",
-    "when": "terminalFocus",
+    "when": "terminalFocus"
   },
   {
     "key": "alt+shift+z",
-    "command": "workbench.action.quickOpenTerm",
+    "command": "workbench.action.quickOpenTerm"
   },
   //========== 书签 ==========//
   {
     "key": "ctrl+m",
-    "command": "bookmarks.toggle",
+    "command": "bookmarks.toggle"
   },
   {
     "key": "ctrl+shift+m",
-    "command": "bookmarks.list",
-  },
-  {
-    "key": "alt+m",
-    "command": "bookmarksExplorer.focus",
+    "command": "bookmarks.list"
   },
   {
     "key": "ctrl+alt+shift+m",
-    "command": "bookmarks.clear",
+    "command": "bookmarks.clear"
   },
   //========== 运行与调试 ==========//
   {
     "key": "ctrl+b",
     "command": "editor.debug.action.toggleBreakpoint",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "cmd+r",
-    "command": "workbench.action.debug.restart",
+    "command": "workbench.action.debug.restart"
     // "when": "editorTextFocus"
   },
   {
     "key": "cmd+shift+r",
-    "command": "workbench.action.debug.run",
+    "command": "workbench.action.debug.run"
     // "when": "editorTextFocus"
   },
   {
     "key": "cmd+d",
-    "command": "workbench.action.debug.stop",
+    "command": "workbench.action.debug.stop"
     // "when": "editorTextFocus"
   },
   //========== 侧边栏导航 ==========//
   {
     "key": "alt+w",
-    "command": "workbench.action.focusSideBar",
+    "command": "workbench.action.focusSideBar"
   },
   // ESC 层级（从具体到通用，顺序决定优先级）
   {
     "key": "escape",
     "command": "list.closeFind",
-    "when": "filesExplorerFocus && inputFocus",
+    "when": "filesExplorerFocus && inputFocus"
   },
   {
     "key": "escape",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "activeViewlet == 'workbench.view.scm' && inputFocus",
+    "when": "activeViewlet == 'workbench.view.scm' && inputFocus"
   },
   {
     "key": "escape",
     "command": "search.action.focusSearchList",
-    "when": "searchViewletFocus && inputFocus",
+    "when": "searchViewletFocus && inputFocus"
   },
   {
     "key": "escape",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "sideBarFocus && !inputFocus",
+    "when": "sideBarFocus && !inputFocus"
   },
   // 快速移动
   {
     "key": "shift+j",
     "command": "list.focusDown",
     "args": 5,
-    "when": "sideBarFocus && !inputFocus || explorerViewletFocus && !inputFocus",
+    "when": "sideBarFocus && !inputFocus || explorerViewletFocus && !inputFocus"
   },
   {
     "key": "shift+k",
     "command": "list.focusUp",
     "args": 5,
-    "when": "sideBarFocus && !inputFocus || explorerViewletFocus && !inputFocus",
+    "when": "sideBarFocus && !inputFocus || explorerViewletFocus && !inputFocus"
   },
   {
     "key": "ctrl+j",
     "command": "list.focusDown",
     "args": 20,
-    "when": "sideBarFocus && !inputFocus || explorerViewletFocus && !inputFocus",
+    "when": "sideBarFocus && !inputFocus || explorerViewletFocus && !inputFocus"
   },
   {
     "key": "ctrl+k",
     "command": "list.focusUp",
     "args": 20,
-    "when": "sideBarFocus && !inputFocus || explorerViewletFocus && !inputFocus",
+    "when": "sideBarFocus && !inputFocus || explorerViewletFocus && !inputFocus"
   },
   //---------- 文件管理器 ----------//
   {
     "key": "space w",
     "command": "workbench.action.toggleSidebarVisibility",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "space l",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "q",
     "command": "workbench.action.toggleSidebarVisibility",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "ctrl+h",
     "command": "workbench.action.previousEditor",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "ctrl+l",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "r",
     "command": "workbench.files.action.refreshFilesExplorer",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "h",
     "command": "list.collapse",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "l",
     "command": "list.select",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "enter",
     "command": "list.select",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "ctrl+t",
     "command": "explorer.openToSide",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "d d",
     "command": "filesExplorer.cut",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "d shift+d",
     "command": "moveFileToTrash",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "t",
     "command": "explorer.newFile",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "m",
     "command": "explorer.newFolder",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "y y",
     "command": "filesExplorer.copy",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "y n",
     "command": "copyFilePath",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "y p",
     "command": "copyRelativeFilePath",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "p p",
     "command": "filesExplorer.paste",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "c w",
     "command": "renameFile",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "/",
     "command": "list.find",
-    "when": "filesExplorerFocus && !inputFocus",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   //---------- 搜索面板 ----------//
   {
     "key": "/",
     "command": "workbench.action.findInFiles",
-    "when": "searchViewletFocus && !inputFocus",
+    "when": "searchViewletFocus && !inputFocus"
   },
   {
     "key": "enter",
     "command": "search.action.focusSearchList",
-    "when": "searchViewletFocus && inputFocus",
+    "when": "searchViewletFocus && inputFocus"
   },
   //---------- 书签面板 ----------//
   {
     "key": "shift+d shift+d",
     "command": "bookmarks.clearFromAllFiles",
-    "when": "focusedView == 'bookmarksExplorer' && !inputFocus",
+    "when": "focusedView == 'bookmarksExplorer' && !inputFocus"
   },
   {
     "key": "/",
     "command": "list.find",
-    "when": "focusedView == 'bookmarksExplorer' && !inputFocus",
+    "when": "focusedView == 'bookmarksExplorer' && !inputFocus"
   },
   //---------- 源代码管理器 ----------//
   {
     "key": "/",
     "command": "list.find",
-    "when": "focusedView == 'workbench.scm' && !inputFocus",
+    "when": "focusedView == 'workbench.scm' && !inputFocus"
   },
   //========== End ==========//
   //===== Auto Generated: Disabled Defaults =====//
@@ -2071,7 +2063,7 @@
   {
     "key": "cmd+r cmd+k",
     "command": "-editor.action.defineKeybinding",
-    "when": "resource == 'vscode-userdata:/Users/toofonwang/Library/Application%20Support/Cursor/User/keybindings.json'"
+    "when": "resource == 'vscode-userdata:/Users/nofoot/Library/Application%20Support/Cursor/User/keybindings.json'"
   },
   {
     "key": "alt+cmd+o",
@@ -5213,6 +5205,11 @@
   },
   {
     "key": "cmd+f",
+    "command": "-glass.showOutputFind",
+    "when": "glassPromptInputFocused && isGlassAgentWorkspace && glassActiveTabKind == 'output' || isGlassAgentWorkspace && !editorTextFocus && glassActiveTabKind == 'output'"
+  },
+  {
+    "key": "cmd+f",
     "command": "-glass.showTerminalFind",
     "when": "glassPromptInputFocused && isGlassAgentWorkspace && glassActiveTabKind == 'terminal' || isGlassAgentWorkspace && !editorTextFocus && glassActiveTabKind == 'terminal'"
   },
@@ -5301,11 +5298,6 @@
     "when": "editorTextFocus"
   },
   {
-    "key": "shift+cmd+c",
-    "command": "-clipboard-manager.editor.copyToHistory",
-    "when": "textInputFocus && !editorReadonly"
-  },
-  {
     "key": "ctrl+f5",
     "command": "-dart.hotReload",
     "when": "dart-code:isInDartDebugSession && inDebugMode && debugType == 'dart' || dart-code:service.reloadSources && inDebugMode && debugType == 'dart'"
@@ -5325,8 +5317,13 @@
     "when": "editorFocus"
   },
   {
-    "key": "ctrl+alt+f",
-    "command": "-leap.find"
+    "key": "alt+cmd+r",
+    "command": "-java.view.package.revealFileInOS",
+    "when": "focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'"
+  },
+  {
+    "key": "shift+f1",
+    "command": "-java.welcome"
   },
   {
     "key": "alt+s alt+n",
@@ -5348,11 +5345,6 @@
     "when": "chatAttachmentResource"
   },
   {
-    "key": "shift+cmd+v",
-    "command": "-clipboard-manager.editor.pickAndPaste",
-    "when": "textInputFocus && !editorReadonly"
-  },
-  {
     "key": "shift+cmd+f5",
     "command": "-dart.rerunLastDebugSession",
     "when": "dart-code:anyProjectLoaded && dart-code:hasLastDebugConfig && !inDebugMode"
@@ -5368,12 +5360,13 @@
     "when": "glassNoModalOpen && isGlassEmptyWorkspace && isSettingsPaneFocused"
   },
   {
-    "key": "shift+alt+b",
-    "command": "-java.workspace.compile"
+    "key": "alt+cmd+c",
+    "command": "-java.view.package.copyFilePath",
+    "when": "focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'"
   },
   {
-    "key": "alt+c",
-    "command": "-leap.match-case"
+    "key": "shift+alt+b",
+    "command": "-java.workspace.compile"
   },
   {
     "key": "alt+cmd+/",
@@ -5409,6 +5402,11 @@
     "key": "shift+cmd+v",
     "command": "-java.action.clipboardPasteAction",
     "when": "javaLSReady && editorLangId == 'java'"
+  },
+  {
+    "key": "shift+alt+cmd+c",
+    "command": "-java.view.package.copyRelativeFilePath",
+    "when": "focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'"
   },
   {
     "key": "ctrl+enter",
@@ -5451,6 +5449,11 @@
     "when": "javaLSReady && editorLangId == 'java'"
   },
   {
+    "key": "cmd+backspace",
+    "command": "-java.view.package.moveFileToTrash",
+    "when": "explorerResourceMoveableToTrash && focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'"
+  },
+  {
     "key": "shift+alt+j",
     "command": "-bookmarks.expandSelectionToPrevious",
     "when": "editorTextFocus"
@@ -5464,6 +5467,11 @@
     "key": "ctrl+o",
     "command": "-java.action.showExtendedOutline",
     "when": "inQuickOpen && javaLSReady"
+  },
+  {
+    "key": "cmd+backspace",
+    "command": "-java.view.package.deleteFilePermanently",
+    "when": "!explorerResourceMoveableToTrash && focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'"
   },
   {
     "key": "ctrl+; s",
@@ -7666,9 +7674,18 @@
     "when": "editorTextFocus"
   },
   {
+    "key": "shift+cmd+c",
+    "command": "-clipboard-manager.editor.copyToHistory",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
     "key": "cmd+l cmd+c",
     "command": "-extension.liveServer.goOffline",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+f",
+    "command": "-leap.find"
   },
   {
     "key": "shift+alt+cmd+m",
@@ -7706,9 +7723,18 @@
     "when": "editorTextFocus && !config.claudeCode.useTerminal"
   },
   {
+    "key": "shift+cmd+v",
+    "command": "-clipboard-manager.editor.pickAndPaste",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
     "key": "cmd+l cmd+o",
     "command": "-extension.liveServer.goOnline",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+c",
+    "command": "-leap.match-case"
   },
   {
     "key": "cmd+i",

@@ -1,0 +1,7 @@
+# 需要通过 VSIX 本地安装的扩展（不在 Open VSX / VS Code Marketplace 上）
+
+# Kotlin
+jetbrains.kotlin
+
+# 42 工具
+undefined_publisher.ft-vscode-extension

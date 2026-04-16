@@ -1,4 +1,4 @@
-// 通过将键绑定放入键绑定文件来覆盖键绑定。
+// Override key bindings by placing them into your key bindings file.
 [
 { "key": "escape escape",         "command": "workbench.action.exitZenMode",
                                      "when": "inZenMode" },
@@ -879,7 +879,7 @@
 { "key": "alt+cmd+pageup",        "command": "editor.action.accessibleViewPreviousCodeBlock",
                                      "when": "accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'inlineChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'panelChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'quickChat'" },
 { "key": "cmd+r cmd+k",           "command": "editor.action.defineKeybinding",
-                                     "when": "resource == 'vscode-userdata:/Users/toofonwang/Library/Application%20Support/Cursor/User/keybindings.json'" },
+                                     "when": "resource == 'vscode-userdata:/Users/nofoot/Library/Application%20Support/Cursor/User/keybindings.json'" },
 { "key": "tab",                   "command": "editor.action.inlineSuggest.commit",
                                      "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
 { "key": "alt+cmd+o",             "command": "editor.action.toggleOvertypeInsertMode" },
@@ -1790,6 +1790,8 @@
 { "key": "cmd+numpad0",           "command": "workbench.action.zoomReset" },
 { "key": "shift+cmd+m",           "command": "workbench.actions.view.problems",
                                      "when": "workbench.panel.markers.view.active" },
+{ "key": "escape",                "command": "workbench.actions.workbench.panel.output.clearFilterText",
+                                     "when": "outputFilterFocus" },
 { "key": "escape",                "command": "workbench.banner.focusBanner",
                                      "when": "bannerFocused" },
 { "key": "down",                  "command": "workbench.banner.focusNextAction",
@@ -2405,6 +2407,8 @@
                                      "when": "glassPromptInputFocused && isGlassAgentWorkspace && glassActiveTabKind == 'browser' || isGlassAgentWorkspace && !editorTextFocus && glassActiveTabKind == 'browser'" },
 { "key": "cmd+f",                 "command": "glass.showFileEditorFind",
                                      "when": "glassPromptInputFocused && isGlassAgentWorkspace && glassActiveTabKind == 'file' || isGlassAgentWorkspace && !editorTextFocus && glassActiveTabKind == 'file'" },
+{ "key": "cmd+f",                 "command": "glass.showOutputFind",
+                                     "when": "glassPromptInputFocused && isGlassAgentWorkspace && glassActiveTabKind == 'output' || isGlassAgentWorkspace && !editorTextFocus && glassActiveTabKind == 'output'" },
 { "key": "cmd+f",                 "command": "glass.showTerminalFind",
                                      "when": "glassPromptInputFocused && isGlassAgentWorkspace && glassActiveTabKind == 'terminal' || isGlassAgentWorkspace && !editorTextFocus && glassActiveTabKind == 'terminal'" },
 { "key": "escape",                "command": "notifications.hideToasts",
@@ -2480,8 +2484,6 @@
 { "key": "shift+cmd+0",           "command": "aiSettings.usingOpenAIKey.toggle" },
 { "key": "alt+cmd+k",             "command": "bookmarks.toggle",
                                      "when": "editorTextFocus" },
-{ "key": "shift+cmd+c",           "command": "clipboard-manager.editor.copyToHistory",
-                                     "when": "textInputFocus && !editorReadonly" },
 { "key": "ctrl+f5",               "command": "dart.hotReload",
                                      "when": "dart-code:isInDartDebugSession && inDebugMode && debugType == 'dart' || dart-code:service.reloadSources && inDebugMode && debugType == 'dart'" },
 { "key": "escape",                "command": "extension.vim_escape",
@@ -2491,9 +2493,11 @@
                                      "when": "gitlens:key:," },
 { "key": "shift+alt+u",           "command": "java.projectConfiguration.update",
                                      "when": "editorFocus" },
+{ "key": "alt+cmd+r",             "command": "java.view.package.revealFileInOS",
+                                     "when": "focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'" },
+{ "key": "shift+f1",              "command": "java.welcome" },
 { "key": "shift+enter",           "command": "jupyter.execSelectionInteractive",
                                      "when": "editorTextFocus && isWorkspaceTrusted && jupyter.ownsSelection && !findInputFocussed && !isCompositeNotebook && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'" },
-{ "key": "ctrl+alt+f",            "command": "leap.find" },
 { "key": "shift+enter",           "command": "python.execSelectionInTerminal",
                                      "when": "editorTextFocus && !findInputFocussed && !isCompositeNotebook && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'" },
 { "key": "alt+s alt+n",           "command": "swift.newFile" },
@@ -2503,18 +2507,17 @@
                                      "when": "editorTextFocus" },
 { "key": "ctrl+enter",            "command": "chat.inlineResourceAnchor.openToSide",
                                      "when": "chatAttachmentResource" },
-{ "key": "shift+cmd+v",           "command": "clipboard-manager.editor.pickAndPaste",
-                                     "when": "textInputFocus && !editorReadonly" },
 { "key": "shift+cmd+f5",          "command": "dart.rerunLastDebugSession",
                                      "when": "dart-code:anyProjectLoaded && dart-code:hasLastDebugConfig && !inDebugMode" },
 { "key": "alt+.",                 "command": "gitlens.key.alt+.",
                                      "when": "gitlens:key:." },
 { "key": "cmd+k",                 "command": "glass.openSettingsSearchPalette",
                                      "when": "glassNoModalOpen && isGlassEmptyWorkspace && isSettingsPaneFocused" },
+{ "key": "alt+cmd+c",             "command": "java.view.package.copyFilePath",
+                                     "when": "focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'" },
 { "key": "shift+alt+b",           "command": "java.workspace.compile" },
 { "key": "shift+enter",           "command": "jupyter.runcurrentcelladvance",
                                      "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !isCompositeNotebook && !notebookEditorFocused" },
-{ "key": "alt+c",                 "command": "leap.match-case" },
 { "key": "escape",                "command": "notebook.cell.quitEdit",
                                      "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'" },
 { "key": "shift+enter",           "command": "python.execInREPL",
@@ -2535,6 +2538,8 @@
                                      "when": "gitlens:key:alt+enter" },
 { "key": "shift+cmd+v",           "command": "java.action.clipboardPasteAction",
                                      "when": "javaLSReady && editorLangId == 'java'" },
+{ "key": "shift+alt+cmd+c",       "command": "java.view.package.copyRelativeFilePath",
+                                     "when": "focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'" },
 { "key": "ctrl+enter",            "command": "jupyter.runcurrentcell",
                                      "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !isCompositeNotebook && !notebookEditorFocused" },
 { "key": "enter",                 "command": "python.execInREPLEnter",
@@ -2547,6 +2552,8 @@
                                      "when": "gitlens:key:alt+left" },
 { "key": "shift+cmd+v",           "command": "java.action.filesExplorerPasteAction",
                                      "when": "config.editor.pasteAs.enabled && explorerViewletFocus" },
+{ "key": "enter",                 "command": "java.view.package.renameFile",
+                                     "when": "focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'" },
 { "key": "alt+enter",             "command": "jupyter.runcurrentcellandaddbelow",
                                      "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused" },
 { "key": "enter",                 "command": "python.execInInteractiveWindowEnter",
@@ -2561,6 +2568,8 @@
                                      "when": "isCompositeNotebook && !LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !inlineChatVisible && !isComposing && !markersNavigationVisible && !notebookEditorFocused && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible" },
 { "key": "ctrl+shift+alt+s",      "command": "java.action.doCleanup",
                                      "when": "javaLSReady && editorLangId == 'java'" },
+{ "key": "cmd+backspace",         "command": "java.view.package.moveFileToTrash",
+                                     "when": "explorerResourceMoveableToTrash && focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'" },
 { "key": "shift+alt+j",           "command": "bookmarks.expandSelectionToPrevious",
                                      "when": "editorTextFocus" },
 { "key": "ctrl+end",              "command": "extension.vim_ctrl+end",
@@ -2569,6 +2578,8 @@
                                      "when": "gitlens:key:ctrl+enter" },
 { "key": "ctrl+o",                "command": "java.action.showExtendedOutline",
                                      "when": "inQuickOpen && javaLSReady" },
+{ "key": "cmd+backspace",         "command": "java.view.package.deleteFilePermanently",
+                                     "when": "!explorerResourceMoveableToTrash && focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'" },
 { "key": "ctrl+; s",              "command": "jupyter.insertCellBelowPosition",
                                      "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused" },
 { "key": "insert",                "command": "extension.vim_insert",
@@ -3027,7 +3038,7 @@
 ]
 
 
-// 以下是其他可用命令:
+// Here are other available commands: 
 // - acceptSelectedSuggestionOnEnter
 // - acceptSnippet
 // - accessibility.announcement.help
@@ -3071,6 +3082,7 @@
 // - bookmarksExplorer.resetViewLocation
 // - bookmarksExplorer.toggleVisibility
 // - bookmarksHelpAndFeedback.focus
+// - bookmarksHelpAndFeedback.openHelpLink
 // - bookmarksHelpAndFeedback.removeView
 // - bookmarksHelpAndFeedback.resetViewLocation
 // - bookmarksHelpAndFeedback.toggleVisibility
@@ -3107,16 +3119,6 @@
 // - chatEditing.viewChanges
 // - cleanSearchEditorState
 // - clientDebugLog.enableCapture
-// - clipboard-manager.api.getMonitor
-// - clipboard-manager.editor.showClipboardInFile
-// - clipboard-manager.history.clear
-// - clipboard-manager.history.remove
-// - clipboard-manager.historyTree.doubleClick
-// - clipboard-manager.setClipboardValue
-// - clipboardHistory.focus
-// - clipboardHistory.removeView
-// - clipboardHistory.resetViewLocation
-// - clipboardHistory.toggleVisibility
 // - closeReferenceSearchEditor
 // - cmdK.clearPromptBar
 // - cmdK.resolveConflictInCmdK
@@ -3199,10 +3201,13 @@
 // - compositionType
 // - createCursor
 // - cursor-deeplink.debug.triggerDeeplink
+// - cursor.action.startTrackingRequest
 // - cursor.applyLayoutStorageData
 // - cursor.browserAutomation.captureWebviewScreenshot
 // - cursor.browserAutomation.internal.captureScreenshot
 // - cursor.browserAutomation.internal.navigateWebview
+// - cursor.browserAutomation.reinjectUIScript
+// - cursor.browserAutomation.requestSnapshotBackfill
 // - cursor.browserOriginAllowlist.ensureNavigationAllowed
 // - cursor.browserOriginAllowlist.ensurePageOriginAllowed
 // - cursor.browserView.closeTab
@@ -3339,16 +3344,12 @@
 // - dart.findTestOrImplementationFile
 // - dart.forceReanalyze
 // - dart.generateDiagnosticReport
-// - dart.getPackages
-// - dart.getPackages.all
 // - dart.goToAugmentation
 // - dart.goToAugmented
 // - dart.goToImports
-// - dart.goToLocation
 // - dart.goToSuper
 // - dart.goToTestOrImplementationFile
 // - dart.goToTests
-// - dart.listOutdatedPackages
 // - dart.openAnalyzerDiagnostics
 // - dart.openDevTools.external
 // - dart.openDevToolsCpuProfiler
@@ -3360,9 +3361,7 @@
 // - dart.openDevToolsPerformance
 // - dart.openExtensionLog
 // - dart.openObservatory
-// - dart.package.openFile
 // - dart.printSelectionToTerminal
-// - dart.promptForVmService
 // - dart.rerunLastTestDebugSession
 // - dart.restartAnalysisServer
 // - dart.sortMembers
@@ -3377,21 +3376,13 @@
 // - dart.task.dartdoc
 // - dart.toggleDartdocComment
 // - dart.toggleLineComment
-// - dart.upgradePackages
-// - dart.upgradePackages.majorVersions
 // - dart.writeRecommendedSettings
 // - dartDependencyTree.focus
-// - dartDependencyTree.removeView
 // - dartDependencyTree.resetViewLocation
-// - dartDependencyTree.toggleVisibility
 // - dartFlutterOutline.focus
-// - dartFlutterOutline.removeView
 // - dartFlutterOutline.resetViewLocation
-// - dartFlutterOutline.toggleVisibility
 // - dartFlutterSidebar.focus
-// - dartFlutterSidebar.removeView
 // - dartFlutterSidebar.resetViewLocation
-// - dartFlutterSidebar.toggleVisibility
 // - dataScience.ClearCache
 // - dataScience.ClearUserProviderJupyterServerCache
 // - debug.action.openDisassemblyView
@@ -3624,13 +3615,16 @@
 // - emmet.expandAbbreviation
 // - env-managers.focus
 // - env-managers.resetViewLocation
+// - errorLens.codeLensOnClick
 // - errorLens.copyProblemCode
 // - errorLens.copyProblemMessage
 // - errorLens.disableLine
 // - errorLens.excludeProblem
 // - errorLens.findLinterRuleDefinition
+// - errorLens.revealLine
 // - errorLens.searchForProblem
 // - errorLens.selectProblem
+// - errorLens.statusBarCommand
 // - errorLens.toggle
 // - errorLens.toggleError
 // - errorLens.toggleHint
@@ -3777,19 +3771,8 @@
 // - flutterPropertyEditor.focus
 // - flutterPropertyEditor.resetViewLocation
 // - focusAndAcceptSuggestion
-// - ft-vscode-extension.getVM
 // - getContextKeyInfo
 // - git-base.api.getRemoteSources
-// - git-graph.addGitRepository
-// - git-graph.clearAvatarCache
-// - git-graph.endAllWorkspaceCodeReviews
-// - git-graph.endSpecificWorkspaceCodeReview
-// - git-graph.fetch
-// - git-graph.openFile
-// - git-graph.removeGitRepository
-// - git-graph.resumeWorkspaceCodeReview
-// - git-graph.version
-// - git-graph.view
 // - git._syncAll
 // - git.acceptMerge
 // - git.addRemote
@@ -3977,12 +3960,17 @@
 // - github.openOnVscodeDev
 // - github.publish
 // - github.timeline.openOnGitHub
+// - gitlens.action.createPullRequest
+// - gitlens.action.hover.commands
+// - gitlens.action.openIssue
+// - gitlens.action.openPullRequest
 // - gitlens.addAuthors
 // - gitlens.ai.enable
 // - gitlens.ai.explainBranch
 // - gitlens.ai.explainBranch:graph
 // - gitlens.ai.explainBranch:views
 // - gitlens.ai.explainCommit
+// - gitlens.ai.explainCommit:editor
 // - gitlens.ai.explainCommit:graph
 // - gitlens.ai.explainCommit:views
 // - gitlens.ai.explainStash
@@ -3991,6 +3979,7 @@
 // - gitlens.ai.explainUnpushed:graph
 // - gitlens.ai.explainUnpushed:views
 // - gitlens.ai.explainWip
+// - gitlens.ai.explainWip:editor
 // - gitlens.ai.explainWip:graph
 // - gitlens.ai.explainWip:views
 // - gitlens.ai.feedback.helpful
@@ -4004,6 +3993,7 @@
 // - gitlens.ai.generateCommitMessage
 // - gitlens.ai.generateCommitMessage:graph
 // - gitlens.ai.generateCommitMessage:scm
+// - gitlens.ai.mcp.authCLI
 // - gitlens.ai.mcp.install
 // - gitlens.ai.mcp.reinstall
 // - gitlens.ai.mcp.selectAgents
@@ -4094,13 +4084,18 @@
 // - gitlens.diffDirectoryWithHead
 // - gitlens.diffFolderWithRevision
 // - gitlens.diffFolderWithRevisionFrom
+// - gitlens.diffHeadWith
 // - gitlens.diffLineWithWorking
+// - gitlens.diffWith
 // - gitlens.diffWithNext
 // - gitlens.diffWithNext:editor/title
 // - gitlens.diffWithPrevious
+// - gitlens.diffWithPrevious:codelens
+// - gitlens.diffWithPrevious:command
 // - gitlens.diffWithPrevious:editor
 // - gitlens.diffWithPrevious:editor/title
 // - gitlens.diffWithPrevious:explorer
+// - gitlens.diffWithPrevious:views
 // - gitlens.diffWithRevision
 // - gitlens.diffWithRevision:commitDetails
 // - gitlens.diffWithRevision:graphDetails
@@ -4108,8 +4103,11 @@
 // - gitlens.diffWithRevisionFrom:commitDetails
 // - gitlens.diffWithRevisionFrom:graphDetails
 // - gitlens.diffWithWorking
+// - gitlens.diffWithWorking:command
 // - gitlens.diffWithWorking:editor
 // - gitlens.diffWithWorking:editor/title
+// - gitlens.diffWithWorking:views
+// - gitlens.diffWorkingWith
 // - gitlens.disableDebugLogging
 // - gitlens.disconnectRemoteProvider
 // - gitlens.disconnectRemoteProvider:graph
@@ -4123,6 +4121,7 @@
 // - gitlens.fetch:views
 // - gitlens.fetchRemote:graph
 // - gitlens.fetchRepositories
+// - gitlens.generateCommitMessage
 // - gitlens.getStarted
 // - gitlens.ghpr.views.openOrCreateWorktree
 // - gitlens.git.branch
@@ -4260,14 +4259,21 @@
 // - gitlens.graph.switchToTag
 // - gitlens.graph.undoCommit
 // - gitlens.inviteToLiveShare
+// - gitlens.launchpad.indicator.action
 // - gitlens.launchpad.indicator.toggle
+// - gitlens.onboarding.dismiss
 // - gitlens.openAssociatedPullRequestOnRemote
 // - gitlens.openBlamePriorToChange
+// - gitlens.openBranchInRemote
 // - gitlens.openBranchOnRemote
+// - gitlens.openBranchesInRemote
 // - gitlens.openBranchesOnRemote
 // - gitlens.openBranchesOnRemote:graph
 // - gitlens.openBranchesOnRemote:views
 // - gitlens.openChangedFiles
+// - gitlens.openChatAction
+// - gitlens.openCloudPatch
+// - gitlens.openCommitInRemote
 // - gitlens.openCommitOnRemote
 // - gitlens.openComparisonOnRemote
 // - gitlens.openCurrentBranchOnRemote
@@ -4282,6 +4288,7 @@
 // - gitlens.openFileHistoryInGraph:graphDetails
 // - gitlens.openFileHistoryInGraph:scm
 // - gitlens.openFileHistoryInGraph:views
+// - gitlens.openFileInRemote
 // - gitlens.openFileOnRemote
 // - gitlens.openFileOnRemote:commitDetails
 // - gitlens.openFileOnRemote:graphDetails
@@ -4292,7 +4299,9 @@
 // - gitlens.openFolderHistoryInGraph
 // - gitlens.openFolderHistoryInGraph:explorer
 // - gitlens.openFolderHistoryInGraph:scm
+// - gitlens.openInRemote
 // - gitlens.openIssueOnRemote
+// - gitlens.openOnRemote
 // - gitlens.openOnlyChangedFiles
 // - gitlens.openPatch
 // - gitlens.openPullRequest:graph
@@ -4303,13 +4312,16 @@
 // - gitlens.openPullRequestComparison:views
 // - gitlens.openPullRequestOnRemote
 // - gitlens.openPullRequestOnRemote:graph
+// - gitlens.openRepoInRemote
 // - gitlens.openRepoOnRemote
 // - gitlens.openRepoOnRemote:graph
 // - gitlens.openRepoOnRemote:views
 // - gitlens.openRevisionFile
 // - gitlens.openRevisionFile:editor/title
 // - gitlens.openRevisionFromRemote
+// - gitlens.openWalkthrough
 // - gitlens.openWorkingFile
+// - gitlens.openWorkingFile:command
 // - gitlens.openWorkingFile:editor/context
 // - gitlens.openWorkingFile:editor/title
 // - gitlens.openWorktree:graph
@@ -4318,8 +4330,10 @@
 // - gitlens.openWorktreeInNewWindow:graph
 // - gitlens.openWorktreeInNewWindow:views
 // - gitlens.pastePatchFromClipboard
+// - gitlens.plus.aiAllAccess.optIn
 // - gitlens.plus.cloudIntegrations.connect
 // - gitlens.plus.cloudIntegrations.manage
+// - gitlens.plus.continueFeaturePreview
 // - gitlens.plus.hide
 // - gitlens.plus.login
 // - gitlens.plus.logout
@@ -4327,7 +4341,9 @@
 // - gitlens.plus.reactivateProTrial
 // - gitlens.plus.referFriend
 // - gitlens.plus.refreshRepositoryAccess
+// - gitlens.plus.resendVerification
 // - gitlens.plus.restore
+// - gitlens.plus.showPlans
 // - gitlens.plus.signUp
 // - gitlens.plus.simulateSubscription
 // - gitlens.plus.upgrade
@@ -4358,6 +4374,7 @@
 // - gitlens.recomposeFromCommit:views
 // - gitlens.recomposeSelectedCommits
 // - gitlens.recomposeSelectedCommits:graph
+// - gitlens.refreshHover
 // - gitlens.regenerateMarkdownDocument
 // - gitlens.removeRemote:graph
 // - gitlens.removeRemote:views
@@ -4370,6 +4387,9 @@
 // - gitlens.restorePrevious.file:graphDetails
 // - gitlens.restorePrevious.file:views
 // - gitlens.revealCommitInView
+// - gitlens.scm.ai.generateCommitMessage
+// - gitlens.scm.generateCommitMessage
+// - gitlens.sendToChat
 // - gitlens.setRemoteAsDefault:graph
 // - gitlens.setRemoteAsDefault:views
 // - gitlens.setUpstream:graph
@@ -4384,14 +4404,17 @@
 // - gitlens.showCommitSearch
 // - gitlens.showCommitsInView
 // - gitlens.showCommitsView
+// - gitlens.showComposerPage
 // - gitlens.showContributorsView
 // - gitlens.showDraftsView
+// - gitlens.showFileHistoryInView
 // - gitlens.showFileHistoryView
 // - gitlens.showGraph
 // - gitlens.showGraphPage
 // - gitlens.showGraphView
 // - gitlens.showHomeView
 // - gitlens.showInCommitGraph
+// - gitlens.showInCommitGraphView
 // - gitlens.showInDetailsView
 // - gitlens.showLastQuickPick
 // - gitlens.showLaunchpad
@@ -4455,6 +4478,7 @@
 // - gitlens.stashSave:views
 // - gitlens.stashesApply
 // - gitlens.stashesApply:views
+// - gitlens.switchAIModel
 // - gitlens.switchMode
 // - gitlens.switchToAnotherBranch:graph
 // - gitlens.switchToAnotherBranch:views
@@ -4463,14 +4487,23 @@
 // - gitlens.timeline.refresh
 // - gitlens.timeline.split
 // - gitlens.toggleFileBlame
+// - gitlens.toggleFileBlame:codelens
 // - gitlens.toggleFileBlame:editor
 // - gitlens.toggleFileBlame:editor/title
+// - gitlens.toggleFileBlame:mode
+// - gitlens.toggleFileBlame:statusbar
 // - gitlens.toggleFileChanges
+// - gitlens.toggleFileChanges:codelens
 // - gitlens.toggleFileChanges:editor
 // - gitlens.toggleFileChanges:editor/title
+// - gitlens.toggleFileChanges:mode
+// - gitlens.toggleFileChanges:statusbar
 // - gitlens.toggleFileHeatmap
+// - gitlens.toggleFileHeatmap:codelens
 // - gitlens.toggleFileHeatmap:editor
 // - gitlens.toggleFileHeatmap:editor/title
+// - gitlens.toggleFileHeatmap:mode
+// - gitlens.toggleFileHeatmap:statusbar
 // - gitlens.toggleFileHeatmapInDiffLeft
 // - gitlens.toggleFileHeatmapInDiffRight
 // - gitlens.toggleGraph
@@ -4488,6 +4521,7 @@
 // - gitlens.views.addAuthor
 // - gitlens.views.addAuthor.multi
 // - gitlens.views.addAuthors
+// - gitlens.views.addPullRequestRemote
 // - gitlens.views.addRemote
 // - gitlens.views.applyChanges
 // - gitlens.views.applyChanges:commitDetails
@@ -4613,9 +4647,11 @@
 // - gitlens.views.drafts.focus
 // - gitlens.views.drafts.info
 // - gitlens.views.drafts.refresh
+// - gitlens.views.drafts.removeView
 // - gitlens.views.drafts.resetViewLocation
 // - gitlens.views.drafts.setShowAvatarsOff
 // - gitlens.views.drafts.setShowAvatarsOn
+// - gitlens.views.drafts.toggleVisibility
 // - gitlens.views.editNode
 // - gitlens.views.expandNode
 // - gitlens.views.fileHistory.attach
@@ -4693,6 +4729,7 @@
 // - gitlens.views.lineHistory.setShowAvatarsOn
 // - gitlens.views.lineHistory.toggleVisibility
 // - gitlens.views.loadAllChildren
+// - gitlens.views.loadMoreChildren
 // - gitlens.views.mergeBranchInto
 // - gitlens.views.mergeChangesWithWorking
 // - gitlens.views.mergeChangesWithWorking:commitDetails
@@ -4885,6 +4922,8 @@
 // - gitlens.views.scm.grouped.tags.visibility.hide
 // - gitlens.views.scm.grouped.tags.visibility.show
 // - gitlens.views.scm.grouped.toggleVisibility
+// - gitlens.views.scm.grouped.welcome.dismiss
+// - gitlens.views.scm.grouped.welcome.restore
 // - gitlens.views.scm.grouped.worktrees.attach
 // - gitlens.views.scm.grouped.worktrees.detach
 // - gitlens.views.scm.grouped.worktrees.setAsDefault
@@ -5017,6 +5056,7 @@
 // - gitlens.views.worktrees.setSortByName
 // - gitlens.views.worktrees.setSortDescending
 // - gitlens.views.worktrees.viewOptionsTitle
+// - gitlens.visualizeHistory
 // - gitlens.visualizeHistory.file
 // - gitlens.visualizeHistory.file:commitDetails
 // - gitlens.visualizeHistory.file:editor
@@ -5028,6 +5068,37 @@
 // - gitlens.visualizeHistory.folder:scm
 // - gitlens.visualizeHistory.repo:scm
 // - gitlens.visualizeHistory.repo:views
+// - gitlens.walkthrough.enableAiSetting
+// - gitlens.walkthrough.gitlensInspect
+// - gitlens.walkthrough.openAcceleratePrReviews
+// - gitlens.walkthrough.openAiCustomInstructionsSettings
+// - gitlens.walkthrough.openAiSettings
+// - gitlens.walkthrough.openCommunityVsPro
+// - gitlens.walkthrough.openDevExPlatform
+// - gitlens.walkthrough.openHelpCenter
+// - gitlens.walkthrough.openInteractiveCodeHistory
+// - gitlens.walkthrough.openLearnAboutAiFeatures
+// - gitlens.walkthrough.openWalkthrough
+// - gitlens.walkthrough.plus.login
+// - gitlens.walkthrough.plus.reactivate
+// - gitlens.walkthrough.plus.signUp
+// - gitlens.walkthrough.plus.upgrade
+// - gitlens.walkthrough.showComposer
+// - gitlens.walkthrough.showDraftsView
+// - gitlens.walkthrough.showGraph
+// - gitlens.walkthrough.showLaunchpad
+// - gitlens.walkthrough.switchAIProvider
+// - gitlens.walkthrough.worktree.create
+// - gitlens.welcome.openCommunityVsPro
+// - gitlens.welcome.openHelpCenter
+// - gitlens.welcome.plus.login
+// - gitlens.welcome.plus.reactivate
+// - gitlens.welcome.plus.signUp
+// - gitlens.welcome.plus.upgrade
+// - gitlens.welcome.showComposer
+// - gitlens.welcome.showGraph
+// - gitlens.welcome.showHomeView
+// - gitlens.welcome.showLaunchpad
 // - glass.abortAgentAndRestoreQuery
 // - glass.activateBrowserTab
 // - glass.captureAndSendDebuggingData
@@ -5080,6 +5151,10 @@
 // - glass.osEditRedo
 // - glass.osEditSelectAll
 // - glass.osEditUndo
+// - glass.remoteSshGenerateConnectionReport
+// - glass.remoteSshKillServerAndReload
+// - glass.remoteSshOpenConfigFile
+// - glass.remoteSshReinstallServerAndReload
 // - glass.reportAiAction
 // - glass.reportBug
 // - glass.resolveWorkspacePathForInlineCode
@@ -5173,6 +5248,49 @@
 // - go.workspace.resetState
 // - goToNextReferenceFromEmbeddedEditor
 // - goToPreviousReferenceFromEmbeddedEditor
+// - gradle.cancelBuild
+// - gradle.cancelTreeItemTask
+// - gradle.cancellingTreeItemTask
+// - gradle.clearAllRecentTasks
+// - gradle.closeAllTaskTerminals
+// - gradle.closeTaskTerminals
+// - gradle.createProject
+// - gradle.createProjectAdvanced
+// - gradle.debugTask
+// - gradle.debugTaskWithArgs
+// - gradle.dependency.reveal
+// - gradle.explorerFlat
+// - gradle.explorerTree
+// - gradle.findTask
+// - gradle.hideStoppedDaemons
+// - gradle.java.projectConfiguration.update
+// - gradle.openBuildFile
+// - gradle.openSettings
+// - gradle.pinTask
+// - gradle.pinTaskWithArgs
+// - gradle.refresh
+// - gradle.refreshDaemonStatus
+// - gradle.removeRecentTask
+// - gradle.restartTask
+// - gradle.runBuild
+// - gradle.runTask
+// - gradle.runTaskWithArgs
+// - gradle.runTasks
+// - gradle.showLogs
+// - gradle.showProcessMessage
+// - gradle.showStoppedDaemons
+// - gradle.showTaskTerminal
+// - gradle.showTasks
+// - gradle.stopDaemon
+// - gradle.stopDaemons
+// - gradle.unpinAllTasks
+// - gradle.unpinTask
+// - gradleDaemonsView.focus
+// - gradleDaemonsView.resetViewLocation
+// - gradleDefaultProjectsView.focus
+// - gradleDefaultProjectsView.resetViewLocation
+// - gradleTasksView.focus
+// - gradleTasksView.resetViewLocation
 // - imagePreview.copyImage
 // - imagePreview.zoomIn
 // - imagePreview.zoomOut
@@ -5191,34 +5309,105 @@
 // - java.action.showSupertypeHierarchy
 // - java.action.showTypeHierarchy
 // - java.change.searchScope
+// - java.classpathConfiguration
 // - java.clean.sharedIndexes
 // - java.clean.workspace
 // - java.dashboard.dumpState
 // - java.dashboard.open
 // - java.dashboard.refresh
+// - java.debug.breakpoints.exceptionTypes
+// - java.debug.continueAll
+// - java.debug.continueOthers
+// - java.debug.debugFromProjectView
+// - java.debug.debugJavaFile
+// - java.debug.hotCodeReplace
+// - java.debug.pauseAll
+// - java.debug.pauseOthers
+// - java.debug.runFromProjectView
+// - java.debug.runJavaFile
+// - java.debug.variables.autoExpandLazyVariables
+// - java.debug.variables.manualExpandLazyVariables
+// - java.debug.variables.notShowHex
+// - java.debug.variables.notShowLogicalStructure
+// - java.debug.variables.notShowQualifiedNames
+// - java.debug.variables.notShowStaticVariables
+// - java.debug.variables.notShowToString
+// - java.debug.variables.showHex
+// - java.debug.variables.showLogicalStructure
+// - java.debug.variables.showQualifiedNames
+// - java.debug.variables.showStaticVariables
+// - java.debug.variables.showToString
+// - java.extGuide
+// - java.formatterSettings
+// - java.formatterSettings.showTextEditor
+// - java.gettingStarted
+// - java.installJdk
+// - java.installJdk.fromWalkthrough
 // - java.open.clientLog
 // - java.open.formatter.settings
 // - java.open.logs
 // - java.open.serverLog
 // - java.open.serverStderrLog
 // - java.open.serverStdoutLog
+// - java.overview
+// - java.project.addLibraries
+// - java.project.addLibraryFolders
 // - java.project.addToSourcePath.command
 // - java.project.build
+// - java.project.build.workspace
+// - java.project.clean.workspace
+// - java.project.create
 // - java.project.createModuleInfo.command
+// - java.project.explorer.hideNonJavaResources
+// - java.project.explorer.showNonJavaResources
 // - java.project.import.command
 // - java.project.listSourcePaths.command
+// - java.project.rebuild
+// - java.project.refreshLibraries
+// - java.project.reloadProjectFromActiveFile
 // - java.project.removeFromSourcePath.command
+// - java.project.removeLibrary
+// - java.project.update
 // - java.project.updateSourceAttachment.command
+// - java.projectSettings
+// - java.runtime
 // - java.runtimes.add
 // - java.server.mode.switch
 // - java.server.restart
 // - java.show.server.task.status
+// - java.showReleaseNotes
+// - java.test.debugFromJavaProjectExplorer
+// - java.test.editor.debug
+// - java.test.editor.run
+// - java.test.goToTest
+// - java.test.goToTestSubject
+// - java.test.runFromJavaProjectExplorer
+// - java.view.fileExplorer.newPackage
+// - java.view.menus.file.newJavaClass
+// - java.view.package.changeToFlatPackageView
+// - java.view.package.changeToHierarchicalPackageView
+// - java.view.package.exportJar
+// - java.view.package.linkWithFolderExplorer
+// - java.view.package.new
+// - java.view.package.newFile
+// - java.view.package.newFolder
+// - java.view.package.newJavaAbstractClass
+// - java.view.package.newJavaAnnotation
+// - java.view.package.newJavaClass
+// - java.view.package.newJavaEnum
+// - java.view.package.newJavaInterface
+// - java.view.package.newJavaRecord
+// - java.view.package.newPackage
+// - java.view.package.refresh
+// - java.view.package.revealInProjectExplorer
+// - java.view.package.unlinkWithFolderExplorer
+// - java.welcome.fromWalkthrough
+// - javaProjectExplorer.focus
+// - javaProjectExplorer.resetViewLocation
 // - javascript.goToProjectConfig
 // - javascript.reloadProjects
 // - javascript.removeUnusedImports
 // - javascript.sortImports
-// - jetbrains.exportWorkspaceToJson
-// - jetbrains.kotlin.restartLsp
 // - jsBrowserBreakpoints.focus
 // - jsBrowserBreakpoints.resetViewLocation
 // - jsDebugNetworkTree.focus
@@ -5227,6 +5416,7 @@
 // - jsExcludedCallers.resetViewLocation
 // - json.clearCache
 // - json.sort
+// - json.validate
 // - jupyter-cell-tags.addTag
 // - jupyter-cell-tags.editTagsInJSON
 // - jupyter-cell-tags.paramaterize
@@ -5307,8 +5497,6 @@
 // - lastCursorLineSelectDrag
 // - lastCursorWordSelect
 // - layoutEditorGroups
-// - leap.findBackward
-// - leap.findForward
 // - list.collapseAllToFocus
 // - list.focusParent
 // - list.resizeColumn
@@ -5324,6 +5512,7 @@
 // - lldb-dap.modules.focus
 // - lldb-dap.modules.resetViewLocation
 // - lldb-dap.modules.showSymbols
+// - lldb._updateAdapterSetting
 // - lldb.alternateBackend
 // - lldb.attach
 // - lldb.commandPrompt
@@ -5334,9 +5523,12 @@
 // - lldb.excludedCallers.removeAll
 // - lldb.excludedCallers.resetViewLocation
 // - lldb.getCargoLaunchConfigs
+// - lldb.insertDebugConfig
 // - lldb.loadedModules.focus
 // - lldb.loadedModules.resetViewLocation
 // - lldb.modules.copyValue
+// - lldb.pickMyProcess
+// - lldb.pickProcess
 // - lldb.selfTest
 // - lldb.showDisassembly
 // - lldb.symbols
@@ -5365,18 +5557,61 @@
 // - material-icon-theme.toggleExplorerArrows
 // - material-icon-theme.toggleGrayscale
 // - material-icon-theme.toggleIconPacks
+// - maven.archetype.generate
+// - maven.archetype.update
+// - maven.dependency.goToEffective
+// - maven.explorer.refresh
+// - maven.favorites
+// - maven.goal.clean
+// - maven.goal.compile
+// - maven.goal.custom
+// - maven.goal.deploy
+// - maven.goal.execute
+// - maven.goal.execute.fromFavoritesMenu
+// - maven.goal.execute.fromLifecycleMenu
+// - maven.goal.execute.fromProjectManager
+// - maven.goal.install
+// - maven.goal.package
+// - maven.goal.site
+// - maven.goal.test
+// - maven.goal.test-compile
+// - maven.goal.validate
+// - maven.goal.verify
+// - maven.history
+// - maven.java.projectConfiguration.update
+// - maven.new.module
+// - maven.plugin.debug
+// - maven.plugin.execute
+// - maven.profile.deselect
+// - maven.profile.select
+// - maven.project.addDependency
+// - maven.project.addFavorite
+// - maven.project.effectivePom
+// - maven.project.excludeDependency
+// - maven.project.goToDefinition
+// - maven.project.openPom
+// - maven.project.setDependencyVersion
+// - maven.project.showDependencies
+// - maven.view.flat
+// - maven.view.hierarchical
+// - mavenProjects.focus
+// - mavenProjects.resetViewLocation
 // - mcp.deeplinkInstall
 // - mcp.diskKVDelete
 // - mcp.diskKVGet
 // - mcp.diskKVSetIfAbsent
 // - mcp.elicitationRequest
+// - mcp.elicitationResponse
 // - mcp.leaseElicitationRequest
 // - mcp.needsAuth
 // - mcp.oauthStorageCleared
+// - mcp.probeAllServers
 // - mcp.progressNotification
 // - mcp.promptListChanged
+// - mcp.refreshSnapshot
 // - mcp.reloadClient
 // - mcp.resourceListChanged
+// - mcp.retryExhaustedServers
 // - mcp.toolListChanged
 // - mcp.updateStatus
 // - memoryMonitor.triggerManualSnapshot
@@ -5557,6 +5792,7 @@
 // - perfview.show
 // - prettier.createConfigFile
 // - prettier.forceFormatDocument
+// - prettier.openOutput
 // - problems.action.copyMessage
 // - problems.action.copyRelatedInformationMessage
 // - problems.action.showMultilineMessage
@@ -5585,6 +5821,7 @@
 // - python-envs.reportIssue
 // - python-envs.revealProjectInExplorer
 // - python-envs.runAsTask
+// - python-envs.runInDedicatedTerminal
 // - python-envs.runInTerminal
 // - python-envs.runPetInTerminal
 // - python-envs.set
@@ -5595,6 +5832,7 @@
 // - python-envs.terminal.deactivate
 // - python-envs.terminal.revertStartupScriptChanges
 // - python-envs.uninstallPackage
+// - python-envs.viewLogs
 // - python-projects.focus
 // - python-projects.resetViewLocation
 // - python._loadLanguageServerExtension
@@ -5603,7 +5841,6 @@
 // - python.clearWorkspaceInterpreter
 // - python.configureTests
 // - python.copilotSetupTests
-// - python.copyTestId
 // - python.createEnvironment
 // - python.createEnvironment-button
 // - python.createEnvironmentCheck
@@ -5629,7 +5866,6 @@
 // - python.execInTerminal
 // - python.execInTerminal-icon
 // - python.execSelectionInDjangoShell
-// - python.getRecommendedEnvironment
 // - python.installJupyter
 // - python.installPython
 // - python.installPythonOnLinux
@@ -5648,6 +5884,8 @@
 // - pythonEnvironments.removeView
 // - pythonEnvironments.resetViewLocation
 // - pythonEnvironments.toggleVisibility
+// - recentTasksView.focus
+// - recentTasksView.resetViewLocation
 // - refactorPreview
 // - refactorPreview.discard
 // - refactorPreview.focus
@@ -5735,7 +5973,6 @@
 // - selectLastSuggestion
 // - setRootFolder
 // - setSelection
-// - settings.cycle
 // - settings.filterByOnline
 // - settings.filterByTelemetry
 // - settings.filterUntrusted
@@ -5746,9 +5983,7 @@
 // - sidebarDevToolsDeepLinks.focus
 // - sidebarDevToolsDeepLinks.resetViewLocation
 // - sidebarDevToolsInspector.focus
-// - sidebarDevToolsInspector.removeView
 // - sidebarDevToolsInspector.resetViewLocation
-// - sidebarDevToolsInspector.toggleVisibility
 // - sidebarDevToolsLogging.focus
 // - sidebarDevToolsLogging.resetViewLocation
 // - sidebarDevToolsMemory.focus
@@ -5896,6 +6131,7 @@
 // - typescript.restartTsServer
 // - typescript.selectTypeScriptVersion
 // - typescript.sortImports
+// - typescript.tsserverRequest
 // - update.check
 // - update.checkForUpdate
 // - update.checking
@@ -6185,6 +6421,7 @@
 // - workbench.action.openAgentLayoutQuickMenu
 // - workbench.action.openApplicationSettingsJson
 // - workbench.action.openBrowserEditor
+// - workbench.action.openCanvas
 // - workbench.action.openDefaultKeybindingsFile
 // - workbench.action.openEditorAtIndex
 // - workbench.action.openExtensionLogsFolder
@@ -6207,7 +6444,7 @@
 // - workbench.action.openPreviousRecentlyUsedEditor
 // - workbench.action.openPreviousRecentlyUsedEditorInGroup
 // - workbench.action.openProcessExplorer
-// - workbench.action.openProfile.默认
+// - workbench.action.openProfile.Default
 // - workbench.action.openRawDefaultSettings
 // - workbench.action.openRemoteSettings
 // - workbench.action.openRemoteSettingsFile
@@ -6231,39 +6468,50 @@
 // - workbench.action.output.activeOutputLogLevelDefault
 // - workbench.action.output.addCompoundLog
 // - workbench.action.output.remove
-// - workbench.action.output.show.anysphere.cursor-agent-exec.Cursor Agent Exec.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.anysphere.cursor-agent-exec.Cursor Plugins.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.anysphere.cursor-agent-exec.Mcp FileSystem Writer.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.anysphere.cursor-always-local.Cursor Always Local.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.anysphere.cursor-always-local.Cursor Tab.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.anysphere.cursor-always-local.Filesync.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.anysphere.cursor-retrieval.Cursor Agent Review.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.anysphere.cursor-retrieval.Cursor Git Graph.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.anysphere.cursor-retrieval.Cursor Grep Service.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.anysphere.cursor-retrieval.Cursor Indexing & Retrieval.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.anysphere.cursor-socket.Cursor Socket.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.charliermarsh.ruff.Ruff.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.cursor.hooks.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.cursorAuthDebug.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.extension-output-Dart-Code.dart-code-#1-flutter initialization.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.extension-output-Dart-Code.dart-code-#2-flutter daemon.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.extension-output-anysphere.cursor-agent-#1-Cursor Agent.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.extension-output-charliermarsh.ruff-#1-Ruff Language Server.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.extension-output-hoovercj.vscode-settings-cycler-#1-Settings Cycler.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.extension-output-mhutchie.git-graph-#1-Git Graph.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
+// - workbench.action.output.show.anysphere.cursor-agent-exec.Cursor Agent Exec.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-agent-exec.Cursor Plugins.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-agent-exec.Mcp FileSystem Writer.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-always-local.Cursor Always Local.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-always-local.Cursor Tab.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-always-local.Filesync.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-commits.Cursor Agent Review.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-mcp.MCP Logs.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-mcp.MCP canonical-cache.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-mcp.MCP snapshot-push.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-retrieval.Cursor Agent Review.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-retrieval.Cursor Git Graph.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-retrieval.Cursor Grep Service.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-retrieval.Cursor Indexing & Retrieval.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.cursor-socket.Cursor Socket.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.anysphere.remote-ssh.Remote - SSH.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.charliermarsh.ruff.Ruff.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.cursor.hooks.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.cursorAuthDebug.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.eamodio.gitlens.GitLens (Git).workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.eamodio.gitlens.GitLens.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.extension-output-anysphere.cursor-agent-#1-Cursor Agent.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.extension-output-anysphere.cursor-resolver-helper-#1-Cursor Resolver Helper.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.extension-output-charliermarsh.ruff-#1-Ruff Language Server.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.extension-output-cursor.cursor-browser-automation-#1-Cursor IDE Browser Automation.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.extension-output-esbenp.prettier-vscode-#1-Prettier.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.extension-output-vadimcn.vscode-lldb-#1-LLDB.workspaceId-0ad7638098066f438b63fbf95d752df7
 // - workbench.action.output.show.exthost
 // - workbench.action.output.show.main
-// - workbench.action.output.show.ms-python.python.Python.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
+// - workbench.action.output.show.ms-python.python.Python Language Server.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.ms-python.python.Python.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.ms-python.vscode-python-envs.Python Environments.workspaceId-0ad7638098066f438b63fbf95d752df7
 // - workbench.action.output.show.ptyhost
 // - workbench.action.output.show.remoteTunnelService
 // - workbench.action.output.show.rendererLog
 // - workbench.action.output.show.shared
-// - workbench.action.output.show.tasks.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
+// - workbench.action.output.show.tasks.workspaceId-0ad7638098066f438b63fbf95d752df7
 // - workbench.action.output.show.terminal
 // - workbench.action.output.show.userDataSync
-// - workbench.action.output.show.vscode.git.Git.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.vscode.github.GitHub.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
-// - workbench.action.output.show.vscodevim.vim.Vim.workspaceId-67aa98cd68aa0c53f5c366607758d5c2
+// - workbench.action.output.show.vscode.git.Git.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.vscode.github-authentication.GitHub Authentication.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.vscode.github.GitHub.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.vscode.json-language-features.JSON Language Server.workspaceId-0ad7638098066f438b63fbf95d752df7
+// - workbench.action.output.show.vscodevim.vim.Vim.workspaceId-0ad7638098066f438b63fbf95d752df7
 // - workbench.action.output.show.workbench.mcp.allowlist
 // - workbench.action.output.show.workbench.mcp.files
 // - workbench.action.output.show.workbench.mcp.oauth
@@ -6310,20 +6558,11 @@
 // - workbench.action.restoreCommandLine
 // - workbench.action.restoreEditorsToMainWindow
 // - workbench.action.revealPathInFinder1
-// - workbench.action.revealPathInFinder10
-// - workbench.action.revealPathInFinder11
-// - workbench.action.revealPathInFinder12
-// - workbench.action.revealPathInFinder13
-// - workbench.action.revealPathInFinder14
-// - workbench.action.revealPathInFinder15
 // - workbench.action.revealPathInFinder2
 // - workbench.action.revealPathInFinder3
 // - workbench.action.revealPathInFinder4
 // - workbench.action.revealPathInFinder5
 // - workbench.action.revealPathInFinder6
-// - workbench.action.revealPathInFinder7
-// - workbench.action.revealPathInFinder8
-// - workbench.action.revealPathInFinder9
 // - workbench.action.revealUserDataFolder
 // - workbench.action.revertAndCloseActiveEditor
 // - workbench.action.runCursorWorktreeCleanupDev
@@ -6487,8 +6726,12 @@
 // - workbench.action.zenShowMultipleEditorTabs
 // - workbench.actions.table.workbench.panel.markers.view.viewAsTable
 // - workbench.actions.table.workbench.panel.markers.view.viewAsTree
-// - workbench.actions.treeView.dartDependencyTree.collapseAll
-// - workbench.actions.treeView.dartDependencyTree.refresh
+// - workbench.actions.treeView.bookmarksExplorer.collapseAll
+// - workbench.actions.treeView.bookmarksExplorer.refresh
+// - workbench.actions.treeView.bookmarksHelpAndFeedback.collapseAll
+// - workbench.actions.treeView.bookmarksHelpAndFeedback.refresh
+// - workbench.actions.treeView.gitlens.views.scm.grouped.collapseAll
+// - workbench.actions.treeView.gitlens.views.scm.grouped.refresh
 // - workbench.actions.treeView.workbench.panel.markers.view.collapseAll
 // - workbench.actions.view.toggleProblems
 // - workbench.actions.workbench.panel.comments.toggleResolvedComments
@@ -6500,7 +6743,6 @@
 // - workbench.actions.workbench.panel.markers.view.toggleExcludedFiles
 // - workbench.actions.workbench.panel.markers.view.toggleInfos
 // - workbench.actions.workbench.panel.markers.view.toggleWarnings
-// - workbench.actions.workbench.panel.output.clearFilterText
 // - workbench.actions.workbench.panel.output.toggle.debug
 // - workbench.actions.workbench.panel.output.toggle.error
 // - workbench.actions.workbench.panel.output.toggle.info
@@ -6514,17 +6756,11 @@
 // - workbench.debug.action.focusRepl
 // - workbench.debug.action.focusVariablesView
 // - workbench.debug.action.focusWatchView
-// - workbench.debug.breakPointsView.removeView
 // - workbench.debug.breakPointsView.resetViewLocation
-// - workbench.debug.breakPointsView.toggleVisibility
-// - workbench.debug.callStackView.removeView
 // - workbench.debug.callStackView.resetViewLocation
-// - workbench.debug.callStackView.toggleVisibility
 // - workbench.debug.loadedScriptsView.focus
 // - workbench.debug.loadedScriptsView.resetViewLocation
-// - workbench.debug.variablesView.removeView
 // - workbench.debug.variablesView.resetViewLocation
-// - workbench.debug.variablesView.toggleVisibility
 // - workbench.debug.viewlet.action.addDataBreakpointOnAddress
 // - workbench.debug.viewlet.action.addFunctionBreakpointAction
 // - workbench.debug.viewlet.action.addWatchExpression
@@ -6538,11 +6774,11 @@
 // - workbench.debug.viewlet.action.removeBreakpoint
 // - workbench.debug.viewlet.action.toggleBreakpointsActivatedAction
 // - workbench.debug.viewlet.action.viewMemory
-// - workbench.debug.watchExpressionsView.removeView
 // - workbench.debug.watchExpressionsView.resetViewLocation
-// - workbench.debug.watchExpressionsView.toggleVisibility
 // - workbench.debug.welcome.focus
+// - workbench.debug.welcome.removeView
 // - workbench.debug.welcome.resetViewLocation
+// - workbench.debug.welcome.toggleVisibility
 // - workbench.editSessions.actions.resetAuth
 // - workbench.explorer.fileView.focus
 // - workbench.explorer.fileView.removeView
@@ -6707,6 +6943,7 @@
 // - workbench.scm.action.setSortKey.status
 // - workbench.scm.action.setTreeViewMode
 // - workbench.scm.action.setTreeViewModeNavigation
+// - workbench.scm.action.toggleRepositoryVisibility.scm0
 // - workbench.scm.action.triggerAgentReview
 // - workbench.scm.focus
 // - workbench.scm.history.focus
@@ -6728,8 +6965,6 @@
 // - workbench.view.explorer.resetViewContainerLocation
 // - workbench.view.extension.bookmarks
 // - workbench.view.extension.bookmarks.resetViewContainerLocation
-// - workbench.view.extension.clipboard-manager
-// - workbench.view.extension.clipboard-manager.resetViewContainerLocation
 // - workbench.view.extension.flutter
 // - workbench.view.extension.flutter.resetViewContainerLocation
 // - workbench.view.extension.flutterPropertyEditorContainer
@@ -6742,6 +6977,8 @@
 // - workbench.view.extension.gitlensPanel.resetViewContainerLocation
 // - workbench.view.extension.gitlensPatch
 // - workbench.view.extension.gitlensPatch.resetViewContainerLocation
+// - workbench.view.extension.gradleContainerView
+// - workbench.view.extension.gradleContainerView.resetViewContainerLocation
 // - workbench.view.extension.jupyter
 // - workbench.view.extension.jupyter-variables
 // - workbench.view.extension.jupyter-variables.resetViewContainerLocation
@@ -6821,6 +7058,7 @@
 // - workbench.views.extensions.virtualUnsupportedExtensions.resetViewLocation
 // - workbench.views.extensions.workspaceRecommendations.focus
 // - workbench.views.extensions.workspaceRecommendations.resetViewLocation
+// - workbench.views.service.sidebar.34fe9c19-835d-4da3-94aa-68d87f27a060.resetViewContainerLocation
 // - workspaceEnvironments.focus
 // - workspaceEnvironments.removeView
 // - workspaceEnvironments.resetViewLocation

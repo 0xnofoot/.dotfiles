@@ -9,7 +9,7 @@
   "cursorpyright.analysis.inlayHints.variableTypes": true,
   // --- GitHub Copilot ---
   "github.copilot.enable": {
-    "*": false,
+    "*": false
   },
   // --- Claude Code ---
   "claudeCode.preferredLocation": "panel",
@@ -23,6 +23,7 @@
   //========== 外观与布局 ==========//
   "workbench.colorTheme": "Syntax Material Dark",
   "workbench.iconTheme": "material-icon-theme",
+  "workbench.activityBar.orientation": "vertical",
   "workbench.layoutControl.enabled": false,
   "window.restoreWindows": "all",
   //========== 编辑器 ==========//
@@ -63,7 +64,7 @@
     "rgba(255,255,64,0.3)",
     "rgba(127,255,127,0.3)",
     "rgba(255,127,255,0.3)",
-    "rgba(79,236,236,0.3)",
+    "rgba(79,236,236,0.3)"
   ],
   // --- Clipboard Manager ---
   "clipboard-manager.snippet.enabled": false,
@@ -82,7 +83,7 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact",
+    "typescriptreact"
   ],
   // --- LLDB ---
   "lldb.library": "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/LLDB",
@@ -91,7 +92,7 @@
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.tabSize": 2,
-    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.inlayHints.enabled": "offUnlessPressed"
   },
   "python.languageServer": "Pylance",
   "python.analysis.typeCheckingMode": "standard",
@@ -103,9 +104,9 @@
   //---------- Go ----------//
   "[go]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "never", // 关键设置
+      "source.organizeImports": "never" // 关键设置
     },
-    "editor.formatOnSave": false, // 双重保障
+    "editor.formatOnSave": false // 双重保障
   },
   "go.toolsManagement.autoUpdate": false, // 禁止自动更新工具
   //---------- Dart / Flutter ----------//
@@ -115,7 +116,7 @@
   "dart.debugSdkLibraries": false,
   "dart.openDevTools": "flutter",
   "dart.devToolsLocation": {
-    "default": "active",
+    "default": "active"
   },
   //---------- Kotlin / Java ----------//
   "ktfmtter.ktfmtVersion": "0.53",
@@ -125,67 +126,67 @@
     {
       "name": "JavaSE-17",
       "path": "/Users/toofonwang/Library/Java/JavaVirtualMachines/ms-17.0.17/Contents/Home",
-      "default": true,
+      "default": true
     },
     {
       "name": "JavaSE-21",
-      "path": "/Users/toofonwang/Library/Java/JavaVirtualMachines/ms-21.0.9/Contents/Home",
-    },
+      "path": "/Users/toofonwang/Library/Java/JavaVirtualMachines/ms-21.0.9/Contents/Home"
+    }
   ],
   "[kotlin]": {
     // "editor.defaultFormatter": "shape-app.ktfmtter",
     "editor.defaultFormatter": "JetBrains.kotlin",
-    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.inlayHints.enabled": "offUnlessPressed"
   },
   //---------- Swift ----------//
   "[swift]": {
     "editor.defaultFormatter": "swiftlang.swift-vscode",
-    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.inlayHints.enabled": "offUnlessPressed"
   },
   "swift.sourcekit-lsp.backgroundIndexing": "auto",
   //---------- Objective-C ----------//
   "[objective-c]": {
     "editor.defaultFormatter": "nofoot.clang-format-support-style-variable",
-    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.inlayHints.enabled": "offUnlessPressed"
   },
   //---------- Web (HTML / CSS / JS / TS) ----------//
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
+    "editor.tabSize": 2
   },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
+    "editor.tabSize": 2
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
+    "editor.tabSize": 2
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
+    "editor.tabSize": 2
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
+    "editor.tabSize": 2
   },
   //---------- JSON / YAML ----------//
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
+    "editor.tabSize": 2
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
+    "editor.tabSize": 2
   },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
+    "editor.tabSize": 2
   },
   //---------- Markdown ----------//
   "[markdown]": {
     "diffEditor.ignoreTrimWhitespace": false,
-    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
   //---------- Docker ----------//
   "[dockercompose]": {
@@ -195,9 +196,9 @@
     "editor.quickSuggestions": {
       "other": true,
       "comments": false,
-      "strings": true,
+      "strings": true
     },
-    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   //========== 远程开发 ==========//
   "remote.SSH.remotePlatform": {
@@ -217,380 +218,376 @@
     // 光标移动
     {
       "before": ["J"],
-      "after": ["5", "j"],
+      "after": ["5", "j"]
     },
     {
       "before": ["K"],
-      "after": ["5", "k"],
+      "after": ["5", "k"]
     },
     {
       "before": ["<C-j>"],
-      "after": ["<C-d>"],
+      "after": ["<C-d>"]
     },
     {
       "before": ["<C-k>"],
-      "after": ["<C-u>"],
+      "after": ["<C-u>"]
     },
     {
       "before": ["H"],
-      "after": ["3", "h"],
+      "after": ["3", "h"]
     },
     {
       "before": ["L"],
-      "after": ["3", "l"],
+      "after": ["3", "l"]
     },
     {
       "before": ["W"],
-      "after": ["3", "w"],
+      "after": ["3", "w"]
     },
     {
       "before": ["E"],
-      "after": ["3", "e"],
+      "after": ["3", "e"]
     },
     {
       "before": ["B"],
-      "after": ["3", "b"],
+      "after": ["3", "b"]
     },
     {
       "before": ["<C-o>"],
-      "commands": ["workbench.action.navigateBack"],
+      "commands": ["workbench.action.navigateBack"]
     },
     {
       "before": ["<C-i>"],
-      "commands": ["workbench.action.navigateForward"],
+      "commands": ["workbench.action.navigateForward"]
     },
     // 窗口与分组
     {
       "before": ["z", "h"],
-      "commands": ["workbench.action.splitEditorLeft"],
+      "commands": ["workbench.action.splitEditorLeft"]
     },
     {
       "before": ["z", "j"],
-      "commands": ["workbench.action.splitEditorDown"],
+      "commands": ["workbench.action.splitEditorDown"]
     },
     {
       "before": ["z", "k"],
-      "commands": ["workbench.action.splitEditorUp"],
+      "commands": ["workbench.action.splitEditorUp"]
     },
     {
       "before": ["z", "l"],
-      "commands": ["workbench.action.splitEditorRight"],
+      "commands": ["workbench.action.splitEditorRight"]
     },
     {
       "before": ["z", "q"],
-      "commands": ["workbench.action.closeGroup"],
+      "commands": ["workbench.action.closeGroup"]
     },
     {
       "before": ["z", "Q"],
-      "commands": ["workbench.action.closeEditorsInOtherGroups"],
+      "commands": ["workbench.action.closeEditorsInOtherGroups"]
     },
     {
       "before": ["leader", "k"],
-      "commands": ["workbench.action.focusAboveGroup"],
+      "commands": ["workbench.action.focusAboveGroup"]
     },
     {
       "before": ["leader", "j"],
-      "commands": ["workbench.action.focusBelowGroup"],
+      "commands": ["workbench.action.focusBelowGroup"]
     },
     {
       "before": ["leader", "h"],
-      "commands": ["workbench.action.focusLeftGroup"],
+      "commands": ["workbench.action.focusLeftGroup"]
     },
     {
       "before": ["leader", "l"],
-      "commands": ["workbench.action.focusRightGroup"],
+      "commands": ["workbench.action.focusRightGroup"]
     },
     {
       "before": ["<up>"],
-      "commands": ["workbench.action.increaseViewSize"],
+      "commands": ["workbench.action.increaseViewSize"]
     },
     {
       "before": ["<down>"],
-      "commands": ["workbench.action.decreaseViewSize"],
+      "commands": ["workbench.action.decreaseViewSize"]
     },
     {
       "before": ["<left>"],
-      "commands": ["workbench.action.decreaseViewWidth"],
+      "commands": ["workbench.action.decreaseViewWidth"]
     },
     {
       "before": ["<right>"],
-      "commands": ["workbench.action.increaseViewWidth"],
+      "commands": ["workbench.action.increaseViewWidth"]
     },
     {
       "before": ["leader", "q", "q"],
-      "commands": ["workbench.action.closeOtherEditors"],
+      "commands": ["workbench.action.closeOtherEditors"]
     },
     {
       "before": ["leader", "q", "l"],
-      "commands": ["workbench.action.closeEditorsToTheRight"],
+      "commands": ["workbench.action.closeEditorsToTheRight"]
     },
     {
       "before": ["leader", "q", "h"],
-      "commands": ["workbench.action.closeEditorsToTheLeft"],
+      "commands": ["workbench.action.closeEditorsToTheLeft"]
     },
     {
       "before": ["t", "t"],
-      "commands": ["workbench.action.files.newUntitledFile"],
+      "commands": ["workbench.action.files.newUntitledFile"]
     },
     // 搜索与导航
     {
       "before": ["leader", "f"],
-      "commands": ["workbench.view.search.focus"],
+      "commands": ["workbench.view.search.focus"]
     },
     {
       "before": ["leader", "e", "f"],
-      "commands": ["workbench.action.quickOpen"],
+      "commands": ["workbench.action.quickOpen"]
     },
     {
       "before": ["leader", "e", "g"],
-      "commands": ["workbench.action.findInFiles"],
+      "commands": ["workbench.action.findInFiles"]
     },
     {
       "before": ["leader", "e", "o"],
-      "commands": ["workbench.action.openRecent"],
+      "commands": ["workbench.action.openRecent"]
     },
     {
       "before": ["leader", "e", "b"],
-      "commands": ["workbench.action.showAllEditors"],
+      "commands": ["workbench.action.showAllEditors"]
     },
     {
       "before": ["leader", "<enter>"],
-      "commands": [":nohl"],
+      "commands": [":nohl"]
     },
     // 文本编辑
     {
       "before": [";"],
-      "after": [":"],
+      "after": [":"]
     },
     {
       "before": ["S"],
-      "commands": [":w"],
+      "commands": [":w"]
     },
     {
       "before": ["Q"],
-      "commands": [":q"],
+      "commands": [":q"]
     },
     {
       "before": ["`"],
-      "after": ["~"],
+      "after": ["~"]
     },
     {
       "before": ["'"],
-      "after": ["%"],
+      "after": ["%"]
     },
     {
       "before": [","],
-      "after": ["0"],
+      "after": ["0"]
     },
     {
       "before": ["."],
-      "after": ["$"],
+      "after": ["$"]
     },
     {
       "before": ["v", "'"],
-      "after": ["v", "%"],
+      "after": ["v", "%"]
     },
     {
       "before": ["d", "'"],
-      "after": ["d", "%"],
+      "after": ["d", "%"]
     },
     {
       "before": ["c", "'"],
-      "after": ["c", "%"],
+      "after": ["c", "%"]
     },
     {
       "before": ["v", ","],
-      "after": ["v", "0"],
+      "after": ["v", "0"]
     },
     {
       "before": ["d", ","],
-      "after": ["d", "0"],
+      "after": ["d", "0"]
     },
     {
       "before": ["c", ","],
-      "after": ["c", "0"],
+      "after": ["c", "0"]
     },
     {
       "before": ["v", "."],
-      "after": ["v", "$", "h"],
+      "after": ["v", "$", "h"]
     },
     {
       "before": ["d", "."],
-      "after": ["v", "$", "h", "d"],
+      "after": ["v", "$", "h", "d"]
     },
     {
       "before": ["c", "."],
-      "after": ["c", "$"],
+      "after": ["c", "$"]
     },
     {
       "before": ["Y"],
-      "after": ["y", "$"],
+      "after": ["y", "$"]
     },
     {
       "before": ["U"],
-      "after": ["<C-r>"],
+      "after": ["<C-r>"]
     },
     {
       "before": ["<enter>"],
-      "commands": ["editor.action.smartSelect.expand"],
+      "commands": ["editor.action.smartSelect.expand"]
     },
     {
       "before": ["<backspace>"],
-      "commands": ["editor.action.smartSelect.shrink"],
+      "commands": ["editor.action.smartSelect.shrink"]
     },
     // 代码操作
     {
       "before": ["leader", "g", "f"],
-      "commands": ["editor.action.formatDocument"],
+      "commands": ["editor.action.formatDocument"]
     },
     {
       "before": ["g", "j"],
-      "commands": ["editor.action.revealDeclaration"],
+      "commands": ["editor.action.revealDeclaration"]
     },
     {
       "before": ["g", "d"],
-      "commands": ["editor.action.revealDefinition"],
+      "commands": ["editor.action.revealDefinition"]
     },
     {
       "before": ["g", "i"],
-      "commands": ["editor.action.goToImplementation"],
+      "commands": ["editor.action.goToImplementation"]
     },
     {
       "before": ["g", "o"],
-      "commands": ["editor.action.goToTypeDefinition"],
+      "commands": ["editor.action.goToTypeDefinition"]
     },
     {
       "before": ["g", "h"],
-      "commands": ["editor.action.showHover"],
+      "commands": ["editor.action.showHover"]
     },
     {
       "before": ["g", "a"],
-      "commands": ["editor.action.quickFix"],
+      "commands": ["editor.action.quickFix"]
     },
     {
       "before": ["g", "r"],
-      "commands": ["references-view.find"],
+      "commands": ["references-view.find"]
     },
     {
       "before": ["g", "R"],
-      "commands": ["editor.action.rename"],
+      "commands": ["editor.action.rename"]
     },
     {
       "before": ["g", "T"],
-      "commands": ["workbench.actions.view.problems"],
+      "commands": ["workbench.actions.view.problems"]
     },
     // 禁用
     {
       "before": ["g", "f"],
-      "commands": [""],
+      "commands": [""]
     },
     {
       "before": ["q"],
-      "commands": [""],
+      "commands": [""]
     },
     // 侧边栏面板
     {
       "before": ["leader", "w"],
-      "commands": ["workbench.view.explorer"],
+      "commands": ["workbench.view.explorer"]
     },
     {
       "before": ["leader", "v"],
-      "commands": ["workbench.view.scm"],
+      "commands": ["workbench.view.scm"]
     },
     {
       "before": ["leader", "d"],
-      "commands": ["workbench.view.debug"],
+      "commands": ["workbench.view.debug"]
     },
     {
       "before": ["leader", "r"],
-      "commands": ["workbench.view.extension.references-view"],
+      "commands": ["workbench.view.extension.references-view"]
     },
     {
       "before": ["leader", "o"],
-      "commands": ["outline.focus"],
+      "commands": ["outline.focus"]
     },
     {
       "before": ["leader", "m"],
-      "commands": ["bookmarksExplorer.focus"],
-    },
-    {
-      "before": ["leader", "M"],
-      "commands": ["bookmarks.listFromAllFiles"],
-    },
+      "commands": ["bookmarksExplorer.focus"]
+    }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
     // 光标移动
     {
       "before": ["J"],
-      "after": ["5", "j"],
+      "after": ["5", "j"]
     },
     {
       "before": ["K"],
-      "after": ["5", "k"],
+      "after": ["5", "k"]
     },
     {
       "before": ["<C-j>"],
-      "after": ["<C-d>"],
+      "after": ["<C-d>"]
     },
     {
       "before": ["<C-k>"],
-      "after": ["<C-u>"],
+      "after": ["<C-u>"]
     },
     {
       "before": ["H"],
-      "after": ["3", "h"],
+      "after": ["3", "h"]
     },
     {
       "before": ["L"],
-      "after": ["3", "l"],
+      "after": ["3", "l"]
     },
     {
       "before": ["W"],
-      "after": ["3", "w"],
+      "after": ["3", "w"]
     },
     {
       "before": ["E"],
-      "after": ["3", "e"],
+      "after": ["3", "e"]
     },
     {
       "before": ["B"],
-      "after": ["3", "b"],
+      "after": ["3", "b"]
     },
     // 文本编辑
     {
       "before": ["<enter>"],
-      "commands": ["editor.action.smartSelect.expand"],
+      "commands": ["editor.action.smartSelect.expand"]
     },
     {
       "before": ["<backspace>"],
-      "commands": ["editor.action.smartSelect.shrink"],
+      "commands": ["editor.action.smartSelect.shrink"]
     },
     // 代码操作
     {
       "before": ["leader", "g", "f"],
-      "commands": ["editor.action.formatSelection"],
+      "commands": ["editor.action.formatSelection"]
     },
     // 禁用
     {
       "before": ["g", "f"],
-      "commands": [""],
+      "commands": [""]
     },
     {
       "before": ["u"],
-      "commands": [""],
+      "commands": [""]
     },
     {
       "before": ["U"],
-      "commands": [""],
+      "commands": [""]
     },
     {
       "before": ["leader", "u"],
-      "after": ["u"],
+      "after": ["u"]
     },
     {
       "before": ["leader", "U"],
-      "after": ["U"],
-    },
-  ],
+      "after": ["U"]
+    }
+  ]
   //========== End ==========//
 }

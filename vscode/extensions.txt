@@ -2,14 +2,12 @@
 
 # Vim
 vscodevim.vim
-murloccra4ler.leap
 
 # 主题与外观
 zhuangtongfa.material-theme
 pkief.material-icon-theme
 oderwat.indent-rainbow
 usernamehw.errorlens
-peaceshi.syntax-highlight
 
 # Git
 eamodio.gitlens
@@ -18,7 +16,6 @@ mhutchie.git-graph
 
 # 编辑增强
 edgardmessias.clipboard-manager
-hoovercj.vscode-settings-cycler
 esbenp.prettier-vscode
 alefragnani.bookmarks
 
@@ -37,9 +34,6 @@ ms-toolsai.vscode-jupyter-slideshow
 # Go
 golang.go
 
-# Kotlin
-jetbrains.kotlin
-
 # Dart / Flutter
 dart-code.dart-code
 dart-code.flutter
@@ -49,7 +43,6 @@ localizely.flutter-intl
 swiftlang.swift-vscode
 
 # Objective-C / C++
-nofoot.clang-format-support-style-variable
 llvm-vs-code-extensions.lldb-dap
 vadimcn.vscode-lldb
 
@@ -64,6 +57,3 @@ tamasfe.even-better-toml
 
 # 中文语言包
 ms-ceintl.vscode-language-pack-zh-hans
-
-# 其他
-undefined_publisher.ft-vscode-extension

@@ -136,6 +136,23 @@ else
     install_extensions "cursor" "$VSCODE_EXT_DIR/extensions-cursor.txt"
     printf "  \033[2m%s\033[0m\n" "Cursor 扩展安装完成"
   fi
+  # 提示需要本地安装的 VSIX 扩展
+  vsix_file="$VSCODE_EXT_DIR/extensions-vsix.txt"
+  if [[ -f "$vsix_file" ]]; then
+    vsix_list=()
+    while IFS= read -r ext; do
+      ext=$(echo "$ext" | sed 's/#.*//' | xargs)
+      [[ -z "$ext" ]] && continue
+      vsix_list+=("$ext")
+    done < "$vsix_file"
+    if [[ ${#vsix_list[@]} -gt 0 ]]; then
+      printf "\n  \033[33m%s\033[0m\n" "以下扩展需要通过 VSIX 本地安装："
+      for ext in "${vsix_list[@]}"; do
+        printf "    \033[2m- %s\033[0m\n" "$ext"
+      done
+      printf "  \033[2m%s\033[0m\n" "请手动下载 .vsix 文件后运行: code/cursor --install-extension <file>.vsix"
+    fi
+  fi
   success "vscode / cursor 扩展安装完成"
 fi
 
