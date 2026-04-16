@@ -136,7 +136,7 @@ fi
 
 # --check 模式：有差异时返回 1
 if $CHECK_MODE; then
-  if [[ $new_count -gt 0 ]]; then
+  if [[ $new_count -gt 0 || ${#removed[@]} -gt 0 ]]; then
     echo ""
     warn "扩展列表未同步，请先运行: bash vscode/scripts/sync-extensions.sh"
     exit 1
@@ -144,25 +144,51 @@ if $CHECK_MODE; then
   exit 0
 fi
 
+# 从文件中删除指定扩展（大小写不敏感）
+remove_from_file() {
+  local ext="$1" file="$2"
+  [[ ! -f "$file" ]] && return 1
+  # 检查是否存在（忽略注释和空行，大小写不敏感）
+  if grep -qiF "$ext" "$file"; then
+    # 删除匹配行（精确匹配整行，忽略大小写，跳过注释行）
+    local tmp
+    tmp=$(mktemp)
+    awk -v pat="$ext" 'BEGIN{IGNORECASE=1} {line=$0; gsub(/#.*/, "", line); gsub(/^[ \t]+|[ \t]+$/, "", line); if (tolower(line) == tolower(pat)) next; print}' "$file" > "$tmp"
+    mv "$tmp" "$file"
+    return 0
+  fi
+  return 1
+}
+
 # 交互模式
 echo ""
-printf "\033[1;34m==>\033[0m \033[1m是否将新增扩展追加到对应文件？(y/N) \033[0m"
+printf "\033[1;34m==>\033[0m \033[1m是否同步扩展列表？(y/N) \033[0m"
 read -r answer
 
 if [[ "$answer" == [yY] ]]; then
-  for ext in "${new_shared[@]}"; do
-    echo "$ext" >> "$SHARED_FILE"
-  done
-  for ext in "${new_code[@]}"; do
-    echo "$ext" >> "$CODE_FILE"
-  done
-  for ext in "${new_cursor[@]}"; do
-    echo "$ext" >> "$CURSOR_FILE"
-  done
-  ok "已追加 $new_count 个新扩展"
+  # 追加新增扩展
+  if [[ $new_count -gt 0 ]]; then
+    for ext in "${new_shared[@]}"; do
+      echo "$ext" >> "$SHARED_FILE"
+    done
+    for ext in "${new_code[@]}"; do
+      echo "$ext" >> "$CODE_FILE"
+    done
+    for ext in "${new_cursor[@]}"; do
+      echo "$ext" >> "$CURSOR_FILE"
+    done
+    ok "已追加 $new_count 个新扩展"
+  fi
 
+  # 删除已卸载扩展
   if [[ ${#removed[@]} -gt 0 ]]; then
-    warn "已移除的扩展需要手动从文件中删除对应行"
+    removed_count=0
+    for ext in "${removed[@]}"; do
+      for file in "$SHARED_FILE" "$CODE_FILE" "$CURSOR_FILE"; do
+        remove_from_file "$ext" "$file" && ((removed_count++))
+      done
+    done
+    ok "已移除 ${#removed[@]} 个已卸载扩展"
   fi
 else
   echo "  已跳过"

@@ -69,8 +69,8 @@ def generate_disable_entry(binding: dict) -> dict:
 
 
 def _escape(s: str) -> str:
-    """转义 JSON 字符串值中的反斜杠和双引号"""
-    return s.replace("\\", "\\\\").replace('"', '\\"')
+    """转义 JSON 字符串值中的特殊字符（\\、\"、\\n、\\t 等）"""
+    return json.dumps(s, ensure_ascii=False)[1:-1]
 
 
 def format_entry(entry: dict) -> str:

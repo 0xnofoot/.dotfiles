@@ -12,6 +12,7 @@
 ├── yazi/               # yazi 文件管理器配置
 ├── zsh/                # zsh 配置（特殊：需要根级 symlink）
 ├── .githooks/          # git hooks（pre-commit 检查扩展同步）
+├── .docs/              # 维护文档（安装脚本更新 SOP 等）
 └── vscode/             # vscode/cursor 配置（链接到 ~/.config/vscode，再按需链接到应用目录）
     ├── settings.json
     ├── keybindings.json
@@ -40,7 +41,7 @@
 | Linux 编译工具 | Step 1/10 — apt/dnf/pacman 安装 build-essential 等 |
 | Homebrew | Step 2/10 — 安装并配置 PATH |
 | Brew bundle | Step 3/10 — 通过 Brewfile 安装所有包 |
-| kitty 可选安装 | Step 4/10 — 交互式询问，支持 `--with-kitty` / `--no-kitty` 参数；macOS 用 cask，Linux 用官方脚本 |
+| kitty 可选安装 | Step 4/10 — 默认跳过，`--with-kitty` 启用；macOS 用 cask，Linux 用官方脚本 |
 | Symlink 循环 | Step 5/10 — 遍历 CONFIG_PACKAGES 链接到 `~/.config/`，同时配置 `core.hooksPath` |
 | zsh 根级 symlink | Step 6/10 — `~/.zshrc`、`~/.zimrc` |
 | vscode/cursor 配置 | Step 7/10 — 检测已安装的 Code/Cursor，将 `~/.config/vscode/` 下的配置文件链接到应用用户目录 |

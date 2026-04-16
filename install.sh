@@ -9,7 +9,6 @@ INSTALL_KITTY=""
 for arg in "$@"; do
   case "$arg" in
     --with-kitty) INSTALL_KITTY=yes ;;
-    --no-kitty)   INSTALL_KITTY=no ;;
   esac
 done
 
@@ -66,13 +65,7 @@ info "Step 3/10: 通过 Brewfile 安装依赖包..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 success "所有依赖包已安装"
 
-# ── Step 4/10: kitty（可选）───────────────────────────────
-if [[ -z "$INSTALL_KITTY" ]]; then
-  printf "\033[1;34m==>\033[0m \033[1m是否安装 kitty 终端？(y/N) \033[0m"
-  read -r answer
-  [[ "$answer" == [yY] ]] && INSTALL_KITTY=yes || INSTALL_KITTY=no
-fi
-
+# ── Step 4/10: kitty（仅 --with-kitty 时安装）─────────────
 if [[ "$INSTALL_KITTY" == "yes" ]]; then
   if command -v kitty &>/dev/null; then
     success "Step 4/10: kitty 已安装，跳过"

@@ -44,7 +44,7 @@
 
 当某个应用在 Linux 上没有 Homebrew formula，或安装本身是可选的，需要单独处理。
 
-kitty 已改为可选安装模式（Step 4），通过交互式提示或 `--with-kitty` / `--no-kitty` 参数控制。参照此模式，在 install.sh 的 Step 4 区域添加类似逻辑：
+kitty 已改为可选安装模式（Step 4），默认跳过，仅 `--with-kitty` 参数启用。参照此模式，在 install.sh 的 Step 4 区域添加类似逻辑：
 
 ```bash
 if command -v <app> &>/dev/null; then

@@ -28,7 +28,7 @@ bash install.sh
 1. 安装 Linux 编译工具（macOS 跳过）
 2. 安装 Homebrew
 3. 通过 Brewfile 安装所有依赖
-4. 可选安装 kitty 终端（交互式询问，或通过 `--with-kitty` / `--no-kitty` 控制）
+4. 安装 kitty 终端（默认跳过，`--with-kitty` 启用）
 5. Symlink 配置目录到 `~/.config/`（含 vscode）
 6. 设置 zsh 根级 symlink（`~/.zshrc`、`~/.zimrc`）+ 下载 Zim
 7. 检测已安装的 VS Code / Cursor，将 `~/.config/vscode/` 下的配置文件链接到对应应用目录
@@ -57,7 +57,12 @@ bash install.sh
 │   ├── starship/       # Starship prompt 配置
 │   └── fzf/            # fzf 集成
 ├── .githooks/          # git hooks（pre-commit 检查扩展同步）
-└── vscode/             # VS Code / Cursor 配置（settings、keybindings、扩展列表）
+└── vscode/             # VS Code / Cursor 配置
+    ├── settings.json
+    ├── keybindings.json
+    ├── extensions*.txt         # 扩展列表（共享 / Code 独有 / Cursor 独有）
+    ├── defaults/               # 各编辑器导出的默认快捷键 JSON
+    └── scripts/                # 同步扩展、生成禁用列表脚本
 ```
 
 ## 快捷键速查

@@ -27,8 +27,6 @@ yzhang.markdown-all-in-one
 zaaack.markdown-editor
 
 # 数据库
-cweijan.dbclient-jdbc
-cweijan.vscode-postgresql-client2
 
 # LeetCode
 leetcode.vscode-leetcode
@@ -37,4 +35,3 @@ leetcode.vscode-leetcode
 adpyke.codesnap
 humao.rest-client
 searking.preview-vscode
-solomonkinard.chrome-extensions
