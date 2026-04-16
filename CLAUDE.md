@@ -39,12 +39,21 @@
 ## 安装机制
 
 - 包管理：macOS 和 Linux 统一使用 Homebrew
-- 配置链接：每个 `<app>/` 目录下维护一份 `.config.sh`，由 `install.sh` Step 5 自动扫描并逐一调用；所有脚本通过父进程导出的 `DOTFILES_DIR` 定位源文件，目标存在时直接删除后重建软链接
+- 配置链接：每个 `<app>/` 目录下维护一份 `.config.sh`，由 `install.sh` Step 5 自动扫描并逐一调用；所有脚本通过父进程导出的 `DOTFILES_DIR` 定位源文件，目标存在时直接删除后重建软链接，失败则通过 `error()` 终止安装
 - 依赖声明：所有 brew/cask 包写在 `Brewfile` 中
 - kitty / tmux / nvim / yazi：整目录链接到 `~/.config/<app>`
 - zsh 特殊处理：整目录链接到 `~/.config/zsh`，同时在 `~/` 创建 `.zshrc`、`.zimrc` 根级 symlink（直接指向 `$DOTFILES_DIR/zsh/`），并预下载 zimfw 到 `zsh/zim/`
-- vscode 特殊处理：不经 `~/.config/vscode` 中间层，直接检测已安装的 Code/Cursor，将 `settings.json`、`keybindings.json` 链接到对应应用用户目录（macOS/Linux 路径不同）；未安装的编辑器静默跳过
+- vscode 特殊处理：不经 `~/.config/vscode` 中间层，直接检测已安装的 Code/Cursor，将 `settings.json`、`keybindings.json` 链接到对应应用用户目录（macOS/Linux 路径不同）；未安装时输出提示并跳过
 - claude 特殊处理：不链接整目录，逐文件将受管条目（`CLAUDE.md`、`settings.json`、`commands/`）链接到 `~/.claude`，保留历史记录等运行时数据；`.gitignore` 排除运行时数据，仅跟踪上述三项
+
+## .config.sh 规范
+
+每个应用的 `.config.sh` 须遵循以下约定：
+
+- 首行 `#!/bin/bash`，次行 `set -e`，确保内部命令失败时立即退出
+- 通过父进程导出的 `DOTFILES_DIR` 定位源文件，不使用相对路径
+- 目标已存在时直接 `rm -rf` 删除，不备份
+- 新增应用时，只需在其目录下创建 `.config.sh`，install.sh 自动发现并调用，无需修改 install.sh
 
 ## install.sh 关键位置
 
@@ -54,8 +63,8 @@
 | Homebrew | Step 2/8 — 安装并配置 PATH |
 | Brew bundle | Step 3/8 — 通过 Brewfile 安装所有包 |
 | kitty 可选安装 | Step 4/8 — 默认跳过，`--with-kitty` 启用；macOS 用 cask，Linux 用官方脚本 |
-| 链接配置 | Step 5/8 — 扫描所有子目录，逐一调用 `.config.sh`，同时配置 `core.hooksPath` |
-| vscode/cursor 扩展 | Step 6/8 — 检测 code/cursor CLI，从 extensions*.txt 安装扩展 |
+| 链接配置 | Step 5/8 — 扫描所有子目录，逐一调用 `.config.sh`（失败则终止）；完成后配置 `core.hooksPath` |
+| vscode/cursor 扩展 | Step 6/8 — 检测 code/cursor CLI，均未找到时跳过；从 extensions*.txt 增量安装扩展 |
 | 默认 shell | Step 7/8 — Linux 上设置 zsh 为默认 shell |
 | Nerd Fonts | Step 8/8 — 自动下载安装 FiraMono + Symbols Nerd Font |
 | 步骤总数 | 硬编码为 "Step N/8"，增减步骤时需全部更新 |
@@ -63,9 +72,9 @@
 ## VSCode 扩展管理
 
 - 共享扩展写在 `vscode/extensions.txt`，Code 独有写在 `extensions-code.txt`，Cursor 独有写在 `extensions-cursor.txt`
-- `install.sh` Step 6 自动检测 CLI 并安装
+- `install.sh` Step 6 自动检测 CLI 并增量安装（已安装的跳过）
 - 新增/删除扩展后，运行 `bash vscode/scripts/sync-extensions.sh` 自动检测差异并同步
-- pre-commit hook 会自动检查扩展列表是否同步，未同步时可选择自动修复并加入提交
+- pre-commit hook 会自动检查扩展列表是否同步，未同步时可选择自动修复并加入提交；无 code/cursor CLI 时跳过检查
 
 ## VSCode 快捷键管理
 
