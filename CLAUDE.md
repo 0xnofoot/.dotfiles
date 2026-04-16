@@ -60,11 +60,13 @@
 ## VSCode 快捷键管理
 
 - `keybindings.json` 中 `//===== Auto Generated: Disabled Defaults =====//` 标记行将文件分为两个区域
-- 标记行之上：手动维护的自定义绑定，直接在 VSCode 中编辑
+- 标记行之上：手动维护的自定义绑定，按场景分类（`//==========` 一级分类，`//----------` 子分类）：
+  - Cursor AI → 全局操作 → 编辑器操作 → 列表与弹窗导航 → 编辑器窗口与分组 → 底部面板与终端 → 书签 → 运行与调试 → 侧边栏导航（文件管理器/搜索/书签/SCM）
 - 标记行之下：脚本自动生成的默认快捷键禁用条目，不要手动编辑
 - 各编辑器导出的默认快捷键 JSON 存放在 `vscode/defaults/`（如 `vscode.json`、`cursor.json`），由 git 跟踪
 - 编辑器大版本更新后，重新导出默认快捷键 JSON 覆盖对应文件，运行 `python3 vscode/scripts/generate-disabled-defaults.py` 刷新禁用列表
 - 脚本自动读取 `vscode/defaults/*.json`，支持任意数量的 VSCode 系编辑器
+- 脚本内置 `PRESERVE_COMMANDS` 排除列表，全选/复制/剪切/粘贴/撤销/重做等基础命令不会被禁用
 - pre-commit hook 在 `vscode/defaults/` 有暂存变更时自动检查禁用列表一致性，不一致可选择自动生成并加入提交
 
 ## Git 规范
