@@ -640,13 +640,13 @@
 { "key": "shift+alt+f8",          "command": "testing.goToPreviousMessage",
                                      "when": "editorFocus && testing.isPeekVisible" },
 { "key": "alt+enter",             "command": "workbench.action.chat.queueMessage",
-                                     "when": "chatInputHasText && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatSessionRequestInProgress && inChatInput && config.chat.requestQueuing.defaultAction == 'steer' && chatInputHasText && chatSessionRequestInProgress && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's'" },
+                                     "when": "chatInputHasText && inChatInput && chatEditingSentRequest == 'st' || chatInputHasText && inChatInput && config.chat.requestQueuing.defaultAction == 'steer' && chatEditingSentRequest != 'q' && chatEditingSentRequest != 'st'" },
 { "key": "enter",                 "command": "workbench.action.chat.queueMessage",
-                                     "when": "chatSessionRequestInProgress && inChatInput && chatInputHasText && chatSessionRequestInProgress && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st' && config.chat.requestQueuing.defaultAction != 'steer' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's'" },
+                                     "when": "chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st' && config.chat.requestQueuing.defaultAction != 'steer'" },
 { "key": "enter",                 "command": "workbench.action.chat.steerWithMessage",
-                                     "when": "chatInputHasText && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatSessionRequestInProgress && inChatInput && config.chat.requestQueuing.defaultAction == 'steer' && chatInputHasText && chatSessionRequestInProgress && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's'" },
+                                     "when": "chatInputHasText && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && config.chat.requestQueuing.defaultAction == 'steer' && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st'" },
 { "key": "alt+enter",             "command": "workbench.action.chat.steerWithMessage",
-                                     "when": "chatSessionRequestInProgress && inChatInput && chatInputHasText && chatSessionRequestInProgress && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st' && config.chat.requestQueuing.defaultAction != 'steer' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's'" },
+                                     "when": "chatInputHasText && inChatInput && chatEditingSentRequest == 'q' || chatInputHasText && inChatInput && chatEditingSentRequest != 'q' && chatEditingSentRequest != 'st' && config.chat.requestQueuing.defaultAction != 'steer'" },
 { "key": "shift+cmd+up",          "command": "workbench.chat.action.focusLastFocused",
                                      "when": "chatCursorAtTop && inChatInput && !quickChatHasFocus" },
 { "key": "shift+cmd+up",          "command": "workbench.chat.action.focusLastFocused",
@@ -724,7 +724,7 @@
 { "key": "enter",                 "command": "acceptSelectedSuggestion",
                                      "when": "acceptSuggestionOnEnter && suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus" },
 { "key": "escape",                "command": "editor.action.inlineSuggest.hide",
-                                     "when": "inlineEditIsVisible || inlineSuggestionVisible" },
+                                     "when": "editorTextFocus && inlineEditIsVisible || editorTextFocus && inlineSuggestionVisible" },
 { "key": "cmd+i",                 "command": "focusSuggestion",
                                      "when": "suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion" },
 { "key": "ctrl+space",            "command": "focusSuggestion",
@@ -1429,12 +1429,13 @@
                                      "when": "browserElementSelectionActive && browserHasUrl && chatIsEnabled && config.chat.sendElementsToChat.enabled && !browserHasError && activeEditor == 'workbench.editor.browser'" },
 { "key": "cmd+l",                 "command": "workbench.action.browser.focusUrlInput",
                                      "when": "activeEditor == 'workbench.editor.browser'" },
+{ "key": "alt+cmd+/",             "command": "workbench.action.browser.openFromViewMenu" },
 { "key": "shift+cmd+a",           "command": "workbench.action.browser.quickOpen",
                                      "when": "activeEditor == 'workbench.editor.browser'" },
 { "key": "f12",                   "command": "workbench.action.browser.toggleDevTools",
                                      "when": "browserHasUrl && !browserHasError && activeEditor == 'workbench.editor.browser'" },
 { "key": "cmd+escape",            "command": "workbench.action.chat.cancel",
-                                     "when": "chatHasQuestionCarousel && !chatRemoteJobCreating || chatHasToolConfirmation && !chatRemoteJobCreating || chatSessionRequestInProgress && !chatRemoteJobCreating" },
+                                     "when": "chatSessionHasActiveRequest && !chatRemoteJobCreating" },
 { "key": "enter",                 "command": "workbench.action.chat.editRequests",
                                      "when": "inChat && !textInputFocus" },
 { "key": "shift+cmd+a",           "command": "workbench.action.chat.focusConfirmation",
@@ -1458,11 +1459,11 @@
 { "key": "alt+cmd+down",          "command": "workbench.action.chat.nextUserPrompt",
                                      "when": "chatIsEnabled && inChat" },
 { "key": "ctrl+cmd+i",            "command": "workbench.action.chat.open",
-                                     "when": "!chatSetupDisabled && !chatSetupHidden" },
+                                     "when": "!chatSetupDisabledInWorkspace && !chatSetupHidden" },
 { "key": "alt+cmd+.",             "command": "workbench.action.chat.openModelPicker",
                                      "when": "chatIsEnabled && inChatInput" },
 { "key": "shift+cmd+i",           "command": "workbench.action.chat.openagent",
-                                     "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden" },
+                                     "when": "config.chat.agent.enabled && !chatSetupDisabledInWorkspace && !chatSetupHidden" },
 { "key": "alt+cmd+pageup",        "command": "workbench.action.chat.previousCodeBlock",
                                      "when": "chatIsEnabled && inChat" },
 { "key": "shift+cmd+f9",          "command": "workbench.action.chat.previousFileTree",
@@ -1732,7 +1733,7 @@
 { "key": "ctrl+shift+alt+`",      "command": "workbench.action.terminal.newInNewWindow",
                                      "when": "terminalHasBeenCreated || terminalProcessSupported" },
 { "key": "shift+cmd+c",           "command": "workbench.action.terminal.openNativeConsole",
-                                     "when": "!terminalFocus" },
+                                     "when": "!isSessionsWindow && !terminalFocus" },
 { "key": "cmd+v",                 "command": "workbench.action.terminal.paste",
                                      "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
 { "key": "enter",                 "command": "workbench.action.terminal.renameActiveTab",
@@ -2241,6 +2242,8 @@
                                      "when": "!inDebugMode && debugConfigurationType == 'node' || !inDebugMode && debugConfigurationType == 'pwa-extensionHost' || !inDebugMode && debugConfigurationType == 'pwa-node'" },
 { "key": "cmd+k alt+cmd+s",       "command": "git.stageSelectedRanges",
                                      "when": "editorTextFocus && !operationInProgress && resourceScheme == 'file'" },
+{ "key": "shift+cmd+.",           "command": "github.copilot.chat.copilotCLI.addFileReference",
+                                     "when": "editorTextFocus && github.copilot.chat.copilotCLI.hasSession" },
 { "key": "shift+cmd+v",           "command": "markdown.showPreview",
                                      "when": "!notebookEditorFocused && editorLangId =~ /^(markdown|prompt|instructions|chatagent|skill)$/" },
 { "key": "shift+alt+f12",         "command": "references-view.findReferences",
@@ -2249,14 +2252,20 @@
                                      "when": "!inDebugMode && activeViewlet == 'workbench.view.debug' && debugConfigurationType == 'node' || !inDebugMode && activeViewlet == 'workbench.view.debug' && debugConfigurationType == 'pwa-extensionHost' || !inDebugMode && activeViewlet == 'workbench.view.debug' && debugConfigurationType == 'pwa-node'" },
 { "key": "cmd+k cmd+n",           "command": "git.unstageSelectedRanges",
                                      "when": "editorTextFocus && isInDiffEditor && isInDiffRightEditor && !operationInProgress && resourceScheme == 'git'" },
+{ "key": "alt+cmd+.",             "command": "github.copilot.chat.rerunWithCopilotDebug",
+                                     "when": "github.copilot-chat.activated && terminalFocus && terminalShellIntegrationEnabled && !terminalAltBufferActive" },
 { "key": "cmd+k v",               "command": "markdown.showPreviewToSide",
                                      "when": "!notebookEditorFocused && editorLangId =~ /^(markdown|prompt|instructions|chatagent|skill)$/" },
 { "key": "f4",                    "command": "references-view.next",
                                      "when": "reference-list.hasResult && references-view.canNavigate" },
 { "key": "cmd+k cmd+r",           "command": "git.revertSelectedRanges",
                                      "when": "editorTextFocus && !operationInProgress && resourceScheme == 'file'" },
+{ "key": "cmd+enter",             "command": "github.copilot.nes.captureExpected.confirm",
+                                     "when": "copilotNesCaptureMode && editorTextFocus" },
 { "key": "shift+f4",              "command": "references-view.prev",
                                      "when": "reference-list.hasResult && references-view.canNavigate" },
+{ "key": "escape",                "command": "github.copilot.nes.captureExpected.abort",
+                                     "when": "copilotNesCaptureMode && editorTextFocus" },
 { "key": "shift+alt+h",           "command": "references-view.showCallHierarchy",
                                      "when": "editorHasCallHierarchyProvider" },
 { "key": "alt+cmd+k",             "command": "bookmarks.toggle",
@@ -2272,8 +2281,6 @@
 { "key": "escape",                "command": "extension.vim_escape",
                                      "when": "editorTextFocus && vim.active && !inDebugRepl" },
 { "key": "alt+h",                 "command": "git.viewFileHistory" },
-{ "key": "shift+cmd+.",           "command": "github.copilot.chat.copilotCLI.addFileReference",
-                                     "when": "editorTextFocus && github.copilot.chat.copilotCLI.hasSession" },
 { "key": "alt+,",                 "command": "gitlens.key.alt+,",
                                      "when": "gitlens:key:," },
 { "key": "shift+enter",           "command": "jupyter.execSelectionInteractive",
@@ -2283,8 +2290,6 @@
                                      "when": "editorTextFocus && editorLangId == 'markdown'" },
 { "key": "cmd+b",                 "command": "markdown.extension.editing.toggleBold",
                                      "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/" },
-{ "key": "cmd+enter",             "command": "mysql.runSQL",
-                                     "when": "config.database-client.executeCursorSQLByShortcut && editorLangId =~ /sql|cql|postgres/ || config.database-client.executeCursorSQLByShortcut && resourceFilename =~ /.dbclient-js$/ || editorHasSelection && editorLangId =~ /sql|cql|postgres/ || editorHasSelection && resourceFilename =~ /.dbclient-js$/" },
 { "key": "f",                     "command": "notebook.find",
                                      "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused" },
 { "key": "shift+cmd+v",           "command": "preview-vscode.showPreview",
@@ -2312,8 +2317,6 @@
                                      "when": "dart-code:anyProjectLoaded && dart-code:hasLastDebugConfig && !inDebugMode" },
 { "key": "cmd+l cmd+o",           "command": "extension.liveServer.goOnline",
                                      "when": "editorTextFocus" },
-{ "key": "alt+cmd+.",             "command": "github.copilot.chat.rerunWithCopilotDebug",
-                                     "when": "github.copilot-chat.activated && terminalFocus && terminalShellIntegrationEnabled && !terminalAltBufferActive" },
 { "key": "alt+.",                 "command": "gitlens.key.alt+.",
                                      "when": "gitlens:key:." },
 { "key": "shift+enter",           "command": "jupyter.runcurrentcelladvance",
@@ -2323,8 +2326,6 @@
                                      "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused" },
 { "key": "cmd+i",                 "command": "markdown.extension.editing.toggleItalic",
                                      "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/" },
-{ "key": "ctrl+cmd+enter",        "command": "mysql.runSQLInNew",
-                                     "when": "editorLangId =~ /sql|cql|postgres/ || resourceFilename =~ /.dbclient-js$/" },
 { "key": "escape",                "command": "notebook.cell.quitEdit",
                                      "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'" },
 { "key": "cmd+k v",               "command": "preview-vscode.showPreviewToSide",
@@ -2347,8 +2348,6 @@
                                      "when": "dart-code:anyProjectLoaded" },
 { "key": "home",                  "command": "extension.vim_home",
                                      "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'" },
-{ "key": "cmd+enter",             "command": "github.copilot.nes.captureExpected.confirm",
-                                     "when": "copilotNesCaptureMode && editorTextFocus" },
 { "key": "alt+enter",             "command": "gitlens.key.alt+enter",
                                      "when": "gitlens:key:alt+enter" },
 { "key": "ctrl+enter",            "command": "jupyter.runcurrentcell",
@@ -2357,8 +2356,6 @@
                                      "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused" },
 { "key": "alt+s",                 "command": "markdown.extension.editing.toggleStrikethrough",
                                      "when": "false" },
-{ "key": "alt+cmd+enter",         "command": "mysql.db.active",
-                                     "when": "editorLangId == 'sql'" },
 { "key": "enter",                 "command": "python.execInREPLEnter",
                                      "when": "isCompositeNotebook && !config.interactiveWindow.executeWithShiftEnter && !inlineChatFocused && !notebookCellListFocused && activeEditor == 'workbench.editor.repl'" },
 { "key": "alt+cmd+l",             "command": "rest-client.rerun-last-request",
@@ -2369,16 +2366,12 @@
                                      "when": "!config.claudeCode.useTerminal" },
 { "key": "ctrl+home",             "command": "extension.vim_ctrl+home",
                                      "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'" },
-{ "key": "escape",                "command": "github.copilot.nes.captureExpected.abort",
-                                     "when": "copilotNesCaptureMode && editorTextFocus" },
 { "key": "alt+left",              "command": "gitlens.key.alt+left",
                                      "when": "gitlens:key:alt+left" },
 { "key": "alt+enter",             "command": "jupyter.runcurrentcellandaddbelow",
                                      "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused" },
 { "key": "ctrl+shift+]",          "command": "markdown.extension.editing.toggleHeadingUp",
                                      "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/" },
-{ "key": "cmd+enter",             "command": "mysql.runES",
-                                     "when": "editorLangId == 'es'" },
 { "key": "a",                     "command": "notebook.cell.insertCodeCellAboveAndFocusContainer",
                                      "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused" },
 { "key": "enter",                 "command": "python.execInInteractiveWindowEnter",
@@ -2397,8 +2390,6 @@
                                      "when": "isCompositeNotebook && !LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !inlineChatVisible && !isComposing && !markersNavigationVisible && !notebookEditorFocused && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible" },
 { "key": "ctrl+shift+[",          "command": "markdown.extension.editing.toggleHeadingDown",
                                      "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/" },
-{ "key": "shift+cmd+enter",       "command": "mysql.runAllQuery",
-                                     "when": "editorLangId =~ /sql|cql|postgres/ || resourceFilename =~ /.dbclient-js$/" },
 { "key": "b",                     "command": "notebook.cell.insertCodeCellBelowAndFocusContainer",
                                      "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused" },
 { "key": "alt+cmd+l",             "command": "rest-client.rerun-last-request",
@@ -2415,8 +2406,6 @@
                                      "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused" },
 { "key": "cmd+m",                 "command": "markdown.extension.editing.toggleMath",
                                      "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/" },
-{ "key": "ctrl+shift+cmd+enter",  "command": "mysql.runAllQueryWithoutParse",
-                                     "when": "editorLangId =~ /sql|cql|postgres/ || resourceFilename =~ /.dbclient-js$/" },
 { "key": "d d",                   "command": "notebook.cell.delete",
                                      "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused" },
 { "key": "alt+cmd+k",             "command": "rest-client.cancel-request",
@@ -2431,8 +2420,6 @@
                                      "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused" },
 { "key": "enter",                 "command": "markdown.extension.onEnterKey",
                                      "when": "editorTextFocus && !editorHasMultipleSelections && !editorReadonly && !markdown.extension.editor.cursor.inFencedCodeBlock && !markdown.extension.editor.cursor.inMathEnv && !suggestWidgetVisible && vim.mode != 'CommandlineInProgress' && vim.mode != 'EasyMotionInputMode' && vim.mode != 'EasyMotionMode' && vim.mode != 'Normal' && vim.mode != 'Replace' && vim.mode != 'SearchInProgressMode' && vim.mode != 'SurroundInputMode' && vim.mode != 'Visual' && vim.mode != 'VisualBlock' && vim.mode != 'VisualLine' && editorLangId =~ /^markdown$|^rmd$|^quarto$/ || editorTextFocus && !editorHasMultipleSelections && !editorReadonly && !markdown.extension.editor.cursor.inFencedCodeBlock && !markdown.extension.editor.cursor.inMathEnv && config.editor.acceptSuggestionOnEnter == 'off' && vim.mode != 'CommandlineInProgress' && vim.mode != 'EasyMotionInputMode' && vim.mode != 'EasyMotionMode' && vim.mode != 'Normal' && vim.mode != 'Replace' && vim.mode != 'SearchInProgressMode' && vim.mode != 'SurroundInputMode' && vim.mode != 'Visual' && vim.mode != 'VisualBlock' && vim.mode != 'VisualLine' && editorLangId =~ /^markdown$|^rmd$|^quarto$/" },
-{ "key": "cmd+enter",             "command": "mysql.mock.run",
-                                     "when": "resourceFilename =~ /mock\\.json$/" },
 { "key": "alt+cmd+k",             "command": "rest-client.cancel-request",
                                      "when": "editorTextFocus && editorLangId == 'plaintext'" },
 { "key": "z",                     "command": "undo",
@@ -2822,6 +2809,7 @@
 // - agentSessionsViewer.refresh
 // - aiCustomization.generateDebugReport
 // - aiCustomization.openManagementEditor
+// - aiCustomization.openMarketplace
 // - aiCustomizationManagement.copyPath
 // - aiCustomizationManagement.delete
 // - aiCustomizationManagement.disableItem
@@ -2883,11 +2871,9 @@
 // - chatEditing.multidiff.explain
 // - chatEditing.openFileInDiff
 // - chatEditing.toggleExplanationWidget
-// - chatEditing.viewAllSessionChanges
 // - chatEditing.viewChanges
 // - chatEditing.viewPreviousEdits
 // - chatEditor.action.reviewChanges
-// - chrome-extensions.createExtension
 // - claude-code.acceptProposedDiff
 // - claude-code.rejectProposedDiff
 // - claude-vscode.acceptProposedDiff
@@ -3017,10 +3003,6 @@
 // - dartFlutterSidebar.resetViewLocation
 // - dataScience.ClearCache
 // - dataScience.ClearUserProviderJupyterServerCache
-// - dbclient.search.result.focus
-// - dbclient.search.result.resetViewLocation
-// - dbclinet.variable.config.view.focus
-// - dbclinet.variable.config.view.resetViewLocation
 // - debug.action.openDisassemblyView
 // - debug.action.toggleDisassemblyViewSourceCode
 // - debug.addConfiguration
@@ -3113,6 +3095,7 @@
 // - editor.action.inlineSuggest.acceptNextLine
 // - editor.action.inlineSuggest.cancelSnooze
 // - editor.action.inlineSuggest.dev.extractRepro
+// - editor.action.inlineSuggest.renameSymbol
 // - editor.action.inlineSuggest.snooze
 // - editor.action.inlineSuggest.toggleAlwaysShowToolbar
 // - editor.action.inlineSuggest.toggleShowCollapsed
@@ -3311,7 +3294,9 @@
 // - extensions.actions.searchByCategory.Visualization
 // - extensions.filter.featured
 // - extensions.recommendedList.focus
+// - extensions.recommendedList.removeView
 // - extensions.recommendedList.resetViewLocation
+// - extensions.recommendedList.toggleVisibility
 // - extensions.sort.installs
 // - extensions.sort.name
 // - extensions.sort.publishedDate
@@ -3412,9 +3397,11 @@
 // - git.commit.FileEntry.CompareAgainstPrevious
 // - git.commit.FileEntry.CompareAgainstWorkspace
 // - git.commit.FileEntry.ViewFileContents
+// - git.commit.FileEntry.ViewPreviousFileContents
 // - git.commit.FileEntry.compare
 // - git.commit.FileEntry.selectForComparison
 // - git.commit.ViewChangeLog
+// - git.commit.checkout
 // - git.commit.cherryPick
 // - git.commit.compare
 // - git.commit.compare.file.compare
@@ -3424,8 +3411,15 @@
 // - git.commit.compare.view.showFilesOnly
 // - git.commit.compare.view.showFolderView
 // - git.commit.createBranch
+// - git.commit.createTag
+// - git.commit.doSomething
 // - git.commit.merge
 // - git.commit.rebase
+// - git.commit.removeBranch
+// - git.commit.removeRemote
+// - git.commit.removeTag
+// - git.commit.revert
+// - git.commit.selected
 // - git.commit.view.hide
 // - git.commit.view.show
 // - git.commit.view.showFilesOnly
@@ -3489,6 +3483,7 @@
 // - git.openChange
 // - git.openFile
 // - git.openFile2
+// - git.openFileInViewer
 // - git.openHEADFile
 // - git.openMergeEditor
 // - git.openRepositoriesInParentFolders
@@ -3678,7 +3673,6 @@
 // - github.copilot.chat.notebook.disableFollowCellExecution
 // - github.copilot.chat.notebook.enableFollowCellExecution
 // - github.copilot.chat.openModelPicker
-// - github.copilot.chat.openPullRequestCopilotCLIAgentSession.openPR
 // - github.copilot.chat.openPullRequestReroute
 // - github.copilot.chat.openSuggestionsPanel
 // - github.copilot.chat.openUserPreferences
@@ -3708,6 +3702,7 @@
 // - github.copilot.chat.startCopilotDebugCommand
 // - github.copilot.chat.toggleStatusMenu
 // - github.copilot.chat.tools.memory.clearMemories
+// - github.copilot.chat.tools.memory.resolveMemoryFileUri
 // - github.copilot.chat.tools.memory.showMemories
 // - github.copilot.chat.triggerPermissiveSignIn
 // - github.copilot.chat.updateCopilotCLIAgentSessionChanges.update
@@ -3749,7 +3744,6 @@
 // - github.copilot.debug.resetVirtualToolGroups
 // - github.copilot.debug.showChatLogView
 // - github.copilot.debug.showContextInspectorView
-// - github.copilot.debug.showNodeSystemCertificatesErrors
 // - github.copilot.debug.showOutputChannel
 // - github.copilot.debug.showOutputChannel.internal
 // - github.copilot.debug.togglePowerSaveBlocker
@@ -3798,16 +3792,6 @@
 // - github.copyVscodeDevLinkFile
 // - github.copyVscodeDevLinkWithoutRange
 // - github.createPullRequest
-// - github.cweijan.mysql.focus
-// - github.cweijan.mysql.removeView
-// - github.cweijan.mysql.resetViewLocation
-// - github.cweijan.mysql.toggleVisibility
-// - github.cweijan.nosql.focus
-// - github.cweijan.nosql.removeView
-// - github.cweijan.nosql.resetViewLocation
-// - github.cweijan.nosql.toggleVisibility
-// - github.dbclient.history.focus
-// - github.dbclient.history.resetViewLocation
 // - github.graph.openOnGitHub
 // - github.openOnGitHub
 // - github.openOnVscodeDev
@@ -4184,6 +4168,11 @@
 // - gitlens.openWorktreeInNewWindow:graph
 // - gitlens.openWorktreeInNewWindow:views
 // - gitlens.pastePatchFromClipboard
+// - gitlens.pausedOperation.abort:graph
+// - gitlens.pausedOperation.continue:graph
+// - gitlens.pausedOperation.open:graph
+// - gitlens.pausedOperation.showConflicts:graph
+// - gitlens.pausedOperation.skip:graph
 // - gitlens.plus.aiAllAccess.optIn
 // - gitlens.plus.cloudIntegrations.connect
 // - gitlens.plus.cloudIntegrations.manage
@@ -4920,6 +4909,7 @@
 // - gitlens.visualizeHistory.file:views
 // - gitlens.visualizeHistory.folder:explorer
 // - gitlens.visualizeHistory.folder:scm
+// - gitlens.visualizeHistory.repo:graph
 // - gitlens.visualizeHistory.repo:scm
 // - gitlens.visualizeHistory.repo:views
 // - gitlens.walkthrough.enableAiSetting
@@ -5033,7 +5023,6 @@
 // - imagePreview.zoomOut
 // - inlayHints.startReadingLineWithHint
 // - inlineChat.fixDiagnostics
-// - inlineChat.resetMoveToPanelChatChoice
 // - inlineChat2.continueInChat
 // - inlineChat2.rephrase
 // - interactive.acceptChanges
@@ -5214,6 +5203,8 @@
 // - lm.addLanguageModelsProviderGroup
 // - lm.migrateLanguageModelsProviderGroup
 // - loadedScripts.collapse
+// - markdown.api.reloadPlugins
+// - markdown.api.render
 // - markdown.editor.insertImageFromWorkspace
 // - markdown.editor.insertLinkFromWorkspace
 // - markdown.extension.editing._wrapBy
@@ -5286,221 +5277,6 @@
 // - multiDiffEditor.collapseAll
 // - multiDiffEditor.expandAll
 // - multiDiffEditor.goToFile
-// - mysql.ai.copilot
-// - mysql.ai.cursor
-// - mysql.bucket.new
-// - mysql.change.user
-// - mysql.changeTableName
-// - mysql.codeLens.copy
-// - mysql.codeLens.run
-// - mysql.column.add
-// - mysql.column.createIndex
-// - mysql.column.down
-// - mysql.column.drop
-// - mysql.column.up
-// - mysql.column.update
-// - mysql.connection.add
-// - mysql.connection.add.viaGroup
-// - mysql.connection.copy
-// - mysql.connection.copyKey
-// - mysql.connection.delete
-// - mysql.connection.disable
-// - mysql.connection.edit
-// - mysql.connection.neo4j.browser
-// - mysql.connection.open
-// - mysql.connection.quickConnect
-// - mysql.connection.selectDb
-// - mysql.connection.startRdp
-// - mysql.connection.terminal
-// - mysql.console.open
-// - mysql.data.dump
-// - mysql.database.add
-// - mysql.db.active.switch
-// - mysql.db.drop
-// - mysql.db.truncate
-// - mysql.delete.event
-// - mysql.delete.function
-// - mysql.delete.procedure
-// - mysql.delete.trigger
-// - mysql.delete.user
-// - mysql.delete.view
-// - mysql.docker.compose.pull
-// - mysql.docker.compose.run
-// - mysql.docker.container.cleanUp
-// - mysql.docker.container.id.copy
-// - mysql.docker.container.inspect
-// - mysql.docker.container.new
-// - mysql.docker.container.open.ports
-// - mysql.docker.container.pause
-// - mysql.docker.container.restart
-// - mysql.docker.container.showLogs
-// - mysql.docker.container.showStats
-// - mysql.docker.container.start
-// - mysql.docker.container.stop
-// - mysql.docker.container.terminal
-// - mysql.docker.container.unpause
-// - mysql.docker.container.updateRestartPolicy
-// - mysql.docker.image.cleanUp
-// - mysql.docker.image.document
-// - mysql.docker.image.id.copy
-// - mysql.docker.image.inspect
-// - mysql.docker.image.new
-// - mysql.docker.image.pull
-// - mysql.docker.image.run
-// - mysql.docker.image.runDetach
-// - mysql.docker.network.cleanUp
-// - mysql.docker.network.delete
-// - mysql.docker.network.inspect
-// - mysql.docker.network.new
-// - mysql.docker.node.drop
-// - mysql.docker.volume.cleanUp
-// - mysql.docker.volume.delete
-// - mysql.docker.volume.inspect
-// - mysql.docker.volume.new
-// - mysql.document.generate
-// - mysql.elastic.copyAsCurl
-// - mysql.elastic.document
-// - mysql.elastic.execute
-// - mysql.elastic.lint
-// - mysql.es.index.delete
-// - mysql.es.index.mapping
-// - mysql.es.index.new
-// - mysql.es.index.showSettings
-// - mysql.es.restore
-// - mysql.es.stream.new
-// - mysql.es.template.aggregations
-// - mysql.es.template.analyze
-// - mysql.es.template.insert
-// - mysql.es.template.search
-// - mysql.es.template.update
-// - mysql.file.delete
-// - mysql.file.download
-// - mysql.file.new
-// - mysql.file.open
-// - mysql.file.upload
-// - mysql.folder.new
-// - mysql.folder.upload
-// - mysql.fs.terminal
-// - mysql.ftp.connect
-// - mysql.history.clear
-// - mysql.history.open
-// - mysql.history.open.all
-// - mysql.history.record
-// - mysql.history.view
-// - mysql.host.copy
-// - mysql.index.drop
-// - mysql.index.modify
-// - mysql.kafka.consumer.configOffset
-// - mysql.kafka.consumer.delete
-// - mysql.kafka.consumer.start
-// - mysql.kafka.consumer.stop
-// - mysql.kafka.offset.resetOffset
-// - mysql.kafka.offset.setOffset
-// - mysql.kafka.topic.delete
-// - mysql.kafka.topic.new
-// - mysql.kafka.topic.produce.send
-// - mysql.kafka.topic.producer.kill
-// - mysql.keyValue.node.delete
-// - mysql.keyValue.node.edit
-// - mysql.keyValue.node.new
-// - mysql.loki.label.viewLog
-// - mysql.mock.reset
-// - mysql.mock.table
-// - mysql.mongo.collection.delete
-// - mysql.mongo.collection.insert
-// - mysql.mongo.dump
-// - mysql.mongo.restore
-// - mysql.mq.consume
-// - mysql.mq.produce
-// - mysql.name.copy
-// - mysql.neo4j.relation.find
-// - mysql.node.create
-// - mysql.node.favorite
-// - mysql.node.favorite.cancel
-// - mysql.node.favorite.clear
-// - mysql.node.filterChildren
-// - mysql.node.rename
-// - mysql.notebook.new
-// - mysql.notebook.open
-// - mysql.notebook.sql
-// - mysql.package.drop
-// - mysql.package.source
-// - mysql.path.copy
-// - mysql.query.add
-// - mysql.query.book.add
-// - mysql.query.delete
-// - mysql.query.link
-// - mysql.query.open
-// - mysql.query.rename
-// - mysql.query.switch
-// - mysql.rabbit.queue.delete
-// - mysql.rabbit.queue.new
-// - mysql.rabbit.role.delete
-// - mysql.rabbit.user.addRole
-// - mysql.rabbit.user.delete
-// - mysql.rabbit.user.new
-// - mysql.rabbit.user.updatePassword
-// - mysql.rabbit.vhost.delete
-// - mysql.rabbit.vhost.new
-// - mysql.redis.connection.status
-// - mysql.redis.dump
-// - mysql.redis.key.del
-// - mysql.redis.key.detail
-// - mysql.redis.key.new
-// - mysql.redis.loadMore
-// - mysql.redis.restore
-// - mysql.runSQLAsJSON
-// - mysql.runSQLWithoutParse
-// - mysql.s3.openSite
-// - mysql.s3.selectBuckets
-// - mysql.s3.url.public
-// - mysql.s3.url.temp
-// - mysql.server.info
-// - mysql.show.esIndex
-// - mysql.show.event
-// - mysql.show.function
-// - mysql.show.procedure
-// - mysql.show.trigger
-// - mysql.sql.import
-// - mysql.ssh.connect
-// - mysql.ssh.folder.terminal
-// - mysql.ssh.forward.port
-// - mysql.ssh.server.status
-// - mysql.ssh.sh.execute
-// - mysql.ssh.user.delete
-// - mysql.ssh.user.new
-// - mysql.ssh.user.updatePassword
-// - mysql.ssh.user.uploadPublicKey
-// - mysql.struct.diff
-// - mysql.struct.dump
-// - mysql.table.copy
-// - mysql.table.design
-// - mysql.table.drop
-// - mysql.table.find
-// - mysql.table.fullTextSearch
-// - mysql.table.show
-// - mysql.table.sort
-// - mysql.table.source
-// - mysql.table.truncate
-// - mysql.template.ddl.reset
-// - mysql.template.new
-// - mysql.template.schema
-// - mysql.template.table
-// - mysql.template.table.delete
-// - mysql.template.table.insert
-// - mysql.template.table.select
-// - mysql.template.table.update
-// - mysql.template.user
-// - mysql.template.view
-// - mysql.treeview.collapse
-// - mysql.treeview.nosql.collapse
-// - mysql.user.grant
-// - mysql.user.sql
-// - mysql.variable.config.display
-// - mysql.view.source
-// - mysql2.refresh
-// - mysql2.refresh.all
-// - mysql2.refreshTree
 // - noop
 // - notebook.action.changeTabDisplaySize
 // - notebook.action.convertIndentationToSpaces
@@ -5583,6 +5359,7 @@
 // - notifications.toggleDoNotDisturbModeBySource
 // - notifications.toggleList
 // - npm.debugScript
+// - npm.debugScriptFromHover
 // - npm.focus
 // - npm.openScript
 // - npm.packageManager
@@ -5591,7 +5368,9 @@
 // - npm.runInstall
 // - npm.runScript
 // - npm.runScriptFromFolder
+// - npm.runScriptFromHover
 // - npm.runSelectedScript
+// - npm.scriptRunner
 // - oneDarkPro.cancelBold
 // - oneDarkPro.cancelItalic
 // - oneDarkPro.cancelVivid
@@ -5641,6 +5420,7 @@
 // - prettier.forceFormatDocument
 // - prettier.openOutput
 // - preview-vscode.showLockedPreviewToSide
+// - previewHtml
 // - problems.action.copyMessage
 // - problems.action.copyRelatedInformationMessage
 // - problems.action.showMultilineMessage
@@ -5652,37 +5432,67 @@
 // - pub.outdated
 // - pub.upgrade
 // - pub.upgrade.majorVersions
+// - pylance.addSummaryAsDocstringAndDismissTooltip
 // - pylance.addToExtraPaths
+// - pylance.addToExtraPathsInConfig
+// - pylance.addTypeAnnotation
+// - pylance.changeSpelling
+// - pylance.completionAccepted
+// - pylance.convertImportFormat
+// - pylance.convertImportStar
+// - pylance.convertImportToModule
+// - pylance.diagnosticRefactor
 // - pylance.dumpCachedTypes
 // - pylance.dumpCodeFlowGraph
 // - pylance.dumpNodes
 // - pylance.dumpTokens
 // - pylance.dumpTypes
+// - pylance.executedClientCommand
+// - pylance.extractMethod
 // - pylance.extractMethodWithRename
+// - pylance.extractVariable
 // - pylance.extractVariableWithRename
 // - pylance.findMatchingEnv
+// - pylance.fixAll
 // - pylance.foldDocstrings
+// - pylance.generateDocumentation
+// - pylance.getAllDocstringRanges
+// - pylance.getAutoImports
+// - pylance.getSourceFiles
 // - pylance.gotoOutputChannel
+// - pylance.implementAllAbstractClasses
+// - pylance.implementAllAbstractClassesWithCopilot
 // - pylance.indexing.clearPersistedIndices
+// - pylance.inheritAllDecorators
 // - pylance.installMissingPackages
 // - pylance.learnMoreAboutImportResolution
 // - pylance.logging.start
 // - pylance.logging.stop
+// - pylance.moveSymbol
 // - pylance.moveSymbolWithFileSelection
 // - pylance.openConfig
 // - pylance.openUri
+// - pylance.pluginCommand
 // - pylance.profiling.start
 // - pylance.profiling.stop
+// - pylance.pytest.addAllFixtureTypeAnnotations
+// - pylance.pytest.addFixtureTypeAnnotation
+// - pylance.registerNotebookStartupCommands
+// - pylance.renameShadowedStdlib
 // - pylance.reportIssue
 // - pylance.runCommands
 // - pylance.runCurrentFileInSandbox
 // - pylance.searchImports
+// - pylance.server.runCurrentFileInSandbox
 // - pylance.setAutoImportCompletions
 // - pylance.showReferences
 // - pylance.showTypeCheckingPicker
 // - pylance.triggerParameterHints
 // - pylance.troubleshootMissingImports
 // - pylance.unfoldDocstrings
+// - pyright.createtypestub
+// - pyright.dumpFileDebugInfo
+// - pyright.organizeimports
 // - python-envs.addPythonProject
 // - python-envs.addPythonProjectGivenResource
 // - python-envs.clearCache
@@ -5722,6 +5532,8 @@
 // - python-projects.resetViewLocation
 // - python-projects.toggleVisibility
 // - python._loadLanguageServerExtension
+// - python.addImport
+// - python.addOptionalForParam
 // - python.analysis.restartLanguageServer
 // - python.clearCacheAndReload
 // - python.clearWorkspaceInterpreter
@@ -5733,6 +5545,7 @@
 // - python.createEnvironmentCheck
 // - python.createNewFile
 // - python.createTerminal
+// - python.createTypeStub
 // - python.debugInTerminal
 // - python.execInDedicatedTerminal
 // - python.execInTerminal
@@ -5745,8 +5558,10 @@
 // - python.installPythonOnLinux
 // - python.installPythonOnMac
 // - python.interpreterPath
+// - python.orderImports
 // - python.pickLocalProcess
 // - python.reloadVSCode
+// - python.removeUnusedImport
 // - python.reportIssue
 // - python.setInterpreter
 // - python.startNativeREPL
@@ -5767,6 +5582,7 @@
 // - references-view.copy
 // - references-view.copyAll
 // - references-view.copyPath
+// - references-view.find
 // - references-view.findImplementations
 // - references-view.pickFromHistory
 // - references-view.refind
@@ -5780,7 +5596,9 @@
 // - references-view.showSupertypes
 // - references-view.showTypeHierarchy
 // - references-view.tree.focus
+// - references-view.tree.removeView
 // - references-view.tree.resetViewLocation
+// - references-view.tree.toggleVisibility
 // - remote-explorer.add
 // - remote-explorer.configureSsh
 // - remote-explorer.connectToFolderInCurrentWindow
@@ -5811,6 +5629,7 @@
 // - repl.action.copyAll
 // - replacePreviousChar
 // - resetGettingStartedProgress
+// - rest-client._openDocumentLink
 // - rest-client.clear-aad-token-cache
 // - rest-client.clear-history
 // - rest-client.copy-codesnippet
@@ -6050,6 +5869,8 @@
 // - vim.showQuickpickCmdLine
 // - vscode-html-css.clear
 // - vscode-html-css.validate
+// - vscodeMarkdownLanguageservice.open
+// - vscodeMarkdownLanguageservice.rename
 // - walkthroughs.selectStep
 // - watch.collapse
 // - welcome.markStepComplete
@@ -6500,17 +6321,20 @@
 // - workbench.action.output.show.eamodio.gitlens.GitLens.log
 // - workbench.action.output.show.extension-output-GitHub.copilot-chat-#1-GitHub Copilot Log (Code References)
 // - workbench.action.output.show.extension-output-charliermarsh.ruff-#1-Ruff Language Server
-// - workbench.action.output.show.extension-output-cweijan.vscode-postgresql-client2-#1-Database Client
+// - workbench.action.output.show.extension-output-donjayamanne.githistory-#1-Git History
 // - workbench.action.output.show.extension-output-esbenp.prettier-vscode-#1-Prettier
 // - workbench.action.output.show.extension-output-hoovercj.vscode-settings-cycler-#1-Settings Cycler
+// - workbench.action.output.show.extension-output-humao.rest-client-#1-REST
 // - workbench.action.output.show.extension-output-mhutchie.git-graph-#1-Git Graph
 // - workbench.action.output.show.extension-output-ms-toolsai.jupyter-#1-Jupyter
 // - workbench.action.output.show.extension-output-ms-toolsai.jupyter-#2-Jupyter 服务器控制台
 // - workbench.action.output.show.extension-output-vadimcn.vscode-lldb-#1-LLDB
+// - workbench.action.output.show.extension-output-vscode.markdown-language-features-#1-Markdown 语言服务器
 // - workbench.action.output.show.exthost
 // - workbench.action.output.show.main
 // - workbench.action.output.show.mcpGateway
 // - workbench.action.output.show.ms-python.debugpy.Python Debugger.log
+// - workbench.action.output.show.ms-python.python.Python 语言服务器.log
 // - workbench.action.output.show.ms-python.python.Python.log
 // - workbench.action.output.show.ms-python.vscode-python-envs.Python Environments.log
 // - workbench.action.output.show.ptyhost
@@ -6525,6 +6349,7 @@
 // - workbench.action.output.show.vscode.github-authentication.GitHub Authentication.log
 // - workbench.action.output.show.vscode.github.GitHub.log
 // - workbench.action.output.show.vscode.json-language-features.JSON 语言服务器.log
+// - workbench.action.output.show.vscode.markdown-language-features.Markdown.log
 // - workbench.action.output.show.vscode.microsoft-authentication.Microsoft 身份验证.log
 // - workbench.action.output.show.vscodevim.vim.Vim.log
 // - workbench.action.pauseSocketWriting
@@ -6633,9 +6458,14 @@
 // - workbench.action.terminal.changeSelectionModeNever
 // - workbench.action.terminal.changeSelectionModePartial
 // - workbench.action.terminal.chat.addTerminalSelection
+// - workbench.action.terminal.chat.continueInBackground
 // - workbench.action.terminal.chat.disableSessionAutoApproval
+// - workbench.action.terminal.chat.focusChatInstance
 // - workbench.action.terminal.chat.focusMostRecentChatTerminal
+// - workbench.action.terminal.chat.focusTerminalByExecutionId
+// - workbench.action.terminal.chat.focusTerminalById
 // - workbench.action.terminal.chat.openTerminalSettingsLink
+// - workbench.action.terminal.chat.toggleChatTerminalOutput
 // - workbench.action.terminal.chat.viewHiddenChatTerminals
 // - workbench.action.terminal.chat.viewInChat
 // - workbench.action.terminal.clearPreviousSessionHistory
@@ -6734,6 +6564,7 @@
 // - workbench.action.url.openUrl
 // - workbench.action.webview.openDeveloperTools
 // - workbench.action.webview.reloadWebviewAction
+// - workbench.action.welcomeOnboarding2026
 // - workbench.action.zenHideEditorTabs
 // - workbench.action.zenShowEditorTab
 // - workbench.action.zenShowMultipleEditorTabs
@@ -6750,6 +6581,18 @@
 // - workbench.actions.syncData.reset
 // - workbench.actions.table.workbench.panel.markers.view.viewAsTable
 // - workbench.actions.table.workbench.panel.markers.view.viewAsTree
+// - workbench.actions.treeView.bookmarksExplorer.collapseAll
+// - workbench.actions.treeView.bookmarksExplorer.refresh
+// - workbench.actions.treeView.bookmarksHelpAndFeedback.collapseAll
+// - workbench.actions.treeView.bookmarksHelpAndFeedback.refresh
+// - workbench.actions.treeView.env-managers.collapseAll
+// - workbench.actions.treeView.env-managers.refresh
+// - workbench.actions.treeView.gitlens.views.scm.grouped.collapseAll
+// - workbench.actions.treeView.gitlens.views.scm.grouped.refresh
+// - workbench.actions.treeView.python-projects.collapseAll
+// - workbench.actions.treeView.python-projects.refresh
+// - workbench.actions.treeView.references-view.tree.collapseAll
+// - workbench.actions.treeView.references-view.tree.refresh
 // - workbench.actions.treeView.workbench.panel.markers.view.collapseAll
 // - workbench.actions.updateIndicator
 // - workbench.actions.view.toggleProblems
@@ -7028,6 +6871,7 @@
 // - workbench.scm.action.setTreeViewModeNavigation
 // - workbench.scm.action.toggleQuickDiffVisibility.git.quickDiffProvider
 // - workbench.scm.action.toggleQuickDiffVisibility.git.secondaryQuickDiffProvider
+// - workbench.scm.action.toggleRepositoryVisibility.scm0
 // - workbench.scm.focus
 // - workbench.scm.history.focus
 // - workbench.scm.history.removeView
@@ -7075,20 +6919,10 @@
 // - workbench.view.extension.context-inspector.resetViewContainerLocation
 // - workbench.view.extension.copilot-chat
 // - workbench.view.extension.copilot-chat.resetViewContainerLocation
-// - workbench.view.extension.dbclient-search-result
-// - workbench.view.extension.dbclient-search-result.resetViewContainerLocation
-// - workbench.view.extension.dbclient-variable-config-view
-// - workbench.view.extension.dbclient-variable-config-view.resetViewContainerLocation
 // - workbench.view.extension.flutter
 // - workbench.view.extension.flutter.resetViewContainerLocation
 // - workbench.view.extension.flutterPropertyEditorContainer
 // - workbench.view.extension.flutterPropertyEditorContainer.resetViewContainerLocation
-// - workbench.view.extension.github-cweijan-mysql
-// - workbench.view.extension.github-cweijan-mysql.resetViewContainerLocation
-// - workbench.view.extension.github-cweijan-nosql
-// - workbench.view.extension.github-cweijan-nosql.resetViewContainerLocation
-// - workbench.view.extension.github-dbclient-history
-// - workbench.view.extension.github-dbclient-history.resetViewContainerLocation
 // - workbench.view.extension.gitlens
 // - workbench.view.extension.gitlens.resetViewContainerLocation
 // - workbench.view.extension.gitlensInspect
@@ -7135,7 +6969,9 @@
 // - workbench.view.testing.resetViewLocation
 // - workbench.view.testing.toggleVisibility
 // - workbench.views.agentPlugins.default.marketplace.focus
+// - workbench.views.agentPlugins.default.marketplace.removeView
 // - workbench.views.agentPlugins.default.marketplace.resetViewLocation
+// - workbench.views.agentPlugins.default.marketplace.toggleVisibility
 // - workbench.views.agentPlugins.installed.focus
 // - workbench.views.agentPlugins.installed.resetViewLocation
 // - workbench.views.agentPlugins.marketplace.focus
@@ -7151,11 +6987,17 @@
 // - workbench.views.extensions.deprecatedExtensions.focus
 // - workbench.views.extensions.deprecatedExtensions.resetViewLocation
 // - workbench.views.extensions.disabled.focus
+// - workbench.views.extensions.disabled.removeView
 // - workbench.views.extensions.disabled.resetViewLocation
+// - workbench.views.extensions.disabled.toggleVisibility
 // - workbench.views.extensions.enabled.focus
+// - workbench.views.extensions.enabled.removeView
 // - workbench.views.extensions.enabled.resetViewLocation
+// - workbench.views.extensions.enabled.toggleVisibility
 // - workbench.views.extensions.installed.focus
+// - workbench.views.extensions.installed.removeView
 // - workbench.views.extensions.installed.resetViewLocation
+// - workbench.views.extensions.installed.toggleVisibility
 // - workbench.views.extensions.marketplace.focus
 // - workbench.views.extensions.marketplace.resetViewLocation
 // - workbench.views.extensions.marketplaceAccess.focus
@@ -7193,13 +7035,17 @@
 // - workbench.views.mcp.default.marketplace.focus
 // - workbench.views.mcp.default.marketplace.resetViewLocation
 // - workbench.views.mcp.default.welcomeView.focus
+// - workbench.views.mcp.default.welcomeView.removeView
 // - workbench.views.mcp.default.welcomeView.resetViewLocation
+// - workbench.views.mcp.default.welcomeView.toggleVisibility
 // - workbench.views.mcp.installed.focus
 // - workbench.views.mcp.installed.resetViewLocation
 // - workbench.views.mcp.marketplace.focus
 // - workbench.views.mcp.marketplace.resetViewLocation
 // - workbench.views.mcp.welcomeView.focus
 // - workbench.views.mcp.welcomeView.resetViewLocation
+// - workbench.views.service.panel.c85d2f13-d995-42d4-adc4-09fee932d65e.resetViewContainerLocation
+// - workbench.views.service.sidebar.cfc375b5-3479-4889-a742-e9f855666154.resetViewContainerLocation
 // - workbench.views.sync.conflicts.focus
 // - workbench.views.sync.conflicts.resetViewLocation
 // - workbench.views.sync.externalActivity.focus

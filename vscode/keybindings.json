@@ -6462,12 +6462,12 @@
   {
     "key": "alt+enter",
     "command": "-workbench.action.chat.queueMessage",
-    "when": "chatInputHasText && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatSessionRequestInProgress && inChatInput && config.chat.requestQueuing.defaultAction == 'steer' && chatInputHasText && chatSessionRequestInProgress && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's'"
+    "when": "chatInputHasText && inChatInput && chatEditingSentRequest == 'st' || chatInputHasText && inChatInput && config.chat.requestQueuing.defaultAction == 'steer' && chatEditingSentRequest != 'q' && chatEditingSentRequest != 'st'"
   },
   {
     "key": "alt+enter",
     "command": "-workbench.action.chat.steerWithMessage",
-    "when": "chatSessionRequestInProgress && inChatInput && chatInputHasText && chatSessionRequestInProgress && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st' && config.chat.requestQueuing.defaultAction != 'steer' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's'"
+    "when": "chatInputHasText && inChatInput && chatEditingSentRequest == 'q' || chatInputHasText && inChatInput && chatEditingSentRequest != 'q' && chatEditingSentRequest != 'st' && config.chat.requestQueuing.defaultAction != 'steer'"
   },
   {
     "key": "shift+cmd+up",
@@ -6904,6 +6904,10 @@
     "when": "activeEditor == 'workbench.editor.browser'"
   },
   {
+    "key": "alt+cmd+/",
+    "command": "-workbench.action.browser.openFromViewMenu"
+  },
+  {
     "key": "shift+cmd+a",
     "command": "-workbench.action.browser.quickOpen",
     "when": "activeEditor == 'workbench.editor.browser'"
@@ -6916,7 +6920,7 @@
   {
     "key": "cmd+escape",
     "command": "-workbench.action.chat.cancel",
-    "when": "chatHasQuestionCarousel && !chatRemoteJobCreating || chatHasToolConfirmation && !chatRemoteJobCreating || chatSessionRequestInProgress && !chatRemoteJobCreating"
+    "when": "chatSessionHasActiveRequest && !chatRemoteJobCreating"
   },
   {
     "key": "shift+cmd+a",
@@ -6971,7 +6975,7 @@
   {
     "key": "ctrl+cmd+i",
     "command": "-workbench.action.chat.open",
-    "when": "!chatSetupDisabled && !chatSetupHidden"
+    "when": "!chatSetupDisabledInWorkspace && !chatSetupHidden"
   },
   {
     "key": "alt+cmd+.",
@@ -6981,7 +6985,7 @@
   {
     "key": "shift+cmd+i",
     "command": "-workbench.action.chat.openagent",
-    "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden"
+    "when": "config.chat.agent.enabled && !chatSetupDisabledInWorkspace && !chatSetupHidden"
   },
   {
     "key": "alt+cmd+pageup",
@@ -7285,6 +7289,11 @@
     "key": "ctrl+shift+alt+`",
     "command": "-workbench.action.terminal.newInNewWindow",
     "when": "terminalHasBeenCreated || terminalProcessSupported"
+  },
+  {
+    "key": "shift+cmd+c",
+    "command": "-workbench.action.terminal.openNativeConsole",
+    "when": "!isSessionsWindow && !terminalFocus"
   },
   {
     "key": "ctrl+space",
@@ -7627,14 +7636,29 @@
     "when": "browserFocused && browserHasUrl && !browserHasError && activeEditor == 'workbench.editor.browser'"
   },
   {
+    "key": "shift+cmd+.",
+    "command": "-github.copilot.chat.copilotCLI.addFileReference",
+    "when": "editorTextFocus && github.copilot.chat.copilotCLI.hasSession"
+  },
+  {
     "key": "shift+cmd+v",
     "command": "-markdown.showPreview",
     "when": "!notebookEditorFocused && editorLangId =~ /^(markdown|prompt|instructions|chatagent|skill)$/"
   },
   {
+    "key": "alt+cmd+.",
+    "command": "-github.copilot.chat.rerunWithCopilotDebug",
+    "when": "github.copilot-chat.activated && terminalFocus && terminalShellIntegrationEnabled && !terminalAltBufferActive"
+  },
+  {
     "key": "cmd+k v",
     "command": "-markdown.showPreviewToSide",
     "when": "!notebookEditorFocused && editorLangId =~ /^(markdown|prompt|instructions|chatagent|skill)$/"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "-github.copilot.nes.captureExpected.confirm",
+    "when": "copilotNesCaptureMode && editorTextFocus"
   },
   {
     "key": "alt+k",
@@ -7647,11 +7671,6 @@
     "when": "editorTextFocus"
   },
   {
-    "key": "shift+cmd+.",
-    "command": "-github.copilot.chat.copilotCLI.addFileReference",
-    "when": "editorTextFocus && github.copilot.chat.copilotCLI.hasSession"
-  },
-  {
     "key": "shift+alt+cmd+m",
     "command": "-markdown-editor.openEditor",
     "when": "editorTextFocus && editorLangId == 'markdown'"
@@ -7660,11 +7679,6 @@
     "key": "cmd+b",
     "command": "-markdown.extension.editing.toggleBold",
     "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
-  },
-  {
-    "key": "cmd+enter",
-    "command": "-mysql.runSQL",
-    "when": "config.database-client.executeCursorSQLByShortcut && editorLangId =~ /sql|cql|postgres/ || config.database-client.executeCursorSQLByShortcut && resourceFilename =~ /.dbclient-js$/ || editorHasSelection && editorLangId =~ /sql|cql|postgres/ || editorHasSelection && resourceFilename =~ /.dbclient-js$/"
   },
   {
     "key": "shift+cmd+v",
@@ -7697,19 +7711,9 @@
     "when": "editorTextFocus"
   },
   {
-    "key": "alt+cmd+.",
-    "command": "-github.copilot.chat.rerunWithCopilotDebug",
-    "when": "github.copilot-chat.activated && terminalFocus && terminalShellIntegrationEnabled && !terminalAltBufferActive"
-  },
-  {
     "key": "cmd+i",
     "command": "-markdown.extension.editing.toggleItalic",
     "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
-  },
-  {
-    "key": "ctrl+cmd+enter",
-    "command": "-mysql.runSQLInNew",
-    "when": "editorLangId =~ /sql|cql|postgres/ || resourceFilename =~ /.dbclient-js$/"
   },
   {
     "key": "cmd+k v",
@@ -7727,19 +7731,9 @@
     "when": "!config.claudeCode.useTerminal && !editorTextFocus"
   },
   {
-    "key": "cmd+enter",
-    "command": "-github.copilot.nes.captureExpected.confirm",
-    "when": "copilotNesCaptureMode && editorTextFocus"
-  },
-  {
     "key": "alt+s",
     "command": "-markdown.extension.editing.toggleStrikethrough",
     "when": "false"
-  },
-  {
-    "key": "alt+cmd+enter",
-    "command": "-mysql.db.active",
-    "when": "editorLangId == 'sql'"
   },
   {
     "key": "alt+cmd+l",
@@ -7757,11 +7751,6 @@
     "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
   },
   {
-    "key": "cmd+enter",
-    "command": "-mysql.runES",
-    "when": "editorLangId == 'es'"
-  },
-  {
     "key": "alt+cmd+l",
     "command": "-rest-client.rerun-last-request",
     "when": "editorTextFocus && editorLangId == 'plaintext'"
@@ -7775,11 +7764,6 @@
     "key": "ctrl+shift+[",
     "command": "-markdown.extension.editing.toggleHeadingDown",
     "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
-  },
-  {
-    "key": "shift+cmd+enter",
-    "command": "-mysql.runAllQuery",
-    "when": "editorLangId =~ /sql|cql|postgres/ || resourceFilename =~ /.dbclient-js$/"
   },
   {
     "key": "alt+cmd+l",
@@ -7797,11 +7781,6 @@
     "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
   },
   {
-    "key": "ctrl+shift+cmd+enter",
-    "command": "-mysql.runAllQueryWithoutParse",
-    "when": "editorLangId =~ /sql|cql|postgres/ || resourceFilename =~ /.dbclient-js$/"
-  },
-  {
     "key": "alt+cmd+k",
     "command": "-rest-client.cancel-request",
     "when": "editorTextFocus && editorLangId == 'http'"
@@ -7810,11 +7789,6 @@
     "key": "cmd+n",
     "command": "-claude-vscode.newConversation",
     "when": "config.claudeCode.enableNewConversationShortcut && activeWebviewPanelId == 'claudeVSCodePanel' || claude-vscode.sideBarActive && config.claudeCode.enableNewConversationShortcut && !editorFocus && !panelFocus"
-  },
-  {
-    "key": "cmd+enter",
-    "command": "-mysql.mock.run",
-    "when": "resourceFilename =~ /mock\\.json$/"
   },
   {
     "key": "alt+cmd+k",
