@@ -136,6 +136,11 @@ fi
 
 # --check 模式：有差异时返回 1
 if $CHECK_MODE; then
+  # 没有任何编辑器可用，无法比对，仅提醒不拦截
+  if ! $has_code && ! $has_cursor; then
+    warn "未检测到 code / cursor CLI，跳过扩展同步检查"
+    exit 0
+  fi
   if [[ $new_count -gt 0 || ${#removed[@]} -gt 0 ]]; then
     echo ""
     warn "扩展列表未同步，请先运行: bash vscode/scripts/sync-extensions.sh"

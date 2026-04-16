@@ -5,3 +5,4 @@
 !settings.json
 !commands/
 !commands/**
+!.config.sh
