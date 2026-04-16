@@ -15,11 +15,16 @@ else
   )
 fi
 
+linked=0
 for dir in "${VSCODE_DIRS[@]}"; do
   [[ ! -d "$dir" ]] && continue
+  app=$(basename "$(dirname "$dir")")
   for f in "${VSCODE_FILES[@]}"; do
     rm -rf "$dir/$f"
     ln -sfn "$DOTFILES_DIR/vscode/$f" "$dir/$f"
+    printf "  %-25s -> vscode/%s\n" "$app/User/$f" "$f"
   done
-  echo "  $(basename "$(dirname "$dir")")/User -> vscode/"
+  linked=$((linked + 1))
 done
+
+[[ $linked -eq 0 ]] && echo "  未检测到已安装的编辑器，已跳过"

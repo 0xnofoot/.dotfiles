@@ -93,12 +93,10 @@ for script in "$DOTFILES_DIR"/*/.config.sh; do
 done
 
 git -C "$DOTFILES_DIR" config core.hooksPath .githooks
-echo "  git hooksPath -> .githooks"
+echo "  dotfiles git hooks       -> .githooks/"
 success "所有配置已链接"
 
 # ── Step 6/8: vscode / cursor 扩展 ───────────────────────
-info "Step 6/8: 安装 vscode / cursor 扩展..."
-
 install_extensions() {
   local cli="$1" file="$2"
   [[ ! -f "$file" ]] && return
@@ -114,23 +112,29 @@ install_extensions() {
 }
 
 VSCODE_EXT_DIR="$DOTFILES_DIR/vscode"
-if command -v code &>/dev/null; then
-  echo "  安装 Code 扩展..."
-  install_extensions "code" "$VSCODE_EXT_DIR/extensions.txt"
-  install_extensions "code" "$VSCODE_EXT_DIR/extensions-code.txt"
-  echo "  Code 扩展安装完成"
+_has_code=false
+_has_cursor=false
+command -v code   &>/dev/null && _has_code=true
+command -v cursor &>/dev/null && _has_cursor=true
+
+if ! $_has_code && ! $_has_cursor; then
+  info "Step 6/8: 跳过扩展安装（未检测到 code / cursor CLI）"
 else
-  echo "  code CLI 未找到，跳过 Code 扩展安装"
+  info "Step 6/8: 安装 vscode / cursor 扩展..."
+  if $_has_code; then
+    echo "  安装 Code 扩展..."
+    install_extensions "code" "$VSCODE_EXT_DIR/extensions.txt"
+    install_extensions "code" "$VSCODE_EXT_DIR/extensions-code.txt"
+    echo "  Code 扩展安装完成"
+  fi
+  if $_has_cursor; then
+    echo "  安装 Cursor 扩展..."
+    install_extensions "cursor" "$VSCODE_EXT_DIR/extensions.txt"
+    install_extensions "cursor" "$VSCODE_EXT_DIR/extensions-cursor.txt"
+    echo "  Cursor 扩展安装完成"
+  fi
+  success "vscode / cursor 扩展安装完成"
 fi
-if command -v cursor &>/dev/null; then
-  echo "  安装 Cursor 扩展..."
-  install_extensions "cursor" "$VSCODE_EXT_DIR/extensions.txt"
-  install_extensions "cursor" "$VSCODE_EXT_DIR/extensions-cursor.txt"
-  echo "  Cursor 扩展安装完成"
-else
-  echo "  cursor CLI 未找到，跳过 Cursor 扩展安装"
-fi
-success "vscode / cursor 扩展安装完成"
 
 # ── Step 7/8: 默认 shell ──────────────────────────────────
 if [[ "$(uname)" != "Darwin" ]]; then

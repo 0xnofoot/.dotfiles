@@ -14,7 +14,8 @@ for item in "${MANAGED[@]}"; do
 
   [[ ! -e "$src" ]] && continue
 
+  [[ -d "$src" ]] && suffix="/" || suffix=""
   rm -rf "$dst"
   ln -sfn "$src" "$dst"
-  echo "  ~/.claude/$item -> $src"
+  printf "  %-25s -> claude/%s\n" "~/.claude/${item}${suffix}" "${item}${suffix}"
 done
