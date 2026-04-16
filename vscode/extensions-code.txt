@@ -1,0 +1,40 @@
+# Code 独有扩展
+
+# AI
+anthropic.claude-code
+github.copilot-chat
+
+# Python
+ms-python.vscode-pylance
+
+# Jupyter
+ms-toolsai.jupyter-keymap
+
+# Dart / Flutter
+blaugold.melos-code
+
+# Remote
+ms-vscode-remote.remote-ssh
+ms-vscode-remote.remote-ssh-edit
+ms-vscode.remote-explorer
+github.codespaces
+
+# Web
+ritwickdey.liveserver
+
+# Markdown
+yzhang.markdown-all-in-one
+zaaack.markdown-editor
+
+# 数据库
+cweijan.dbclient-jdbc
+cweijan.vscode-postgresql-client2
+
+# LeetCode
+leetcode.vscode-leetcode
+
+# 工具
+adpyke.codesnap
+humao.rest-client
+searking.preview-vscode
+solomonkinard.chrome-extensions

@@ -1,0 +1,24 @@
+# Cursor 独有扩展
+
+# Cursor 内置
+anysphere.cursorpyright
+anysphere.remote-ssh
+
+# Python
+donjayamanne.python-environment-manager
+
+# Kotlin
+shape-app.ktfmtter
+
+# Swift
+vknabel.vscode-swiftformat
+vknabel.vscode-swiftlint
+
+# Java
+redhat.java
+vscjava.vscode-java-pack
+vscjava.vscode-java-debug
+vscjava.vscode-java-dependency
+vscjava.vscode-java-test
+vscjava.vscode-maven
+vscjava.vscode-gradle

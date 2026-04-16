@@ -11,13 +11,11 @@
   "files.autoGuessEncoding": true,
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
-  "search.useIgnoreFiles": true,
   //---------- Workbench ----------//
   "workbench.colorTheme": "Syntax Material Dark",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.layoutControl.enabled": false,
   //---------- Window ----------//
-  "window.dialogStyle": "custom",
   "window.restoreWindows": "all",
   //---------- Editor ----------//
   "editor.fontFamily": "FiraMono Nerd Font Mono, Menlo, Monaco, 'Courier New', monospace",
@@ -125,11 +123,9 @@
   "swiftlint.enable": false,
   "swiftlint.onlyEnableWithConfig": true,
   "swiftlint.configSearchPaths": [
-    "~/.config/vscode/language/swift/swiftlint.yml",
     ".swiftlint.yml",
   ],
   "swiftformat.configSearchPaths": [
-    "~/.config/vscode/language/swift/swiftformat.config",
     ".swiftformat",
   ],
   "swift.sourcekit-lsp.backgroundIndexing": "auto",
@@ -182,7 +178,6 @@
     "editor.defaultFormatter": "yzhang.markdown-all-in-one",
   },
   //---------- Clang-Format ----------//
-  "clang-format.language.objective-c.style": "file:${env.HOME}/.config/vscode/language/objective-c/clang-format.config",
   //---------- ESLint ----------//
   "eslint.enable": true,
   "eslint.validate": [
@@ -557,6 +552,7 @@
   "remote.SSH.remotePlatform": {
     "dev-host-toofonwang": "linux"
   },
+  //---------- Chat ----------//
   "chat.viewSessions.orientation": "stacked",
   //---------- End ----------//
 }

@@ -1,0 +1,69 @@
+# Code 和 Cursor 共享扩展
+
+# Vim
+vscodevim.vim
+murloccra4ler.leap
+
+# 主题与外观
+zhuangtongfa.material-theme
+pkief.material-icon-theme
+oderwat.indent-rainbow
+usernamehw.errorlens
+peaceshi.syntax-highlight
+
+# Git
+eamodio.gitlens
+donjayamanne.githistory
+mhutchie.git-graph
+
+# 编辑增强
+edgardmessias.clipboard-manager
+hoovercj.vscode-settings-cycler
+esbenp.prettier-vscode
+alefragnani.bookmarks
+
+# Python
+ms-python.python
+ms-python.debugpy
+ms-python.vscode-python-envs
+charliermarsh.ruff
+
+# Jupyter
+ms-toolsai.jupyter
+ms-toolsai.jupyter-renderers
+ms-toolsai.vscode-jupyter-cell-tags
+ms-toolsai.vscode-jupyter-slideshow
+
+# Go
+golang.go
+
+# Kotlin
+jetbrains.kotlin
+
+# Dart / Flutter
+dart-code.dart-code
+dart-code.flutter
+localizely.flutter-intl
+
+# Swift
+swiftlang.swift-vscode
+
+# Objective-C / C++
+nofoot.clang-format-support-style-variable
+llvm-vs-code-extensions.lldb-dap
+vadimcn.vscode-lldb
+
+# Web
+dbaeumer.vscode-eslint
+ecmel.vscode-html-css
+
+# 数据格式
+redhat.vscode-yaml
+peterj.proto
+tamasfe.even-better-toml
+
+# 中文语言包
+ms-ceintl.vscode-language-pack-zh-hans
+
+# 其他
+undefined_publisher.ft-vscode-extension

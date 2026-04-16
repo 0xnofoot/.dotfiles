@@ -23,7 +23,7 @@ cd ~/.dotfiles
 bash install.sh
 ```
 
-重启终端即可生效。安装脚本会自动完成以下 9 步：
+重启终端即可生效。安装脚本会自动完成以下 10 步：
 
 1. 安装 Linux 编译工具（macOS 跳过）
 2. 安装 Homebrew
@@ -32,8 +32,9 @@ bash install.sh
 5. Symlink 配置目录到 `~/.config/`（含 vscode）
 6. 设置 zsh 根级 symlink（`~/.zshrc`、`~/.zimrc`）+ 下载 Zim
 7. 检测已安装的 VS Code / Cursor，将 `~/.config/vscode/` 下的配置文件链接到对应应用目录
-8. 设置 zsh 为默认 shell（Linux）
-9. 安装 Nerd Fonts（FiraMono + Symbols）
+8. 安装 VS Code / Cursor 扩展（从 extensions*.txt 读取）
+9. 设置 zsh 为默认 shell（Linux）
+10. 安装 Nerd Fonts（FiraMono + Symbols）
 
 ## 仓库结构
 
@@ -55,7 +56,8 @@ bash install.sh
 │   ├── local.zsh       # 本机覆盖（不入库）
 │   ├── starship/       # Starship prompt 配置
 │   └── fzf/            # fzf 集成
-└── vscode/             # VS Code / Cursor 配置（settings.json、keybindings.json）
+├── .githooks/          # git hooks（pre-commit 检查扩展同步）
+└── vscode/             # VS Code / Cursor 配置（settings、keybindings、扩展列表）
 ```
 
 ## 快捷键速查

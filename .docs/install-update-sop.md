@@ -7,7 +7,7 @@
 | 文件 | 作用 |
 |------|------|
 | `Brewfile` | Homebrew 依赖声明，brew bundle 读取此文件安装所有包 |
-| `install.sh` | 安装入口，包含 `CONFIG_PACKAGES` 数组和九步安装流程 |
+| `install.sh` | 安装入口，包含 `CONFIG_PACKAGES` 数组和十步安装流程 |
 
 ## 场景 1：新增应用（带配置目录）
 
@@ -82,6 +82,24 @@ ln -sfn "$HOME/.config/<app>/<rc>" "$HOME/.<rc>"
 - 检测目标应用目录是否存在（不存在则 skip）
 - 存在则将 `~/.config/<app>/` 下的配置文件逐个 symlink 到应用用户目录
 - macOS 和 Linux 使用不同的目标路径
+
+## 场景 8：管理 VSCode / Cursor 扩展
+
+扩展列表存放在 `vscode/` 目录下三个文本文件中：
+
+| 文件 | 内容 |
+|------|------|
+| `extensions.txt` | Code 和 Cursor 共享的扩展 |
+| `extensions-code.txt` | Code 独有扩展 |
+| `extensions-cursor.txt` | Cursor 独有扩展 |
+
+**新增扩展**：在编辑器中安装后，运行 `bash vscode/scripts/sync-extensions.sh` 自动同步。
+**删除扩展**：在编辑器中卸载后，从文件中移除对应行。
+**pre-commit hook**（`.githooks/pre-commit`，`install.sh` Step 5 自动配置 `core.hooksPath`）：
+- 每次提交自动检查扩展列表是否同步
+- 若 `vscode/defaults/` 有暂存变更，同时检查禁用快捷键列表是否一致
+- 检查不通过时交互式询问：输入 `y` 自动修复并加入本次提交，输入 `n` 阻止提交
+**install.sh Step 8** 会自动检测 `code`/`cursor` CLI，增量安装扩展列表中的扩展。
 
 ## 修改后检查清单
 
