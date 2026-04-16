@@ -11,15 +11,16 @@ for arg in "$@"; do
     --with-kitty) INSTALL_KITTY=yes ;;
   esac
 done
+export INSTALL_KITTY
 
 info()    { printf "\033[1;34m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
 success() { printf "\033[1;32m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
 warn()    { printf "\033[1;33m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
 error()   { printf "\033[1;31m==>\033[0m \033[1m%s\033[0m\n" "$1"; exit 1; }
 
-# ── Step 1/8: Linux 编译工具 ───────────────────────────────
+# ── Step 1/5: Linux 编译工具 ───────────────────────────────
 if [[ "$(uname)" != "Darwin" ]]; then
-  info "Step 1/8: 安装 Linux 编译工具..."
+  info "Step 1/5: 安装 Linux 编译工具..."
   if command -v apt-get &>/dev/null; then
     sudo apt-get update -qq
     sudo apt-get install -y build-essential procps curl file git
@@ -33,11 +34,11 @@ if [[ "$(uname)" != "Darwin" ]]; then
   fi
   success "编译工具就绪"
 else
-  success "Step 1/8: macOS 编译工具（Xcode CLT）已就绪"
+  success "Step 1/5: macOS 编译工具（Xcode CLT）已就绪"
 fi
 
-# ── Step 2/8: Homebrew ────────────────────────────────────
-info "Step 2/8: 安装 Homebrew..."
+# ── Step 2/5: Homebrew ────────────────────────────────────
+info "Step 2/5: 安装 Homebrew..."
 if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
@@ -60,33 +61,13 @@ else
 fi
 success "Homebrew 就绪"
 
-# ── Step 3/8: 安装依赖包 ──────────────────────────────────
-info "Step 3/8: 通过 Brewfile 安装依赖包..."
+# ── Step 3/5: 安装依赖包 ──────────────────────────────────
+info "Step 3/5: 通过 Brewfile 安装依赖包..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 success "所有依赖包已安装"
 
-# ── Step 4/8: kitty（仅 --with-kitty 时安装）──────────────
-if [[ "$INSTALL_KITTY" == "yes" ]]; then
-  if command -v kitty &>/dev/null; then
-    success "Step 4/8: kitty 已安装，跳过"
-  elif [[ "$(uname)" == "Darwin" ]]; then
-    info "Step 4/8: 通过 Homebrew 安装 kitty..."
-    brew install --cask kitty
-    success "kitty 已安装"
-  else
-    info "Step 4/8: 通过官方脚本安装 kitty (Linux)..."
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-    mkdir -p ~/.local/bin
-    ln -sfn ~/.local/kitty.app/bin/kitty ~/.local/bin/kitty
-    ln -sfn ~/.local/kitty.app/bin/kitten ~/.local/bin/kitten
-    success "kitty 已安装"
-  fi
-else
-  success "Step 4/8: 跳过 kitty 安装"
-fi
-
-# ── Step 5/8: 链接配置 ────────────────────────────────────
-info "Step 5/8: 链接配置..."
+# ── Step 4/5: 链接配置 ────────────────────────────────────
+info "Step 4/5: 链接配置..."
 mkdir -p "$HOME/.config"
 for script in "$DOTFILES_DIR"/*/.config.sh; do
   [[ -f "$script" ]] || continue
@@ -99,82 +80,8 @@ git -C "$DOTFILES_DIR" config core.hooksPath .githooks
 printf "  \033[2mgit config core.hooksPath\033[0m \033[2m=\033[0m \033[2;3m.githooks/\033[0m\n"
 success "所有配置已链接"
 
-# ── Step 6/8: vscode / cursor 扩展 ───────────────────────
-install_extensions() {
-  local cli="$1" file="$2"
-  [[ ! -f "$file" ]] && return
-  local installed
-  installed=$("$cli" --list-extensions 2>/dev/null) || return
-  while IFS= read -r ext; do
-    ext=$(echo "$ext" | sed 's/#.*//' | xargs)
-    [[ -z "$ext" ]] && continue
-    echo "$installed" | grep -qiF "$ext" && continue
-    printf "    \033[2m安装 %s\033[0m\n" "$ext"
-    "$cli" --install-extension "$ext" --force 2>/dev/null || warn "    安装失败: $ext"
-  done < "$file"
-}
-
-VSCODE_EXT_DIR="$DOTFILES_DIR/vscode"
-_has_code=false
-_has_cursor=false
-command -v code   &>/dev/null && _has_code=true
-command -v cursor &>/dev/null && _has_cursor=true
-
-if ! $_has_code && ! $_has_cursor; then
-  info "Step 6/8: 跳过扩展安装（未检测到 code / cursor CLI）"
-else
-  info "Step 6/8: 安装 vscode / cursor 扩展..."
-  if $_has_code; then
-    printf "  \033[33m%s\033[0m\n" "安装 Code 扩展..."
-    install_extensions "code" "$VSCODE_EXT_DIR/extensions.txt"
-    install_extensions "code" "$VSCODE_EXT_DIR/extensions-code.txt"
-    printf "  \033[2m%s\033[0m\n" "Code 扩展安装完成"
-  fi
-  if $_has_cursor; then
-    printf "  \033[33m%s\033[0m\n" "安装 Cursor 扩展..."
-    install_extensions "cursor" "$VSCODE_EXT_DIR/extensions.txt"
-    install_extensions "cursor" "$VSCODE_EXT_DIR/extensions-cursor.txt"
-    printf "  \033[2m%s\033[0m\n" "Cursor 扩展安装完成"
-  fi
-  # 提示需要本地安装的 VSIX 扩展
-  vsix_file="$VSCODE_EXT_DIR/extensions-vsix.txt"
-  if [[ -f "$vsix_file" ]]; then
-    vsix_list=()
-    while IFS= read -r ext; do
-      ext=$(echo "$ext" | sed 's/#.*//' | xargs)
-      [[ -z "$ext" ]] && continue
-      vsix_list+=("$ext")
-    done < "$vsix_file"
-    if [[ ${#vsix_list[@]} -gt 0 ]]; then
-      printf "\n  \033[33m%s\033[0m\n" "以下扩展需要通过 VSIX 本地安装："
-      for ext in "${vsix_list[@]}"; do
-        printf "    \033[2m- %s\033[0m\n" "$ext"
-      done
-      printf "  \033[2m%s\033[0m\n" "请手动下载 .vsix 文件后运行: code/cursor --install-extension <file>.vsix"
-    fi
-  fi
-  success "vscode / cursor 扩展安装完成"
-fi
-
-# ── Step 7/8: 默认 shell ──────────────────────────────────
-if [[ "$(uname)" != "Darwin" ]]; then
-  info "Step 7/8: 设置默认 shell 为 zsh..."
-  ZSH_PATH="$(which zsh)"
-  if [[ "$SHELL" != "$ZSH_PATH" ]]; then
-    if ! grep -qF "$ZSH_PATH" /etc/shells; then
-      echo "$ZSH_PATH" | sudo tee -a /etc/shells >/dev/null
-    fi
-    chsh -s "$ZSH_PATH"
-    success "默认 shell 已设置为 zsh"
-  else
-    success "默认 shell 已是 zsh"
-  fi
-else
-  success "Step 7/8: macOS 默认 shell 已是 zsh"
-fi
-
-# ── Step 8/8: Nerd Fonts ──────────────────────────────────
-info "Step 8/8: 安装 Nerd Fonts..."
+# ── Step 5/5: Nerd Fonts ──────────────────────────────────
+info "Step 5/5: 安装 Nerd Fonts..."
 FONT_DIR=""
 if [[ "$(uname)" == "Darwin" ]]; then
   FONT_DIR="$HOME/Library/Fonts"

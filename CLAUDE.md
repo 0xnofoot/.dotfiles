@@ -7,7 +7,7 @@
 ├── install.sh          # 一键安装脚本（macOS + Linux）
 ├── Brewfile            # Homebrew 依赖清单
 ├── kitty/              # kitty 终端配置
-│   └── .config.sh      # 链接整目录到 ~/.config/kitty
+│   └── .config.sh      # 可选安装 kitty + 链接整目录到 ~/.config/kitty
 ├── tmux/               # tmux 配置
 │   └── .config.sh      # 链接整目录到 ~/.config/tmux
 ├── nvim/               # neovim 配置
@@ -15,7 +15,7 @@
 ├── yazi/               # yazi 文件管理器配置
 │   └── .config.sh      # 链接整目录到 ~/.config/yazi
 ├── zsh/                # zsh 配置
-│   └── .config.sh      # 链接整目录到 ~/.config/zsh，并创建 ~/.zshrc、~/.zimrc 根级 symlink
+│   └── .config.sh      # 链接整目录到 ~/.config/zsh，创建根级 symlink，Linux 设置默认 shell
 ├── .githooks/          # git hooks（pre-commit 检查扩展同步）
 ├── claude/             # Claude Code 配置
 │   ├── .config.sh      # 逐文件链接受管条目到 ~/.claude，保留运行时数据
@@ -24,7 +24,7 @@
 │   └── commands/       # 自定义 skills
 ├── .docs/              # 维护文档（安装脚本更新 SOP 等）
 └── vscode/             # vscode/cursor 配置
-    ├── .config.sh      # 检测已安装的 Code/Cursor，直接链接配置文件到应用用户目录
+    ├── .config.sh      # 链接配置文件到应用用户目录 + 检测 CLI 安装扩展
     ├── settings.json
     ├── keybindings.json
     ├── extensions.txt          # Code 和 Cursor 共享扩展
@@ -40,11 +40,12 @@
 ## 安装机制
 
 - 包管理：macOS 和 Linux 统一使用 Homebrew
-- 配置链接：每个 `<app>/` 目录下维护一份 `.config.sh`，由 `install.sh` Step 5 自动扫描并逐一调用；所有脚本通过父进程导出的 `DOTFILES_DIR` 定位源文件，目标存在时直接删除后重建软链接，失败则通过 `error()` 终止安装
+- 配置链接与应用特有操作：每个 `<app>/` 目录下维护一份 `.config.sh`，由 `install.sh` Step 4 自动扫描并逐一调用；脚本负责配置链接，也可包含应用特有的安装/设置逻辑（如扩展安装、默认 shell 设置等）；所有脚本通过父进程导出的 `DOTFILES_DIR` 定位源文件，目标存在时直接删除后重建软链接，失败则通过 `error()` 终止安装
 - 依赖声明：所有 brew/cask 包写在 `Brewfile` 中
-- kitty / tmux / nvim / yazi：整目录链接到 `~/.config/<app>`
-- zsh 特殊处理：整目录链接到 `~/.config/zsh`，同时在 `~/` 创建 `.zshrc`、`.zimrc` 根级 symlink（直接指向 `$DOTFILES_DIR/zsh/`），并预下载 zimfw 到 `zsh/zim/`
-- vscode 特殊处理：不经 `~/.config/vscode` 中间层，直接检测已安装的 Code/Cursor，将 `settings.json`、`keybindings.json` 链接到对应应用用户目录（macOS/Linux 路径不同）；未安装时输出提示并跳过
+- tmux / nvim / yazi：整目录链接到 `~/.config/<app>`
+- kitty 特殊处理：`--with-kitty` 时先安装 kitty（macOS 用 cask，Linux 用官方脚本），再链接配置目录
+- zsh 特殊处理：整目录链接到 `~/.config/zsh`，同时在 `~/` 创建 `.zshrc`、`.zimrc` 根级 symlink（直接指向 `$DOTFILES_DIR/zsh/`），预下载 zimfw 到 `zsh/zim/`，Linux 上设置 zsh 为默认 shell
+- vscode 特殊处理：不经 `~/.config/vscode` 中间层，直接检测已安装的 Code/Cursor，将 `settings.json`、`keybindings.json` 链接到对应应用用户目录（macOS/Linux 路径不同），随后检测 CLI 增量安装扩展；未安装时输出提示并跳过
 - claude 特殊处理：不链接整目录，逐文件将受管条目（`CLAUDE.md`、`settings.json`、`commands/`）链接到 `~/.claude`，保留历史记录等运行时数据；`.gitignore` 排除运行时数据，仅跟踪上述三项
 
 ## .config.sh 规范
@@ -60,21 +61,18 @@
 
 | 内容 | 位置 |
 |------|------|
-| Linux 编译工具 | Step 1/8 — apt/dnf/pacman 安装 build-essential 等 |
-| Homebrew | Step 2/8 — 安装并配置 PATH |
-| Brew bundle | Step 3/8 — 通过 Brewfile 安装所有包 |
-| kitty 可选安装 | Step 4/8 — 默认跳过，`--with-kitty` 启用；macOS 用 cask，Linux 用官方脚本 |
-| 链接配置 | Step 5/8 — 扫描所有子目录，逐一调用 `.config.sh`（失败则终止）；完成后配置 `core.hooksPath` |
-| vscode/cursor 扩展 | Step 6/8 — 检测 code/cursor CLI，均未找到时跳过；从 extensions*.txt 增量安装扩展；提示 VSIX 本地安装扩展 |
-| 默认 shell | Step 7/8 — Linux 上设置 zsh 为默认 shell |
-| Nerd Fonts | Step 8/8 — 自动下载安装 FiraMono + Symbols Nerd Font |
-| 步骤总数 | 硬编码为 "Step N/8"，增减步骤时需全部更新 |
+| Linux 编译工具 | Step 1/5 — apt/dnf/pacman 安装 build-essential 等 |
+| Homebrew | Step 2/5 — 安装并配置 PATH |
+| Brew bundle | Step 3/5 — 通过 Brewfile 安装所有包 |
+| 链接配置 | Step 4/5 — 扫描所有子目录，逐一调用 `.config.sh`（失败则终止）；完成后配置 `core.hooksPath`；各应用的特有操作（扩展安装、kitty 可选安装、默认 shell 等）均由对应 `.config.sh` 处理 |
+| Nerd Fonts | Step 5/5 — 自动下载安装 FiraMono + Symbols Nerd Font |
+| 步骤总数 | 硬编码为 "Step N/5"，增减步骤时需全部更新 |
 
 ## VSCode 扩展管理
 
 - 共享扩展写在 `vscode/extensions.txt`，Code 独有写在 `extensions-code.txt`，Cursor 独有写在 `extensions-cursor.txt`
 - 需要通过 VSIX 本地安装的扩展写在 `extensions-vsix.txt`（不在 Open VSX / VS Code Marketplace 上的扩展）
-- `install.sh` Step 6 自动检测 CLI 并增量安装（已安装的跳过），最后提示用户手动安装 VSIX 扩展
+- `vscode/.config.sh` 自动检测 CLI 并增量安装（已安装的跳过），最后提示用户手动安装 VSIX 扩展
 - 新增/删除扩展后，运行 `bash vscode/scripts/sync-extensions.sh` 自动检测差异并同步
 - pre-commit hook 会自动检查扩展列表是否同步，未同步时可选择自动修复并加入提交；无 code/cursor CLI 时跳过检查
 

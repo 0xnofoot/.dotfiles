@@ -7,8 +7,8 @@
 | 文件 | 作用 |
 |------|------|
 | `Brewfile` | Homebrew 依赖声明，`brew bundle` 读取此文件安装所有包 |
-| `<app>/.config.sh` | 各应用的配置链接脚本，由 install.sh Step 5 自动扫描调用 |
-| `install.sh` | 安装入口，Step 4 处理 kitty 可选安装，Step 5 扫描 `.config.sh` |
+| `<app>/.config.sh` | 各应用的配置链接与特有操作脚本，由 install.sh Step 4 自动扫描调用 |
+| `install.sh` | 安装入口，Step 1-3 准备环境，Step 4 扫描 `.config.sh`，Step 5 安装字体 |
 
 ---
 
@@ -31,7 +31,7 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.confi
 
 4. **install.sh**：无需修改，Step 5 自动发现新脚本并调用
 
-如果该应用需要非标准安装（如 Linux 上无 Homebrew formula），参见[场景 5](#场景-5应用需要非标准安装)。
+如果该应用需要非标准安装（如 Linux 上无 Homebrew formula），在 `.config.sh` 中添加安装逻辑，参见[场景 5](#场景-5应用需要非标准安装)。
 
 ---
 
@@ -64,30 +64,33 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.confi
 
 ## 场景 5：应用需要非标准安装
 
-当某个应用在 Linux 上没有 Homebrew formula，或安装本身是可选的，需要在 install.sh Step 4 区域单独处理。
+当某个应用在 Linux 上没有 Homebrew formula，或安装本身是可选的，在其 `.config.sh` 中添加安装逻辑。
 
-kitty 已采用可选安装模式，默认跳过，仅 `--with-kitty` 参数启用。参照此模式在 Step 4 区域添加：
+kitty 已采用可选安装模式，默认跳过，仅 `--with-kitty` 参数启用。参照此模式在 `<app>/.config.sh` 中添加：
 
 ```bash
-if [[ "$INSTALL_APP" == "yes" ]]; then
-  if command -v <app> &>/dev/null; then
-    success "Step 4/8: <app> 已安装，跳过"
-  elif [[ "$(uname)" == "Darwin" ]]; then
-    info "Step 4/8: 通过 Homebrew 安装 <app>..."
-    brew install --cask <app>
-  else
-    info "Step 4/8: 通过官方脚本安装 <app> (Linux)..."
-    # 平台特殊安装逻辑
+# 可选安装（--with-<app> 时 INSTALL_APP=yes）
+if [[ "${INSTALL_APP:-}" == "yes" ]]; then
+  if ! command -v <app> &>/dev/null; then
+    if [[ "$(uname)" == "Darwin" ]]; then
+      printf "  \033[33m%s\033[0m\n" "通过 Homebrew 安装 <app>..."
+      brew install --cask <app>
+    else
+      printf "  \033[33m%s\033[0m\n" "通过官方脚本安装 <app> (Linux)..."
+      # 平台特殊安装逻辑
+    fi
   fi
-else
-  success "Step 4/8: 跳过 <app> 安装"
 fi
 ```
 
-同时在 install.sh 顶部的参数解析处添加对应 flag：
+同时在 install.sh 顶部的参数解析处添加对应 flag 并 export：
 
 ```bash
 --with-<app>) INSTALL_APP=yes ;;
+```
+
+```bash
+export INSTALL_APP
 ```
 
 ---
@@ -140,12 +143,12 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.<rc>"
 
 **删除扩展**：在编辑器中卸载后，运行 `bash vscode/scripts/sync-extensions.sh` 自动同步（会提示移除已卸载项）。
 
-**pre-commit hook**（`.githooks/pre-commit`，install.sh Step 5 配置 `core.hooksPath`）：
+**pre-commit hook**（`.githooks/pre-commit`，install.sh Step 4 配置 `core.hooksPath`）：
 - 每次提交自动检查扩展列表是否同步；无 code/cursor CLI 时跳过检查，不阻断提交
 - 若 `vscode/defaults/` 有暂存变更，同时检查禁用快捷键列表是否一致
 - 检查不通过时交互式询问：输入 `y` 自动修复并加入本次提交，输入 `n` 阻止提交
 
-**install.sh Step 6** 自动检测 `code`/`cursor` CLI，均未找到时整步跳过；找到时增量安装扩展列表中尚未安装的扩展。
+**vscode/.config.sh** 自动检测 `code`/`cursor` CLI，均未找到时跳过；找到时增量安装扩展列表中尚未安装的扩展。
 
 ---
 
@@ -155,7 +158,7 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.<rc>"
 
 - [ ] Brewfile 中包名是 Homebrew 实际 formula 名（`brew info <name>` 可验证）
 - [ ] 新增应用已创建 `.config.sh`，且首行 `#!/bin/bash`、次行 `set -e`
-- [ ] 如果增减了 install.sh 的步骤，所有 `"Step N/8"` 的分母已同步更新，并更新 CLAUDE.md 中的步骤表格
+- [ ] 如果增减了 install.sh 的步骤，所有 `"Step N/5"` 的分母已同步更新，并更新 CLAUDE.md 中的步骤表格
 - [ ] `bash -n install.sh` 和各 `.config.sh` 语法检查通过
 - [ ] macOS 特有逻辑用 `[[ "$(uname)" == "Darwin" ]]` 保护
 - [ ] Linux 特有逻辑用 `[[ "$(uname)" != "Darwin" ]]` 保护
