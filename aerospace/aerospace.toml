@@ -7,8 +7,8 @@ start-at-login = false
 # 禁用 macOS "Hide Application" 行为，让 Cmd+H 完全交给 AeroSpace
 automatically-unhide-macos-hidden-apps = true
 
-# 启动时自动 layout
-after-startup-command = []
+# AeroSpace 启动时顺带拉起 SwipeAeroSpace（三指滑动手势桥接）
+after-startup-command = ['exec-and-forget open -a SwipeAeroSpace']
 
 # 当焦点切换到非 AeroSpace 管理的窗口时，自动切回上一个 workspace
 on-focus-changed = ['move-mouse window-lazy-center']
