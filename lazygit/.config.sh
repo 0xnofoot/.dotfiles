@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+: "${DOTFILES_DIR:?must be set by install.sh}"
 # lazygit 依赖 XDG_CONFIG_HOME（由 zsh/env.zsh 导出为 ~/.config），
 # macOS 与 Linux 统一链接到 ~/.config/lazygit
 TARGET="$HOME/.config/lazygit"

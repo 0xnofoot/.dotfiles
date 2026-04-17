@@ -18,9 +18,10 @@
 │   └── .config.sh      # 链接整目录到 ~/.config/bottom
 ├── lazygit/            # lazygit 配置（接入 delta 作为 pager）
 │   └── .config.sh      # 链接整目录到 ~/.config/lazygit（依赖 XDG_CONFIG_HOME）
-├── git/                # git 片段（delta 等）
+├── git/                # git 公共配置
 │   ├── .config.sh      # 通过 git config --add include.path 接入 ~/.gitconfig
-│   └── delta.gitconfig # 不含私有信息的通用片段
+│   ├── common.gitconfig   # 公共 git 设置（core、pull、delta、merge 等）
+│   └── gitignore_global   # 全局忽略（被 common.gitconfig 的 excludesfile 引用）
 ├── zsh/                # zsh 配置
 │   └── .config.sh      # 链接整目录到 ~/.config/zsh，创建根级 symlink，Linux 设置默认 shell
 ├── .githooks/          # git hooks（pre-commit 检查扩展同步）
@@ -56,13 +57,14 @@
 - vscode 特殊处理：不经 `~/.config/vscode` 中间层，直接检测已安装的 Code/Cursor，将 `settings.json`、`keybindings.json` 链接到对应应用用户目录（macOS/Linux 路径不同），随后检测 CLI 增量安装扩展；未安装时输出提示并跳过
 - claude 特殊处理：不链接整目录，逐文件将受管条目（`CLAUDE.md`、`settings.json`、`commands/`）链接到 `~/.claude`，运行时数据（历史记录、缓存等）保留在 `~/.claude` 真实目录中，不进入仓库
 - lazygit 特殊处理：`zsh/env.zsh` 导出 `XDG_CONFIG_HOME=~/.config`，使 macOS 上的 lazygit 也读取 `~/.config/lazygit`，与 Linux 路径统一
-- git 特殊处理：不走 symlink。用户 `~/.gitconfig` 含私有信息（邮箱、URL rewrites 等）不入库，仓库只提供通用片段（如 `delta.gitconfig`），由 `.config.sh` 幂等地 `git config --global --add include.path` 接入
+- git 特殊处理：不走 symlink。用户 `~/.gitconfig` 只保留私有内容（`[user]`、`[commit] template`、`[url] insteadOf`、`[core] hooksPath` 等）不入库，仓库用 `git/common.gitconfig` 集中维护公共片段（含 delta、excludesfile 等所有通用配置），由 `.config.sh` 幂等地 `git config --global --add include.path` 接入
 
 ## .config.sh 规范
 
 每个应用的 `.config.sh` 须遵循以下约定：
 
 - 首行 `#!/bin/bash`，次行 `set -e`，确保内部命令失败时立即退出
+- `set -e` 之后用 `: "${DOTFILES_DIR:?must be set by install.sh}"` 强校验，脱离 install.sh 独立运行时立即失败，避免污染 `~/.gitconfig` 或生成坏 symlink
 - 通过父进程导出的 `DOTFILES_DIR` 定位源文件，不使用相对路径
 - 目标已存在时直接 `rm -rf` 删除，不备份
 - 新增应用时，只需在其目录下创建 `.config.sh`，install.sh 自动发现并调用，无需修改 install.sh

@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+: "${DOTFILES_DIR:?must be set by install.sh}"
 # kitty 可选安装与配置链接 — 由 install.sh 调用，DOTFILES_DIR / INSTALL_KITTY 由父进程导出
 
 # ── 可选安装 kitty（--with-kitty 时 INSTALL_KITTY=yes）──

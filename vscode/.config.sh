@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+: "${DOTFILES_DIR:?must be set by install.sh}"
 # vscode / cursor 配置链接与扩展安装 — 由 install.sh 调用，DOTFILES_DIR 由父进程导出
 
 warn() { printf "\033[1;33m==>\033[0m \033[1m%s\033[0m\n" "$1"; }

@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+: "${DOTFILES_DIR:?must be set by install.sh}"
 # zsh 配置链接与默认 shell 设置 — 由 install.sh 调用，DOTFILES_DIR 由父进程导出
 
 # ── ~/.config/zsh 目录链接 ──
