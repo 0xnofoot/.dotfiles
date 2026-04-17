@@ -67,11 +67,11 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.confi
 
 当某个应用在 Linux 上没有 Homebrew formula，或安装本身是可选的，在其 `.config.sh` 中添加安装逻辑。
 
-kitty 已采用可选安装模式，默认跳过，仅 `--with-kitty` 参数启用。参照此模式在 `<app>/.config.sh` 中添加：
+kitty 已采用可选安装模式，默认跳过，仅 `--with-kitty` 参数启用。以 kitty 实现为例（`kitty/.config.sh`），按以下模式在 `<app>/.config.sh` 中添加。占位符约定：`<APP>` 为大写应用名，`<app>` 为小写。
 
 ```bash
-# 可选安装（--with-<app> 时 INSTALL_APP=yes）
-if [[ "${INSTALL_APP:-}" == "yes" ]]; then
+# 可选安装（--with-<app> 时 INSTALL_<APP>=yes）
+if [[ "${INSTALL_<APP>:-}" == "yes" ]]; then
   if ! command -v <app> &>/dev/null; then
     if [[ "$(uname)" == "Darwin" ]]; then
       printf "  \033[33m%s\033[0m\n" "通过 Homebrew 安装 <app>..."
@@ -84,15 +84,17 @@ if [[ "${INSTALL_APP:-}" == "yes" ]]; then
 fi
 ```
 
-同时在 install.sh 顶部的参数解析处添加对应 flag 并 export：
+同时在 `install.sh` 顶部的参数解析处添加对应 flag 并 export（参照 `install.sh` 开头 `INSTALL_KITTY` 的写法）：
 
 ```bash
---with-<app>) INSTALL_APP=yes ;;
+--with-<app>) INSTALL_<APP>=yes ;;
 ```
 
 ```bash
-export INSTALL_APP
+export INSTALL_<APP>
 ```
+
+> **命名约定**：每个可选安装应用用独立的 `INSTALL_<APP>` 环境变量（如 `INSTALL_KITTY`），避免多应用共享同名变量互相覆盖。
 
 ---
 

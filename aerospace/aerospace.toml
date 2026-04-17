@@ -5,7 +5,7 @@
 start-at-login = false
 
 # 禁用 macOS "Hide Application" 行为，让 Cmd+H 完全交给 AeroSpace
-automatically-unhide-macos-hidden-apps = true
+automatically-unhide-macos-hidden-apps = false
 
 # AeroSpace 启动时顺带拉起 SwipeAeroSpace（三指滑动手势桥接）
 after-startup-command = ['exec-and-forget open -a SwipeAeroSpace']

@@ -1,2 +1,8 @@
 .DS_Store
 **/__pycache__/
+
+# speckit 功能开发 worktree
+.worktrees/
+
+# 本机 zsh 覆盖（双保险；zsh/.gitignore 已忽略）
+/zsh/local.zsh
