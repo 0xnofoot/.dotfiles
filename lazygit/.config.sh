@@ -1,11 +1,8 @@
 #!/bin/bash
 set -e
-# lazygit 配置链接 — macOS 与 Linux 路径不同，按平台处理
-if [[ "$(uname)" == "Darwin" ]]; then
-  TARGET="$HOME/Library/Application Support/lazygit"
-else
-  TARGET="$HOME/.config/lazygit"
-fi
+# lazygit 依赖 XDG_CONFIG_HOME（由 zsh/env.zsh 导出为 ~/.config），
+# macOS 与 Linux 统一链接到 ~/.config/lazygit
+TARGET="$HOME/.config/lazygit"
 mkdir -p "$(dirname "$TARGET")"
 rm -rf "$TARGET"
 ln -sfn "$DOTFILES_DIR/lazygit" "$TARGET"

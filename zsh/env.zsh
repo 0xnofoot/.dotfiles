@@ -30,6 +30,10 @@ export STARSHIP_CONFIG="$HOME/.config/zsh/starship/starship.toml"
 # editor
 export EDITOR='nvim'
 
+# XDG — 统一配置目录，让 macOS 上的 lazygit 等工具也使用 ~/.config/<app>
+# 而非各自的系统默认路径（如 ~/Library/Application Support/lazygit）
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Homebrew PATH — 仅在未初始化时执行。
 # HOMEBREW_PREFIX 由 `brew shellenv` 导出；若已设置，说明 shellenv
 # 已运行过（如 macOS 的 /etc/zprofile 或重复 source 本文件）。
