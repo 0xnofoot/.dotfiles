@@ -23,6 +23,7 @@
 ```bash
 #!/bin/bash
 set -e
+: "${DOTFILES_DIR:?must be set by install.sh}"
 # <app> 配置链接 — 由 install.sh 调用，DOTFILES_DIR 由父进程导出
 rm -rf "$HOME/.config/<app>"
 ln -sfn "$DOTFILES_DIR/<app>" "$HOME/.config/<app>"
@@ -138,6 +139,7 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.<rc>"
 | `shared.txt` | Code 和 Cursor 共享的扩展 |
 | `code.txt` | Code 独有扩展 |
 | `cursor.txt` | Cursor 独有扩展 |
+| `vsix.txt` | 不在 Open VSX / VS Code Marketplace 上、需 VSIX 本地安装的扩展（`.config.sh` 仅列出清单，需手动安装） |
 
 **新增扩展**：在编辑器中安装后，运行 `bash vscode/scripts/sync-extensions.sh` 自动同步。
 

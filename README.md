@@ -171,6 +171,6 @@ Prefix 为 `Ctrl+S`。
 
 ## 自定义
 
-- **zsh/local.zsh** — 本机专属配置（已被 .gitignore 忽略），在此添加不想入库的环境变量或别名
+- **zsh/local.zsh** — 本机专属配置（已被忽略，不入库），在此添加不想入库的环境变量或别名
 - **nvim/lua/config/machine_specific.lua** — Neovim 本机覆盖
 - **Brewfile** — 增删依赖后运行 `brew bundle`
