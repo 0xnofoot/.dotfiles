@@ -2,6 +2,7 @@
 
 # AI
 anthropic.claude-code
+github.copilot-chat
 
 # Vim
 murloccra4ler.leap

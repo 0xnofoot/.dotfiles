@@ -17,3 +17,5 @@ alias j='yazi'
 alias cd='z'
 alias cdi='zi'
 
+alias cc='claude'
+alias ccd='claude --allow-dangerously-skip-permissions'
