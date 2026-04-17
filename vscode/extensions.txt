@@ -20,6 +20,9 @@ esbenp.prettier-vscode
 alefragnani.bookmarks
 
 # Python
+charliermarsh.ruff
+ms-python.debugpy
+ms-python.python
 ms-python.vscode-python-envs
 
 # Jupyter
@@ -41,6 +44,7 @@ swiftlang.swift-vscode
 
 # Objective-C / C++
 llvm-vs-code-extensions.lldb-dap
+nofoot.clang-format-support-style-variable
 vadimcn.vscode-lldb
 
 # Web

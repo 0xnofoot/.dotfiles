@@ -29,7 +29,7 @@ ln -sfn "$DOTFILES_DIR/<app>" "$HOME/.config/<app>"
 printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.config/<app>/" "<app>/"
 ```
 
-4. **install.sh**：无需修改，Step 5 自动发现新脚本并调用
+4. **install.sh**：无需修改，Step 4 自动发现新脚本并调用
 
 如果该应用需要非标准安装（如 Linux 上无 Homebrew formula），在 `.config.sh` 中添加安装逻辑，参见[场景 5](#场景-5应用需要非标准安装)。
 
@@ -38,7 +38,7 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.confi
 ## 场景 2：删除应用
 
 1. **Brewfile**：删除对应的 `brew`/`cask` 行
-2. **`<app>/.config.sh`**：删除（或保留配置目录但移除 `.config.sh`，则 Step 5 不再调用）
+2. **`<app>/.config.sh`**：删除（或保留配置目录但移除 `.config.sh`，则 Step 4 不再调用）
 3. **install.sh**：无需修改
 4. 配置目录本身是否从仓库删除，由维护者决定
 
