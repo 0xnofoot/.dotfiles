@@ -33,6 +33,14 @@
                             "to": [{ "key_code": "fn" }]
                         }
                     ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 50503,
+                        "vendor_id": 1133
+                    },
+                    "ignore": true
                 }
             ],
             "name": "Default",
