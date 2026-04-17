@@ -52,7 +52,7 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.confi
 1. **Brewfile**：添加 `brew "<tool>"` 到对应分类下
 2. **`<app>/.config.sh`** 和 **install.sh**：无需改动
 
-仅 macOS 需要：`brew "<tool>", condition: -> { OS.mac? }`；仅 Linux 需要：`brew "<tool>", condition: -> { OS.linux? }`
+仅 macOS 需要：`brew "<tool>" if OS.mac?`；仅 Linux 需要：`brew "<tool>" if OS.linux?`（与 Brewfile 现有写法保持一致）
 
 ---
 
@@ -170,11 +170,13 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.<rc>"
 ## Brewfile 分类约定
 
 ```ruby
-# Shell        — shell 本身（zsh）
-# Core Apps    — 带配置目录的核心应用（neovim, tmux, yazi）
-# CLI Tools    — 配置中引用的命令行工具（fzf, fd, ripgrep, bat, eza ...）
-# Media        — 媒体相关工具（mpv）
-# Platform     — 平台相关（kitty cask、xclip 等带 OS 条件的包）
+# Shell               — shell 本身（zsh）
+# Core Apps           — 带配置目录的核心应用（neovim, tmux, yazi）
+# CLI Tools           — 配置中引用的命令行工具（fzf, fd, ripgrep, bat, eza ...）
+# Media               — 媒体相关工具（mpv）
+# Platform            — 平台相关（xclip、unzip 等带 OS 条件的包）
+# macOS Vim Everywhere — macOS 专属输入法/窗口/键位改造套件
+#                        （macism, im-select, svim, aerospace, swipeaerospace, karabiner-elements）
 ```
 
 新增包时放入对应分类；如果不确定归类，优先放 CLI Tools。

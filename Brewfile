@@ -34,3 +34,12 @@ brew "mpv"
 
 # Platform
 brew "xclip" if OS.linux?
+brew "unzip" if OS.linux?   # install.sh Step 5 解压 Nerd Fonts 使用
+
+# macOS Vim Everywhere
+brew "laishulu/homebrew/macism"
+brew "daipeihust/tap/im-select"
+brew "felixkratz/formulae/svim"
+cask "nikitabobko/tap/aerospace"
+cask "mediosz/tap/swipeaerospace"
+cask "karabiner-elements"

@@ -205,6 +205,10 @@
     "dev-host-toofonwang": "linux"
   },
   //========== Vim ==========//
+  "vim.autoSwitchInputMethod.enable": true,
+  "vim.autoSwitchInputMethod.defaultIM": "com.apple.keylayout.ABC",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "/opt/homebrew/bin/im-select",
+  "vim.autoSwitchInputMethod.switchIMCmd": "/opt/homebrew/bin/im-select {im}",
   "vim.leader": "<space>",
   "vim.easymotion": true,
   "vim.searchHighlightColor": "rgba(150, 150, 150, 0.4)",

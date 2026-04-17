@@ -42,6 +42,22 @@ function zvm_after_lazy_keybindings() {
     bindkey -M vicmd "'" vi-match-bracket
 }
 
+# 输入法自动切换 — Normal 切英文，Insert 恢复上次输入法
+ZVM_PREV_IM=""
+function zvm_after_select_vi_mode() {
+    case $ZVM_MODE in
+        $ZVM_MODE_NORMAL)
+            ZVM_PREV_IM=$(macism 2>/dev/null)
+            macism com.apple.keylayout.ABC 2>/dev/null
+            ;;
+        $ZVM_MODE_INSERT)
+            if [[ -n "$ZVM_PREV_IM" && "$ZVM_PREV_IM" != "com.apple.keylayout.ABC" ]]; then
+                macism "$ZVM_PREV_IM" 2>/dev/null
+            fi
+            ;;
+    esac
+}
+
 # 在 zsh-vi-mode 之后恢复 fzf 按键绑定并初始化 starship
 # （starship 必须在此初始化，避免与 zsh-vi-mode 的
 # zle-keymap-select 钩子包装冲突 — 否则会 FUNCNEST 溢出）

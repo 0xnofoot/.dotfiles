@@ -548,6 +548,47 @@ M = {
             vim.keymap.set('n', '<c-g>', ':LazyGit<CR>', { noremap = true, silent = true })
         end
     },
+
+    {
+        -- 输入法自动切换（不依赖 im-select.nvim，纯 autocmd 实现）
+        "keaising/im-select.nvim",
+        enabled = false, -- 禁用插件，仅保留声明以便日后对比
+    },
 }
+
+-- 输入法自动切换 — 纯 autocmd 实现
+-- Why: im-select.nvim 的 M.closed 标志在首次切换后不会重置，
+-- 导致 async_switch_im=false 仅对首次生效；其内部 autocmd 还会和 <CR>
+-- 交互造成 Insert 模式下回车异常切换。此处直接同步调用 macism，
+-- 只挂 InsertEnter/InsertLeave，完全可控。
+do
+    local macism = "/opt/homebrew/bin/macism"
+    local default_im = "com.apple.keylayout.ABC"
+
+    if vim.fn.executable(macism) == 1 then
+        local prev_im = nil
+        local group = vim.api.nvim_create_augroup("AutoIMSwitch", { clear = true })
+
+        vim.api.nvim_create_autocmd("InsertLeave", {
+            group = group,
+            callback = function()
+                local cur = vim.fn.system(macism):gsub("%s+$", "")
+                if cur ~= "" then prev_im = cur end
+                if cur ~= default_im then
+                    vim.fn.system(macism .. " " .. default_im)
+                end
+            end,
+        })
+
+        vim.api.nvim_create_autocmd("InsertEnter", {
+            group = group,
+            callback = function()
+                if prev_im and prev_im ~= "" and prev_im ~= default_im then
+                    vim.fn.system(macism .. " " .. prev_im)
+                end
+            end,
+        })
+    end
+end
 
 return M

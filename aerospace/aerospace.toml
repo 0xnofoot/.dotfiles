@@ -1,0 +1,91 @@
+# AeroSpace 配置
+# 参考：https://nikitabobko.github.io/AeroSpace/guide
+
+# 禁用 macOS "Hide Application" 行为，让 Cmd+H 完全交给 AeroSpace
+automatically-unhide-macos-hidden-apps = true
+
+# 启动时自动 layout
+after-startup-command = []
+
+# 当焦点切换到非 AeroSpace 管理的窗口时，自动切回上一个 workspace
+on-focus-changed = ['move-mouse window-lazy-center']
+
+# Normalizations
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# 默认根容器方向
+default-root-container-orientation = 'auto'
+default-root-container-layout = 'tiles'
+
+# 间距
+[gaps]
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
+outer.top = 10
+outer.right = 10
+
+# 主模式绑定
+[mode.main.binding]
+
+# -- 焦点移动（Vim 方向）--
+cmd-h = 'focus left'
+cmd-j = 'focus down'
+cmd-k = 'focus up'
+cmd-l = 'focus right'
+
+# -- 交换窗口位置 --
+cmd-shift-h = 'move left'
+cmd-shift-j = 'move down'
+cmd-shift-k = 'move up'
+cmd-shift-l = 'move right'
+
+# -- Workspace 切换 --
+cmd-1 = 'workspace 1'
+cmd-2 = 'workspace 2'
+cmd-3 = 'workspace 3'
+cmd-4 = 'workspace 4'
+cmd-5 = 'workspace 5'
+cmd-6 = 'workspace 6'
+cmd-7 = 'workspace 7'
+cmd-8 = 'workspace 8'
+cmd-9 = 'workspace 9'
+
+# -- 移动窗口到 Workspace --
+cmd-shift-1 = 'move-node-to-workspace 1'
+cmd-shift-2 = 'move-node-to-workspace 2'
+cmd-shift-3 = 'move-node-to-workspace 3'
+cmd-shift-4 = 'move-node-to-workspace 4'
+cmd-shift-5 = 'move-node-to-workspace 5'
+cmd-shift-6 = 'move-node-to-workspace 6'
+cmd-shift-7 = 'move-node-to-workspace 7'
+cmd-shift-8 = 'move-node-to-workspace 8'
+cmd-shift-9 = 'move-node-to-workspace 9'
+
+# -- 特殊 Workspace（Scratch Pad）--
+cmd-0 = 'workspace W'
+cmd-shift-0 = 'move-node-to-workspace W'
+
+# -- Workspace back-and-forth --
+cmd-backtick = 'workspace-back-and-forth'
+
+# -- 全屏 --
+cmd-semicolon = 'fullscreen'
+
+# -- 切换浮动/平铺 --
+cmd-shift-f = 'layout floating tiling'
+
+# -- 快速启动 --
+cmd-enter = 'exec-and-forget open -na kitty'
+cmd-space = 'exec-and-forget open -a Raycast'
+cmd-i = 'exec-and-forget open -a "Microsoft Edge"'
+
+# -- 布局切换 --
+cmd-slash = 'layout tiles horizontal vertical'
+cmd-comma = 'layout accordion horizontal vertical'
+
+# -- 调整窗口大小（服务模式） --
+cmd-shift-minus = 'resize smart -50'
+cmd-shift-equal = 'resize smart +50'

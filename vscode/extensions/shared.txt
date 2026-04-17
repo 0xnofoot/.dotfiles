@@ -38,7 +38,6 @@ swiftlang.swift-vscode
 
 # Objective-C / C++
 llvm-vs-code-extensions.lldb-dap
-nofoot.clang-format-support-style-variable
 vadimcn.vscode-lldb
 
 # Web

@@ -6,6 +6,8 @@
 .dotfiles/
 ├── install.sh          # 一键安装脚本（macOS + Linux）
 ├── Brewfile            # Homebrew 依赖清单
+├── README.md           # 面向用户的仓库说明
+├── AGENTS.md           # → CLAUDE.md 的 symlink，给非 Claude 系 Agent 读取
 ├── kitty/              # kitty 终端配置
 │   └── .config.sh      # 可选安装 kitty + 链接整目录到 ~/.config/kitty
 ├── tmux/               # tmux 配置
@@ -31,6 +33,14 @@
 │   ├── settings.json
 │   └── commands/       # 自定义 skills
 ├── .docs/              # 维护文档（安装脚本更新 SOP 等）
+├── aerospace/          # macOS 平铺窗口管理器配置（Vim Everywhere 组件）
+│   └── .config.sh      # 链接整目录到 ~/.config/aerospace
+├── karabiner/          # Karabiner-Elements 键位改造（Vim Everywhere 组件）
+│   ├── .config.sh      # 链接整目录到 ~/.config/karabiner
+│   ├── .gitignore      # 排除 automatic_backups/（运行时备份）
+│   └── karabiner.json
+├── svim/               # 系统级 Vim 输入控制（Vim Everywhere 组件）
+│   └── .config.sh      # 链接整目录到 ~/.config/svim
 └── vscode/             # vscode/cursor 配置
     ├── .config.sh      # 链接配置文件到应用用户目录 + 检测 CLI 安装扩展
     ├── settings.json

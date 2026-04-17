@@ -1,0 +1,9 @@
+# 已有原生 Vim 支持的应用，排除在外
+kitty
+Terminal
+iTerm2
+Alacritty
+WezTerm
+Code
+Cursor
+Neovide
