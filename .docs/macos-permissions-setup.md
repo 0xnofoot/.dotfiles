@@ -1,5 +1,13 @@
 # macOS 权限配置指南
 
+> **平台限定**:本方案(macism / im-select / SketchyVim / AeroSpace / SwipeAeroSpace / Karabiner-Elements)**仅支持 macOS**,Linux 上不安装也不加载对应配置。
+>
+> 相关守卫:
+> - `Brewfile` 整段 `if OS.mac? ... end`
+> - `svim/.config.sh`、`aerospace/.config.sh`、`karabiner/.config.sh` 顶部 `[[ "$(uname)" != "Darwin" ]] && exit 0`
+> - `nvim/lua/config/plugins/editor.lua` 的 AutoIMSwitch 包一层 `if vim.fn.has("mac") == 1`
+> - `zsh/vim.zsh` 的 `zvm_after_select_vi_mode` 顶部 `[[ "$OSTYPE" != darwin* ]] && return`
+
 本文档列出 macOS Vim Everywhere 方案中需要在「系统设置」里手动授权的项目。
 所有权限均位于 **系统设置 → 隐私与安全性**。
 

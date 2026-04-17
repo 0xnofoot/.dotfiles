@@ -556,12 +556,12 @@ M = {
     },
 }
 
--- 输入法自动切换 — 纯 autocmd 实现
+-- 输入法自动切换 — 纯 autocmd 实现（仅 macOS）
 -- Why: im-select.nvim 的 M.closed 标志在首次切换后不会重置，
 -- 导致 async_switch_im=false 仅对首次生效；其内部 autocmd 还会和 <CR>
 -- 交互造成 Insert 模式下回车异常切换。此处直接同步调用 macism，
 -- 只挂 InsertEnter/InsertLeave，完全可控。
-do
+if vim.fn.has("mac") == 1 then
     local macism = "/opt/homebrew/bin/macism"
     local default_im = "com.apple.keylayout.ABC"
 
@@ -589,6 +589,6 @@ do
             end,
         })
     end
-end
+end  -- if vim.fn.has("mac") == 1
 
 return M

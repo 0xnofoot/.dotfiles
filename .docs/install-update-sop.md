@@ -177,6 +177,7 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.<rc>"
 # Platform            — 平台相关（xclip、unzip 等带 OS 条件的包）
 # macOS Vim Everywhere — macOS 专属输入法/窗口/键位改造套件
 #                        （macism, im-select, svim, aerospace, swipeaerospace, karabiner-elements）
+#                        整块包一层 `if OS.mac? ... end`，Linux 侧跳过安装
 ```
 
 新增包时放入对应分类；如果不确定归类，优先放 CLI Tools。

@@ -42,9 +42,11 @@ function zvm_after_lazy_keybindings() {
     bindkey -M vicmd "'" vi-match-bracket
 }
 
-# 输入法自动切换 — Normal 切英文，Insert 恢复上次输入法
+# 输入法自动切换 — Normal 切英文，Insert 恢复上次输入法（仅 macOS）
 ZVM_PREV_IM=""
 function zvm_after_select_vi_mode() {
+    [[ "$OSTYPE" != darwin* ]] && return
+    (( $+commands[macism] )) || return
     case $ZVM_MODE in
         $ZVM_MODE_NORMAL)
             ZVM_PREV_IM=$(macism 2>/dev/null)
