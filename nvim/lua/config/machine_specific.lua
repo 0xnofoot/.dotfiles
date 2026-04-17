@@ -3,6 +3,6 @@
 vim.g.nvim_config_path = os.getenv("HOME") .. "/.config/nvim"
 
 -- make it
-vim.g.python = "python"
+vim.g.python = "python3"
 
-vim.g.snips_author = "toofonwang"
+vim.g.snips_author = "nofoot"
