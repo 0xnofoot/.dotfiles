@@ -1,6 +1,7 @@
 # Shell
 brew "zsh"
 brew "starship"
+brew "atuin"
 
 # Core Apps
 brew "neovim"
@@ -17,8 +18,10 @@ brew "fzf"
 brew "fd"
 brew "ripgrep"
 brew "bat"
+brew "jless"
 brew "eza"
 brew "lazygit"
+brew "git-delta"
 brew "zoxide"
 brew "exiftool"
 brew "mediainfo"

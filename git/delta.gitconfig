@@ -1,0 +1,20 @@
+# dotfiles 管理的 git 片段 — 由 git/.config.sh 通过
+# `git config --global --add include.path` 合并到 ~/.gitconfig。
+# 只放不含机器/账号隐私的通用配置。
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+    side-by-side = true
+
+[merge]
+    conflictstyle = zdiff3
+
+[diff]
+    colorMoved = default

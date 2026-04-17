@@ -16,6 +16,11 @@
 │   └── .config.sh      # 链接整目录到 ~/.config/yazi
 ├── bottom/             # bottom (btm) 系统监视器配置
 │   └── .config.sh      # 链接整目录到 ~/.config/bottom
+├── lazygit/            # lazygit 配置（接入 delta 作为 pager）
+│   └── .config.sh      # 按平台链接整目录（macOS: Library/Application Support，Linux: ~/.config）
+├── git/                # git 片段（delta 等）
+│   ├── .config.sh      # 通过 git config --add include.path 接入 ~/.gitconfig
+│   └── delta.gitconfig # 不含私有信息的通用片段
 ├── zsh/                # zsh 配置
 │   └── .config.sh      # 链接整目录到 ~/.config/zsh，创建根级 symlink，Linux 设置默认 shell
 ├── .githooks/          # git hooks（pre-commit 检查扩展同步）
@@ -50,6 +55,8 @@
 - zsh 特殊处理：整目录链接到 `~/.config/zsh`，同时在 `~/` 创建 `.zshrc`、`.zimrc` 根级 symlink（直接指向 `$DOTFILES_DIR/zsh/`），预下载 zimfw 到 `zsh/zim/`，Linux 上设置 zsh 为默认 shell
 - vscode 特殊处理：不经 `~/.config/vscode` 中间层，直接检测已安装的 Code/Cursor，将 `settings.json`、`keybindings.json` 链接到对应应用用户目录（macOS/Linux 路径不同），随后检测 CLI 增量安装扩展；未安装时输出提示并跳过
 - claude 特殊处理：不链接整目录，逐文件将受管条目（`CLAUDE.md`、`settings.json`、`commands/`）链接到 `~/.claude`，运行时数据（历史记录、缓存等）保留在 `~/.claude` 真实目录中，不进入仓库
+- lazygit 特殊处理：按平台链接整目录，macOS 目标为 `~/Library/Application Support/lazygit`，Linux 为 `~/.config/lazygit`
+- git 特殊处理：不走 symlink。用户 `~/.gitconfig` 含私有信息（邮箱、URL rewrites 等）不入库，仓库只提供通用片段（如 `delta.gitconfig`），由 `.config.sh` 幂等地 `git config --global --add include.path` 接入
 
 ## .config.sh 规范
 

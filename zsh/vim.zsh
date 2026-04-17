@@ -51,6 +51,11 @@ function zvm_after_init() {
     (( ${+functions[starship_precmd]} )) || eval "$(starship init zsh)"
     eval "$(fzf --zsh)"
 
+    # atuin 接管 Ctrl+R 搜索历史，保留 ↑ 给 zsh-history-substring-search
+    if (( ${+commands[atuin]} )); then
+        eval "$(atuin init zsh --disable-up-arrow)"
+    fi
+
     if [[ -n "$TMUX_POPUP" ]]; then
         _tmux_popup_exit() { exit }
         zle -N _tmux_popup_exit

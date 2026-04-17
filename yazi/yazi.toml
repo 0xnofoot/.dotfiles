@@ -55,6 +55,9 @@ libreoffice = [
 	{ run = "open %s",      desc = "Open", for = "macos" },
 	{ run = "xdg-open %s",  desc = "Open", for = "linux" },
 ]
+json_view = [
+	{ run = "jless %s",  desc = "jless",  for = "unix", block = true },
+]
 
 [open]
 rules = [
@@ -66,8 +69,11 @@ rules = [
 	{ mime = "image/*", use = [ "image_view", "reveal" ] },
 	# 媒体
 	{ mime = "{audio,video}/*", use = [ "play", "reveal" ] },
-	# 代码 / JSON
-	{ mime = "application/{json,ndjson,javascript,wine-extension-ini}", use = [ "edit", "reveal" ] },
+	# JSON — 按扩展名兜底（mime 有时识别为 text/plain），Enter 走 nvim，r 菜单里可选 jless
+	{ url = "*.{json,ndjson}", use = [ "edit", "json_view", "reveal" ] },
+	{ mime = "application/{json,ndjson}", use = [ "edit", "json_view", "reveal" ] },
+	# 其他代码
+	{ mime = "application/{javascript,wine-extension-ini}", use = [ "edit", "reveal" ] },
 	# 压缩包
 	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = [ "extract", "reveal" ] },
 	# PDF

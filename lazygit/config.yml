@@ -1,0 +1,8 @@
+# lazygit 最小配置 — 仅接入 delta 作为 pager，其余保持默认。
+# macOS 读取 ~/Library/Application Support/lazygit/config.yml
+# Linux  读取 ~/.config/lazygit/config.yml
+
+git:
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never --side-by-side
