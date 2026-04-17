@@ -47,7 +47,7 @@
 - kitty 特殊处理：`--with-kitty` 时先安装 kitty（macOS 用 cask，Linux 用官方脚本），再链接配置目录
 - zsh 特殊处理：整目录链接到 `~/.config/zsh`，同时在 `~/` 创建 `.zshrc`、`.zimrc` 根级 symlink（直接指向 `$DOTFILES_DIR/zsh/`），预下载 zimfw 到 `zsh/zim/`，Linux 上设置 zsh 为默认 shell
 - vscode 特殊处理：不经 `~/.config/vscode` 中间层，直接检测已安装的 Code/Cursor，将 `settings.json`、`keybindings.json` 链接到对应应用用户目录（macOS/Linux 路径不同），随后检测 CLI 增量安装扩展；未安装时输出提示并跳过
-- claude 特殊处理：不链接整目录，逐文件将受管条目（`CLAUDE.md`、`settings.json`、`commands/`）链接到 `~/.claude`，保留历史记录等运行时数据；`.gitignore` 排除运行时数据，仅跟踪上述三项
+- claude 特殊处理：不链接整目录，逐文件将受管条目（`CLAUDE.md`、`settings.json`、`commands/`）链接到 `~/.claude`，运行时数据（历史记录、缓存等）保留在 `~/.claude` 真实目录中，不进入仓库
 
 ## .config.sh 规范
 
