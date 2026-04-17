@@ -1,0 +1,82 @@
+#===============#
+# bottom (btm) 配置
+#===============#
+
+#===============#
+# 全局行为
+#===============#
+[flags]
+
+# 刷新与时间窗口
+rate                 = "1s"
+default_time_value   = "60s"
+time_delta           = 15000
+retention            = "10m"
+
+# CPU
+hide_avg_cpu         = false
+average_cpu_row      = false
+current_usage        = true   # 进程 CPU% 基于单核当前使用率，更直观
+unnormalized_cpu     = false
+cpu_left_legend      = false
+
+# 内存
+process_memory_as_value = true   # 进程内存显示绝对值（MiB），不是百分比
+enable_cache_memory     = true
+
+# 进程搜索（smartcase 风格）
+case_sensitive       = false
+whole_word           = false
+regex                = false
+
+# 视图
+tree                 = true    # 默认树形视图，hjkl / +/- 展开折叠，贴近 neo-tree 体感
+group_processes      = false   # 树形模式下自动忽略
+expanded             = false   # 启动时不独占某个部件，Tab/Shift+hjkl 切换
+basic                = false
+hide_table_gap       = false
+show_table_scroll_position = true   # vim 风格滚动指示
+
+# 温度与进程命令
+temperature_type     = "c"
+process_command      = false
+
+# 网络
+network_use_binary_prefix = true   # KiB/s 而非 Kb/s
+network_use_bytes         = true
+network_use_log           = false
+use_old_network_legend    = false
+memory_legend             = "top-right"
+network_legend            = "top-right"
+
+# 外围
+dot_marker           = false
+hide_time            = false
+battery              = false
+disable_click        = false
+disable_keys         = false
+disable_advanced_kill = false
+read_only            = false
+hide_k_threads       = true    # Linux 上默认隐藏内核线程，减少噪声
+
+#===============#
+# 部件列与排序
+#===============#
+[processes]
+columns = ["PID", "Name", "CPU%", "Mem%", "R/s", "W/s", "User", "State"]
+
+[cpu]
+default = "all"
+
+[disk]
+columns = ["Disk", "Mount", "Used", "Free", "Total", "Used%", "R/s", "W/s"]
+default_sort = "Mount"
+
+[temperature]
+default_sort = "Sensor"
+
+#===============#
+# 主题
+#===============#
+[styles]
+theme = "gruvbox"

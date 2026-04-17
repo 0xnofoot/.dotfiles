@@ -24,6 +24,7 @@ brew "exiftool"
 brew "mediainfo"
 brew "trash-cli"
 brew "tldr"
+brew "bottom"
 brew "xclip" if OS.linux?
 
 # Media
