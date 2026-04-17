@@ -7,6 +7,7 @@
 > - `svim/.config.sh`、`aerospace/.config.sh`、`karabiner/.config.sh` 顶部 `[[ "$(uname)" != "Darwin" ]] && exit 0`
 > - `nvim/lua/config/plugins/editor.lua` 的 AutoIMSwitch 包一层 `if vim.fn.has("mac") == 1`
 > - `zsh/vim.zsh` 的 `zvm_after_select_vi_mode` 顶部 `[[ "$OSTYPE" != darwin* ]] && return`
+> - `vscode/settings.json` 无法按 OS 条件分段,`vim.autoSwitchInputMethod.*` 硬编码 `/opt/homebrew/bin/im-select`,Linux 上扩展静默降级不生效,不影响编辑器使用
 
 本文档列出 macOS Vim Everywhere 方案中需要在「系统设置」里手动授权的项目。
 所有权限均位于 **系统设置 → 隐私与安全性**。
