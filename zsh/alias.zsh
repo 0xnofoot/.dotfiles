@@ -19,3 +19,4 @@ alias cdi='zi'
 
 alias cc='claude'
 alias ccd='claude --allow-dangerously-skip-permissions'
+alias cccd='claude -c --allow-dangerously-skip-permissions'
