@@ -169,15 +169,36 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.<rc>"
 
 ## Brewfile 分类约定
 
+Brewfile 分三段,顺序固定:
+
 ```ruby
-# Shell               — shell 本身（zsh）
-# Core Apps           — 带配置目录的核心应用（neovim, tmux, yazi）
-# CLI Tools           — 配置中引用的命令行工具（fzf, fd, ripgrep, bat, eza ...）
-# Media               — 媒体相关工具（mpv）
-# Platform            — 平台相关（xclip、unzip 等带 OS 条件的包）
-# macOS Vim Everywhere — macOS 专属输入法/窗口/键位改造套件
-#                        （macism, im-select, svim, aerospace, swipeaerospace, karabiner-elements）
-#                        整块包一层 `if OS.mac? ... end`，Linux 侧跳过安装
+# ============================================================
+# 公共依赖（macOS + Linux 均安装）
+# ============================================================
+# Shell      — zsh、starship、atuin
+# Core Apps  — 带配置目录的核心应用（neovim, tmux, yazi, poppler ...）
+# CLI Tools  — 配置中引用的命令行工具（fzf, fd, ripgrep, bat, eza ...）
+# Media      — 媒体相关工具（mpv）
+
+# ============================================================
+# macOS 专属
+# ============================================================
+if OS.mac?
+  # Vim Everywhere — 输入法切换 / 窗口管理 / 键位改造
+  #                  （macism, im-select, svim, aerospace, swipeaerospace, karabiner-elements）
+end
+
+# ============================================================
+# Linux 专属
+# ============================================================
+if OS.linux?
+  # 系统工具 — xclip、unzip 等
+end
 ```
 
-新增包时放入对应分类；如果不确定归类，优先放 CLI Tools。
+新增包时的归类规则:
+
+- 两边都要装 → 按用途(Shell / Core Apps / CLI Tools / Media)归到公共段
+- macOS 专用 → 进 `if OS.mac?` 块,同类内部可再加子注释分组
+- Linux 专用 → 进 `if OS.linux?` 块,同上
+- 不确定归类,优先放 CLI Tools
