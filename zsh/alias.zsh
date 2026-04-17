@@ -26,6 +26,8 @@ alias gs='git status'
 alias gd='git diff'
 alias gc='git clone'
 alias gp='git push origin'
+alias gl='git log'
+alias glo='git log --oneline'
 
 alias cc='claude'
 alias ccc='claude -c'
@@ -41,7 +43,13 @@ alias cccd='claude -c --allow-dangerously-skip-permissions'
 jless() {
   local _strip='s{/\*.*?\*/}{}gs; s{(^|[^:"])//[^\n]*}{$1}g; s{,(\s*[\]\}])}{$1}g'
   if (( $# == 0 )); then
-    local tmp; tmp=$(mktemp); cat > "$tmp"
+    # 无参数且 stdin 是终端 → 没有输入可读，直接交给 jless 报错/显示帮助
+    if [[ -t 0 ]]; then
+      command jless
+      return
+    fi
+    # 管道输入：用 >| 绕开 NO_CLOBBER，强制写入 mktemp 预建文件
+    local tmp; tmp=$(mktemp); cat >| "$tmp"
     if grep -qE '(^|[^:"])//|/\*' "$tmp"; then
       perl -0pe "$_strip" "$tmp" | command jless -
     else
