@@ -46,15 +46,21 @@ function zvm_after_lazy_keybindings() {
 ZVM_PREV_IM=""
 function zvm_after_select_vi_mode() {
     [[ "$OSTYPE" != darwin* ]] && return
-    (( $+commands[macism] )) || return
+    (( $+commands[macism] || $+commands[im-select] )) || return
     case $ZVM_MODE in
         $ZVM_MODE_NORMAL)
             ZVM_PREV_IM=$(macism 2>/dev/null)
             macism com.apple.keylayout.ABC 2>/dev/null
             ;;
         $ZVM_MODE_INSERT)
+            # 切回 CJK 方向用 im-select 替代 macism：macism 在切 CJK 时会触发
+            # macOS 焦点事件导致窗口闪烁，im-select 的 TIS 调用路径不会触发。
             if [[ -n "$ZVM_PREV_IM" && "$ZVM_PREV_IM" != "com.apple.keylayout.ABC" ]]; then
-                macism "$ZVM_PREV_IM" 2>/dev/null
+                if (( $+commands[im-select] )); then
+                    im-select "$ZVM_PREV_IM" 2>/dev/null
+                else
+                    macism "$ZVM_PREV_IM" 2>/dev/null
+                fi
             fi
             ;;
     esac
@@ -67,6 +73,22 @@ function zvm_after_init() {
     # 守卫：每个会话只初始化 starship 一次 — 重复 source 会叠加
     # zle-keymap-select 钩子，导致 FUNCNEST 溢出
     (( ${+functions[starship_precmd]} )) || eval "$(starship init zsh)"
+
+    # starship 的 zle-keymap-select 会覆盖 zvm 的绑定，导致 zvm_after_select_vi_mode
+    # 钩子在模式切换时不触发（状态栏不切换输入法）。zvm 0.12.0 未暴露内部 widget，
+    # 所以这里根据 zle 内置的 $KEYMAP 手动维护 ZVM_MODE 并调用用户钩子，再链到 starship。
+    if (( ${+functions[starship_zle-keymap-select]} )); then
+        _zvm_starship_keymap_select() {
+            case "$KEYMAP" in
+                vicmd)      ZVM_MODE=$ZVM_MODE_NORMAL ;;
+                main|viins) ZVM_MODE=$ZVM_MODE_INSERT ;;
+            esac
+            (( ${+functions[zvm_after_select_vi_mode]} )) && zvm_after_select_vi_mode
+            starship_zle-keymap-select "$@"
+        }
+        zle -N zle-keymap-select _zvm_starship_keymap_select
+    fi
+
     eval "$(fzf --zsh)"
 
     # atuin 接管 Ctrl+R 搜索历史，保留 ↑ 给 zsh-history-substring-search
