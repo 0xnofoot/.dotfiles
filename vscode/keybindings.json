@@ -375,7 +375,7 @@
   },
   {
     "key": "ctrl+shift+m",
-    "command": "bookmarks.list"
+    "command": "bookmarks.listFromAllFiles"
   },
   {
     "key": "ctrl+alt+shift+m",
