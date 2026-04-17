@@ -5,15 +5,15 @@
                 "parameters": { "basic.to_if_alone_timeout_milliseconds": 200 },
                 "rules": [
                     {
-                        "description": "右 Option 单击切换输入法，按住保持 Option",
+                        "description": "右 Command 单击切换输入法，按住保持 Command",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "right_option",
+                                    "key_code": "right_command",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [{ "key_code": "right_option" }],
-                                "to_if_alone": [{ "shell_command": "if [ $(/opt/homebrew/bin/macism) = 'com.apple.keylayout.ABC' ]; then /opt/homebrew/bin/macism com.apple.inputmethod.SCIM.ITABC; else /opt/homebrew/bin/macism com.apple.keylayout.ABC; fi" }],
+                                "to": [{ "key_code": "right_command" }],
+                                "to_if_alone": [{ "shell_command": "if [ $(/opt/homebrew/bin/im-select) = 'com.apple.keylayout.ABC' ]; then /opt/homebrew/bin/im-select com.apple.inputmethod.SCIM.ITABC; else /opt/homebrew/bin/im-select com.apple.keylayout.ABC; fi" }],
                                 "type": "basic"
                             }
                         ]

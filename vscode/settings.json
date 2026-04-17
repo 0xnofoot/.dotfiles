@@ -146,7 +146,6 @@
   "swift.sourcekit-lsp.backgroundIndexing": "auto",
   //---------- Objective-C ----------//
   "[objective-c]": {
-    "editor.defaultFormatter": "nofoot.clang-format-support-style-variable",
     "editor.inlayHints.enabled": "offUnlessPressed"
   },
   //---------- Web (HTML / CSS / JS / TS) ----------//

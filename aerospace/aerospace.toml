@@ -1,6 +1,9 @@
 # AeroSpace 配置
 # 参考：https://nikitabobko.github.io/AeroSpace/guide
 
+# 关闭开机自启动（也需在 系统设置 → 通用 → 登录项 中移除）
+start-at-login = false
+
 # 禁用 macOS "Hide Application" 行为，让 Cmd+H 完全交给 AeroSpace
 automatically-unhide-macos-hidden-apps = true
 
@@ -79,7 +82,6 @@ cmd-shift-f = 'layout floating tiling'
 
 # -- 快速启动 --
 cmd-enter = 'exec-and-forget open -na kitty'
-cmd-space = 'exec-and-forget open -a Raycast'
 cmd-i = 'exec-and-forget open -a "Microsoft Edge"'
 
 # -- 布局切换 --
