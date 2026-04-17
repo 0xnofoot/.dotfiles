@@ -43,6 +43,10 @@
     "command": "workbench.action.quit"
   },
   {
+    "key": "ctrl+cmd+f",
+    "command": "workbench.action.toggleFullScreen"
+  },
+  {
     "key": "cmd+e",
     "command": "workbench.action.toggleSidebarVisibility"
   },
