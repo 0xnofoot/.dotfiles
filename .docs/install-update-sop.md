@@ -131,13 +131,13 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.<rc>"
 
 ## 场景 9：管理 VSCode / Cursor 扩展
 
-扩展列表存放在 `vscode/` 目录下三个文本文件中：
+扩展列表存放在 `vscode/extensions/` 目录下：
 
 | 文件 | 内容 |
 |------|------|
-| `extensions.txt` | Code 和 Cursor 共享的扩展 |
-| `extensions-code.txt` | Code 独有扩展 |
-| `extensions-cursor.txt` | Cursor 独有扩展 |
+| `shared.txt` | Code 和 Cursor 共享的扩展 |
+| `code.txt` | Code 独有扩展 |
+| `cursor.txt` | Cursor 独有扩展 |
 
 **新增扩展**：在编辑器中安装后，运行 `bash vscode/scripts/sync-extensions.sh` 自动同步。
 
@@ -145,7 +145,7 @@ printf "  \033[36m%-24s\033[0m \033[2m→\033[0m \033[2;3m%s\033[0m\n" "~/.<rc>"
 
 **pre-commit hook**（`.githooks/pre-commit`，install.sh Step 4 配置 `core.hooksPath`）：
 - 每次提交自动检查扩展列表是否同步；无 code/cursor CLI 时跳过检查，不阻断提交
-- 若 `vscode/defaults/` 有暂存变更，同时检查禁用快捷键列表是否一致
+- 若 `vscode/default-keybindings/` 有暂存变更，同时检查禁用快捷键列表是否一致
 - 检查不通过时交互式询问：输入 `y` 自动修复并加入本次提交，输入 `n` 阻止提交
 
 **vscode/.config.sh** 自动检测 `code`/`cursor` CLI，均未找到时跳过；找到时增量安装扩展列表中尚未安装的扩展。

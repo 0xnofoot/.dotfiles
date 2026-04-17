@@ -2,7 +2,7 @@
 #
 # pre-commit hook:
 #   1. 检查 VSCode/Cursor 扩展列表是否同步
-#   2. 若 vscode/defaults/ 有变更，检查 keybindings.json 禁用列表是否已更新
+#   2. 若 vscode/default-keybindings/ 有变更，检查 keybindings.json 禁用列表是否已更新
 #   检查不通过时交互式询问是否自动修复
 #
 
@@ -26,9 +26,9 @@ if [[ -f "$SYNC_SCRIPT" ]]; then
   if ! bash "$SYNC_SCRIPT" --check; then
     if ask_fix; then
       bash "$SYNC_SCRIPT" <<< "y"
-      git add "$DOTFILES_DIR/vscode/extensions.txt" \
-              "$DOTFILES_DIR/vscode/extensions-code.txt" \
-              "$DOTFILES_DIR/vscode/extensions-cursor.txt"
+      git add "$DOTFILES_DIR/vscode/extensions/shared.txt" \
+              "$DOTFILES_DIR/vscode/extensions/code.txt" \
+              "$DOTFILES_DIR/vscode/extensions/cursor.txt"
       ok "扩展列表已同步并暂存"
     else
       exit 1
@@ -37,7 +37,7 @@ if [[ -f "$SYNC_SCRIPT" ]]; then
 fi
 
 # ── 2. 默认快捷键禁用列表 ──
-if [[ -f "$GENERATE_SCRIPT" ]] && git diff --cached --name-only | grep -q '^vscode/defaults/'; then
+if [[ -f "$GENERATE_SCRIPT" ]] && git diff --cached --name-only | grep -q '^vscode/default-keybindings/'; then
   if ! python3 "$GENERATE_SCRIPT" --check; then
     if ask_fix; then
       python3 "$GENERATE_SCRIPT"

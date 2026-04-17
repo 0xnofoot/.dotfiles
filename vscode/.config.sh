@@ -61,18 +61,18 @@ command -v cursor &>/dev/null && _has_cursor=true
 if $_has_code || $_has_cursor; then
   if $_has_code; then
     printf "  \033[33m%s\033[0m\n" "安装 Code 扩展..."
-    install_extensions "code" "$VSCODE_SRC/extensions.txt"
-    install_extensions "code" "$VSCODE_SRC/extensions-code.txt"
+    install_extensions "code" "$VSCODE_SRC/extensions/shared.txt"
+    install_extensions "code" "$VSCODE_SRC/extensions/code.txt"
     printf "  \033[2m%s\033[0m\n" "Code 扩展安装完成"
   fi
   if $_has_cursor; then
     printf "  \033[33m%s\033[0m\n" "安装 Cursor 扩展..."
-    install_extensions "cursor" "$VSCODE_SRC/extensions.txt"
-    install_extensions "cursor" "$VSCODE_SRC/extensions-cursor.txt"
+    install_extensions "cursor" "$VSCODE_SRC/extensions/shared.txt"
+    install_extensions "cursor" "$VSCODE_SRC/extensions/cursor.txt"
     printf "  \033[2m%s\033[0m\n" "Cursor 扩展安装完成"
   fi
   # 提示需要本地安装的 VSIX 扩展
-  vsix_file="$VSCODE_SRC/extensions-vsix.txt"
+  vsix_file="$VSCODE_SRC/extensions/vsix.txt"
   if [[ -f "$vsix_file" ]]; then
     vsix_list=()
     while IFS= read -r ext; do

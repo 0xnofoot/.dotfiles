@@ -15,10 +15,10 @@ CHECK_MODE=false
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 VSCODE_DIR="$(dirname "$SCRIPT_DIR")"
 
-SHARED_FILE="$VSCODE_DIR/extensions.txt"
-CODE_FILE="$VSCODE_DIR/extensions-code.txt"
-CURSOR_FILE="$VSCODE_DIR/extensions-cursor.txt"
-VSIX_FILE="$VSCODE_DIR/extensions-vsix.txt"
+SHARED_FILE="$VSCODE_DIR/extensions/shared.txt"
+CODE_FILE="$VSCODE_DIR/extensions/code.txt"
+CURSOR_FILE="$VSCODE_DIR/extensions/cursor.txt"
+VSIX_FILE="$VSCODE_DIR/extensions/vsix.txt"
 
 info()  { printf "\033[1;34m==>\033[0m \033[1m%s\033[0m\n" "$1"; }
 warn()  { printf "\033[1;33m==>\033[0m \033[1m%s\033[0m\n" "$1"; }

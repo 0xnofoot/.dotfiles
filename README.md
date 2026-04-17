@@ -32,7 +32,7 @@ bash install.sh
 5. Symlink 配置目录到 `~/.config/`（含 vscode）
 6. 设置 zsh 根级 symlink（`~/.zshrc`、`~/.zimrc`）+ 下载 Zim
 7. 检测已安装的 VS Code / Cursor，将 `~/.config/vscode/` 下的配置文件链接到对应应用目录
-8. 安装 VS Code / Cursor 扩展（从 extensions*.txt 读取）
+8. 安装 VS Code / Cursor 扩展（从 extensions/ 目录读取）
 9. 设置 zsh 为默认 shell（Linux）
 10. 安装 Nerd Fonts（FiraMono + Symbols）
 
@@ -60,8 +60,8 @@ bash install.sh
 └── vscode/             # VS Code / Cursor 配置
     ├── settings.json
     ├── keybindings.json
-    ├── extensions*.txt         # 扩展列表（共享 / Code 独有 / Cursor 独有）
-    ├── defaults/               # 各编辑器导出的默认快捷键 JSON
+    ├── extensions/             # 扩展列表（共享 / Code 独有 / Cursor 独有 / VSIX）
+    ├── default-keybindings/    # 各编辑器导出的默认快捷键 JSON
     └── scripts/                # 同步扩展、生成禁用列表脚本
 ```
 
