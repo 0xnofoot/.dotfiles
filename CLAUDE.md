@@ -39,8 +39,6 @@
 │   ├── .config.sh      # 链接整目录到 ~/.config/karabiner
 │   ├── .gitignore      # 排除 automatic_backups/（运行时备份）
 │   └── karabiner.json
-├── svim/               # 系统级 Vim 输入控制（Vim Everywhere 组件）
-│   └── .config.sh      # 链接整目录到 ~/.config/svim
 └── vscode/             # vscode/cursor 配置
     ├── .config.sh      # 链接配置文件到应用用户目录 + 检测 CLI 安装扩展
     ├── settings.json

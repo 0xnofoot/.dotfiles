@@ -187,7 +187,7 @@ Brewfile 分三段,顺序固定:
 # ============================================================
 if OS.mac?
   # Vim Everywhere — 输入法切换 / 窗口管理 / 键位改造
-  #                  （macism, im-select, svim, aerospace, swipeaerospace, karabiner-elements）
+  #                  （macism, im-select, aerospace, swipeaerospace, karabiner-elements）
 end
 
 # ============================================================

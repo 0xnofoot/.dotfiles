@@ -1,10 +1,10 @@
 # macOS 权限配置指南
 
-> **平台限定**:本方案(macism / im-select / SketchyVim / AeroSpace / SwipeAeroSpace / Karabiner-Elements)**仅支持 macOS**,Linux 上不安装也不加载对应配置。
+> **平台限定**:本方案(macism / im-select / AeroSpace / SwipeAeroSpace / Karabiner-Elements)**仅支持 macOS**,Linux 上不安装也不加载对应配置。
 >
 > 相关守卫:
 > - `Brewfile` 整段 `if OS.mac? ... end`
-> - `svim/.config.sh`、`aerospace/.config.sh`、`karabiner/.config.sh` 顶部 `[[ "$(uname)" != "Darwin" ]] && exit 0`
+> - `aerospace/.config.sh`、`karabiner/.config.sh` 顶部 `[[ "$(uname)" != "Darwin" ]] && exit 0`
 > - `nvim/lua/config/plugins/editor.lua` 的 AutoIMSwitch 包一层 `if vim.fn.has("mac") == 1`
 > - `zsh/vim.zsh` 的 `zvm_after_select_vi_mode` 顶部 `[[ "$OSTYPE" != darwin* ]] && return`
 > - `vscode/settings.json` 无法按 OS 条件分段,`vim.autoSwitchInputMethod.*` 硬编码 `/opt/homebrew/bin/im-select`,Linux 上扩展静默降级不生效,不影响编辑器使用
@@ -22,7 +22,6 @@
 
 | 应用 | 用途 | 备注 |
 |------|------|------|
-| SketchyVim (`svim`) | 在系统文本框注入 Vim 键位 | 不会自动出现在列表中,需按 `+` 手动添加 `/opt/homebrew/bin/svim`(在添加面板按 `Cmd+Shift+G` 粘贴路径) |
 | AeroSpace | 平铺窗口管理 | 首次启动会弹窗请求 |
 | SwipeAeroSpace | 三指滑动切换 workspace | 首次启动会弹窗请求 |
 | Karabiner-Elements | 低层按键重映射 | 首次启动会弹窗请求 |
@@ -75,7 +74,6 @@
 |------|------|
 | AeroSpace | 按需关闭(也可在 `aerospace.toml` 中设 `start-at-login = false`) |
 | Karabiner-Elements | 保持开启(依赖其后台服务) |
-| SketchyVim | 由 `brew services` 管理,无需在此配置 |
 
 ---
 
@@ -83,10 +81,7 @@
 
 ```bash
 # 二进制是否就位
-which macism im-select svim
-
-# SketchyVim 是否在运行
-brew services list | grep svim
+which macism im-select
 
 # 当前输入法 ID(切到中文后再跑一次,确认 ID 与 karabiner.json 匹配)
 macism
@@ -98,5 +93,5 @@ macism
 
 1. 先装依赖:`bash ~/.dotfiles/install.sh`
 2. 首次启动各 App,按弹窗授权
-3. 手动补齐:SketchyVim 的辅助功能(需手动添加),Spotlight 禁用
+3. 手动补齐:Spotlight 禁用
 4. 重启 Karabiner-Elements 让规则生效:`launchctl kickstart -k gui/$(id -u)/org.pqrs.service.agent.karabiner_console_user_server` 或直接重启系统
