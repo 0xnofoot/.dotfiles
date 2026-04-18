@@ -41,7 +41,9 @@ alias cccd='claude -c --allow-dangerously-skip-permissions'
 # jless 包装 — 自动识别 JSONC（扩展名 .jsonc/.json5 或含 //、/* 注释、尾逗号），
 # strip 后喂给真 jless；普通 JSON 透传。真命令用 `command jless` 调。
 jless() {
-  local _strip='s{/\*.*?\*/}{}gs; s{(^|[^:"])//[^\n]*}{$1}g; s{,(\s*[\]\}])}{$1}g'
+  # 字符串上下文感知：先匹配完整 JSON 字符串（含转义），再剥离 // 和 /* */ 注释，
+  # 最后去掉尾逗号。避免把字符串内容里的 // 当成注释切掉。
+  local _strip='s{("(?:[^"\\]|\\.)*")|/\*.*?\*/|//[^\n]*}{defined $1 ? $1 : ""}ges; s{,(\s*[\]\}])}{$1}g'
   if (( $# == 0 )); then
     # 无参数且 stdin 是终端 → 没有输入可读，直接交给 jless 报错/显示帮助
     if [[ -t 0 ]]; then
