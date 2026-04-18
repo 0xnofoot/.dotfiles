@@ -108,6 +108,15 @@
 - 脚本内置 `PRESERVE_COMMANDS` 排除列表，全选/复制/剪切/粘贴/撤销/重做等基础命令不会被禁用
 - pre-commit hook 在 `vscode/default-keybindings/` 有暂存变更时自动检查禁用列表一致性，不一致可选择自动生成并加入提交
 
+## 调试输入法 / zle widget 相关改动时
+
+涉及输入法切换（`macism` / `im-select` / macOS TIS API）或 zsh zle widget（`zle-keymap-select` 等）的改动时，遵循以下顺序：
+
+1. **先 reboot 再诊断** — macOS TIS 状态和 zsh 当前会话状态都会在调试过程中被污染（反复注册 widget wrapper、混用 macism/im-select、函数拷贝产生递归链等），在脏状态上演绎原理会得到完全错误的结论。改动前如果现象"看起来不对"，第一步必须重启验证基准行为
+2. **不要混用 `macism` 和 `im-select`** — 两者调用 TIS 的路径不同，混用会让系统 IM 状态进入不一致（状态栏和真实输入法漂移）。`im-select` 切 CJK 有已知 bug（`macism` README 里明确列为反面案例），只用于避免 macism workaround 的窗口闪烁
+3. **`macism` 切 CJK 时的窗口闪烁是设计** — macism 的默认行为会创建临时窗口抢焦点再还回去（`TemporaryWindow.app`），这是绕过 macOS IM 激活 bug 的 workaround，不是缺陷。`macism ID 0` 可以关闭 workaround 但会退化到 im-select 同样的漂移问题
+4. **zle widget 链式包装要一次成型** — `functions -c src dst` 重复执行会把 dst 覆盖成 wrapper 本身，造成递归链（FUNCNEST 溢出或多次触发）。在同一 zsh 会话里迭代调试 widget 时，每次修改前先 `unfunction` 旧版本，或直接开新 kitty 窗口
+
 ## Git 规范
 
 - 提交时使用中文 commit message
