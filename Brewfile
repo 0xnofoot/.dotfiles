@@ -32,6 +32,7 @@ brew "mediainfo"
 brew "trash-cli"
 brew "tldr"
 brew "bottom"
+brew "node"                     # 提供 npx，用于 claude statusLine (ccstatusline) 等工具的运行时加载
 
 # Media
 brew "mpv"
