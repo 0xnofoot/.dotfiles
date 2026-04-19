@@ -60,14 +60,35 @@ def is_shortcut_key(key: str) -> bool:
     return False
 
 
-# 不应被禁用的基础命令（全选、复制、剪切、粘贴、撤销、重做等）
+# 不应被禁用的基础命令（全选、复制、剪切、粘贴、撤销、重做、查找等）
 PRESERVE_COMMANDS = {
+    # 全选 / 复制 / 剪切 / 粘贴 / 撤销 / 重做
     "editor.action.selectAll",
     "execCopy",
     "execCut",
     "execPaste",
     "undo",
     "redo",
+    # 查找（cmd+f 在各 context 下绑定的所有 find/filter/search 命令）
+    "actions.find",
+    "editor.action.extensioneditor.showfind",
+    "editor.action.webvieweditor.showFind",
+    "repl.action.filter",
+    "settings.action.search",
+    "workbench.action.browser.showFind",
+    "commentsFocusFilter",
+    "keybindings.editor.searchKeybindings",
+    "notebook.find",
+    "problems.action.focusFilter",
+    "workbench.action.terminal.focusFind",
+    # Cursor 独有的查找命令
+    "composer.find.focus",
+    "glass.showBrowserFind",
+    "glass.showFileEditorFind",
+    "glass.showOutputFind",
+    "glass.showTerminalFind",
+    "aiSettings.action.focusSearch",
+    "planEditor.actions.find",
 }
 
 

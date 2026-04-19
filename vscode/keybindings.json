@@ -810,11 +810,6 @@
     "when": "inputFocus && notebookEditorFocused && !inlineChatFocused && notebookCellType == 'markup'"
   },
   {
-    "key": "cmd+f",
-    "command": "-actions.find",
-    "when": "activeEditorIsReviewChanges || editorFocus || activeEditorIsReviewChanges && editorFocus || activeEditorIsReviewChanges && editorIsOpen || editorFocus && editorIsOpen"
-  },
-  {
     "key": "cmd+e",
     "command": "-actions.findWithSelection"
   },
@@ -974,11 +969,6 @@
     "key": "shift+alt+f3",
     "command": "-editor.action.dirtydiff.previous",
     "when": "editorTextFocus && !textCompareEditorActive"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-editor.action.extensioneditor.showfind",
-    "when": "!editorFocus && activeEditor == 'workbench.editor.extension'"
   },
   {
     "key": "shift+alt+f",
@@ -1357,11 +1347,6 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "cmd+f",
-    "command": "-editor.action.webvieweditor.showFind",
-    "when": "webviewFindWidgetEnabled && !editorFocus && activeEditor == 'WebviewEditor'"
-  },
-  {
     "key": "f7",
     "command": "-editor.action.wordHighlight.next",
     "when": "editorTextFocus && hasWordHighlights"
@@ -1537,11 +1522,6 @@
     "when": "listFocus && referenceSearchVisible && !inputFocus && !treeElementCanCollapse && !treeElementCanExpand && !treestickyScrollFocused"
   },
   {
-    "key": "cmd+f",
-    "command": "-repl.action.filter",
-    "when": "inDebugRepl && textInputFocus"
-  },
-  {
     "key": "alt+cmd+f",
     "command": "-repl.action.find",
     "when": "inDebugRepl || inDebugRepl && focusedView == 'workbench.panel.repl.view'"
@@ -1570,11 +1550,6 @@
     "key": "shift+cmd+backspace",
     "command": "-search.searchEditor.action.deleteFileResults",
     "when": "inSearchEditor"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-settings.action.search",
-    "when": "inSettingsEditor"
   },
   {
     "key": "cmd+/",
@@ -1821,11 +1796,6 @@
     "when": "editorHasPromptBar && editorPromptBarFocused"
   },
   {
-    "key": "cmd+f",
-    "command": "-commentsFocusFilter",
-    "when": "focusedView == 'workbench.panel.comments'"
-  },
-  {
     "key": "cmd+down",
     "command": "-commentsFocusViewFromFilter",
     "when": "commentsFilterFocus"
@@ -1834,11 +1804,6 @@
     "key": "shift+cmd+/",
     "command": "-composer.cycleModelParameter",
     "when": "composerFocused && !editorTextFocus"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-composer.find.focus",
-    "when": "composerFocused && !composerFindWidgetFocused"
   },
   {
     "key": "f3",
@@ -2199,11 +2164,6 @@
     "when": "inKeybindings && keybindingFocus && !inputFocus"
   },
   {
-    "key": "cmd+f",
-    "command": "-keybindings.editor.searchKeybindings",
-    "when": "inKeybindings"
-  },
-  {
     "key": "alt+cmd+p",
     "command": "-keybindings.editor.toggleSortByPrecedence",
     "when": "inKeybindings"
@@ -2474,11 +2434,6 @@
     "when": "activeEditor == 'workbench.editor.notebookTextDiffEditor'"
   },
   {
-    "key": "cmd+f",
-    "command": "-notebook.find",
-    "when": "notebookEditorFocused && !editorFocus && activeEditor == 'workbench.editor.interactive' || notebookEditorFocused && !editorFocus && activeEditor == 'workbench.editor.notebook'"
-  },
-  {
     "key": "cmd+end",
     "command": "-notebook.focusBottom",
     "when": "notebookEditorFocused && !inputFocus"
@@ -2541,11 +2496,6 @@
     "key": "cmd+c",
     "command": "-problems.action.copy",
     "when": "problemsVisibility && !relatedInformationFocus && focusedView == 'workbench.panel.markers.view'"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-problems.action.focusFilter",
-    "when": "focusedView == 'workbench.panel.markers.view'"
   },
   {
     "key": "cmd+down",
@@ -3647,11 +3597,6 @@
     "key": "alt+f2",
     "command": "-workbench.action.terminal.focusAccessibleBuffer",
     "when": "accessibilityModeEnabled && terminalFocus && terminalHasBeenCreated || accessibilityModeEnabled && terminalFocus && terminalProcessSupported"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-workbench.action.terminal.focusFind",
-    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
   },
   {
     "key": "cmd+r cmd+i",
@@ -5198,26 +5143,6 @@
     "when": "glassEditorPanelVisible && isGlassAgentWorkspace"
   },
   {
-    "key": "cmd+f",
-    "command": "-glass.showBrowserFind",
-    "when": "glassPromptInputFocused && isGlassAgentWorkspace && glassActiveTabKind == 'browser' || isGlassAgentWorkspace && !editorTextFocus && glassActiveTabKind == 'browser'"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-glass.showFileEditorFind",
-    "when": "glassPromptInputFocused && isGlassAgentWorkspace && glassActiveTabKind == 'file' || isGlassAgentWorkspace && !editorTextFocus && glassActiveTabKind == 'file'"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-glass.showOutputFind",
-    "when": "glassPromptInputFocused && isGlassAgentWorkspace && glassActiveTabKind == 'output' || isGlassAgentWorkspace && !editorTextFocus && glassActiveTabKind == 'output'"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-glass.showTerminalFind",
-    "when": "glassPromptInputFocused && isGlassAgentWorkspace && glassActiveTabKind == 'terminal' || isGlassAgentWorkspace && !editorTextFocus && glassActiveTabKind == 'terminal'"
-  },
-  {
     "key": "f10",
     "command": "-extension.node-debug.startWithStopOnEntry",
     "when": "!inDebugMode && debugConfigurationType == 'node' || !inDebugMode && debugConfigurationType == 'pwa-extensionHost' || !inDebugMode && debugConfigurationType == 'pwa-node'"
@@ -5281,11 +5206,6 @@
     "key": "ctrl+enter",
     "command": "-notebook.cell.executeAndFocusContainer",
     "when": "notebookCellListFocused || editorTextFocus && inputFocus && notebookEditorFocused"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-aiSettings.action.focusSearch",
-    "when": "isSettingsPaneFocused"
   },
   {
     "key": "shift+cmd+j",
@@ -5966,11 +5886,6 @@
     "when": "markdownPlanEditorActive"
   },
   {
-    "key": "cmd+f",
-    "command": "-planEditor.actions.find",
-    "when": "markdownPlanEditorActive"
-  },
-  {
     "key": "cmd+g",
     "command": "-planEditor.findNext",
     "when": "markdownPlanEditorActive"
@@ -6160,11 +6075,6 @@
     "key": "cmd+up",
     "command": "-inlineChat.focus",
     "when": "editorTextFocus && inlineChatVisible && !accessibilityModeEnabled && !inlineChatFocused && !isEmbeddedDiffEditor && inlineChatOuterCursorPosition == 'below'"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-actions.find",
-    "when": "editorFocus || editorIsOpen"
   },
   {
     "key": "cmd+up",
@@ -6430,11 +6340,6 @@
     "key": "shift+cmd+g",
     "command": "-workbench.action.browser.findPrevious",
     "when": "browserFindWidgetVisible && activeEditor == 'workbench.editor.browser'"
-  },
-  {
-    "key": "cmd+f",
-    "command": "-workbench.action.browser.showFind",
-    "when": "browserHasUrl && !browserHasError && activeEditor == 'workbench.editor.browser'"
   },
   {
     "key": "cmd+/",

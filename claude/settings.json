@@ -78,5 +78,10 @@
     }
   },
   "language": "简体中文",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "statusLine": {
+    "type": "command",
+    "command": "bash -lc 'npx -y ccstatusline@latest'",
+    "padding": 0
+  }
 }
