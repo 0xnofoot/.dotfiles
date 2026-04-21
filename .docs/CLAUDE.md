@@ -116,7 +116,7 @@
 3. **`macism` 切 CJK 时的窗口闪烁是设计** — macism 的默认行为会创建临时窗口抢焦点再还回去（`TemporaryWindow.app`），这是绕过 macOS IM 激活 bug 的 workaround，不是缺陷。`macism ID 0` 可以关闭 workaround 但会退化到 im-select 同样的漂移问题
 4. **zle widget 链式包装要一次成型** — `functions -c src dst` 重复执行会把 dst 覆盖成 wrapper 本身，造成递归链（FUNCNEST 溢出或多次触发）。在同一 zsh 会话里迭代调试 widget 时，每次修改前先 `unfunction` 旧版本，或直接开新 kitty 窗口
 5. **带副作用的 `eval "$(tool init zsh)"` 一律放顶层，不要塞进 `zvm_after_init` 等函数体内** — 第三方 init 脚本（如 fzf 0.71+）在顶层会包含无条件 `return`（0.70 及之前只有条件 return），放在函数体里 eval 时 `return` 会让宿主函数提前退出，后续 eval（atuin、starship 等）全部静默跳过。顶层 eval 时 `return` 只退出 eval 自身，不影响后续语句。配合各自的幂等守卫（自定义 flag 或自带 env 变量）避免重复 source `~/.zshrc` 时重载
-6. **不要依赖第三方工具的内部函数名做守卫** — starship 1.25+ 把函数名前缀从 `starship_` 改成 `prompt_starship_`，旧守卫 `${+functions[starship_precmd]}` 直接永远为假导致反复 init。守卫用自己定义的 flag（`_STARSHIP_INITED=1`）或工具自身 export 的 env 变量（atuin 的 `$ATUIN_SESSION`）
+6. **不要依赖第三方工具的内部函数名做守卫** — starship 1.25+ 把函数名前缀从 `starship_` 改成 `prompt_starship_`，旧守卫 `${+functions[starship_precmd]}` 直接永远为假导致反复 init。守卫用自己定义的**不导出**的 shell-local flag（`_STARSHIP_INITED=1`、`_FZF_INITED=1`、`_ATUIN_INITED=1`），不要用工具自己 `export` 的 env 变量（如 atuin 的 `$ATUIN_SESSION`）——export 的变量会被子 shell 继承，yazi `S`、`tmux new-window` 等起的新 zsh 会误判已 init 直接跳过，子 shell 里 widget 未注册、Ctrl+R 回退到默认 `bck-i-search`
 7. **atuin 18.x 的 widget 按 keymap 分名** — 没有叫 `_atuin_search` 的 widget（那只是内部函数），bindkey 要按 keymap 用 `atuin-search`（emacs）/`atuin-search-viins`（viins）/`atuin-search-vicmd`（vicmd）。另外 zsh-vi-mode 初始化时会重建 viins/vicmd keymap，顶层 atuin init 的 Ctrl+R 绑定会被清掉，必须在 `zvm_after_init` 里按 keymap 重绑一次
 
 ## Git 规范

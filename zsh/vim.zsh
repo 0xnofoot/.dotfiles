@@ -83,9 +83,12 @@ function zvm_after_select_vi_mode() {
 [[ -n "$_FZF_INITED" ]] || { eval "$(fzf --zsh)"; _FZF_INITED=1; }
 
 # atuin 接管 Ctrl+R 搜索历史，保留 ↑ 给 zsh-history-substring-search
-# ATUIN_SESSION 由 atuin init 自身 export，作为天然幂等守卫
-if [[ -z "$ATUIN_SESSION" ]] && command -v atuin &>/dev/null; then
+# 不能用 ATUIN_SESSION 做守卫：它由 atuin init 主动 export，子 shell 会继承，
+# yazi 按 S 起的新 zsh 会误判已 init 从而跳过，导致 atuin-search widget
+# 未注册、Ctrl+R 回退到 zsh 默认 bck-i-search。用不导出的 local flag。
+if [[ -z "$_ATUIN_INITED" ]] && command -v atuin &>/dev/null; then
     eval "$(atuin init zsh --disable-up-arrow)"
+    _ATUIN_INITED=1
 fi
 
 # ------------------
