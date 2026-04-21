@@ -41,11 +41,9 @@ brew "mpv"
 # macOS 专属
 # ============================================================
 if OS.mac?
-  # Vim Everywhere（输入法切换 / 窗口管理 / 键位改造）
+  # Vim Everywhere（输入法切换 / 键位改造）
   brew "laishulu/homebrew/macism"
   brew "daipeihust/tap/im-select"
-  cask "nikitabobko/tap/aerospace"
-  cask "mediosz/tap/swipeaerospace"
   cask "karabiner-elements"
 end
 

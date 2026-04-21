@@ -34,8 +34,6 @@
 │   ├── settings.json
 │   └── commands/       # 自定义 skills
 ├── .docs/              # 维护文档（README.md / CLAUDE.md 真实文件、SOP、权限指南等）
-├── aerospace/          # macOS 平铺窗口管理器配置（Vim Everywhere 组件）
-│   └── .config.sh      # 链接整目录到 ~/.config/aerospace
 ├── karabiner/          # Karabiner-Elements 键位改造（Vim Everywhere 组件）
 │   ├── .config.sh      # 链接整目录到 ~/.config/karabiner
 │   ├── .gitignore      # 排除 automatic_backups/（运行时备份）

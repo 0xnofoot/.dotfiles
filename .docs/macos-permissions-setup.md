@@ -1,10 +1,10 @@
 # macOS 权限配置指南
 
-> **平台限定**:本方案(macism / im-select / AeroSpace / SwipeAeroSpace / Karabiner-Elements)**仅支持 macOS**,Linux 上不安装也不加载对应配置。
+> **平台限定**:本方案(macism / im-select / Karabiner-Elements)**仅支持 macOS**,Linux 上不安装也不加载对应配置。
 >
 > 相关守卫:
 > - `Brewfile` 整段 `if OS.mac? ... end`
-> - `aerospace/.config.sh`、`karabiner/.config.sh` 顶部 `[[ "$(uname)" != "Darwin" ]] && exit 0`
+> - `karabiner/.config.sh` 顶部 `[[ "$(uname)" != "Darwin" ]] && exit 0`
 > - `nvim/lua/config/plugins/editor.lua` 的 AutoIMSwitch 包一层 `if vim.fn.has("mac") == 1`
 > - `zsh/vim.zsh` 的 `zvm_after_select_vi_mode` 顶部 `[[ "$OSTYPE" != darwin* ]] && return`
 > - `vscode/settings.json` 无法按 OS 条件分段,`vim.autoSwitchInputMethod.*` 硬编码 `/opt/homebrew/bin/im-select`,Linux 上扩展静默降级不生效,不影响编辑器使用
@@ -22,8 +22,6 @@
 
 | 应用 | 用途 | 备注 |
 |------|------|------|
-| AeroSpace | 平铺窗口管理 | 首次启动会弹窗请求 |
-| SwipeAeroSpace | 三指滑动切换 workspace | 首次启动会弹窗请求 |
 | Karabiner-Elements | 低层按键重映射 | 首次启动会弹窗请求 |
 
 ---
@@ -58,12 +56,6 @@
 
 - 可保留系统默认(不冲突),或按个人习惯调整
 
-### 3.3 Mission Control / 桌面切换
-
-路径:系统设置 → 键盘 → 键盘快捷键 → Mission Control
-
-- 若使用 AeroSpace 的 workspace 功能,建议关闭 `Ctrl+← / Ctrl+→` 的"切换桌面"快捷键,避免与窗口操作冲突
-
 ---
 
 ## 4. 登录项(可选)
@@ -72,7 +64,6 @@
 
 | 应用 | 建议 |
 |------|------|
-| AeroSpace | 按需关闭(也可在 `aerospace.toml` 中设 `start-at-login = false`) |
 | Karabiner-Elements | 保持开启(依赖其后台服务) |
 
 ---
