@@ -66,35 +66,53 @@ function zvm_after_select_vi_mode() {
     esac
 }
 
-# 在 zsh-vi-mode 之后恢复 fzf 按键绑定并初始化 starship
-# （starship 必须在此初始化，避免与 zsh-vi-mode 的
-# zle-keymap-select 钩子包装冲突 — 否则会 FUNCNEST 溢出）
-function zvm_after_init() {
-    # 守卫：每个会话只初始化 starship 一次 — 重复 source 会叠加
-    # zle-keymap-select 钩子，导致 FUNCNEST 溢出
-    (( ${+functions[starship_precmd]} )) || eval "$(starship init zsh)"
+# ------------------
+# 顶层初始化 — source vim.zsh 时立即 eval
+# ------------------
+# 不放在 zvm_after_init 里的原因：fzf 0.71+ 的 init 脚本在顶层包含无条件 return
+# （0.70 及之前只有条件 return），在函数体内 eval 时 return 会让 zvm_after_init
+# 提前退出，导致后续 eval（atuin 等）全部跳过。
+# 顶层 eval 时 return 只退出 eval 自身，不影响后续语句。
+# 各自用幂等守卫，避免 source ~/.zshrc 时重复初始化。
 
-    # starship 的 zle-keymap-select 会覆盖 zvm 的绑定，导致 zvm_after_select_vi_mode
-    # 钩子在模式切换时不触发（状态栏不切换输入法）。zvm 0.12.0 未暴露内部 widget，
-    # 所以这里根据 zle 内置的 $KEYMAP 手动维护 ZVM_MODE 并调用用户钩子，再链到 starship。
-    if (( ${+functions[starship_zle-keymap-select]} )); then
+# starship — 自定义 flag 守卫，不依赖 starship 内部函数名
+# （1.25+ 函数名前缀从 starship_ 改为 prompt_starship_，旧守卫 ${+functions[starship_precmd]} 永远失效）
+[[ -n "$_STARSHIP_INITED" ]] || { eval "$(starship init zsh)"; _STARSHIP_INITED=1; }
+
+# fzf
+[[ -n "$_FZF_INITED" ]] || { eval "$(fzf --zsh)"; _FZF_INITED=1; }
+
+# atuin 接管 Ctrl+R 搜索历史，保留 ↑ 给 zsh-history-substring-search
+# ATUIN_SESSION 由 atuin init 自身 export，作为天然幂等守卫
+if [[ -z "$ATUIN_SESSION" ]] && command -v atuin &>/dev/null; then
+    eval "$(atuin init zsh --disable-up-arrow)"
+fi
+
+# ------------------
+# zvm_after_init — 只保留必须在 zsh-vi-mode 初始化之后再做的事
+# ------------------
+function zvm_after_init() {
+    # starship 的 zle-keymap-select widget 会被 zsh-vi-mode 的 bindkey -v 覆盖，
+    # 导致 zvm_after_select_vi_mode 钩子在模式切换时不触发（状态栏不切换输入法）。
+    # zvm 0.12.0 未暴露内部 widget，这里根据 zle 内置的 $KEYMAP 手动维护 ZVM_MODE
+    # 并调用用户钩子，再链到 starship。函数名走 starship 1.25+ 的 prompt_ 前缀。
+    if (( ${+functions[prompt_starship_zle-keymap-select]} )); then
         _zvm_starship_keymap_select() {
             case "$KEYMAP" in
                 vicmd)      ZVM_MODE=$ZVM_MODE_NORMAL ;;
                 main|viins) ZVM_MODE=$ZVM_MODE_INSERT ;;
             esac
             (( ${+functions[zvm_after_select_vi_mode]} )) && zvm_after_select_vi_mode
-            starship_zle-keymap-select "$@"
+            prompt_starship_zle-keymap-select "$@"
         }
         zle -N zle-keymap-select _zvm_starship_keymap_select
     fi
 
-    eval "$(fzf --zsh)"
-
-    # atuin 接管 Ctrl+R 搜索历史，保留 ↑ 给 zsh-history-substring-search
-    if (( ${+commands[atuin]} )); then
-        eval "$(atuin init zsh --disable-up-arrow)"
-    fi
+    # zsh-vi-mode 会重建 viins/vicmd keymap，顶层 atuin 的 Ctrl+R 绑定会被清掉，
+    # 按 atuin 18.x 的 widget 命名（按 keymap 分）在 emacs/viins 下重绑一次；
+    # vicmd 下 atuin 默认用 `/` 触发，Ctrl+R 留给 fzf
+    (( ${+widgets[atuin-search]} ))       && bindkey -M emacs '^R' atuin-search
+    (( ${+widgets[atuin-search-viins]} )) && bindkey -M viins '^R' atuin-search-viins
 
     if [[ -n "$TMUX_POPUP" ]]; then
         _tmux_popup_exit() { exit }
