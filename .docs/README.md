@@ -54,7 +54,11 @@ bash install.sh
 | 字体目录 | `~/Library/Fonts/` | `~/.local/share/fonts/` |
 | Karabiner / 输入法切换 | 安装并链接 | 完全跳过 |
 
-macOS 首次运行需在「系统设置 → 隐私与安全性」手动授权 Karabiner，详见 [macos-permissions-setup.md](macos-permissions-setup.md)。
+macOS 首次运行需在「系统设置 → 隐私与安全性」手动授权 Karabiner，详见 [USER.md](USER.md#1-macos-首次运行系统设置授权)。
+
+## 使用指南
+
+日常使用约定、tmux 键位速查、macOS 首次授权步骤，见 [USER.md](USER.md)。
 
 ## 自定义
 

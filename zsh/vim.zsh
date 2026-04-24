@@ -82,12 +82,13 @@ function zvm_after_select_vi_mode() {
 # fzf
 [[ -n "$_FZF_INITED" ]] || { eval "$(fzf --zsh)"; _FZF_INITED=1; }
 
-# atuin 接管 Ctrl+R 搜索历史，保留 ↑ 给 zsh-history-substring-search
+# atuin 搜索历史 — Alt+/ 触发，↑ 留给 zsh-history-substring-search，
+# Ctrl+R 让给 fzf-history-widget（fzf init 已经在 emacs keymap 绑好）
 # 不能用 ATUIN_SESSION 做守卫：它由 atuin init 主动 export，子 shell 会继承，
 # yazi 按 S 起的新 zsh 会误判已 init 从而跳过，导致 atuin-search widget
-# 未注册、Ctrl+R 回退到 zsh 默认 bck-i-search。用不导出的 local flag。
+# 未注册。用不导出的 local flag。
 if [[ -z "$_ATUIN_INITED" ]] && command -v atuin &>/dev/null; then
-    eval "$(atuin init zsh --disable-up-arrow)"
+    eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
     _ATUIN_INITED=1
 fi
 
@@ -111,11 +112,12 @@ function zvm_after_init() {
         zle -N zle-keymap-select _zvm_starship_keymap_select
     fi
 
-    # zsh-vi-mode 会重建 viins/vicmd keymap，顶层 atuin 的 Ctrl+R 绑定会被清掉，
-    # 按 atuin 18.x 的 widget 命名（按 keymap 分）在 emacs/viins 下重绑一次；
-    # vicmd 下 atuin 默认用 `/` 触发，Ctrl+R 留给 fzf
-    (( ${+widgets[atuin-search]} ))       && bindkey -M emacs '^R' atuin-search
-    (( ${+widgets[atuin-search-viins]} )) && bindkey -M viins '^R' atuin-search-viins
+    # atuin 18.x 的 widget 按 keymap 分名（atuin-search/atuin-search-viins/
+    # atuin-search-vicmd），用 Alt+/ 触发；zsh-vi-mode 会重建 viins/vicmd
+    # keymap，所以 viins/vicmd 必须在这里重绑，emacs 顶层绑过也顺便统一
+    (( ${+widgets[atuin-search]} ))       && bindkey -M emacs '\e/' atuin-search
+    (( ${+widgets[atuin-search-viins]} )) && bindkey -M viins '\e/' atuin-search-viins
+    (( ${+widgets[atuin-search-vicmd]} )) && bindkey -M vicmd '\e/' atuin-search-vicmd
 
     if [[ -n "$TMUX_POPUP" ]]; then
         _tmux_popup_exit() { exit }

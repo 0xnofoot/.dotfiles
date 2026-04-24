@@ -1,0 +1,3 @@
+# TPM 插件安装目录（走 XDG 路径时装在 ~/.config/tmux/plugins/，因
+# tmux/ 整目录 symlink 到 ~/.config/tmux，物理上落在这里）
+plugins/

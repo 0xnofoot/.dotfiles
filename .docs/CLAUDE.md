@@ -59,6 +59,7 @@
 - 配置链接与应用特有操作：每个 `<app>/` 目录下维护一份 `.config.sh`，由 `install.sh` Step 4 自动扫描并逐一调用；脚本负责配置链接，也可包含应用特有的安装/设置逻辑（如扩展安装、默认 shell 设置等）；所有脚本通过父进程导出的 `DOTFILES_DIR` 定位源文件，目标存在时直接删除后重建软链接，失败则通过 `error()` 终止安装
 - 依赖声明：所有 brew/cask 包写在 `Brewfile` 中
 - tmux / nvim / yazi / bottom：整目录链接到 `~/.config/<app>`
+- tmux 特殊处理：TPM 走 XDG 路径，插件装到 `~/.config/tmux/plugins/`，物理上落在仓库 `tmux/plugins/`（由 `tmux/.gitignore` 排除）。`.config.sh` 显式 `export TMUX_PLUGIN_MANAGER_PATH` 并调用 `install_plugins` headless 自动装完所有 `@plugin` 声明的插件（否则 TPM 会 fallback 到 `~/.tmux/plugins/`）
 - kitty 特殊处理：`--with-kitty` 时先安装 kitty（macOS 用 cask，Linux 用官方脚本），再链接配置目录
 - zsh 特殊处理：整目录链接到 `~/.config/zsh`，同时在 `~/` 创建 `.zshrc`、`.zimrc` 根级 symlink（直接指向 `$DOTFILES_DIR/zsh/`），预下载 zimfw 到 `zsh/zim/`，Linux 上设置 zsh 为默认 shell
 - vscode 特殊处理：不经 `~/.config/vscode` 中间层，直接检测已安装的 Code/Cursor，将 `settings.json`、`keybindings.json` 链接到对应应用用户目录（macOS/Linux 路径不同），随后检测 CLI 增量安装扩展；未安装时输出提示并跳过
@@ -126,3 +127,5 @@
 ## 维护文档
 
 - [安装脚本更新 SOP](install-update-sop.md) — 配置变更时如何更新安装脚本
+- [tmux 延迟评估插件](tmux-deferred-plugins.md) — 已弃用 / 延迟评估的 tmux 插件记录与重新评估信号
+- [USER.md](USER.md) — 用户侧使用指南（tmux 键位、macOS 授权等），用户文档改动应同步此处
