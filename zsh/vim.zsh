@@ -119,6 +119,14 @@ function zvm_after_init() {
     (( ${+widgets[atuin-search-viins]} )) && bindkey -M viins '\e/' atuin-search-viins
     (( ${+widgets[atuin-search-vicmd]} )) && bindkey -M vicmd '\e/' atuin-search-vicmd
 
+    # 禁用 ^R —— atuin 走 M-/，不需要 fzf 的 fzf-history-widget，也不想回落到
+    # zsh 默认 history-incremental-search-backward（bck-i-search）。绑 noop 吃掉即可
+    _noop_widget() { : }
+    zle -N _noop_widget
+    bindkey -M emacs '^R' _noop_widget
+    bindkey -M viins '^R' _noop_widget
+    bindkey -M vicmd '^R' _noop_widget
+
     if [[ -n "$TMUX_POPUP" ]]; then
         _tmux_popup_exit() { exit }
         zle -N _tmux_popup_exit
