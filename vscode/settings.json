@@ -594,6 +594,7 @@
       "before": ["leader", "U"],
       "after": ["U"]
     }
-  ]
+  ],
+  "python.defaultInterpreterPath": "/opt/homebrew/bin/python3"
   //========== End ==========//
 }
