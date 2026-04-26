@@ -34,6 +34,13 @@ alias ccc='claude -c'
 alias ccd='claude --allow-dangerously-skip-permissions'
 alias cccd='claude -c --allow-dangerously-skip-permissions'
 
+# 仅在 kitty 外层（非 tmux 包裹）直连远端时把 ssh 转给 kitten ssh —— kitten ssh 会
+# 把 kitty 的 terminfo 推到远端，避免远端不识别 TERM=xterm-kitty 导致字符乱码。
+# tmux 内 TERM 已被重写为 tmux-256color，远端普遍支持，不需要转发
+if [[ "$TERM" == "xterm-kitty" ]] && [[ -z "$TMUX" ]] && command -v kitten &>/dev/null; then
+    alias ssh='kitten ssh'
+fi
+
 # ------------------
 # functions
 # ------------------

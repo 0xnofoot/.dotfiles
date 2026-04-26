@@ -30,6 +30,13 @@ export STARSHIP_CONFIG="$HOME/.config/zsh/starship/starship.toml"
 # editor
 export EDITOR='nvim'
 
+# locale — 强制 UTF-8，避免远端 LANG=C 时 zsh/starship 把中文和 Nerd Font
+# 图标渲染成下划线。kitten ssh 不转发 LANG，在 env.zsh 里 export 让本地
+# 远端 zsh 都自带 UTF-8，不依赖 sshd AcceptEnv。远端需已生成 en_US.UTF-8
+# （Ubuntu/Debian 上 sudo locale-gen en_US.UTF-8）
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # XDG — 统一配置目录，让 macOS 上的 lazygit 等工具也使用 ~/.config/<app>
 # 而非各自的系统默认路径（如 ~/Library/Application Support/lazygit）
 export XDG_CONFIG_HOME="$HOME/.config"
