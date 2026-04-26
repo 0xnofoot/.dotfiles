@@ -61,7 +61,7 @@
 - tmux / nvim / yazi / bottom：整目录链接到 `~/.config/<app>`
 - tmux 特殊处理：TPM 走 XDG 路径，插件装到 `~/.config/tmux/plugins/`，物理上落在仓库 `tmux/plugins/`（由 `tmux/.gitignore` 排除）。`.config.sh` 显式 `export TMUX_PLUGIN_MANAGER_PATH` 并调用 `install_plugins` headless 自动装完所有 `@plugin` 声明的插件（否则 TPM 会 fallback 到 `~/.tmux/plugins/`）
 - kitty 特殊处理：`--with-kitty` 时先安装 kitty（macOS 用 cask，Linux 用官方脚本），再链接配置目录
-- zsh 特殊处理：整目录链接到 `~/.config/zsh`，同时在 `~/` 创建 `.zshrc`、`.zimrc` 根级 symlink（直接指向 `$DOTFILES_DIR/zsh/`），预下载 zimfw 到 `zsh/zim/`，Linux 上设置 zsh 为默认 shell
+- zsh 特殊处理：整目录链接到 `~/.config/zsh`，同时在 `~/` 创建 `.zshrc`、`.zimrc` 根级 symlink（直接指向 `$DOTFILES_DIR/zsh/`），预下载 zimfw 到 `zsh/zim/`，Linux 上设置 zsh 为默认 shell；Linux 按需生成 `en_US.UTF-8` locale（优先 locale-gen，fallback localedef），配合 `zsh/env.zsh` 强制的 LANG/LC_ALL=en_US.UTF-8 避免 zle 退回 8-bit 模式
 - vscode 特殊处理：不经 `~/.config/vscode` 中间层，直接检测已安装的 Code/Cursor，将 `settings.json`、`keybindings.json` 链接到对应应用用户目录（macOS/Linux 路径不同），随后检测 CLI 增量安装扩展；未安装时输出提示并跳过
 - claude 特殊处理：不链接整目录，逐文件将受管条目（`CLAUDE.md`、`settings.json`、`commands/`）链接到 `~/.claude`，运行时数据（历史记录、缓存等）保留在 `~/.claude` 真实目录中，不进入仓库
 - lazygit 特殊处理：`zsh/env.zsh` 导出 `XDG_CONFIG_HOME=~/.config`，使 macOS 上的 lazygit 也读取 `~/.config/lazygit`，与 Linux 路径统一
