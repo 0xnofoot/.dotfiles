@@ -6,10 +6,10 @@ zmodule zimfw/environment
 zmodule zimfw/utility
 zmodule zimfw/completion
 
-zmodule zsh-users/zsh-autosuggestions
-zmodule zsh-users/zsh-history-substring-search
+# zsh-defer 提供 `zsh-defer` 命令，把非关键插件推迟到首个 prompt 之后加载。
+# 下面三块（autosuggestions / fast-syntax-highlighting / autopair）已从 zim
+# 移出，改由 optimization.zsh 的 _zsh_defer_load_plugins 异步装载。
+zmodule romkatv/zsh-defer
 
 zmodule jeffreytse/zsh-vi-mode
-zmodule zdharma-continuum/fast-syntax-highlighting
-zmodule hlissner/zsh-autopair
 zmodule Aloxaf/fzf-tab

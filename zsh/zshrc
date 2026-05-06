@@ -3,6 +3,7 @@
 # ------------------
 
 source $HOME/.config/zsh/env.zsh
+source $HOME/.config/zsh/optimization.zsh
 source $HOME/.config/zsh/vim.zsh
 source $HOME/.config/zsh/plugs.zsh
 source $HOME/.config/zsh/alias.zsh

@@ -63,7 +63,10 @@ success "Homebrew 就绪"
 
 # ── Step 3/5: 安装依赖包 ──────────────────────────────────
 info "Step 3/5: 通过 Brewfile 安装依赖包..."
-brew bundle --file="$DOTFILES_DIR/Brewfile"
+# --upgrade: 已有包强制升到最新 stable，保持多机版本一致。
+# Homebrew 不支持精确 pin 到 patch 版本（除极少数版本化 formula 如 node@20），
+# 统一滚动到最新是唯一可行的跨机对齐策略；配置需跟随上游 breaking change。
+brew bundle --file="$DOTFILES_DIR/Brewfile" --upgrade
 success "所有依赖包已安装"
 
 # ── Step 4/5: 链接配置 ────────────────────────────────────

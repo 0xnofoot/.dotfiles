@@ -1,3 +1,5 @@
 # ignore these file
 /zim/
 local.zsh
+# zcompile 生成的字节码，提高启动解析速度；由 optimization.zsh 按需生成
+*.zwc

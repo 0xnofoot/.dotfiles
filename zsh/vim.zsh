@@ -67,34 +67,11 @@ function zvm_after_select_vi_mode() {
 }
 
 # ------------------
-# 顶层初始化 — source vim.zsh 时立即 eval
-# ------------------
-# 不放在 zvm_after_init 里的原因：fzf 0.71+ 的 init 脚本在顶层包含无条件 return
-# （0.70 及之前只有条件 return），在函数体内 eval 时 return 会让 zvm_after_init
-# 提前退出，导致后续 eval（atuin 等）全部跳过。
-# 顶层 eval 时 return 只退出 eval 自身，不影响后续语句。
-# 各自用幂等守卫，避免 source ~/.zshrc 时重复初始化。
-
-# starship — 自定义 flag 守卫，不依赖 starship 内部函数名
-# （1.25+ 函数名前缀从 starship_ 改为 prompt_starship_，旧守卫 ${+functions[starship_precmd]} 永远失效）
-[[ -n "$_STARSHIP_INITED" ]] || { eval "$(starship init zsh)"; _STARSHIP_INITED=1; }
-
-# fzf
-[[ -n "$_FZF_INITED" ]] || { eval "$(fzf --zsh)"; _FZF_INITED=1; }
-
-# atuin 搜索历史 — Alt+/ 触发，↑ 留给 zsh-history-substring-search，
-# Ctrl+R 让给 fzf-history-widget（fzf init 已经在 emacs keymap 绑好）
-# 不能用 ATUIN_SESSION 做守卫：它由 atuin init 主动 export，子 shell 会继承，
-# yazi 按 S 起的新 zsh 会误判已 init 从而跳过，导致 atuin-search widget
-# 未注册。用不导出的 local flag。
-if [[ -z "$_ATUIN_INITED" ]] && command -v atuin &>/dev/null; then
-    eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
-    _ATUIN_INITED=1
-fi
-
-# ------------------
 # zvm_after_init — 只保留必须在 zsh-vi-mode 初始化之后再做的事
 # ------------------
+# starship/fzf/atuin 的顶层 init 已迁到 optimization.zsh，此处钩子依赖那些
+# 初始化产生的 widget / prompt 函数存在（source 顺序：env → optimization →
+# vim → plugs，zvm_after_init 在 zsh-vi-mode 加载时触发，此时上面都已完成）
 function zvm_after_init() {
     # starship 的 zle-keymap-select widget 会被 zsh-vi-mode 的 bindkey -v 覆盖，
     # 导致 zvm_after_select_vi_mode 钩子在模式切换时不触发（状态栏不切换输入法）。

@@ -120,6 +120,25 @@
 6. **不要依赖第三方工具的内部函数名做守卫** — starship 1.25+ 把函数名前缀从 `starship_` 改成 `prompt_starship_`，旧守卫 `${+functions[starship_precmd]}` 直接永远为假导致反复 init。守卫用自己定义的**不导出**的 shell-local flag（`_STARSHIP_INITED=1`、`_FZF_INITED=1`、`_ATUIN_INITED=1`），不要用工具自己 `export` 的 env 变量（如 atuin 的 `$ATUIN_SESSION`）——export 的变量会被子 shell 继承，yazi `S`、`tmux new-window` 等起的新 zsh 会误判已 init 直接跳过，子 shell 里 widget 未注册、Ctrl+R 回退到默认 `bck-i-search`
 7. **atuin 18.x 的 widget 按 keymap 分名** — 没有叫 `_atuin_search` 的 widget（那只是内部函数），bindkey 要按 keymap 用 `atuin-search`（emacs）/`atuin-search-viins`（viins）/`atuin-search-vicmd`（vicmd）。另外 zsh-vi-mode 初始化时会重建 viins/vicmd keymap，顶层 atuin init 的 Ctrl+R 绑定会被清掉，必须在 `zvm_after_init` 里按 keymap 重绑一次
 
+## 优化 version manager（RVM / nvm / pyenv / rbenv / asdf）启动时
+
+改这类 version manager 的启动耗时时，**必须分两层加载**，只要有一层错就会在非 shell 场景下炸：
+
+1. **PATH 段 eager** — shell 启动时就把 manager 托管的 `rubies/<ver>/bin`、`gems/<ver>/bin` 等 prepend 到 `/usr/bin` 之前。`#!/usr/bin/env ruby` 这种 shebang 链、嵌套的 `env ruby_executable_hooks`（CocoaPods pod_execute.sh）、GUI / launchd / CI 子进程全部绕开 shell function 只认 PATH；只 stub 函数不动 PATH 等于把这些场景拱手让给 `/usr/bin/ruby 2.6`（macOS 自带，EOL）
+2. **manager 函数 lazy** — `source ~/.rvm/scripts/rvm` 这种 ~200ms 重初始化，可以用 stub（`unset self + source 真 rvm + 以原参重放`）延迟到用户真的敲 `rvm` 时再触发
+
+**具体做法**：从 manager 的 "默认版本" symlink 读版本名，prepend 对应 bin 到 PATH 最前：
+
+| manager | 默认版本来源 | 要 prepend 的 bin |
+|---------|------------|-----------------|
+| RVM | `~/.rvm/environments/default`（由 `rvm --default use <ver>` 维护）| `gems/<ver>/bin`、`gems/<ver>@global/bin`、`rubies/<ver>/bin` |
+| nvm | `~/.nvm/alias/default` | `~/.nvm/versions/node/<ver>/bin` |
+| pyenv | `~/.pyenv/version` 文件内容 | `~/.pyenv/versions/<ver>/bin` |
+| rbenv | `~/.rbenv/version` 文件内容 | `~/.rbenv/versions/<ver>/bin` |
+| asdf | `~/.tool-versions` 每行 | 各 plugin 的 `installs/<name>/<ver>/bin` |
+
+踩坑记录：2026-04-27 把 RVM 改成 stub + lazy 时只 append 了 `~/.rvm/bin`（只含 `rvm` 命令本体），丢掉了 `rubies/3.3.0/bin`，6 分钟后用户 `pod install` 命中 /usr/bin/ruby 2.6 崩（base64 gem 缺）。修复见 commit `aba3822`。
+
 ## Git 规范
 
 - 提交时使用中文 commit message

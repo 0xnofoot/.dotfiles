@@ -64,6 +64,11 @@ elif [[ -d /home/linuxbrew/.linuxbrew/opt/trash-cli/bin ]]; then
     export PATH="/home/linuxbrew/.linuxbrew/opt/trash-cli/bin:$PATH"
 fi
 
-# zoxide
-eval "$(zoxide init zsh)"
+# 注：zoxide / starship / fzf / atuin 等 init-script 的缓存初始化已集中到
+# optimization.zsh。所有启动性能相关的优化（init 缓存、RVM 懒加载等）都在
+# 那个文件里统一管理。
+
+# 关闭 zoxide doctor 的位置检查：我们把 zoxide init 放到 optimization.zsh
+# 做启动缓存，不在 ~/.zshrc 末尾，每次子进程返回时 zoxide 会 stderr 打警告
+export _ZO_DOCTOR=0
 

@@ -23,3 +23,6 @@ if [[ -z "$_ZSH_ZIM_LOADED" ]]; then
   _ZSH_ZIM_LOADED=1
   source ${ZIM_HOME}/init.zsh
 fi
+
+# 延迟加载非关键插件（定义在 optimization.zsh，zsh-defer 必须先被 zim init）
+(( ${+functions[_zsh_defer_load_plugins]} )) && _zsh_defer_load_plugins
