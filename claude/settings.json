@@ -52,18 +52,19 @@
       "Bash(git rev-parse:*)",
       "Bash(git ls-files:*)",
       "Bash(git blame:*)",
-      "mcp__tavily__tavily_search",
-      "mcp__tavily__tavily_extract",
-      "mcp__tavily__tavily_research",
-      "mcp__tavily__tavily_crawl",
-      "mcp__tavily__tavily_map",
-      "mcp__tavily__tavily_skill"
+      "mcp__searxng__searxng_web_search",
+      "mcp__searxng__web_url_read"
     ],
     "deny": [
       "WebFetch",
       "WebSearch"
     ],
     "defaultMode": "default"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash -lc 'npx -y ccstatusline@latest'",
+    "padding": 0
   },
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true,
@@ -78,10 +79,6 @@
     }
   },
   "language": "简体中文",
-  "skipDangerousModePermissionPrompt": true,
-  "statusLine": {
-    "type": "command",
-    "command": "bash -lc 'npx -y ccstatusline@latest'",
-    "padding": 0
-  }
+  "autoMemoryEnabled": true,
+  "skipDangerousModePermissionPrompt": true
 }

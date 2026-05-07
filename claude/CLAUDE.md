@@ -2,16 +2,14 @@
 
 ## 网络搜索与页面抓取
 
-内置的 WebSearch 和 WebFetch 工具已被禁用，所有网络访问改用 Tavily MCP：
+内置的 WebSearch 和 WebFetch 工具已被禁用，所有网络访问改用自托管 SearXNG MCP（`search.nofoot.xyz`）：
 
 | 需求 | 使用工具 |
 |------|----------|
-| 网络搜索 | `mcp__tavily__tavily_search` |
-| 抓取指定 URL 内容 | `mcp__tavily__tavily_extract` |
-| 深度多源研究 | `mcp__tavily__tavily_research` |
-| 爬取网站结构 | `mcp__tavily__tavily_crawl` |
-| 映射网站 URL 结构 | `mcp__tavily__tavily_map` |
-| 查询库/API 文档 | `mcp__tavily__tavily_skill` |
+| 网络搜索 | `mcp__searxng__searxng_web_search` |
+| 抓取指定 URL 内容（转 Markdown，支持分段 / 章节 / 段落切片） | `mcp__searxng__web_url_read` |
+
+SearXNG 后端聚合 Google / Bing / DuckDuckGo / Brave 等 70+ 引擎，无 API Key。仅提供搜索 + URL 抓取两个工具，多源研究 / 网站爬取 / 站点映射等高级能力需自行组合调用。
 
 
 ## Speckit 新需求工作流
