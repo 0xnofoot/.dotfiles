@@ -89,6 +89,9 @@ PRESERVE_COMMANDS = {
     "glass.showTerminalFind",
     "aiSettings.action.focusSearch",
     "planEditor.actions.find",
+    # 保存（cmd+s / ctrl+s 在 VSCode 和 Cursor 下的保存命令）
+    "workbench.action.files.save",
+    "glass.saveFile",
 }
 
 

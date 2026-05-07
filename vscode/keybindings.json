@@ -3140,10 +3140,6 @@
     "command": "-workbench.action.files.revealActiveFileInWindows"
   },
   {
-    "key": "cmd+s",
-    "command": "-workbench.action.files.save"
-  },
-  {
     "key": "shift+cmd+s",
     "command": "-workbench.action.files.saveAs"
   },
@@ -4716,11 +4712,6 @@
     "key": "shift+cmd+r",
     "command": "-glass.reloadWindow",
     "when": "glassNoModalOpen && isGlassEmptyWorkspace"
-  },
-  {
-    "key": "cmd+s",
-    "command": "-glass.saveFile",
-    "when": "isGlassAgentWorkspace"
   },
   {
     "key": "shift+cmd+j",
