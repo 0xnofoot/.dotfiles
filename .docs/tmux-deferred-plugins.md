@@ -99,4 +99,4 @@
 | copy-mode 里框选 URL / 路径想一键打开 | tmux-open |
 | pane marking 用得少 | 保留，零成本；内置功能 |
 
-卸载某个插件：从 `tmux.conf` 的 `set -g @plugin '…'` 删掉那一行，`prefix+alt-u`（TPM 内置快捷键）清理，或手动 `rm -rf ~/.config/tmux/plugins/<name>`。
+卸载某个插件：从 `tmux.conf` 的 `set -g @plugin '…'` 删掉那一行，跑 `~/.config/tmux/plugins/tpm/bindings/clean_plugins` 清理（TPM 原生快捷键已在 tmux.conf 末尾 unbind），或手动 `rm -rf ~/.config/tmux/plugins/<name>`。

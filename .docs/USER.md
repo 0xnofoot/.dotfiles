@@ -64,6 +64,10 @@ macism
 | 键 | 行为 | 来源 |
 |----|------|------|
 | `M-h` / `M-j` / `M-k` / `M-l` | tmux pane 切换（左/下/上/右） | tmux 原生 |
+| `M-n` | 新建 window（当前 pane 路径） | 内置（自绑） |
+| `M-1` … `M-9` | 直接切到指定编号的 window | 内置（自绑） |
+| `M-Tab` | 切到上一个 window | 内置（自绑） |
+| `prefix+h` / `prefix+l` | 上一个 / 下一个 window | 内置（自绑） |
 | `M-f` | 打开 / 关闭 floax 持久化 scratchpad（全局） | tmux-floax |
 | `M-_` / `M-+` / `M-)` | popup 内缩小 / 放大 / 重置尺寸（只在 popup 内生效） | tmux-floax |
 | `prefix+j` | tmux-jump 单字符定位 | tmux-jump |
@@ -73,9 +77,8 @@ macism
 | `prefix+y` | choose-buffer：浏览 / 粘贴 / 删除多剪贴板栈 | 内置（自绑） |
 | `prefix+Ctrl-s` | resurrect 手动保存全部 session | tmux-resurrect |
 | `prefix+Ctrl-r` | resurrect 手动恢复最近快照 | tmux-resurrect |
-| `prefix+s` | choose-tree：fuzzy 切 session（`/` 搜索） | tmux 原生 |
-| `prefix+w` | choose-tree：fuzzy 切 window | tmux 原生 |
-| `prefix+:` 进 command-prompt | `:new-session -s name -c path` 等动态命令 | tmux 原生 |
+
+> 原生 `prefix+s` / `prefix+w` / `prefix+:` 等已批量 unbind，精简 prefix 表；如需 session 切换/命令提示等能力，自行 `bind` 或走 CLI。
 
 ### 2.2 tmux-floax 持久化 scratchpad
 

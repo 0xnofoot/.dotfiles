@@ -33,7 +33,7 @@
 │   ├── CLAUDE.md
 │   ├── settings.json
 │   └── commands/       # 自定义 skills
-├── .docs/              # 维护文档（README.md / CLAUDE.md 真实文件、SOP、权限指南等）
+├── .docs/              # 维护文档（README.md / CLAUDE.md / USER.md 真实文件、install SOP、tmux 延迟评估记录等）
 ├── karabiner/          # Karabiner-Elements 键位改造（Vim Everywhere 组件）
 │   ├── .config.sh      # 链接整目录到 ~/.config/karabiner
 │   ├── .gitignore      # 排除 automatic_backups/（运行时备份）
@@ -83,7 +83,7 @@
 |------|------|
 | Linux 编译工具 | Step 1/5 — apt/dnf/pacman 安装 build-essential 等 |
 | Homebrew | Step 2/5 — 安装并配置 PATH |
-| Brew bundle | Step 3/5 — 通过 Brewfile 安装所有包 |
+| Brew bundle | Step 3/5 — 通过 Brewfile 安装所有包；`--upgrade` 强制升级已有包，保证多机滚动到同一最新版（Homebrew 不支持精确 pin 到 patch 版本，统一滚动是唯一跨机对齐策略） |
 | 链接配置 | Step 4/5 — 扫描所有子目录，逐一调用 `.config.sh`（失败则终止）；完成后配置 `core.hooksPath`；各应用的特有操作（扩展安装、kitty 可选安装、默认 shell 等）均由对应 `.config.sh` 处理 |
 | Nerd Fonts | Step 5/5 — 自动下载安装 FiraMono + Symbols Nerd Font |
 | 步骤总数 | 硬编码为 "Step N/5"，增减步骤时需全部更新 |
