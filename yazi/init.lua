@@ -1,3 +1,5 @@
+require("restore"):setup()
+
 -- Tab bar: 2 rows height for visual gap from file list
 function Tabs.height()
 	return #cx.tabs > 1 and 2 or 0

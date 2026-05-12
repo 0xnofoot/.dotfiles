@@ -8,6 +8,11 @@ use = "yazi-rs/plugins:zoxide"
 rev = "7749958"
 hash = "99aa06d3014798d86001c324468d497f"
 
+[[plugin.deps]]
+use = "boydaihungst/restore"
+rev = "0e08704"
+hash = "e4d7c06510b4fe5f64ae31fbb4e017d6"
+
 [[flavor.deps]]
 use = "matt-dong-123/gruvbox-material"
 rev = "6c36491"
