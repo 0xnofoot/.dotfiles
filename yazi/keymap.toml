@@ -129,6 +129,7 @@ keymap = [
 	{ on = [ "g", "c" ], run = "cd ~/.config",   desc = "Go to ~/.config" },
 	{ on = [ "g", "C" ], run = "cd ~/.dotfiles", desc = "Go to ~/.dotfiles" },
 	{ on = [ "g", "P" ], run = "cd ~/Projects",  desc = "Go to Projects" },
+	{ on = [ "g", "t" ], run = "cd ~/.tmp",      desc = "Go to ~/.tmp" },
 
 	# Tabs
 	{ on = "<C-n>", run = "tab_create --current",    desc = "New tab in cwd" },
