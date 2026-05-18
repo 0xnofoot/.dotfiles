@@ -59,11 +59,11 @@ keymap = [
 	{ on = [ "y", "L" ], run = "link --relative",        desc = "Symlink (relative)" },
 
 	{ on = [ "d", "d" ], run = "yank --cut",                                          desc = "Cut files" },
-	{ on = [ "d", "D" ], run = "shell --confirm 'trash-put -- \"$@\"'",                desc = "Trash files (trash-cli)" },
+	{ on = [ "d", "D" ], run = "plugin trash-confirm",                                 desc = "Trash files (trash-cli, confirm)" },
 	{ on = [ "d", "u" ], run = "plugin restore -- --interactive",                      desc = "Restore from trash (interactive)" },
 	{ on = [ "d", "U" ], run = "plugin restore -- --interactive --interactive-overwrite", desc = "Restore from trash (interactive, overwrite on conflict)" },
-	{ on = "d",          run = "shell --confirm 'trash-put -- \"$@\"'",                desc = "Trash files (trash-cli)" },
-	{ on = "<Delete>",   run = "shell --confirm 'trash-put -- \"$@\"'",                desc = "Trash files (trash-cli)" },
+	{ on = "d",          run = "plugin trash-confirm",                                 desc = "Trash files (trash-cli, confirm)" },
+	{ on = "<Delete>",   run = "plugin trash-confirm",                                 desc = "Trash files (trash-cli, confirm)" },
 
 	{ on = [ "p", "p" ], run = "paste",         desc = "Paste" },
 	{ on = [ "p", "o" ], run = "paste --force", desc = "Paste (overwrite)" },
