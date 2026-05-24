@@ -1,0 +1,8 @@
+# JetBrains IDE 必装插件(自行在 IDE 内 Marketplace 安装,JetBrains 没有稳定 CLI)
+# 装好后到 Settings > Keymap 切到 Custom
+
+VSCode Keymap          # com.intellij.plugins.vscodekeymap;Custom keymap parent='VSCode OSX' 依赖此插件
+IdeaVim                # IdeaVIM;接管编辑器内 vim 模式,配合 ~/.ideavimrc
+IdeaVim-EasyMotion     # ideavim-easymotion;ideavimrc 里 `set easymotion` 依赖此插件
+AceJump                # AceJump;IdeaVim-EasyMotion 的底层依赖
+IdeaVimExtension       # IdeaVimExtension;IdeaVim 模式切换时自动切系统输入法(对齐 VSCode Vim autoSwitchInputMethod)

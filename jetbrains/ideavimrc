@@ -1,0 +1,159 @@
+" ============================================================
+" 选项(对齐 VSCode Vim settings.json)
+" ============================================================
+let mapleader = " "
+set easymotion
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set clipboard+=unnamed
+set relativenumber
+set number
+
+" 输入法切换由 IdeaVimExtension 插件接管(plugins.txt 中列出),无需 vimrc 配置
+
+" sethandler:全模式交回 IDE 的 ctrl 键(IDE 命令优先,vim 不拦截)
+sethandler <C-h> n-v:ide i:ide
+sethandler <C-l> n-v:ide i:ide
+sethandler <C-b> n-v:ide i:ide
+sethandler <C-f> n-v:ide i:ide
+sethandler <C-m> n-v:ide i:ide
+" ctrl+j/k:全模式 vim 接管
+"   - normal/visual:nnoremap/xnoremap 走 <C-d>/<C-u> 半页跳
+"   - insert:imap 翻译成 ↓/↑,既能在编辑器内移动光标,又能让 lookup 弹窗(swing 内部
+"     只识别方向键)选 next/prev item;同时 IDE keymap 里 ctrl+j/k -> EditorDown/Up
+"     仍生效于纯 popup 焦点(SearchEverywhere / FindUsages 等)
+sethandler <C-j> n-v:vim i:vim
+sethandler <C-k> n-v:vim i:vim
+imap <C-j> <Down>
+imap <C-k> <Up>
+" Tab/S-Tab:insert 模式交回 IDE,让 lookup 弹窗的 Select Next/Prev Completion Option
+" 生效;normal/visual 留给 vim,<C-i>(== <Tab>) 的 nnoremap Forward 不受影响
+sethandler <Tab>   n-v:vim i:ide
+sethandler <S-Tab> n-v:vim i:ide
+" Space:全模式交给 vim
+"   - normal/visual:作为 mapleader,各种 <leader>xx 映射要走 vim
+"   - insert:vim 插入字面空格;否则会被 IDE keymap 里 `space w`/`space l` 之类的
+"     chord 拦下等第二键,空格输入失效
+sethandler <Space> n-v:vim i:vim
+
+" ============================================================
+" Normal 模式
+" ============================================================
+
+" --- 光标移动 ---
+nnoremap J 5j
+nnoremap K 5k
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
+nnoremap H 3h
+nnoremap L 3l
+nnoremap W 3w
+nnoremap E 3e
+nnoremap B 3b
+nnoremap <C-o> :action Back<CR>
+nnoremap <C-i> :action Forward<CR>
+
+" --- 窗口与分组 ---
+" JetBrains 仅支持上下/左右两种分屏方向;h/k 退化映射到对应方向
+nnoremap zh :action SplitVertically<CR>
+nnoremap zj :action SplitHorizontally<CR>
+nnoremap zk :action SplitHorizontally<CR>
+nnoremap zl :action SplitVertically<CR>
+nnoremap zq :action Unsplit<CR>
+nnoremap zQ :action UnsplitAll<CR>
+" JetBrains 没有按方向 focus group 的 action,统一用 Next/PrevSplitter 凑合
+nnoremap <leader>k :action PrevSplitter<CR>
+nnoremap <leader>j :action NextSplitter<CR>
+nnoremap <leader>h :action PrevSplitter<CR>
+nnoremap <leader>l :action NextSplitter<CR>
+" 视图大小调整
+nnoremap <Up>    :action StretchSplitToTop<CR>
+nnoremap <Down>  :action StretchSplitToBottom<CR>
+nnoremap <Left>  :action StretchSplitToLeft<CR>
+nnoremap <Right> :action StretchSplitToRight<CR>
+" 关闭组合键
+nnoremap <leader>qq :action CloseAllEditorsButActive<CR>
+nnoremap <leader>ql :action CloseAllToTheRight<CR>
+nnoremap <leader>qh :action CloseAllToTheLeft<CR>
+" 新建临时文件(JetBrains 没有 untitled,用 scratch 替代)
+nnoremap tt :action NewScratchFile<CR>
+
+" --- 搜索与导航 ---
+nnoremap <leader>f  :action ActivateFindToolWindow<CR>
+nnoremap <leader>ef :action GotoFile<CR>
+nnoremap <leader>eg :action FindInPath<CR>
+nnoremap <leader>eo :action RecentFiles<CR>
+nnoremap <leader>eb :action Switcher<CR>
+nnoremap <leader><CR> :nohlsearch<CR>
+
+" --- 文本编辑 ---
+nnoremap ; :
+nnoremap S :w<CR>
+nnoremap Q :q<CR>
+nnoremap ` ~
+nnoremap ' %
+nnoremap , 0
+nnoremap . $
+xnoremap v' v%
+nnoremap d' d%
+nnoremap c' c%
+xnoremap v, v0
+nnoremap d, d0
+nnoremap c, c0
+xnoremap v. v$h
+nnoremap d. v$hd
+nnoremap c. c$
+nnoremap Y y$
+nnoremap U <C-r>
+nnoremap <CR> :action EditorSelectWord<CR>
+nnoremap <BS> :action EditorUnSelectWord<CR>
+
+" --- 代码操作 ---
+nnoremap <leader>gf :action ReformatCode<CR>
+nnoremap gj :action GotoDeclaration<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap go :action GotoTypeDeclaration<CR>
+nnoremap gh :action ShowHoverInfo<CR>
+nnoremap ga :action ShowIntentionActions<CR>
+nnoremap gr :action FindUsages<CR>
+nnoremap gR :action RenameElement<CR>
+nnoremap gT :action ActivateProblemsViewToolWindow<CR>
+
+" --- 禁用 ---
+nnoremap gf <Nop>
+nnoremap q  <Nop>
+
+" --- 侧边栏面板 ---
+nnoremap <leader>w :action ActivateProjectToolWindow<CR>
+nnoremap <leader>v :action ActivateVersionControlToolWindow<CR>
+nnoremap <leader>d :action ActivateDebugToolWindow<CR>
+nnoremap <leader>r :action FindUsages<CR>
+nnoremap <leader>o :action ActivateStructureToolWindow<CR>
+nnoremap <leader>m :action ActivateBookmarksToolWindow<CR>
+
+" ============================================================
+" Visual 模式
+" ============================================================
+
+xnoremap J 5j
+xnoremap K 5k
+xnoremap <C-j> <C-d>
+xnoremap <C-k> <C-u>
+xnoremap H 3h
+xnoremap L 3l
+xnoremap W 3w
+xnoremap E 3e
+xnoremap B 3b
+xnoremap <CR> :action EditorSelectWord<CR>
+xnoremap <BS> :action EditorUnSelectWord<CR>
+xnoremap <leader>gf :action ReformatCode<CR>
+
+" 禁用
+xnoremap gf <Nop>
+xnoremap u  <Nop>
+xnoremap U  <Nop>
+xnoremap <leader>u u
+xnoremap <leader>U U

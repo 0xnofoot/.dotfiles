@@ -40,19 +40,25 @@
 │   ├── .config.sh      # 链接整目录到 ~/.config/karabiner
 │   ├── .gitignore      # 排除 automatic_backups/（运行时备份）
 │   └── karabiner.json
-└── vscode/             # vscode/cursor 配置
-    ├── .config.sh      # 链接配置文件到应用用户目录 + 检测 CLI 安装扩展
-    ├── settings.json
-    ├── keybindings.json
-    ├── extensions/             # 扩展列表
-    │   ├── shared.txt          # Code 和 Cursor 共享扩展
-    │   ├── code.txt            # Code 独有扩展
-    │   ├── cursor.txt          # Cursor 独有扩展
-    │   └── vsix.txt            # 需要 VSIX 本地安装的扩展
-    ├── default-keybindings/    # 各编辑器导出的默认快捷键 JSON（git 跟踪）
-    └── scripts/
-        ├── sync-extensions.sh             # 扩展列表同步脚本
-        └── generate-disabled-defaults.py  # 默认快捷键禁用列表生成脚本
+├── vscode/             # vscode/cursor 配置
+│   ├── .config.sh      # 链接配置文件到应用用户目录 + 检测 CLI 安装扩展
+│   ├── settings.json
+│   ├── keybindings.json
+│   ├── extensions/             # 扩展列表
+│   │   ├── shared.txt          # Code 和 Cursor 共享扩展
+│   │   ├── code.txt            # Code 独有扩展
+│   │   ├── cursor.txt          # Cursor 独有扩展
+│   │   └── vsix.txt            # 需要 VSIX 本地安装的扩展
+│   ├── default-keybindings/    # 各编辑器导出的默认快捷键 JSON（git 跟踪）
+│   └── scripts/
+│       ├── sync-extensions.sh             # 扩展列表同步脚本
+│       └── generate-disabled-defaults.py  # 默认快捷键禁用列表生成脚本
+└── jetbrains/          # JetBrains 系 IDE（AS / IDEA / PyCharm ...）配置
+    ├── .config.sh      # 扫描已安装产品链接 keymap + 根级链 ~/.ideavimrc;插件靠 IDE 内 Marketplace 手装
+    ├── keymaps/
+    │   └── Custom.xml  # parent="VSCode OSX" 的差异 keymap(焦点/分屏/调试/书签等)
+    ├── ideavimrc       # IdeaVim 配置;sethandler 路由 ctrl/Tab/Space 到 IDE 或 vim,详见下方"特殊处理"
+    └── plugins.txt     # 必装插件清单(VSCode Keymap / IdeaVim)
 ```
 
 ## 安装机制
@@ -68,6 +74,7 @@
 - claude 特殊处理：不链接整目录，逐文件将受管条目（`CLAUDE.md`、`settings.json`、`commands/`）链接到 `~/.claude`，运行时数据（历史记录、缓存等）保留在 `~/.claude` 真实目录中，不进入仓库
 - lazygit 特殊处理：`zsh/env.zsh` 导出 `XDG_CONFIG_HOME=~/.config`，使 macOS 上的 lazygit 也读取 `~/.config/lazygit`，与 Linux 路径统一
 - git 特殊处理：不走 symlink。用户 `~/.gitconfig` 只保留私有内容（`[user]`、`[commit] template`、`[url] insteadOf`、`[core] hooksPath` 等）不入库，仓库用 `git/common.gitconfig` 集中维护公共片段（含 delta、excludesfile 等所有通用配置），由 `.config.sh` 幂等地 `git config --global --add include.path` 接入
+- jetbrains 特殊处理：JetBrains 系 IDE 配置目录版本化（`AndroidStudio<ver>/`、`IntelliJIdea<ver>/` ...），`.config.sh` 用前缀白名单 glob 匹配 `~/Library/Application Support/{Google,JetBrains}/<Product><ver>/`（Linux 对应 `~/.config/{Google,JetBrains}/`），只把 `keymaps/Custom.xml` 链接进去；**不管 `options/keymap.xml`**——IDE 会回写该文件,symlink 会被穿透污染仓库,改成首次启动后到 Settings > Keymap 手动切到 Custom。`Custom.xml` 用 `parent="VSCode OSX"`,只写 diff,依赖用户先在 Marketplace 装 VSCode Keymap 插件;JetBrains 没有稳定的插件 CLI,`plugins.txt` 仅作清单提示。**Settings Sync / Settings Repository 启用时云端会回写覆盖 keymaps/,需在 IDE 内禁用同步或把 keymap 排除在同步范围外**。**IDE 改动 keymap 后会重写 `Custom.xml`(action 按字母排序、注释丢失、空 action 节点保留)**,这是 by design,git diff 时按"IDE 是编辑器,dotfiles 是版本控制"心态接受。IdeaVim 配置 `ideavimrc` 同目录维护(共用此分类),`.config.sh` 在 IDE 检测之前先做 `~/.ideavimrc` 根级 symlink(IdeaVim 不走 XDG),即使没装 IDE 也链接,避免后装 IDE 时漏配。**`ideavimrc` 里 sethandler 路由策略**:`ctrl+h/l/b/f/m` 全模式给 IDE(避开 vim 默认语义);`ctrl+j/k` 全模式给 vim,insert 模式 `imap <C-j> <Down>` / `imap <C-k> <Up>` 翻译成方向键——补全弹窗(lookup)用 swing 内部 InputMap 只认硬编码方向键,普通 keymap action 进不去,翻译成方向键才能选 next/prev item;`Tab`/`S-Tab` 在 insert 给 IDE(配合 keymap 把 `EditorLookupSelectionDown/Up` 绑到 tab/shift+tab 实现补全切换),normal/visual 留给 vim(`<C-i>` == `<Tab>` 的 jumplist Forward 不受影响);`Space` 全模式给 vim,否则 IDE keymap 里 `space w`/`space l` 之类的 chord 会拦下空格输入
 
 ## .config.sh 规范
 
