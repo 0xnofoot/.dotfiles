@@ -1,11 +1,14 @@
 <keymap version="1" name="Custom" parent="VSCode OSX">
   <action id="$Copy">
+    <keyboard-shortcut first-keystroke="meta c" />
     <keyboard-shortcut first-keystroke="y" second-keystroke="y" />
   </action>
   <action id="$Cut">
+    <keyboard-shortcut first-keystroke="meta x" />
     <keyboard-shortcut first-keystroke="d" second-keystroke="d" />
   </action>
   <action id="$Paste">
+    <keyboard-shortcut first-keystroke="meta v" />
     <keyboard-shortcut first-keystroke="p" second-keystroke="p" />
   </action>
   <action id="ActivateProjectToolWindow">
