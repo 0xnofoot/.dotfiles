@@ -77,15 +77,12 @@
   <action id="HideActiveWindow">
     <keyboard-shortcut first-keystroke="alt q" />
     <keyboard-shortcut first-keystroke="q" />
-    <keyboard-shortcut first-keystroke="space" second-keystroke="w" />
   </action>
   <action id="HideAllWindows">
     <keyboard-shortcut first-keystroke="meta e" />
   </action>
   <action id="InsertInlineCompletionAction" />
-  <action id="JumpToLastWindow">
-    <keyboard-shortcut first-keystroke="space" second-keystroke="l" />
-  </action>
+  <action id="JumpToLastWindow" />
   <action id="MoveEditorToOppositeTabGroup">
     <keyboard-shortcut first-keystroke="shift ctrl alt l" />
     <keyboard-shortcut first-keystroke="shift ctrl alt h" />

@@ -128,6 +128,7 @@ nnoremap q  <Nop>
 
 " --- 侧边栏面板 ---
 nnoremap <leader>w :action ActivateProjectToolWindow<CR>
+nnoremap <leader><Space> :action ActivateProjectToolWindow<CR>
 nnoremap <leader>v :action ActivateVersionControlToolWindow<CR>
 nnoremap <leader>d :action ActivateDebugToolWindow<CR>
 nnoremap <leader>r :action FindUsages<CR>
