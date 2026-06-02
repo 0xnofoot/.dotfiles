@@ -87,10 +87,7 @@
     <keyboard-shortcut first-keystroke="shift ctrl alt l" />
     <keyboard-shortcut first-keystroke="shift ctrl alt h" />
   </action>
-  <action id="NewElement">
-    <keyboard-shortcut first-keystroke="t" />
-    <keyboard-shortcut first-keystroke="m" />
-  </action>
+  <action id="NewElement" />
   <action id="NextEditPredictionProceedAction" />
   <action id="NextParameter" />
   <action id="NextSplitter">
