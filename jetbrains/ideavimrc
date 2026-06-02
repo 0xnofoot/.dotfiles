@@ -32,6 +32,10 @@ imap <C-k> <Up>
 " 生效;normal/visual 留给 vim,<C-i>(== <Tab>) 的 nnoremap Forward 不受影响
 sethandler <Tab>   n-v:vim i:ide
 sethandler <S-Tab> n-v:vim i:ide
+" C-o/C-i:normal/visual 给 vim(映射到 Back/Forward 导航);insert 给 IDE
+" IdeaVim 不把 <C-i> 和 <Tab> 的 sethandler 等同处理,需单独声明
+sethandler <C-o> n-v:vim i:ide
+sethandler <C-i> n-v:vim i:ide
 " Space:全模式交给 vim
 "   - normal/visual:作为 mapleader,各种 <leader>xx 映射要走 vim
 "   - insert:vim 插入字面空格;否则会被 IDE keymap 里 `space w`/`space l` 之类的
