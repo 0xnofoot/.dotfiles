@@ -63,6 +63,9 @@ success "Homebrew 就绪"
 
 # ── Step 3/5: 安装依赖包 ──────────────────────────────────
 info "Step 3/5: 通过 Brewfile 安装依赖包..."
+# 第三方 tap 需先 trust 才能被 brew bundle 加载（Homebrew 安全机制）
+brew trust laishulu/homebrew 2>/dev/null || true
+brew trust daipeihust/tap    2>/dev/null || true
 # --upgrade: 已有包强制升到最新 stable，保持多机版本一致。
 # Homebrew 不支持精确 pin 到 patch 版本（除极少数版本化 formula 如 node@20），
 # 统一滚动到最新是唯一可行的跨机对齐策略；配置需跟随上游 breaking change。
