@@ -26,6 +26,9 @@
     <keyboard-shortcut first-keystroke="shift alt q" />
   </action>
   <action id="CodeFloatingToolbar.GotoNextMenu" />
+  <action id="copilot.applyInlays">
+    <keyboard-shortcut first-keystroke="alt enter" />
+  </action>
   <action id="CommentByLineComment">
     <keyboard-shortcut first-keystroke="ctrl slash" />
   </action>
@@ -59,6 +62,7 @@
   </action>
   <action id="EditorScrollToCenter" />
   <action id="EditorSelectLine" />
+  <action id="EditorStartNewLine" />
   <action id="EditorTab" />
   <action id="EditorToggleUseSoftWraps" />
   <action id="EditorUp">
@@ -82,9 +86,6 @@
     <keyboard-shortcut first-keystroke="meta e" />
   </action>
   <action id="InsertInlineCompletionAction" />
-  <action id="copilot.applyInlays">
-    <keyboard-shortcut first-keystroke="meta enter" />
-  </action>
   <action id="JumpToLastWindow" />
   <action id="MoveEditorToOppositeTabGroup">
     <keyboard-shortcut first-keystroke="shift ctrl alt l" />
@@ -141,6 +142,7 @@
   <action id="ShowBookmarks">
     <keyboard-shortcut first-keystroke="shift ctrl m" />
   </action>
+  <action id="SplitChooser.Duplicate" />
   <action id="SplitChooser.NextWindow" />
   <action id="SplitHorizontally">
     <keyboard-shortcut first-keystroke="shift alt j" />
@@ -165,6 +167,7 @@
   </action>
   <action id="Tab" />
   <action id="Terminal.CommandCompletion" />
+  <action id="Terminal.SmartCommandExecution.Run" />
   <action id="TodoViewGroupByFlattenPackage" />
   <action id="ToggleBookmark">
     <keyboard-shortcut first-keystroke="ctrl m" />
