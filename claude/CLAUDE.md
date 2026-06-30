@@ -15,19 +15,7 @@
 
 ## 代码库探索
 
-探索代码库、查找代码依赖、追踪调用链、影响分析、找死代码等结构性查询时，**优先使用 `codebase-memory` 知识图谱能力**（MCP 工具前缀 `mcp__codebase-memory-mcp__`），仅当该能力不可用或项目未索引时，才退回 `find` / `grep` 等普通命令。
-
-| 需求 | 优先工具 |
-|------|----------|
-| 谁调用了 X / X 调用了谁 / 调用链 | `trace_path` |
-| 按名称或模式查找符号 | `search_graph` |
-| 文本搜索（图谱增强的 grep） | `search_code` |
-| 架构概览、模块聚类 | `get_architecture` |
-| 读取某符号源码 | `get_code_snippet` |
-| 复杂多跳 / 跨服务查询 | `query_graph`（Cypher） |
-| git diff 影响面分析 | `detect_changes` |
-
-使用前先 `list_projects` 确认项目已索引；未索引时可 `index_repository` 建索引，或直接退回普通命令。详细工作流见 `~/.claude/skills/codebase-memory/SKILL.md`。
+探索代码库、查找依赖、追踪调用链、影响分析、找死代码等结构性查询，**优先用 `codebase-memory` 知识图谱**（MCP 工具前缀 `mcp__codebase-memory-mcp__`），不可用或项目未索引时才退回 `find` / `grep`。具体工具映射与工作流见 `~/.claude/skills/codebase-memory/SKILL.md`。
 
 ## 其他非常驻规则
 
