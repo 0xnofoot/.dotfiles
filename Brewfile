@@ -23,6 +23,7 @@ brew "fd"
 brew "ripgrep"
 brew "bat"
 brew "jless"
+brew "jq"                        # claude/.config.sh 解析 settings.json 同步 plugin
 brew "eza"
 brew "lazygit"
 brew "git-delta"
@@ -32,7 +33,7 @@ brew "mediainfo"
 brew "trash-cli"
 brew "tldr"
 brew "bottom"
-brew "node"                     # 提供 npx，用于 claude statusLine (ccstatusline) 等工具的运行时加载
+brew "node"                     # 提供 node/npx，用于 claude 插件运行时（claude-hud statusLine 等）
 
 # Media
 brew "mpv"
