@@ -69,16 +69,7 @@
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$HOME/.claude/hooks/warn-prefer-codebase-memory.sh\""
-          }
-        ]
-      },
-      {
-        "matcher": "Grep|Glob",
+        "matcher": "Grep|Glob|Find",
         "hooks": [
           {
             "type": "command",
