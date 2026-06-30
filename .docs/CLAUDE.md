@@ -32,7 +32,8 @@
 │   ├── .config.sh      # 逐文件链接受管条目到 ~/.claude，保留运行时数据
 │   ├── CLAUDE.md       # 全局规则 + 非常驻规则索引（按需 Read 加载）
 │   ├── settings.json
-│   ├── commands/       # 自定义 skills
+│   ├── commands/       # 自定义 slash commands
+│   ├── skills/         # 自定义 skills（如 codebase-memory 知识图谱）
 │   └── on-demand/      # 非常驻规则目录，命中触发条件时按需加载
 │       └── speckit.md  # /speckit.* 命令专属规则
 ├── .docs/              # 维护文档（README.md / CLAUDE.md / USER.md 真实文件、install SOP、tmux 延迟评估记录等）
