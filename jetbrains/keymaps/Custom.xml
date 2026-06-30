@@ -11,6 +11,9 @@
     <keyboard-shortcut first-keystroke="meta v" />
     <keyboard-shortcut first-keystroke="p" second-keystroke="p" />
   </action>
+  <action id="ActivateDebugToolWindow">
+    <keyboard-shortcut first-keystroke="shift meta d" />
+  </action>
   <action id="ActivateProjectToolWindow">
     <keyboard-shortcut first-keystroke="alt w" />
   </action>
@@ -18,6 +21,9 @@
     <keyboard-shortcut first-keystroke="alt z" />
   </action>
   <action id="Android.Designer.AutoArrange" />
+  <action id="Android.Designer.IssuePanel.QuickFixes">
+    <keyboard-shortcut first-keystroke="meta period" />
+  </action>
   <action id="BraceOrQuoteOut" />
   <action id="CloseAllEditorsButActive">
     <keyboard-shortcut first-keystroke="ctrl alt q" />
@@ -26,11 +32,13 @@
     <keyboard-shortcut first-keystroke="shift alt q" />
   </action>
   <action id="CodeFloatingToolbar.GotoNextMenu" />
-  <action id="copilot.applyInlays">
-    <keyboard-shortcut first-keystroke="alt enter" />
-  </action>
   <action id="CommentByLineComment">
     <keyboard-shortcut first-keystroke="ctrl slash" />
+  </action>
+  <action id="Console.TableResult.GotoReferencedResult">
+    <mouse-shortcut keystroke="button1 doubleClick" />
+    <keyboard-shortcut first-keystroke="enter" />
+    <keyboard-shortcut first-keystroke="f2" />
   </action>
   <action id="CopyAbsolutePath">
     <keyboard-shortcut first-keystroke="y" second-keystroke="n" />
@@ -85,7 +93,19 @@
   <action id="HideAllWindows">
     <keyboard-shortcut first-keystroke="meta e" />
   </action>
-  <action id="InsertInlineCompletionAction" />
+  <action id="InsertInlineCompletionAction">
+    <keyboard-shortcut first-keystroke="alt enter" />
+  </action>
+  <action id="InsertInlineCompletionLineAction">
+    <keyboard-shortcut first-keystroke="meta right" />
+    <keyboard-shortcut first-keystroke="ctrl e" />
+    <keyboard-shortcut first-keystroke="end" />
+    <keyboard-shortcut first-keystroke="alt enter" />
+  </action>
+  <action id="InsertInlineCompletionWordAction">
+    <keyboard-shortcut first-keystroke="alt right" />
+    <keyboard-shortcut first-keystroke="alt enter" />
+  </action>
   <action id="JumpToLastWindow" />
   <action id="MoveEditorToOppositeTabGroup">
     <keyboard-shortcut first-keystroke="shift ctrl alt l" />
@@ -142,6 +162,9 @@
   <action id="ShowBookmarks">
     <keyboard-shortcut first-keystroke="shift ctrl m" />
   </action>
+  <action id="ShowIntentionActions">
+    <keyboard-shortcut first-keystroke="meta period" />
+  </action>
   <action id="SplitChooser.Duplicate" />
   <action id="SplitChooser.NextWindow" />
   <action id="SplitHorizontally">
@@ -162,6 +185,9 @@
   <action id="SwitcherIterateItemsFallback" />
   <action id="SwitcherRecentEditedChangedToggleCheckBox" />
   <action id="SwitcherRecentEditedChangedToggleCheckBoxFallback" />
+  <action id="Synchronize">
+    <keyboard-shortcut first-keystroke="shift meta y" />
+  </action>
   <action id="SynchronizeCurrentFile">
     <keyboard-shortcut first-keystroke="r" />
   </action>
