@@ -7,8 +7,8 @@ set -e
 CLAUDE_DST="$HOME/.claude"
 mkdir -p "$CLAUDE_DST"
 
-# 受管条目：CLAUDE.md  settings.json  commands/ skills/  on-demand/
-MANAGED=(CLAUDE.md settings.json commands skills on-demand)
+# 受管条目：CLAUDE.md  settings.json  commands/ skills/ hooks/ on-demand/
+MANAGED=(CLAUDE.md settings.json commands skills hooks on-demand)
 
 for item in "${MANAGED[@]}"; do
   src="$DOTFILES_DIR/claude/$item"

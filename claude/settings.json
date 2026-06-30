@@ -66,6 +66,38 @@
     "command": "bash -lc 'npx -y ccstatusline@latest'",
     "padding": 0
   },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/warn-prefer-codebase-memory.sh\""
+          }
+        ]
+      },
+      {
+        "matcher": "Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/cbm-code-discovery-gate\""
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/cbm-session-reminder\""
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true,
     "pyright-lsp@claude-plugins-official": true
@@ -80,5 +112,7 @@
   },
   "language": "简体中文",
   "autoMemoryEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "model": "sonnet",
+  "have_init_model_to_sonnet": true
 }
