@@ -3,7 +3,7 @@
     "DISABLE_AUTOUPDATER": "1",
     "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
-    "DISABLE_AUTO_COMPACT": "1"
+    "DISABLE_AUTO_COMPACT": "0"
   },
   "permissions": {
     "allow": [
@@ -80,74 +80,5 @@
   },
   "language": "简体中文",
   "autoMemoryEnabled": true,
-  "skipDangerousModePermissionPrompt": true,
-  "lsp": {
-    "kotlin-language-server": {
-      "command": "kotlin-language-server",
-      "args": [],
-      "extensionToLanguage": {
-        ".kt": "kotlin",
-        ".kts": "kotlin"
-      }
-    },
-    "jdtls": {
-      "command": "jdtls",
-      "args": [],
-      "extensionToLanguage": {
-        ".java": "java"
-      }
-    },
-    "xcrun": {
-      "command": "xcrun",
-      "args": [
-        "sourcekit-lsp"
-      ],
-      "extensionToLanguage": {
-        ".swift": "swift"
-      }
-    },
-    "clangd": {
-      "command": "clangd",
-      "args": [
-        "--background-index"
-      ],
-      "extensionToLanguage": {
-        ".c": "c",
-        ".cpp": "cpp",
-        ".cc": "cpp",
-        ".cxx": "cpp",
-        ".h": "c",
-        ".hpp": "cpp",
-        ".m": "objc",
-        ".mm": "objcpp"
-      }
-    },
-    "dart": {
-      "command": "dart",
-      "args": [
-        "language-server",
-        "--client-id=claude-code"
-      ],
-      "extensionToLanguage": {
-        ".dart": "dart"
-      }
-    },
-    "gopls": {
-      "command": "gopls",
-      "args": [],
-      "extensionToLanguage": {
-        ".go": "go"
-      }
-    },
-    "pyright-langserver": {
-      "command": "pyright-langserver",
-      "args": [
-        "--stdio"
-      ],
-      "extensionToLanguage": {
-        ".py": "python",
-        ".pyi": "python"
-      }
-    }
-  }
+  "skipDangerousModePermissionPrompt": true
 }
