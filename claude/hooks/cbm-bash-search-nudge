@@ -11,9 +11,11 @@ payload="$(cat)"
 cmd="$(printf '%s' "$payload" | jq -r '.tool_input.command // empty' 2>/dev/null)" || exit 0
 [ -n "$cmd" ] || exit 0
 
-# 命中搜索类命令（含被 shadow 的 grep/find 与真身 rg/fd/ugrep/bfs 等）
-# 用 bash 内建正则，避免依赖被 shadow 的 grep
-[[ "$cmd" =~ (^|[^[:alnum:]_])(rg|grep|egrep|fgrep|ugrep|ug|find|fd|bfs|ag|ack)([^[:alnum:]_]|$) ]] || exit 0
+# 仅当搜索命令处于「命令位置」（行首，或 ; & | ( 之后，允许 command/sudo/time
+# 等前缀）时才提醒，避免 commit message、echo 参数、含 find 的文件名等误触发。
+# 用 bash 内建正则，避免依赖被 shadow 的 grep。
+re='(^|[;&|(]|'$'\n'')[[:space:]]*((command|sudo|time|nice|nohup|xargs)[[:space:]]+)*(rg|grep|egrep|fgrep|ugrep|ug|find|fd|bfs|ag|ack)([[:space:]]|$)'
+[[ "$cmd" =~ $re ]] || exit 0
 
 jq -cn '{
   hookSpecificOutput: {
