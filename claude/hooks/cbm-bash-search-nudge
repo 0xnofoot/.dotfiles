@@ -1,0 +1,24 @@
+#!/bin/bash
+# PreToolUse(Bash) nudge：主 agent 找代码走 Bash（rg/fd/grep/find），
+# 不触发 cbm-code-discovery-gate（那个只挂 Grep|Glob|Find 工具名）。
+# 本 hook 在 Bash 命令含搜索类命令时注入一句提醒，**从不阻断**，
+# 任何异常静默 exit 0。判断权留给模型：结构性查询才该走 codebase-memory。
+set -e
+
+command -v jq >/dev/null 2>&1 || exit 0
+
+payload="$(cat)"
+cmd="$(printf '%s' "$payload" | jq -r '.tool_input.command // empty' 2>/dev/null)" || exit 0
+[ -n "$cmd" ] || exit 0
+
+# 命中搜索类命令（含被 shadow 的 grep/find 与真身 rg/fd/ugrep/bfs 等）
+# 用 bash 内建正则，避免依赖被 shadow 的 grep
+[[ "$cmd" =~ (^|[^[:alnum:]_])(rg|grep|egrep|fgrep|ugrep|ug|find|fd|bfs|ag|ack)([^[:alnum:]_]|$) ]] || exit 0
+
+jq -cn '{
+  hookSpecificOutput: {
+    hookEventName: "PreToolUse",
+    additionalContext: "提醒：结构性代码查询（找定义/调用者/调用链/影响分析/死代码）应先用 codebase-memory MCP（mcp__codebase-memory-mcp__search_graph / trace_path / get_code_snippet / query_graph）。当前 Bash 搜索仅适合纯文本串/文件名检索；若本次是结构性查询，请改走 MCP。"
+  }
+}'
+exit 0
