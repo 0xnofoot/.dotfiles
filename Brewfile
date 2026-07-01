@@ -21,6 +21,8 @@ brew "tree-sitter-cli"
 brew "fzf"
 brew "fd"
 brew "ripgrep"
+brew "ugrep"                     # 独立真身；用 ugrep/ug 直接调用（Claude Code 的 grep shadow 不影响此名）
+brew "bfs"                       # 广度优先 find，find 兼容语法
 brew "bat"
 brew "jless"
 brew "jq"                        # claude/.config.sh 解析 settings.json 同步 plugin
