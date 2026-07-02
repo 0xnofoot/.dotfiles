@@ -3,7 +3,14 @@
     "DISABLE_AUTOUPDATER": "1",
     "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
-    "DISABLE_AUTO_COMPACT": "0"
+    "DISABLE_AUTO_COMPACT": "0",
+    "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1",
+    "ANTHROPIC_BASE_URL": "http://127.0.0.1:3456",
+    "ANTHROPIC_API_BASE_URL": "http://127.0.0.1:3456",
+    "CLAUDE_AGENT_API_BASE_URL": "http://127.0.0.1:3456",
+    "ANTHROPIC_MODEL": "futu/glm-5.2-tencent",
+    "ANTHROPIC_SMALL_FAST_MODEL": "futu/deepseek-v4-flash",
+    "TZ": "UTC"
   },
   "permissions": {
     "allow": [
@@ -71,15 +78,6 @@
             "command": "\"$HOME/.claude/hooks/cbm-code-discovery-gate\""
           }
         ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$HOME/.claude/hooks/cbm-bash-search-nudge\""
-          }
-        ]
       }
     ],
     "SessionStart": [
@@ -127,6 +125,5 @@
   "language": "简体中文",
   "autoMemoryEnabled": true,
   "skipDangerousModePermissionPrompt": true,
-  "model": "sonnet",
-  "have_init_model_to_sonnet": true
+  "apiKeyHelper": "/Users/toofonwang/.claude-code-router/bin/ccr-claude-code-api-key-cc"
 }
