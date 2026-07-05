@@ -124,5 +124,6 @@
   },
   "language": "简体中文",
   "autoMemoryEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "autoCompactEnabled": true
 }
