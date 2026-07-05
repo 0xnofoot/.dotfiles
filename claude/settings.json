@@ -114,6 +114,12 @@
         "source": "github",
         "repo": "thedotmack/claude-mem"
       }
+    },
+    "counter-trading-rd-ai": {
+      "source": {
+        "source": "git",
+        "url": "git@gitlab.futunn.com:counter-trading-rd/marketplace.git"
+      }
     }
   },
   "language": "简体中文",
