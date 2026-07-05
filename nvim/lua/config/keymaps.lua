@@ -84,7 +84,11 @@ for _, mapping in ipairs(nmappings) do
     vim.keymap.set(mapping.mode or "n", mapping.from, mapping.to, { noremap = true })
 end
 
--- 注释快捷键（使用 Neovim 内置 gc/gcc）
-vim.keymap.set('n', '<C-_>', 'gcc', { remap = true })
-vim.keymap.set('v', '<C-_>', 'gc', { remap = true })
-vim.keymap.set('i', '<C-_>', '<Esc>gcca', { remap = true })
+-- 注释快捷键（使用 Neovim 0.10+ 内置 gc/gcc）
+-- kitty keyboard protocol（kitty + tmux allow-passthrough）下 Ctrl+/ 被精确识别为 <C-/>，
+-- 传统终端把 Ctrl+/ 编码为 0x1f 即 <C-_>。两者都绑，跨协议/SSH 兼容。
+for _, lhs in ipairs({ '<C-_>', '<C-/>' }) do
+    vim.keymap.set('n', lhs, 'gcc', { remap = true })
+    vim.keymap.set('v', lhs, 'gc', { remap = true })
+    vim.keymap.set('i', lhs, '<Esc>gcca', { remap = true })
+end
