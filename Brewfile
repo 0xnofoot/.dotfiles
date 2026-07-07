@@ -35,7 +35,8 @@ brew "mediainfo"
 brew "trash-cli"
 brew "tldr"
 brew "bottom"
-brew "node"                     # 提供 node/npx，用于 claude 插件运行时（claude-hud statusLine 等）
+brew "bun"                      # claude-hud statusLine 用 bun 执行 TS（bun --env-file ... src/index.ts）
+brew "node"                     # 通用 node/npx 运行时（部分 claude 插件依赖）
 
 # Media
 brew "mpv"
@@ -57,4 +58,5 @@ if OS.linux?
   # 系统工具
   brew "xclip"                  # 剪贴板桥接（Wayland/X11）
   brew "unzip"                  # install.sh 解压 Nerd Fonts
+  brew "ruby"                   # tmux-jump 依赖（macOS 系统自带 /usr/bin/ruby，不装）
 end

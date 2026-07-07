@@ -260,4 +260,4 @@ bind -n M-Backspace switch-client -l
 - **TPM 首次装后插件没加载**：跑 `~/.config/tmux/plugins/tpm/bin/install_plugins`，然后 `tmux source-file ~/.config/tmux/tmux.conf` 或 `tmux kill-server` 再起
 - **floax popup 打不开**：确认 tmux >= 3.2（`tmux -V`），低版本不支持 display-popup
 - **M-f 在 popup 内按了没关闭**：floax 用 session 名判断是否在 popup 内，确认 popup 里 `tmux display -p '#{session_name}'` 输出是 `scratch`
-- **tmux-jump 无反应**：依赖 Ruby，`ruby --version` 验证（macOS 自带；Linux 可能需 `apt install ruby`）
+- **tmux-jump 无反应**：依赖 Ruby，`ruby --version` 验证（macOS 系统自带 /usr/bin/ruby；Linux 由 Brewfile 自动安装）
