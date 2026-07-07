@@ -24,7 +24,7 @@ for item in "${MANAGED[@]}"; do
 done
 
 # ── codebase-memory-mcp 安装 ───────────────────────────────
-# 269MB 编译二进制，不入库；官方 install.sh 从 GitHub release 按 OS/arch 下载到
+# 约 270MB 量级的编译二进制，不入库；官方 install.sh 从 GitHub release 按 OS/arch 下载到
 # ~/.local/bin（含 checksum 校验、macOS 重签名）。用 --skip-config 跳过官方的
 # "配置 agent" 步骤——那步会重写 cbm-* hooks 与注册 MCP，而 cbm hooks 已由本仓库
 # claude/hooks/ + settings.json 管理（软链），让官方写会写穿污染仓库。MCP 改用
@@ -35,7 +35,7 @@ install_codebase_memory_mcp() {
   if [[ -x "$bin" ]] && "$bin" --version >/dev/null 2>&1; then
     printf "  \033[2mcodebase-memory-mcp 已安装：%s\033[0m\n" "$("$bin" --version 2>&1 | head -1)"
   else
-    printf "  \033[2m下载 codebase-memory-mcp（约 269MB）...\033[0m\n"
+    printf "  \033[2m下载 codebase-memory-mcp（约 270MB 量级）...\033[0m\n"
     curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh \
       | bash -s -- --skip-config \
       || { printf "  \033[2mcodebase-memory-mcp 下载失败，跳过\033[0m\n"; return 0; }
@@ -67,12 +67,14 @@ sync_claude_plugins() {
   fi
 
   # 1. 注册第三方 marketplace（内置官方源不在此列，install 时自动解析）
-  while read -r repo; do
-    [[ -n "$repo" ]] || continue
-    claude plugin marketplace add "$repo" >/dev/null 2>&1 \
-      && printf "  \033[2mmarketplace + %s\033[0m\n" "$repo" \
-      || printf "  \033[2mmarketplace ~ %s（已存在或失败）\033[0m\n" "$repo"
-  done < <(jq -r '.extraKnownMarketplaces // {} | to_entries[] | select(.value.source.source=="github") | .value.source.repo' "$settings")
+  #    github 源传 repo（owner/name），git 源传 url（如 GitLab SSH），二者均可被
+  #    `claude plugin marketplace add` 当作 clone 目标处理。
+  while read -r src; do
+    [[ -n "$src" ]] || continue
+    claude plugin marketplace add "$src" >/dev/null 2>&1 \
+      && printf "  \033[2mmarketplace + %s\033[0m\n" "$src" \
+      || printf "  \033[2mmarketplace ~ %s（已存在或失败）\033[0m\n" "$src"
+  done < <(jq -r '.extraKnownMarketplaces // {} | to_entries[] | .value.source | if .source=="github" then .repo elif .source=="git" then .url else empty end' "$settings")
 
   # 2. 安装声明的插件；value=false 的装后置为 disabled
   while IFS=$'\t' read -r plugin enabled; do
