@@ -94,6 +94,7 @@
     "pyright-lsp@claude-plugins-official": true,
     "claude-hud@claude-hud": true,
     "claude-mem@thedotmack": true,
+    "caveman@caveman": true,
     "cortex@counter-trading-rd-ai": true
   },
   "extraKnownMarketplaces": {
@@ -113,6 +114,12 @@
       "source": {
         "source": "github",
         "repo": "thedotmack/claude-mem"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
       }
     },
     "counter-trading-rd-ai": {
