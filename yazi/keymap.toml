@@ -80,6 +80,11 @@ keymap = [
 	{ on = [ "c", "d" ], run = "cd --interactive",            desc = "Change dir" },
 	{ on = [ "c", "m" ], run = "shell 'chmod +x %s' --block", desc = "Make executable" },
 
+	{ on = [ "o", "a" ], run = "plugin compress",       desc = "Compress selected" },
+	{ on = [ "o", "p" ], run = "plugin compress -p",    desc = "Compress (password)" },
+	{ on = [ "o", "l" ], run = "plugin compress -l",    desc = "Compress (level)" },
+	{ on = [ "o", "u" ], run = "plugin compress -phl",  desc = "Compress (password+header+level)" },
+
 	{ on = ":", run = "shell --block --interactive",           desc = "Shell (block)" },
 	{ on = ";", run = "shell --block --interactive",           desc = "Shell (block)" },
 	{ on = "'", run = "shell --interactive",                   desc = "Shell" },

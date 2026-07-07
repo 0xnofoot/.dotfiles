@@ -13,6 +13,11 @@ use = "boydaihungst/restore"
 rev = "0e08704"
 hash = "e4d7c06510b4fe5f64ae31fbb4e017d6"
 
+[[plugin.deps]]
+use = "KKV9/compress"
+rev = "e60e122"
+hash = "fbaf0adc8efc59555b748d36aab62d40"
+
 [[flavor.deps]]
 use = "matt-dong-123/gruvbox-material"
 rev = "6c36491"

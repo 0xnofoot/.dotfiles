@@ -59,4 +59,5 @@ if OS.linux?
   brew "xclip"                  # 剪贴板桥接（Wayland/X11）
   brew "unzip"                  # install.sh 解压 Nerd Fonts
   brew "ruby"                   # tmux-jump 依赖（macOS 系统自带 /usr/bin/ruby，不装）
+  brew "zip"                    # yazi compress.yazi 的 zip 格式（macOS 系统自带 /usr/bin/zip，不装）
 end

@@ -261,3 +261,18 @@ bind -n M-Backspace switch-client -l
 - **floax popup 打不开**：确认 tmux >= 3.2（`tmux -V`），低版本不支持 display-popup
 - **M-f 在 popup 内按了没关闭**：floax 用 session 名判断是否在 popup 内，确认 popup 里 `tmux display -p '#{session_name}'` 输出是 `scratch`
 - **tmux-jump 无反应**：依赖 Ruby，`ruby --version` 验证（macOS 系统自带 /usr/bin/ruby；Linux 由 Brewfile 自动安装）
+
+## 3. yazi 压缩打包
+
+基于 [compress.yazi](https://github.com/KKV9/compress.yazi) 插件，`o` 子组：
+
+| 键位 | 功能 |
+|------|------|
+| `o a` | 压缩选中文件（默认 zip） |
+| `o p` | 密码压缩（zip/7z/rar） |
+| `o l` | 指定压缩级别 |
+| `o u` | 全选项（密码 + header 加密 + 级别） |
+
+- 压缩时输入归档名，扩展名决定格式（`.zip` / `.7z` / `.tar.gz` / `.tar.xz` 等，共 10 种）
+- 依赖：zip（macOS 自带，Linux 由 Brewfile 装）、7z（p7zip，Brewfile 已含）、tar/gzip/xz（系统自带）；rar 等冷门格式按需另装
+- 解压用 yazi 内置（归档文件按 `o` 或回车触发 `extract`）
