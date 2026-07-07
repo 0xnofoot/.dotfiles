@@ -76,7 +76,7 @@ keymap = [
 	{ on = [ "c", "I" ], run = "rename --cursor=start",              desc = "Rename (cursor at start)" },
 	{ on = [ "c", "A" ], run = "rename --cursor=end",                desc = "Rename (cursor at end)" },
 	{ on = [ "c", "s" ], run = "rename --empty=ext --cursor=end",    desc = "Rename (clear ext, keep name)" },
-	{ on = [ "c", "b" ], run = "shell '~/.config/yazi/scripts/bulk-rename.sh' --block", desc = "Bulk rename" },
+	{ on = [ "c", "b" ], run = "rename", desc = "Rename (bulk rename if multiple selected)" },
 	{ on = [ "c", "d" ], run = "cd --interactive",            desc = "Change dir" },
 	{ on = [ "c", "m" ], run = "shell 'chmod +x %s' --block", desc = "Make executable" },
 
