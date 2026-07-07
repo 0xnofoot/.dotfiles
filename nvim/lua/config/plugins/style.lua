@@ -1,4 +1,4 @@
-M = {
+local M = {
     {
         -- 基本主题设置
         "theniceboy/nvim-deus",

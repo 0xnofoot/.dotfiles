@@ -48,7 +48,6 @@ local nmappings = {
     { from = "<c-c>",        to = "<nop>",                                               mode = mode_nv },
     { from = "<c-w>",        to = "<nop>",                                               mode = mode_nv },
     { from = "q",            to = "<nop>",                                               mode = mode_nv },
-    { from = "Q",            to = "<nop>",                                               mode = mode_nv },
 
     { from = ";",            to = ":",                                                   mode = mode_nv },
     { from = "S",            to = "<Cmd>write<CR>",                                       mode = mode_nv },

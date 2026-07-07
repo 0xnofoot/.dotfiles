@@ -1,4 +1,4 @@
-M = {
+local M = {
     {
         -- 相同词汇高亮
         "RRethy/vim-illuminate",

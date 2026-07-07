@@ -1,4 +1,4 @@
-M = {
+local M = {
     'neovim/nvim-lspconfig',
 
     config = function()

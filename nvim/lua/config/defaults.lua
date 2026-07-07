@@ -3,7 +3,8 @@ vim.o.termguicolors = true
 -- 命令行模式使用竖线光标
 vim.o.guicursor = vim.o.guicursor .. ',c:ver25'
 
--- 打开终端时的一些配置 vim.g.terminal_color_0  = '#000000'
+-- 打开终端时的一些配置
+vim.g.terminal_color_0             = '#000000'
 vim.g.terminal_color_1             = '#FF5555'
 vim.g.terminal_color_2             = '#50FA7B'
 vim.g.terminal_color_3             = '#F1FA8C'

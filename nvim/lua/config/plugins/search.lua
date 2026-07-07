@@ -1,6 +1,6 @@
 local m = { noremap = true, nowait = true }
 
-M = {
+local M = {
     {
         'ibhagwan/fzf-lua',
         keys = { '<c-f>', '<leader>ef' },
