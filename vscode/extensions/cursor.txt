@@ -11,3 +11,4 @@ shape-app.ktfmtter
 vknabel.vscode-swiftformat
 vknabel.vscode-swiftlint
 
+monokai.theme-monokai-pro-vscode

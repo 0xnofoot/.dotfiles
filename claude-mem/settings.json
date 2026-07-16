@@ -1,5 +1,5 @@
 {
-  "CLAUDE_MEM_MODEL": "futu/deepseek-v4-pro",
+  "CLAUDE_MEM_MODEL": "futu/deepseek-v4-flash",
   "CLAUDE_MEM_CONTEXT_OBSERVATIONS": "50",
   "CLAUDE_MEM_WORKER_PORT": "37701",
   "CLAUDE_MEM_WORKER_HOST": "127.0.0.1",
@@ -49,7 +49,7 @@
   "CLAUDE_MEM_TIER_SIMPLE_MODEL": "futu/deepseek-v4-flash",
   "CLAUDE_MEM_TIER_SUMMARY_MODEL": "",
   "CLAUDE_MEM_TIER_FAST_MODEL": "futu/deepseek-v4-flash",
-  "CLAUDE_MEM_TIER_SMART_MODEL": "futu/deepseek-v4-pro",
+  "CLAUDE_MEM_TIER_SMART_MODEL": "futu/deepseek-v4-flash",
   "CLAUDE_MEM_CHROMA_ENABLED": "true",
   "CLAUDE_MEM_CHROMA_MODE": "local",
   "CLAUDE_MEM_CHROMA_HOST": "127.0.0.1",

@@ -21,6 +21,7 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
   //========== 外观与布局 ==========//
+  "workbench.preferredDarkColorTheme": "Monokai Classic",
   "workbench.colorTheme": "Syntax Material Dark",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.activityBar.orientation": "vertical",
