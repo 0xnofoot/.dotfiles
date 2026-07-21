@@ -1,7 +1,26 @@
-# 代码库探索规则（按需加载）
+# 代码发现规则
 
-> **触发条件**：需要进行结构性代码查询时——探索代码库结构、查找定义/调用者/调用链/依赖/实现、影响分析、找死代码。**尤其包括在 Bash 里准备用 `rg`/`grep`/`find`/`fd` 搜索代码的场景**：动手搜之前先加载本规则，判断该走 codebase-memory MCP 还是退回 `rg`/`fd`。
+> **触发条件**：需要进行结构性代码查询时——探索代码库结构、查找定义/调用者/调用链/依赖/实现、影响分析、找死代码。**尤其包括在 Bash 里准备用 `rg`/`grep`/`find`/`fd` 搜索代码的场景**：动手搜之前先加载本规则，判断该走 CodeGraph 还是退回 `rg`/`fd`。
 
-探索代码库、查找依赖、追踪调用链、影响分析、找死代码等结构性查询，**优先用 `codebase-memory` 知识图谱**（MCP 工具前缀 `mcp__codebase-memory-mcp__`），不可用或项目未索引时才退回 Bash 里的 `rg`/`fd`。**Bash 工具内禁止裸 `grep`/`find`**：Claude Code 的 shell-snapshot 把它们 shadow 成内嵌 ugrep/bfs，不认 `-E`/`-A`/`--exclude-dir` 等选项，裸调用必报 `ugrep: bad option`；改用 `rg`（搜文本）/`fd`（找文件），确需真 grep/find 语义用 `command grep`/`/usr/bin/find`。shadow 只劫持 `grep`/`find` 两个名字，真身 `ugrep`/`ug`（TUI）/`bfs` 用自身名字调用不受影响。带 Grep/Glob 工具的子 agent 也可用内置工具。具体工具映射与工作流见 `~/.claude/skills/codebase-memory/SKILL.md`。
+## 优先级
 
-项目可能嵌套（monorepo 子项目各自独立索引为独立 project）。调用前先 `list_projects`；存在嵌套时按**目标代码路径匹配最深的 `root_path`** 选 `project`，不要默认用最外层父项目。单个 project 查不到 ≠ 工具不可用——先换正确子项目重试，确认无误再退回 `rg`/`fd`。
+1. **项目已索引（根目录有 `.codegraph/`）→ 用 CodeGraph，别 grep**：
+   - MCP 工具（会话内可用时）：`codegraph_explore` 一次返回相关符号源码 + 调用路径（含 grep 跟不到的动态分派跳转）+ blast radius。查询里点名符号或文件名，精确度更高。
+   - Shell（MCP 不可用时）：`codegraph explore "<符号名或问题>"` 输出同 MCP。
+   - 其他常用：`codegraph callers <符号>`（谁调用）/ `codegraph callees <符号>`（调用了谁）/ `codegraph impact <符号>`（改动影响面）/ `codegraph search <名>`（全文搜符号，FTS5）/ `codegraph files <符号>`（文件结构）。
+2. **项目未索引（无 `.codegraph/`）→ 退回 `rg`/`fd`**，或先 `codegraph init` 建索引（一次性，之后自动增量同步）。
+3. **非代码文件**（配置、文案、proto、md）或**已知文件路径精读**：直接 Read/Grep/Glob，不走 CodeGraph。
+
+## Bash 内 grep/find 注意（Claude Code shell-snapshot）
+
+Claude Code 的 shell-snapshot 把 `grep`/`find` shadow 成内嵌 `ugrep`/`bfs`，不认 `-E`/`-A`/`--exclude-dir` 等选项，裸调用必报 `ugrep: bad option`。
+- 搜文本用 `rg`，找文件用 `fd`。
+- 确需真 grep/find 语义：`command grep` / `/usr/bin/find`。
+- shadow 只劫持 `grep`/`find` 两个名字；真身 `ugrep`/`ug`（TUI）/`bfs` 用自身名字调用不受影响。
+- 带 Grep/Glob 工具的子 agent 可用内置工具，不受 shell shadow 影响。
+
+## 跨语言/跨仓库提示
+
+- **跨语言调用链**（Swift↔ObjC、RN↔Native）：CodeGraph 自动桥接，`codegraph_explore` 可追踪。
+- **Flutter↔原生（Pigeon/MethodChannel）**：桥接支持未明确，查不到时退回 grep Pigeon 生成文件 + 原生 handler。
+- **多仓库**：每个 repo 独立 `.codegraph/`，跨仓库查询需 cd 到对应仓库或分别索引后手动关联。
