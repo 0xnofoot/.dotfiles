@@ -23,35 +23,6 @@ for item in "${MANAGED[@]}"; do
     "~/.claude/${item}${suffix}" "${item}${suffix}"
 done
 
-# ── codebase-memory-mcp 安装 ───────────────────────────────
-# 约 270MB 量级的编译二进制，不入库；官方 install.sh 从 GitHub release 按 OS/arch 下载到
-# ~/.local/bin（含 checksum 校验、macOS 重签名）。用 --skip-config 跳过官方的
-# "配置 agent" 步骤——那步会重写 cbm-* hooks 与注册 MCP，而 cbm hooks 已由本仓库
-# claude/hooks/ + settings.json 管理（软链），让官方写会写穿污染仓库。MCP 改用
-# claude mcp add --scope user 显式注册（写 ~/.claude.json 顶层，与本机现状一致）。
-# 尽力而为：网络/claude 缺失则跳过，绝不让 install.sh 中断。
-install_codebase_memory_mcp() {
-  local bin="$HOME/.local/bin/codebase-memory-mcp"
-  if [[ -x "$bin" ]] && "$bin" --version >/dev/null 2>&1; then
-    printf "  \033[2mcodebase-memory-mcp 已安装：%s\033[0m\n" "$("$bin" --version 2>&1 | head -1)"
-  else
-    printf "  \033[2m下载 codebase-memory-mcp（约 270MB 量级）...\033[0m\n"
-    curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh \
-      | bash -s -- --skip-config \
-      || { printf "  \033[2mcodebase-memory-mcp 下载失败，跳过\033[0m\n"; return 0; }
-  fi
-  command -v claude >/dev/null 2>&1 || {
-    printf "  \033[2mclaude CLI 未安装，跳过 MCP 注册\033[0m\n"; return 0; }
-  if claude mcp get codebase-memory-mcp >/dev/null 2>&1; then
-    printf "  \033[2mMCP codebase-memory-mcp 已注册\033[0m\n"
-  else
-    claude mcp add --scope user codebase-memory-mcp "$bin" >/dev/null 2>&1 \
-      && printf "  \033[2mMCP + codebase-memory-mcp\033[0m\n" \
-      || printf "  \033[2mMCP 注册失败（手动：claude mcp add --scope user codebase-memory-mcp %s）\033[0m\n" "$bin"
-  fi
-}
-install_codebase_memory_mcp || true
-
 # ── Claude plugin 同步 ─────────────────────────────────────
 # settings.json 是单一真相源（extraKnownMarketplaces + enabledPlugins）。
 # installed_plugins.json 与 plugins/cache/ 不入库，由 `claude plugin` CLI 在本机重建。
