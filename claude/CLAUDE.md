@@ -9,5 +9,4 @@
 | 触发条件 | 加载文件 |
 |----------|---------|
 | 需要网络访问：搜索网络信息、查最新外部资料、抓取 URL/网页内容时 | `~/.claude/on-demand/web-access.md` |
-| 需要结构性代码查询：探索代码库、找定义/调用者/调用链/依赖/实现、影响分析、找死代码时（含在 Bash 里准备用 `rg`/`grep`/`find`/`fd` 搜代码的场景） | `~/.claude/on-demand/code-discovery.md` |
 | 用户执行任何 `/speckit.*` 命令（specify / plan / tasks / implement 等） | `~/.claude/on-demand/speckit.md` |
