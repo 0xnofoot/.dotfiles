@@ -10,3 +10,4 @@
 |----------|---------|
 | 需要网络访问：搜索网络信息、查最新外部资料、抓取 URL/网页内容时 | `~/.claude/on-demand/web-access.md` |
 | 用户执行任何 `/speckit.*` 命令（specify / plan / tasks / implement 等） | `~/.claude/on-demand/speckit.md` |
+| 用户要求「深度调研 / 深度研究 / deep research」，或点名使用 hyperresearch | `~/.claude/on-demand/deep-research.md` |
