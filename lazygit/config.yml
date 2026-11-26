@@ -2,6 +2,6 @@
 # macOS/Linux 统一读取 ~/.config/lazygit/config.yml（依赖 zsh/env.zsh 导出 XDG_CONFIG_HOME）
 
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --paging=never --side-by-side
+      command: delta --paging=never --side-by-side
