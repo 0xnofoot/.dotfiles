@@ -83,6 +83,30 @@ uv run python -m playwright install-deps chromium
 
 装一次全局生效，之后所有项目共用。抓取 provider 默认即 `crawl4ai`（`[web] provider`），无需每项目修改。
 
+## 登录态抓取（authenticated crawling）
+
+登录墙内容（Reddit 私密版、LinkedIn、Medium 付费墙、X、YouTube 订阅、GitHub 私有库、Amazon KDP、Quora 等）需要登录 profile。：
+
+- **登录窗与抓取必须都用 patchright**：上游 `crwl profiles create` 用 playwright 开登录窗，会被 Reddit 判「此浏览器或应用可能不安全」而登录失败；抓取却用 patchright。已把 `_fetch_visible` 改为 patchright。
+- **headless 绝不碰 profile**：headless 与 headful 的 cookie 加密 key 不同，headless 启动 profile 会把读不出的登录 cookie 当损坏数据**删除**。已改 `fetcher.py`：headless 时不传 profile。
+
+### 登录 / 重登 / 补登
+
+```bash
+~/.src-code/hyperresearch/.venv/bin/python ~/.src-code/hyperresearch/scripts/login.py [--profile research]
+```
+
+脚本先列出各平台登录态（缺哪个一目了然），再开窗口登录，关窗后复列。
+**登录成功后停留 5-10 秒再关窗**：Chromium 写 cookie 到 SQLite 有延迟，立即关窗会丢登录态（GitHub 踩过）。
+
+### 关键结论
+
+- Reddit 公开页：`[web] magic = true` 且**不带 profile** 即可稳定抓取；magic=false 必被 bot 墙拦。
+- Reddit 登录页：`reddit.com` 加进 `visible_browser_domains`，走 headful patchright 通道（弹窗带登录态）。
+- 登录方式 OAuth / 账号密码均可（Reddit/X/Medium/YouTube 用 Google OAuth 已验证通过）。
+- `visible_browser_domains` 内的域名走 headful（带登录态），之外走 headless（匿名，快）。
+- **Cloudflare 强防护站点 patchright 过不去**（Crunchbase / Glassdoor 等，特征 cookie `cf_chl_rc_ni` 挑战循环）——自动化浏览器天花板，此类站点放弃登录态抓取，手动处理。
+
 ## 更新 `~/.src-code/hyperresearch`
 
 ```bash
@@ -113,3 +137,4 @@ uv sync --extra crawl4ai
 - 首次在某项目运行 `/hyperresearch` 时，会向该项目根 `CLAUDE.md` **追加**一段带标记的内容，不覆盖现有文字（安全）。
 - 换机器：在新机器上跑一次上面的全局安装流程即可（会自动 clone 到 `~/.src-code/hyperresearch`），之后所有项目直接 `/hyperresearch`。
 - 搜索侧：fetcher 子代理的搜索已指向 search2ai MCP（`mcp__search2ai__search`），需确保 search2ai MCP 在会话中可用。
+- **Claude-in-Chrome（browser-fetcher 兜底通道）在 env-var token 会话下不可用**：Claude Code 浏览器集成硬性要求 OAuth 登录（`/login`），`ANTHROPIC_AUTH_TOKEN` + 自定义 `ANTHROPIC_BASE_URL` 的会话只有 user:inference scope，会被静默禁用。登录墙内容走上面的 crawl4ai profile 通道。

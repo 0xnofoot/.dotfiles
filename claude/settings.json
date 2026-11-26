@@ -77,8 +77,21 @@
       }
     }
   },
-  "language": "简体中文",
+  "language": "\u7b80\u4f53\u4e2d\u6587",
   "autoMemoryEnabled": true,
   "skipDangerousModePermissionPrompt": true,
-  "autoCompactEnabled": true
+  "autoCompactEnabled": true,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "WebSearch|WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/nofoot/.hyperresearch/hook.js\""
+          }
+        ]
+      }
+    ]
+  }
 }
