@@ -32,6 +32,21 @@ test -x .venv/bin/hyperresearch || uv sync --extra crawl4ai
 
 # 3. 安装到当前项目目录（只生成 skill/agents/hooks，体积很小）
 uv run hyperresearch install "$TARGET_DIR"
+
+# 4. 注入 fake-ip 白名单（幂等，可安全无条件执行）
+#    同内网若用 clash/tun 的 fake-ip DNS，所有域名解析到 198.18.x.x 保留网段，
+#    会被 hyperresearch 的 SSRF 防护拒绝；放行该保留网段无任何副作用。
+python3 - <<'PYEOF'
+import pathlib
+p = pathlib.Path("$TARGET_DIR") / ".hyperresearch" / "config.toml"
+s = p.read_text()
+if "198.18.0.0/15" not in s:
+    s = s.replace("allow_private_hosts = []", 'allow_private_hosts = ["198.18.0.0/15"]')
+    p.write_text(s)
+    print("injected fake-ip allowlist (198.18.0.0/15)")
+else:
+    print("fake-ip allowlist already present")
+PYEOF
 ```
 
 装完在当前目录的 Claude Code 会话里 `/hyperresearch <问题>` 即可。
@@ -46,7 +61,17 @@ uv run python -m patchright install chromium
 uv run python -m playwright install chromium
 ```
 
-装一次全局生效，之后所有项目共用。
+**系统依赖（换新机器必做，需要 sudo）**：Chromium 在 Linux 上还依赖一串系统库（libnss3/libnspr4/libatk/cups/gbm/pango/cairo 等约 78 个）。若抓取报
+`error while loading shared libraries: libnspr4.so` / `libatk-1.0.so.0` 之类，用 Playwright 官方一次装全：
+
+```bash
+cd "$HOME/.src-code/hyperresearch"
+uv run python -m playwright install-deps chromium
+```
+
+（提示 "your OS is not officially supported" 可忽略，它 fallback 用 ubuntu24.04 清单，依赖一样。）
+
+装一次全局生效，之后所有项目共用。抓取 provider 默认即 `crawl4ai`（`[web] provider`），无需每项目修改。
 
 ## 更新 `~/.src-code/hyperresearch`
 
