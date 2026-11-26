@@ -33,7 +33,7 @@ brew "zoxide"
 brew "exiftool"
 brew "mediainfo"
 brew "trash-cli"
-brew "tldr"
+brew "tealdeer"                 # tldr 客户端
 brew "bottom"
 brew "bun"                      # claude-hud statusLine 用 bun 执行 TS（bun --env-file ... src/index.ts）
 brew "node"                     # 通用 node/npx 运行时（部分 claude 插件依赖）
@@ -45,7 +45,7 @@ brew "mpv"
 # macOS 专属
 # ============================================================
 if OS.mac?
-  # Vim Everywhere（输入法切换 / 键位改造）
+  # 输入法切换 / 键位改造
   brew "laishulu/homebrew/macism"
   brew "daipeihust/tap/im-select"
   cask "karabiner-elements"
